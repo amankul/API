@@ -1,0 +1,29 @@
+group 'M3_API_Automation'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'io.rest-assured:rest-assured:3.0.0'
+    testCompile 'io.rest-assured:json-schema-validator:3.0.0'
+    compile 'io.rest-assured:json-path:3.0.0'
+    compile group: 'org.testng', name: 'testng', version: '6.9.10'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.7'
+
+}
+
+test {
+    useTestNG {
+        suites 'src/main/java/com/phunware/m3/resources/testNG.xml'
+
+    }
+}
