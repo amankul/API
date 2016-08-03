@@ -1,11 +1,11 @@
-2016-08-03 17:18:43 | (com.phunware.m3.api.tests.Attributes) | [getOneAttribute] | {
+2016-08-03 17:27:13 | (com.phunware.m3.api.tests.Attributes) | [getOneAttribute] | {
   "name": "member_status",
   "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
   "enabled": true,
   "dateCreated": "2016-06-08 18:33",
   "attributeType": "ENUM"
 }
-2016-08-03 17:18:43 | (com.phunware.m3.api.tests.Attributes) | [getAllAttributes] | [{
+2016-08-03 17:27:13 | (com.phunware.m3.api.tests.Attributes) | [getAllAttributes] | [{
   "name": "asdad",
   "allowedValues": ["qwrewqewqe"],
   "enabled": true,
@@ -102,24 +102,24 @@
   "dateCreated": "2016-06-14 16:37",
   "attributeType": "ENUM"
 }]
-2016-08-03 17:18:44 | (com.phunware.m3.api.tests.Attributes) | [enableOneAttribute] | {
+2016-08-03 17:27:14 | (com.phunware.m3.api.tests.Attributes) | [enableOneAttribute] | {
   "name": "member_status",
   "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
   "enabled": true,
   "dateCreated": "2016-06-08 18:33",
   "attributeType": "ENUM"
 }
-2016-08-03 17:18:45 | (com.phunware.m3.api.tests.Attributes) | [disableOneAttribute] | requirement failed: Cannot disable attribute 'member_status' on an active profile
-2016-08-03 17:18:45 | (com.phunware.m3.api.tests.Attributes) | [postOneAttribute] | Duplicate entry '1-dang' for key 'key_attributeMetadata_orgId_name'
-2016-08-03 17:18:45 | (com.phunware.m3.api.tests.Attributes) | [addOneValueToAttribute] | requirement failed: Cannot remove from allowedValues
-2016-08-03 17:18:45 | (com.phunware.m3.api.tests.Attributes) | [addMultipleValuesToAttribute] | {
+2016-08-03 17:27:14 | (com.phunware.m3.api.tests.Attributes) | [disableOneAttribute] | requirement failed: Cannot disable attribute 'member_status' on an active profile
+2016-08-03 17:27:14 | (com.phunware.m3.api.tests.Attributes) | [postOneAttribute] | Duplicate entry '1-dang' for key 'key_attributeMetadata_orgId_name'
+2016-08-03 17:27:15 | (com.phunware.m3.api.tests.Attributes) | [addOneValueToAttribute] | requirement failed: Cannot remove from allowedValues
+2016-08-03 17:27:15 | (com.phunware.m3.api.tests.Attributes) | [addMultipleValuesToAttribute] | {
   "name": "dang",
   "allowedValues": ["i", "bro", "alot", "rap", "like"],
   "enabled": true,
   "dateCreated": "2016-08-01 16:09",
   "attributeType": "ENUM"
 }
-2016-08-03 17:18:45 | (com.phunware.m3.api.tests.Profiles) | [getOneProfile] | {
+2016-08-03 17:27:15 | (com.phunware.m3.api.tests.Profiles) | [getOneProfile] | {
   "date_created": "2016-06-08",
   "name": "Premium Members",
   "description": "Premium Members",
@@ -131,7 +131,7 @@
     "value": "PREMIUM"
   }]
 }
-2016-08-03 17:18:46 | (com.phunware.m3.api.tests.Profiles) | [getAllProfiles] | [{
+2016-08-03 17:27:15 | (com.phunware.m3.api.tests.Profiles) | [getAllProfiles] | [{
   "date_created": "2016-06-14",
   "name": "!@#$",
   "description": "!@#$",
@@ -458,8 +458,8 @@
     "value": "v2"
   }]
 }]
-2016-08-03 17:18:47 | (com.phunware.m3.api.tests.Profiles) | [createOneProfile] | requirement failed: Value provided for [name] is not unique, please provide an unique value.
-2016-08-03 17:18:47 | (com.phunware.m3.api.tests.Profiles) | [disableOneProfile] | {
+2016-08-03 17:27:17 | (com.phunware.m3.api.tests.Profiles) | [createOneProfile] | requirement failed: Value provided for [name] is not unique, please provide an unique value.
+2016-08-03 17:27:17 | (com.phunware.m3.api.tests.Profiles) | [disableOneProfile] | {
   "date_created": "2016-07-21",
   "name": "Kevin's Spotify Profile",
   "description": "This is Kevin. Kevin likes rap/edm. Be like Kevin.",
@@ -471,7 +471,7 @@
     "value": "PREMIUM"
   }]
 }
-2016-08-03 17:18:47 | (com.phunware.m3.api.tests.Profiles) | [enableOneProfile] | {
+2016-08-03 17:27:17 | (com.phunware.m3.api.tests.Profiles) | [enableOneProfile] | {
   "date_created": "2016-07-21",
   "name": "Kevin's Spotify Profile",
   "description": "This is Kevin. Kevin likes rap/edm. Be like Kevin.",
