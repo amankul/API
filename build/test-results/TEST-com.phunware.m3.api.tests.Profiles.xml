@@ -1,125 +1,12 @@
-2016-08-03 19:23:03 | (com.phunware.m3.api.tests.Attributes) | [getOneAttribute] | {
-  "name": "member_status",
-  "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
-  "enabled": true,
-  "dateCreated": "2016-06-08 18:33",
-  "attributeType": "ENUM"
-}
-2016-08-03 19:23:04 | (com.phunware.m3.api.tests.Attributes) | [getAllAttributes] | [{
-  "name": "asdad",
-  "allowedValues": ["qwrewqewqe"],
-  "enabled": true,
-  "dateCreated": "2016-06-09 18:35",
-  "attributeType": "ENUM"
-}, {
-  "name": "asdf",
-  "allowedValues": ["asdf", "fvdfgdfb"],
-  "enabled": true,
-  "dateCreated": "2016-06-09 20:05",
-  "attributeType": "ENUM"
-}, {
-  "name": "dang",
-  "allowedValues": ["i", "bro", "alot", "rap", "like"],
-  "enabled": true,
-  "dateCreated": "2016-08-01 16:09",
-  "attributeType": "ENUM"
-}, {
-  "name": "loyalty_status",
-  "allowedValues": ["SILVER", "DIAMOND", "PLATINUM", "steve", "GOLD"],
-  "enabled": true,
-  "dateCreated": "2016-05-18 18:17",
-  "attributeType": "ENUM"
-}, {
-  "name": "member_status",
-  "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
-  "enabled": true,
-  "dateCreated": "2016-06-08 18:33",
-  "attributeType": "ENUM"
-}, {
-  "name": "random",
-  "allowedValues": ["123as-123sdf", "asdf-asdf", "asdf_asdf", "v2", "asdf__123"],
-  "enabled": true,
-  "dateCreated": "2016-06-14 17:31",
-  "attributeType": "ENUM"
-}, {
-  "name": "test1",
-  "allowedValues": ["qwer"],
-  "enabled": true,
-  "dateCreated": "2016-06-23 16:41",
-  "attributeType": "ENUM"
-}, {
-  "name": "test2",
-  "allowedValues": ["asdfg"],
-  "enabled": true,
-  "dateCreated": "2016-06-27 16:22",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_1",
-  "allowedValues": ["t4", "t5", "t1", "t2", "t3"],
-  "enabled": true,
-  "dateCreated": "2016-06-15 15:23",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_2",
-  "allowedValues": ["t_1"],
-  "enabled": true,
-  "dateCreated": "2016-06-15 15:24",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_3",
-  "allowedValues": ["t-1", "t-2"],
-  "enabled": true,
-  "dateCreated": "2016-06-15 15:25",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_4",
-  "allowedValues": ["test4"],
-  "enabled": true,
-  "dateCreated": "2016-06-16 19:46",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_5",
-  "allowedValues": ["test5"],
-  "enabled": true,
-  "dateCreated": "2016-06-17 20:49",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_6",
-  "allowedValues": ["test5"],
-  "enabled": true,
-  "dateCreated": "2016-06-23 16:30",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_attribute",
-  "allowedValues": ["value1", "value2", "value3"],
-  "enabled": true,
-  "dateCreated": "2016-06-09 17:04",
-  "attributeType": "ENUM"
-}, {
-  "name": "test_attribute_2",
-  "allowedValues": ["v4", "v3", "v1", "v2", "v5"],
-  "enabled": true,
-  "dateCreated": "2016-06-14 16:37",
-  "attributeType": "ENUM"
-}]
-2016-08-03 19:23:05 | (com.phunware.m3.api.tests.Attributes) | [enableOneAttribute] | {
-  "name": "member_status",
-  "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
-  "enabled": true,
-  "dateCreated": "2016-06-08 18:33",
-  "attributeType": "ENUM"
-}
-2016-08-03 19:23:05 | (com.phunware.m3.api.tests.Attributes) | [disableOneAttribute] | requirement failed: Cannot disable attribute 'member_status' on an active profile
-2016-08-03 19:23:05 | (com.phunware.m3.api.tests.Attributes) | [postOneAttribute] | Duplicate entry '1-dang' for key 'key_attributeMetadata_orgId_name'
-2016-08-03 19:23:06 | (com.phunware.m3.api.tests.Attributes) | [addOneValueToAttribute] | requirement failed: Cannot remove from allowedValues
-2016-08-03 19:23:06 | (com.phunware.m3.api.tests.Attributes) | [addMultipleValuesToAttribute] | {
-  "name": "dang",
-  "allowedValues": ["i", "bro", "alot", "rap", "like"],
-  "enabled": true,
-  "dateCreated": "2016-08-01 16:09",
-  "attributeType": "ENUM"
-}
-2016-08-03 19:23:06 | (com.phunware.m3.api.tests.Profiles) | [getOneProfile] | {
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.phunware.m3.api.tests.Profiles" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-08-04T00:23:06" hostname="Kevins-MacBook-Pro.local" time="2.655">
+  <properties/>
+  <testcase name="getOneProfile" classname="com.phunware.m3.api.tests.Profiles" time="0.237"/>
+  <testcase name="getAllProfiles" classname="com.phunware.m3.api.tests.Profiles" time="1.759"/>
+  <testcase name="createOneProfile" classname="com.phunware.m3.api.tests.Profiles" time="0.202"/>
+  <testcase name="disableOneProfile" classname="com.phunware.m3.api.tests.Profiles" time="0.223"/>
+  <testcase name="enableOneProfile" classname="com.phunware.m3.api.tests.Profiles" time="0.232"/>
+  <system-out><![CDATA[2016-08-03 19:23:06 | (com.phunware.m3.api.tests.Profiles) | (getOneProfile) | {
   "date_created": "2016-06-08",
   "name": "Premium Members",
   "description": "Premium Members",
@@ -131,7 +18,7 @@
     "value": "PREMIUM"
   }]
 }
-2016-08-03 19:23:06 | (com.phunware.m3.api.tests.Profiles) | [getAllProfiles] | [{
+2016-08-03 19:23:06 | (com.phunware.m3.api.tests.Profiles) | (getAllProfiles) | [{
   "date_created": "2016-06-14",
   "name": "!@#$",
   "description": "!@#$",
@@ -458,8 +345,8 @@
     "value": "v2"
   }]
 }]
-2016-08-03 19:23:08 | (com.phunware.m3.api.tests.Profiles) | [createOneProfile] | requirement failed: Value provided for [name] is not unique, please provide an unique value.
-2016-08-03 19:23:08 | (com.phunware.m3.api.tests.Profiles) | [disableOneProfile] | {
+2016-08-03 19:23:08 | (com.phunware.m3.api.tests.Profiles) | (createOneProfile) | requirement failed: Value provided for [name] is not unique, please provide an unique value.
+2016-08-03 19:23:08 | (com.phunware.m3.api.tests.Profiles) | (disableOneProfile) | {
   "date_created": "2016-07-21",
   "name": "Kevin's Spotify Profile",
   "description": "This is Kevin. Kevin likes rap/edm. Be like Kevin.",
@@ -471,7 +358,7 @@
     "value": "PREMIUM"
   }]
 }
-2016-08-03 19:23:09 | (com.phunware.m3.api.tests.Profiles) | [enableOneProfile] | {
+2016-08-03 19:23:09 | (com.phunware.m3.api.tests.Profiles) | (enableOneProfile) | {
   "date_created": "2016-07-21",
   "name": "Kevin's Spotify Profile",
   "description": "This is Kevin. Kevin likes rap/edm. Be like Kevin.",
@@ -483,3 +370,6 @@
     "value": "PREMIUM"
   }]
 }
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -25,6 +25,6 @@ dependencies {
 
 test {
     useTestNG {
-        suites '/src/main/java/com/phunware/m3/resources'
+        suites '/src/test/resources/testNG.xml'
     }
 }
