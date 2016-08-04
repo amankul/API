@@ -1,0 +1,12 @@
+target
+.classpath
+.project
+.settings/
+.gradle
+.idea
+bin
+build
+gradle
+
+Logging
+test-output
