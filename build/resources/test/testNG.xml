@@ -7,6 +7,7 @@
         <classes>
             <class name="com.phunware.m3.api.tests.Attributes"/>
             <class name="com.phunware.m3.api.tests.Profiles"/>
+            <class name="com.phunware.m3.api.tests.Beacons"/>
 
         </classes>
     </test>

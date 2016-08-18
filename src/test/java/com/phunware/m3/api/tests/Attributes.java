@@ -260,5 +260,33 @@ public class Attributes {
         else if (status == 400)
             assertThat(statusBody, containsString("Cannot remove from allowedValues"));
     }
+
+//    @Test(priority = 10)
+//    public void getCMS() {
+//
+//        String URL = "http://cms-api.phunware.com/v1.0/content?%7B%22containerId%22%3A%2256d9c8db7baa1b1564001fa1%22%2C%22structureId%22%3A%2215551%22%2C%22depth%22%3A2%2C%22limit%22%3A100%7D";
+//        //String URL = "http://cms-api.phunware.com/v1.0/content?{"containerId":"56d9c8db7baa1b1564001fa1","structureId":"15551","depth":2,"limit":100}";
+//        //String URL = "http://cms-api.phunware.com/v1.0/content?{containerId:56d9c8db7baa1b1564001fa1,structureId:15551,depth:2,limit:100}";
+//
+//        String accessKey = env.getProperty("accessKey");
+//        String signatureKey = env.getProperty("signatureKey");
+//        String body = "";
+//
+//        try {
+//            AUTH_VALUE = auth.generateAuthHeader("GET", accessKey, signatureKey, URL, body);
+//            System.out.println(AUTH_VALUE);
+//        } catch (Exception e) { e.printStackTrace();}
+//
+//        Response response = given()
+//                .header("Content-Type", "application/json")
+//                //.header("x-org-id", "1").header("x-client-id", "1")
+//                .header("X-Auth", AUTH_VALUE)
+//                .get(URL)
+//                .then().statusCode(200).extract().response();
+//
+//        log.info(response.asString());
+//        System.out.println(response);
+//    }
+
 }
 

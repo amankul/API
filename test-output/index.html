@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-M3_API_TEST_SUITE">
-              <span class="suite-name border-passed">M3 API TEST SUITE</span>
+              <span class="suite-name border-failed">M3 API TEST SUITE</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,7 +91,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">12 methods,   12 passed</span>
+                    <span class="method-stats">17 methods, 1 failed,   16 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-M3_API_TEST_SUITE" class="hide-methods failed suite-M3_API_TEST_SUITE"> (hide)</a> <!-- hide-methods failed suite-M3_API_TEST_SUITE -->
+                      <a href="#" panel-name="suite-M3_API_TEST_SUITE" class="show-methods failed suite-M3_API_TEST_SUITE"> (show)</a> <!-- show-methods failed suite-M3_API_TEST_SUITE -->
+                    </span>
+                    <div class="method-list-content failed suite-M3_API_TEST_SUITE">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconBy_UUID">getBeaconBy_UUID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-M3_API_TEST_SUITE -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -147,7 +161,27 @@
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconsBy_Tags">getBeaconsBy_Tags</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconsBy_UUIDAlias">getBeaconsBy_UUIDAlias</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconsFor_Tags">getBeaconsFor_Tags</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="getOneAttribute">getOneAttribute</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getOneBeaconBy_ID">getOneBeaconBy_ID</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -172,45 +206,58 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-M3_API_TEST_SUITE" class="panel M3_API_TEST_SUITE">
-          <div class="suite-M3_API_TEST_SUITE-class-passed">
+          <div class="suite-M3_API_TEST_SUITE-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.phunware.m3.api.tests.Profiles</span>
+              <img src="failed.png"/>
+              <span class="class-name">com.phunware.m3.api.tests.Beacons</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="createOneProfile">
-                  </a> <!-- createOneProfile -->
-                  <span class="method-name">createOneProfile</span>
+                  <a name="getBeaconBy_UUID">
+                  </a> <!-- getBeaconBy_UUID -->
+                  <span class="method-name">getBeaconBy_UUID</span>
+                  <div class="stack-trace">java.lang.NullPointerException
+	at com.phunware.m3.api.tests.Beacons.getBeaconBy_UUID(Beacons.java:99)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+... Removed 27 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-M3_API_TEST_SUITE-class-failed -->
+          <div class="suite-M3_API_TEST_SUITE-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.phunware.m3.api.tests.Beacons</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="getBeaconsBy_Tags">
+                  </a> <!-- getBeaconsBy_Tags -->
+                  <span class="method-name">getBeaconsBy_Tags</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="disableOneProfile">
-                  </a> <!-- disableOneProfile -->
-                  <span class="method-name">disableOneProfile</span>
+                  <a name="getBeaconsBy_UUIDAlias">
+                  </a> <!-- getBeaconsBy_UUIDAlias -->
+                  <span class="method-name">getBeaconsBy_UUIDAlias</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="enableOneProfile">
-                  </a> <!-- enableOneProfile -->
-                  <span class="method-name">enableOneProfile</span>
+                  <a name="getBeaconsFor_Tags">
+                  </a> <!-- getBeaconsFor_Tags -->
+                  <span class="method-name">getBeaconsFor_Tags</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="getAllProfiles">
-                  </a> <!-- getAllProfiles -->
-                  <span class="method-name">getAllProfiles</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="getOneProfile">
-                  </a> <!-- getOneProfile -->
-                  <span class="method-name">getOneProfile</span>
+                  <a name="getOneBeaconBy_ID">
+                  </a> <!-- getOneBeaconBy_ID -->
+                  <span class="method-name">getOneBeaconBy_ID</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -272,6 +319,49 @@
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-M3_API_TEST_SUITE-class-passed -->
+          <div class="suite-M3_API_TEST_SUITE-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.phunware.m3.api.tests.Profiles</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="createOneProfile">
+                  </a> <!-- createOneProfile -->
+                  <span class="method-name">createOneProfile</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="disableOneProfile">
+                  </a> <!-- disableOneProfile -->
+                  <span class="method-name">disableOneProfile</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="enableOneProfile">
+                  </a> <!-- enableOneProfile -->
+                  <span class="method-name">enableOneProfile</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="getAllProfiles">
+                  </a> <!-- getAllProfiles -->
+                  <span class="method-name">getAllProfiles</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="getOneProfile">
+                  </a> <!-- getOneProfile -->
+                  <span class="method-name">getOneProfile</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-M3_API_TEST_SUITE-class-passed -->
         </div> <!-- panel M3_API_TEST_SUITE -->
         <div panel-name="test-xml-M3_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -286,6 +376,7 @@
     &lt;classes&gt;
       &lt;class name=&quot;com.phunware.m3.api.tests.Attributes&quot;/&gt;
       &lt;class name=&quot;com.phunware.m3.api.tests.Profiles&quot;/&gt;
+      &lt;class name=&quot;com.phunware.m3.api.tests.Beacons&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- M3 API Tests --&gt;
 &lt;/suite&gt; &lt;!-- M3 API TEST SUITE --&gt;
@@ -299,7 +390,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">M3 API Tests (2 classes)</span>
+                <span class="test-name">M3 API Tests (3 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -325,60 +416,80 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(12);
+data.addRows(17);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'getOneAttribute')
 data.setCell(0, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(0, 3, 2006);
+data.setCell(0, 3, 2298);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'getAllProfiles')
 data.setCell(1, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(1, 3, 1458);
+data.setCell(1, 3, 1644);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'getAllAttributes')
 data.setCell(2, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(2, 3, 881);
+data.setCell(2, 3, 920);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'enableOneAttribute')
-data.setCell(3, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(3, 3, 218);
+data.setCell(3, 1, 'getOneBeaconBy_ID')
+data.setCell(3, 2, 'com.phunware.m3.api.tests.Beacons')
+data.setCell(3, 3, 765);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'addMultipleValuesToAttribute')
-data.setCell(4, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(4, 3, 199);
+data.setCell(4, 1, 'getBeaconsBy_UUIDAlias')
+data.setCell(4, 2, 'com.phunware.m3.api.tests.Beacons')
+data.setCell(4, 3, 385);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'getOneProfile')
-data.setCell(5, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(5, 3, 197);
+data.setCell(5, 1, 'getBeaconBy_UUID')
+data.setCell(5, 2, 'com.phunware.m3.api.tests.Beacons')
+data.setCell(5, 3, 361);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'disableOneAttribute')
-data.setCell(6, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(6, 3, 179);
+data.setCell(6, 1, 'getBeaconsBy_Tags')
+data.setCell(6, 2, 'com.phunware.m3.api.tests.Beacons')
+data.setCell(6, 3, 349);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'addOneValueToAttribute')
-data.setCell(7, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(7, 3, 174);
+data.setCell(7, 1, 'getBeaconsFor_Tags')
+data.setCell(7, 2, 'com.phunware.m3.api.tests.Beacons')
+data.setCell(7, 3, 323);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'postOneAttribute')
+data.setCell(8, 1, 'enableOneAttribute')
 data.setCell(8, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(8, 3, 165);
+data.setCell(8, 3, 235);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'disableOneProfile')
-data.setCell(9, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(9, 3, 154);
+data.setCell(9, 1, 'addMultipleValuesToAttribute')
+data.setCell(9, 2, 'com.phunware.m3.api.tests.Attributes')
+data.setCell(9, 3, 209);
 data.setCell(10, 0, 10)
-data.setCell(10, 1, 'enableOneProfile')
+data.setCell(10, 1, 'getOneProfile')
 data.setCell(10, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(10, 3, 151);
+data.setCell(10, 3, 207);
 data.setCell(11, 0, 11)
-data.setCell(11, 1, 'createOneProfile')
-data.setCell(11, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(11, 3, 142);
+data.setCell(11, 1, 'disableOneAttribute')
+data.setCell(11, 2, 'com.phunware.m3.api.tests.Attributes')
+data.setCell(11, 3, 181);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'addOneValueToAttribute')
+data.setCell(12, 2, 'com.phunware.m3.api.tests.Attributes')
+data.setCell(12, 3, 180);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'enableOneProfile')
+data.setCell(13, 2, 'com.phunware.m3.api.tests.Profiles')
+data.setCell(13, 3, 165);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'disableOneProfile')
+data.setCell(14, 2, 'com.phunware.m3.api.tests.Profiles')
+data.setCell(14, 3, 162);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'postOneAttribute')
+data.setCell(15, 2, 'com.phunware.m3.api.tests.Attributes')
+data.setCell(15, 3, 153);
+data.setCell(16, 0, 16)
+data.setCell(16, 1, 'createOneProfile')
+data.setCell(16, 2, 'com.phunware.m3.api.tests.Profiles')
+data.setCell(16, 3, 138);
 window.suiteTableData['M3_API_TEST_SUITE']= { tableData: data, tableDiv: 'times-div-M3_API_TEST_SUITE'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 seconds</span>
+              <span class="suite-total-time">Total running time: 8 seconds</span>
               <div id="times-div-M3_API_TEST_SUITE">
               </div> <!-- times-div-M3_API_TEST_SUITE -->
             </div> <!-- times-div -->
@@ -411,64 +522,96 @@ return data;
               </div> <!-- configuration-test before -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
+              <div class="chronological-class-name">com.phunware.m3.api.tests.Beacons</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">instantiateEnvironment</span>
+                <span class="method-start">98 ms</span>
+              </div> <!-- configuration-test before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
               <div class="chronological-class-name">com.phunware.m3.api.tests.Profiles</div> <!-- chronological-class-name -->
               <div class="configuration-test before">
                 <span class="method-name">instantiateEnvironment</span>
-                <span class="method-start">121 ms</span>
+                <span class="method-start">99 ms</span>
               </div> <!-- configuration-test before -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">com.phunware.m3.api.tests.Attributes</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">getOneAttribute</span>
-                <span class="method-start">134 ms</span>
+                <span class="method-start">107 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">getAllAttributes</span>
-                <span class="method-start">2141 ms</span>
+                <span class="method-start">2405 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">enableOneAttribute</span>
-                <span class="method-start">3022 ms</span>
+                <span class="method-start">3325 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">disableOneAttribute</span>
-                <span class="method-start">3241 ms</span>
+                <span class="method-start">3560 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">postOneAttribute</span>
-                <span class="method-start">3420 ms</span>
+                <span class="method-start">3742 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">addOneValueToAttribute</span>
-                <span class="method-start">3585 ms</span>
+                <span class="method-start">3895 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">addMultipleValuesToAttribute</span>
-                <span class="method-start">3759 ms</span>
+                <span class="method-start">4075 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">com.phunware.m3.api.tests.Profiles</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">getOneProfile</span>
-                <span class="method-start">3959 ms</span>
+                <span class="method-start">4285 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">getAllProfiles</span>
-                <span class="method-start">4156 ms</span>
+                <span class="method-start">4492 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">createOneProfile</span>
-                <span class="method-start">5615 ms</span>
+                <span class="method-start">6136 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">disableOneProfile</span>
-                <span class="method-start">5757 ms</span>
+                <span class="method-start">6275 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">enableOneProfile</span>
-                <span class="method-start">5911 ms</span>
+                <span class="method-start">6437 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.phunware.m3.api.tests.Beacons</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">getOneBeaconBy_ID</span>
+                <span class="method-start">6602 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">getBeaconBy_UUID</span>
+                <span class="method-start">7367 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">getBeaconsBy_Tags</span>
+                <span class="method-start">7740 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">getBeaconsBy_UUIDAlias</span>
+                <span class="method-start">8089 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">getBeaconsFor_Tags</span>
+                <span class="method-start">8475 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

@@ -5,6 +5,27 @@
     <classes>
       <class name="com.phunware.m3.api.tests.Attributes"/>
       <class name="com.phunware.m3.api.tests.Profiles"/>
+      <class name="com.phunware.m3.api.tests.Beacons"/>
     </classes>
   </test> <!-- M3 API Tests -->
+  <test name="M3 API Tests(failed)">
+    <classes>
+      <class name="com.phunware.m3.api.tests.Beacons">
+        <methods>
+          <include name="instantiateEnvironment"/>
+          <include name="getBeaconBy_UUID"/>
+        </methods>
+      </class> <!-- com.phunware.m3.api.tests.Beacons -->
+      <class name="com.phunware.m3.api.tests.Attributes">
+        <methods>
+          <include name="instantiateEnvironment"/>
+        </methods>
+      </class> <!-- com.phunware.m3.api.tests.Attributes -->
+      <class name="com.phunware.m3.api.tests.Profiles">
+        <methods>
+          <include name="instantiateEnvironment"/>
+        </methods>
+      </class> <!-- com.phunware.m3.api.tests.Profiles -->
+    </classes>
+  </test> <!-- M3 API Tests(failed) -->
 </suite> <!-- Failed suite [M3 API TEST SUITE] -->
