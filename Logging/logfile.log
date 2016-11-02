@@ -1,4 +1,125 @@
-2016-08-18 16:21:15 | (com.phunware.m3.api.tests.Beacons) | [getOneBeaconBy_ID] | {
+2016-11-02 14:03:23 | (com.phunware.m3.api.tests.Attributes) | [getOneAttribute] | {
+  "name": "member_status",
+  "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
+  "enabled": true,
+  "dateCreated": "2016-06-08 18:33",
+  "attributeType": "ENUM"
+}
+2016-11-02 14:03:23 | (com.phunware.m3.api.tests.Attributes) | [getAllAttributes] | [{
+  "name": "asdad",
+  "allowedValues": ["qwrewqewqe"],
+  "enabled": true,
+  "dateCreated": "2016-06-09 18:35",
+  "attributeType": "ENUM"
+}, {
+  "name": "asdf",
+  "allowedValues": ["asdf", "fvdfgdfb"],
+  "enabled": true,
+  "dateCreated": "2016-06-09 20:05",
+  "attributeType": "ENUM"
+}, {
+  "name": "dang",
+  "allowedValues": ["i", "bro", "alot", "rap", "like"],
+  "enabled": true,
+  "dateCreated": "2016-08-01 16:09",
+  "attributeType": "ENUM"
+}, {
+  "name": "loyalty_status",
+  "allowedValues": ["SILVER", "DIAMOND", "PLATINUM", "steve", "GOLD"],
+  "enabled": true,
+  "dateCreated": "2016-05-18 18:17",
+  "attributeType": "ENUM"
+}, {
+  "name": "member_status",
+  "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
+  "enabled": true,
+  "dateCreated": "2016-06-08 18:33",
+  "attributeType": "ENUM"
+}, {
+  "name": "random",
+  "allowedValues": ["123as-123sdf", "asdf-asdf", "asdf_asdf", "v2", "asdf__123"],
+  "enabled": true,
+  "dateCreated": "2016-06-14 17:31",
+  "attributeType": "ENUM"
+}, {
+  "name": "test1",
+  "allowedValues": ["qwer"],
+  "enabled": true,
+  "dateCreated": "2016-06-23 16:41",
+  "attributeType": "ENUM"
+}, {
+  "name": "test2",
+  "allowedValues": ["asdfg"],
+  "enabled": true,
+  "dateCreated": "2016-06-27 16:22",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_1",
+  "allowedValues": ["t4", "t5", "t1", "t2", "t3"],
+  "enabled": true,
+  "dateCreated": "2016-06-15 15:23",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_2",
+  "allowedValues": ["t_1"],
+  "enabled": true,
+  "dateCreated": "2016-06-15 15:24",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_3",
+  "allowedValues": ["t-1", "t-2"],
+  "enabled": true,
+  "dateCreated": "2016-06-15 15:25",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_4",
+  "allowedValues": ["test4"],
+  "enabled": true,
+  "dateCreated": "2016-06-16 19:46",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_5",
+  "allowedValues": ["test5"],
+  "enabled": true,
+  "dateCreated": "2016-06-17 20:49",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_6",
+  "allowedValues": ["test5"],
+  "enabled": true,
+  "dateCreated": "2016-06-23 16:30",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_attribute",
+  "allowedValues": ["value1", "value2", "value3"],
+  "enabled": true,
+  "dateCreated": "2016-06-09 17:04",
+  "attributeType": "ENUM"
+}, {
+  "name": "test_attribute_2",
+  "allowedValues": ["v4", "v3", "v1", "v2", "v5"],
+  "enabled": true,
+  "dateCreated": "2016-06-14 16:37",
+  "attributeType": "ENUM"
+}]
+2016-11-02 14:03:24 | (com.phunware.m3.api.tests.Attributes) | [enableOneAttribute] | {
+  "name": "member_status",
+  "allowedValues": ["PREMIUM", "BASIC", "ADVANCED", "steve"],
+  "enabled": true,
+  "dateCreated": "2016-06-08 18:33",
+  "attributeType": "ENUM"
+}
+2016-11-02 14:03:24 | (com.phunware.m3.api.tests.Attributes) | [disableOneAttribute] | requirement failed: Cannot disable attribute 'member_status' on an active profile
+2016-11-02 14:03:24 | (com.phunware.m3.api.tests.Attributes) | [postOneAttribute] | Duplicate entry '1-dang' for key 'key_attributeMetadata_orgId_name'
+2016-11-02 14:03:25 | (com.phunware.m3.api.tests.Attributes) | [addOneValueToAttribute] | requirement failed: Cannot remove from allowedValues
+2016-11-02 14:03:25 | (com.phunware.m3.api.tests.Attributes) | [addMultipleValuesToAttribute] | {
+  "name": "dang",
+  "allowedValues": ["i", "bro", "alot", "rap", "like"],
+  "enabled": true,
+  "dateCreated": "2016-08-01 16:09",
+  "attributeType": "ENUM"
+}
+2016-11-02 14:03:25 | (com.phunware.m3.api.tests.Beacons) | [getOneBeaconBy_ID] | {
   "createdById": 1,
   "tags": ["faketag"],
   "uuid": "00000000-0000-0000-0000-000000000000",
@@ -7,15 +128,22 @@
   "modifiedById": 1,
   "orgId": 52,
   "interval": 5,
-  "id": 1964,
+  "id": 2041,
   "txPower": -59,
-  "major": 0,
+  "major": 1,
   "summary": "",
-  "minor": 0
+  "minor": 1
 }
-2016-08-18 16:21:18 | (com.phunware.m3.api.tests.Beacons) | [getBeaconsBy_UUIDAlias] | [{
+2016-11-02 14:03:26 | (com.phunware.m3.api.tests.Beacons) | [getBeaconBy_UUID] | {"error":{"code":"auth","message":"Invalid signature."}}
+2016-11-02 14:03:26 | (com.phunware.m3.api.tests.Beacons) | [getBeaconBy_UUID_Major] | {"error":{"code":"auth","message":"Invalid signature."}}
+2016-11-02 14:03:27 | (com.phunware.m3.api.tests.Beacons) | [getBeaconBy_UUID_Major_Minor] | {"error":{"code":"auth","message":"Invalid signature."}}
+2016-11-02 14:03:27 | (com.phunware.m3.api.tests.Beacons) | [getBeaconBy_UUID_Tags] | {"error":{"code":"auth","message":"Invalid signature."}}
+2016-11-02 14:03:27 | (com.phunware.m3.api.tests.Beacons) | [getBeaconsBy_UUIDAlias] | [{
   "uuid": "e8d8c186-d862-4a52-8142-e148720d6397",
   "uuidAlias": "1838 test"
+}, {
+  "uuid": "12312321-3132-1312-3123-213131231321",
+  "uuidAlias": "ckTest1"
 }, {
   "uuid": "8DEEFBB9-F738-4297-8040-96668BB44281",
   "uuidAlias": "Dev Test"
@@ -29,7 +157,375 @@
   "uuid": "6e42f68a-d0d1-467b-a23e-9d11fa746e43",
   "uuidAlias": "oldbeacon"
 }, {
+  "uuid": "1233d5d0-66d1-41f1-84b7-59dbf4e30437",
+  "uuidAlias": "qa test"
+}, {
   "uuid": "11c7f1f8-3058-b733-cb03-110ea9c11254",
   "uuidAlias": "Senion"
 }]
-2016-08-18 16:21:18 | (com.phunware.m3.api.tests.Beacons) | [getBeaconsBy_Tags] | ["3637", "3839", "3849", "3867 roximity", "beacon server test", "beacon server test2", "beacon server test3", "caleb 3637 test", "caleb beacon testing", "faketag", "haritest", "haritestagain", "ios beacon test", "iostest", "matts house", "matts house 2", "matts tester beacon", "new beacon", "removetest1860", "senion austin", "single senion beacno", "test1860", "testplat1230", "vinay tester beacon"]
+2016-11-02 14:03:28 | (com.phunware.m3.api.tests.Beacons) | [getBeaconsBy_Tags] | ["3285", "3637", "3839", "3849", "3867 roximity", "3869", "3895", "beacon server test", "beacon server test2", "beacon server test3", "beacon tag test", "caleb 3637 test", "caleb beacon testing", "faketag", "haritest", "haritestagain", "ios beacon test", "ios test", "iostest", "matts house", "matts house 2", "matts tester beacon", "new beacon", "qa test", "removetest1860", "senion austin", "single senion beacno", "test1860", "testplat1230", "vinay tester beacon"]
+2016-11-02 14:03:28 | (com.phunware.m3.api.tests.Beacons) | [getBeaconWith_Tags] | {"error":{"code":"auth","message":"Invalid signature."}}
+2016-11-02 14:03:28 | (com.phunware.m3.api.tests.Profiles) | [getOneProfile] | {
+  "date_created": "2016-06-08",
+  "name": "Premium Members",
+  "description": "Premium Members",
+  "enabled": true,
+  "id": 3,
+  "rules": [{
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "PREMIUM"
+  }]
+}
+2016-11-02 14:03:29 | (com.phunware.m3.api.tests.Profiles) | [getAllProfiles] | [{
+  "date_created": "2016-06-14",
+  "name": "!@#$",
+  "description": "!@#$",
+  "enabled": true,
+  "id": 15,
+  "rules": [{
+    "attributeMetadataName": "asdf",
+    "operator": "Equal",
+    "value": "asdf"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "abracadabra open the cave alibaba and the 40 theives",
+  "description": "abracadabra open the cave alibaba and the 40 theives",
+  "enabled": true,
+  "id": 7,
+  "rules": [{
+    "attributeMetadataName": "member_status",
+    "operator": "NotEqual",
+    "value": "BASIC"
+  }, {
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "SILVER"
+  }, {
+    "attributeMetadataName": "loyalty_status",
+    "operator": "NotEqual",
+    "value": "SILVER"
+  }]
+}, {
+  "date_created": "2016-05-18",
+  "name": "Big Spender updated",
+  "description": "max loyalty and expensive favorite product",
+  "enabled": true,
+  "id": 1,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "DIAMOND"
+  }]
+}, {
+  "date_created": "2016-07-07",
+  "name": "HariTestProfile",
+  "description": "HariTestProfile",
+  "enabled": true,
+  "id": 48,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "SILVER"
+  }, {
+    "attributeMetadataName": "loyalty_status",
+    "operator": "NotEqual",
+    "value": "DIAMOND"
+  }]
+}, {
+  "date_created": "2016-07-21",
+  "name": "Kevin's Spotify Profile",
+  "description": "This is Kevin. Kevin likes rap/edm. Be like Kevin.",
+  "enabled": true,
+  "id": 62,
+  "rules": [{
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "PREMIUM"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "New profile",
+  "description": "New profile",
+  "enabled": true,
+  "id": 2,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "GOLD"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "New Profile #2",
+  "description": "New Profile #2",
+  "enabled": false,
+  "id": 4,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "GOLD"
+  }, {
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "ADVANCED"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "New Profile #4",
+  "description": "New Profile #4",
+  "enabled": true,
+  "id": 6,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "GOLD"
+  }, {
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "BASIC"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "New Profile3",
+  "description": "New Profile3",
+  "enabled": true,
+  "id": 5,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "GOLD"
+  }, {
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "BASIC"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "Premium Members",
+  "description": "Premium Members",
+  "enabled": true,
+  "id": 3,
+  "rules": [{
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "PREMIUM"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "QATesting",
+  "description": "max loyalty and expensive favorite product",
+  "enabled": true,
+  "id": 9,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "GOLD"
+  }]
+}, {
+  "date_created": "2016-06-13",
+  "name": "Test 1",
+  "description": "Test 1",
+  "enabled": true,
+  "id": 10,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "GOLD"
+  }]
+}, {
+  "date_created": "2016-06-15",
+  "name": "test1",
+  "description": "test1",
+  "enabled": true,
+  "id": 21,
+  "rules": [{
+    "attributeMetadataName": "test_1",
+    "operator": "NotEqual",
+    "value": "t1"
+  }]
+}, {
+  "date_created": "2016-06-15",
+  "name": "test2",
+  "description": "test2",
+  "enabled": true,
+  "id": 22,
+  "rules": [{
+    "attributeMetadataName": "test_2",
+    "operator": "Equal",
+    "value": "t_1"
+  }]
+}, {
+  "date_created": "2016-06-15",
+  "name": "test3",
+  "description": "test3",
+  "enabled": true,
+  "id": 23,
+  "rules": [{
+    "attributeMetadataName": "test_3",
+    "operator": "Equal",
+    "value": "t-1"
+  }, {
+    "attributeMetadataName": "test_3",
+    "operator": "NotEqual",
+    "value": "t-2"
+  }]
+}, {
+  "date_created": "2016-06-16",
+  "name": "test4",
+  "description": "test4",
+  "enabled": true,
+  "id": 25,
+  "rules": [{
+    "attributeMetadataName": "test_1",
+    "operator": "Equal",
+    "value": "t1"
+  }]
+}, {
+  "date_created": "2016-06-21",
+  "name": "test5",
+  "description": "test5",
+  "enabled": true,
+  "id": 31,
+  "rules": [{
+    "attributeMetadataName": "asdf",
+    "operator": "Equal",
+    "value": "asdf"
+  }, {
+    "attributeMetadataName": "test_1",
+    "operator": "Equal",
+    "value": "t1"
+  }]
+}, {
+  "date_created": "2016-06-17",
+  "name": "testing",
+  "description": "testing",
+  "enabled": true,
+  "id": 26,
+  "rules": [{
+    "attributeMetadataName": "test_5",
+    "operator": "Equal",
+    "value": "test5"
+  }]
+}, {
+  "date_created": "2016-07-07",
+  "name": "TestLoyalty",
+  "description": "TestLoyalty",
+  "enabled": true,
+  "id": 47,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "NotEqual",
+    "value": "DIAMOND"
+  }]
+}, {
+  "date_created": "2016-07-07",
+  "name": "TestProfile",
+  "description": "TestProfile",
+  "enabled": true,
+  "id": 46,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "SILVER"
+  }, {
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "BASIC"
+  }]
+}, {
+  "date_created": "2016-06-08",
+  "name": "Testprofile@#!#!",
+  "description": "Testprofile@#!#!",
+  "enabled": false,
+  "id": 8,
+  "rules": [{
+    "attributeMetadataName": "loyalty_status",
+    "operator": "Equal",
+    "value": "PLATINUM"
+  }]
+}, {
+  "date_created": "2016-06-16",
+  "name": "test_4",
+  "description": "test_4",
+  "enabled": true,
+  "id": 24,
+  "rules": [{
+    "attributeMetadataName": "test_attribute",
+    "operator": "Equal",
+    "value": "value1"
+  }]
+}, {
+  "date_created": "2016-06-14",
+  "name": "test_profile",
+  "description": "test_profile",
+  "enabled": true,
+  "id": 11,
+  "rules": [{
+    "attributeMetadataName": "test_attribute_2",
+    "operator": "Equal",
+    "value": "v1"
+  }]
+}, {
+  "date_created": "2016-06-14",
+  "name": "test_profile_2",
+  "description": "test_profile_2",
+  "enabled": true,
+  "id": 12,
+  "rules": [{
+    "attributeMetadataName": "test_attribute_2",
+    "operator": "NotEqual",
+    "value": "v2"
+  }]
+}, {
+  "date_created": "2016-06-14",
+  "name": "test_profile_3",
+  "description": "test_profile_3",
+  "enabled": true,
+  "id": 13,
+  "rules": [{
+    "attributeMetadataName": "test_attribute_2",
+    "operator": "Equal",
+    "value": "v1"
+  }, {
+    "attributeMetadataName": "test_attribute_2",
+    "operator": "NotEqual",
+    "value": "v2"
+  }]
+}, {
+  "date_created": "2016-06-14",
+  "name": "test_profile_4",
+  "description": "test_profile_4",
+  "enabled": true,
+  "id": 14,
+  "rules": [{
+    "attributeMetadataName": "test_attribute_2",
+    "operator": "Equal",
+    "value": "v2"
+  }]
+}]
+2016-11-02 14:03:30 | (com.phunware.m3.api.tests.Profiles) | [createOneProfile] | requirement failed: Value provided for [name] is not unique, please provide an unique value.
+2016-11-02 14:03:30 | (com.phunware.m3.api.tests.Profiles) | [disableOneProfile] | {
+  "date_created": "2016-07-21",
+  "name": "Kevin's Spotify Profile",
+  "description": "This is Kevin. Kevin likes rap/edm. Be like Kevin.",
+  "enabled": false,
+  "id": 62,
+  "rules": [{
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "PREMIUM"
+  }]
+}
+2016-11-02 14:03:30 | (com.phunware.m3.api.tests.Profiles) | [enableOneProfile] | {
+  "date_created": "2016-07-21",
+  "name": "Kevin's Spotify Profile",
+  "description": "This is Kevin. Kevin likes rap/edm. Be like Kevin.",
+  "enabled": true,
+  "id": 62,
+  "rules": [{
+    "attributeMetadataName": "member_status",
+    "operator": "Equal",
+    "value": "PREMIUM"
+  }]
+}
