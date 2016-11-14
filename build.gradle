@@ -23,6 +23,16 @@ dependencies {
 
 }
 
+
+
+// Gradle task to run core API TESTS
+ task coreapi(type: Test) { 
+    useTestNG { 
+        suites '/src/test/resources/coreApi.xml' 
+     }
+}
+
+
 test {
     useTestNG {
         suites '/src/test/resources/testNG.xml'
