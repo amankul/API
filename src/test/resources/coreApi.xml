@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >  
+
+<suite name="CORE API TEST SUITE">  
+
+    <test name="CORE API TESTS" > 
+        <classes> 
+            <class name="com.phunware.core.api.tests.Client"/> 
+        </classes> 
+    </test>
+
+      </suite>
