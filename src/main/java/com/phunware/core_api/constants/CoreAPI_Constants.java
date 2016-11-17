@@ -17,4 +17,11 @@ public class CoreAPI_Constants {
         public static final String CLIENT_CATEGORIES_END_POINT = "v2.0/client-categories";
         public static final String CLIENT_PAGINATION_END_POINT = "v2.0/clients";
         public static final String CLIENT_END_POINT_1 = "v2.0/clients";
+
+
+    // Organization
+        // Resource-EndPoint 
+    public static final String ORGANIZATION_END_POINT = "v2.0/organizations/";
+    public static final String ORGANIZATIONS_COLLECTION_END_POINT = "v2.0/organizations";
 }
+
