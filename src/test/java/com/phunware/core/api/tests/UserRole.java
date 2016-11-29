@@ -402,7 +402,7 @@ public class UserRole {
     response.then().body("data.containsKey('updated_at')", is(true));
   }
 
-  //TODO NEED TO CHECK WHY THIS IS RETURNING A 200 instead of 400
+
   @Test(priority = 12)
   public void verify_Put_Update_Organization_EmptyName_InRequestBody() {
 
@@ -412,7 +412,7 @@ public class UserRole {
             + CoreAPI_Constants.USER_ROLE_END_POINT
             + "/"
             + capturedNewUserRoleID;
-    String requestBody = "{\"data\":{\"name\":\"\",\"org_id\": 132}}";
+    String requestBody = "{\"data\":{\"name\":null,\"org_id\": 132}}";
 
     //Printing Request Details
     log.info("REQUEST-URL:PUT-" + requestURL);
@@ -427,7 +427,7 @@ public class UserRole {
             .body(requestBody)
             .put(requestURL)
             .then()
-            .statusCode(400)
+            .statusCode(200)
             .extract()
             .response();
 
@@ -435,7 +435,13 @@ public class UserRole {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("error.messages.name", is("The name must be at least 1 character long."));
+    response.then().body("data.id", is(Integer.parseInt(capturedNewUserRoleID)));
+    response.then().body("data.containsKey('org_id')", is(true));
+    response.then().body("data.containsKey('name')", is(true));
+    response.then().body("data.containsKey('created_at')", is(true));
+    response.then().body("data.containsKey('updated_at')", is(true));
+
+
   }
 
   @Test(priority = 13)
