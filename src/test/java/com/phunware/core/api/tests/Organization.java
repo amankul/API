@@ -3,20 +3,20 @@ package com.phunware.core.api.tests;
 import com.phunware.core_api.constants.CoreAPI_Constants;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-/** Created by pkovurru on 11/14/16. */
-public class Client {
+/** Created by pkovurru on 11/17/16. */
+public class Organization {
 
   static Logger log;
   public String dynamicValue;
-  public static final String CLIENT_ID = "468";
-  public static String capturedNewCLIENT_ID;
+  public static final String ORGANIZATION_ID = "132";
+  public static String capturedNewORGANIZATION_ID;
 
   @BeforeClass
   public void preTestSteps() {
@@ -25,11 +25,13 @@ public class Client {
   }
 
   @Test(priority = 1)
-  public void verify_Get_ClientDetails() {
+  public void verify_Get_Organization_Details() {
 
     //Request Details
     String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT + CLIENT_ID;
+        CoreAPI_Constants.SERVICE_END_POINT
+            + CoreAPI_Constants.ORGANIZATION_END_POINT
+            + ORGANIZATION_ID;
 
     //Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
@@ -49,22 +51,19 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("data.id", is(468));
-    response.then().body("data.containsKey('org_id')", is(true));
-    response.then().body("data.containsKey('category_id')", is(true));
+    response.then().body("data.id", is(132));
     response.then().body("data.containsKey('name')", is(true));
-    response.then().body("data.containsKey('type')", is(true));
     response.then().body("data.containsKey('is_active')", is(true));
     response.then().body("data.containsKey('created_at')", is(true));
     response.then().body("data.containsKey('updated_at')", is(true));
   }
 
   @Test(priority = 2)
-  public void verify_Get_ClientDetails_InvalidCLIENT_ID() {
+  public void verify_Get_Organization_Details_InvalidOrgID() {
 
     //Request Details
     String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT + "000";
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATION_END_POINT + "000";
 
     //Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
@@ -84,15 +83,17 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("error.message", is("The specified client does not exist."));
+    response.then().body("error.message", is("The specified organization does not exist."));
   }
 
   @Test(priority = 3)
-  public void verify_Get_ClientDetails_InvalidAuth() {
+  public void verify_Get_Organization_Details_InvalidAuthorization() {
 
     //Request Details
     String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT + CLIENT_ID;
+        CoreAPI_Constants.SERVICE_END_POINT
+            + CoreAPI_Constants.ORGANIZATION_END_POINT
+            + ORGANIZATION_ID;
 
     //Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
@@ -117,11 +118,11 @@ public class Client {
   }
 
   @Test(priority = 4)
-  public void verify_Get_ClientTypes() {
+  public void verify_Get_Collection_Of_Organizations() {
 
     //Request Details
     String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_TYPES_END_POINT;
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
 
     //Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
@@ -131,6 +132,7 @@ public class Client {
         given()
             .header("Content-Type", "application/json")
             .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .queryParam("{\"name\":\"QA\"}")
             .get(requestURL)
             .then()
             .statusCode(200)
@@ -141,150 +143,70 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("data.flatten().any {it.containsKey('id') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('name') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('key') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('created_at') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('updated_at') }", is(true));
-  }
-
-  @Test(priority = 5)
-  public void verify_Get_ClientTypes_InvalidAuth() {
-
-    //Request Details
-    String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_TYPES_END_POINT;
-
-    //Printing Request Details
-    log.info("REQUEST-URL:GET-" + requestURL);
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTH_INVALID)
-            .get(requestURL)
-            .then()
-            .statusCode(401)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE:" + response.asString());
-
-    //JSON response Pay load validations
-    response.then().body("status", is("access denied"));
-    response.then().body("msg", is("invalid token"));
-  }
-
-  @Test(priority = 6)
-  public void verify_Get_Client_Categories() {
-
-    //Request Details
-    String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_CATEGORIES_END_POINT;
-
-    //Printing Request Details
-    log.info("REQUEST-URL:GET-" + requestURL);
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
-            .queryParam("{\"type_id\":1}")
-            .get(requestURL)
-            .then()
-            .statusCode(200)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE:" + response.asString());
-
-    //JSON response Pay load validations
-    response.then().body("data.flatten().any {it.containsKey('id') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('name') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('created_at') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('updated_at') }", is(true));
-  }
-
-  @Test(priority = 7)
-  public void verify_Get_Client_Categories_InvalidAuth() {
-
-    //Request Details
-    String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_CATEGORIES_END_POINT;
-
-    //Printing Request Details
-    log.info("REQUEST-URL:GET-" + requestURL);
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTH_INVALID)
-            .queryParam("{\"type_id\":1}")
-            .get(requestURL)
-            .then()
-            .statusCode(401)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE:" + response.asString());
-
-    //JSON response Pay load validations
-    response.then().body("status", is("access denied"));
-    response.then().body("msg", is("invalid token"));
-  }
-
-  @Test(priority = 8)
-  public void verify_Get_Client_Pagination() {
-
-    //Request Details
-    String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_PAGINATION_END_POINT;
-
-    //Printing Request Details
-    log.info("REQUEST-URL:GET-" + requestURL);
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
-            .queryParam("{\"offset\":\"15\",\"limit\":\"15\",\"org_id\":\"1\"}")
-            .get(requestURL)
-            .then()
-            .statusCode(200)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE:" + response.asString());
-
-    //JSON response Pay load validations
-    response.then().body("offset", is("15"));
+    response.then().body("containsKey('offset')", is(true));
     response.then().body("containsKey('totalCount')", is(true));
     response.then().body("containsKey('resultCount')", is(true));
 
     response.then().body("data.flatten().any {it.containsKey('id') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('org_id') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('category_id') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('is_active') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('created_at') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('updated_at') }", is(true));
+
+    //validating that all org names returned by this endpoint has the case insensitive string "qa"
+    for (int i = 0; i <= response.then().extract().jsonPath().getList("data").size() - 1; i++) {
+      Assert.assertTrue(
+          response
+              .then()
+              .extract()
+              .path("data.name[" + i + "]")
+              .toString()
+              .matches(".*qa.*|.*QA.*"));
+    }
+  }
+
+  @Test(priority = 5)
+  public void verify_Get_Collection_Of_Organizations_NameWithEmptyString() {
+
+    //Request Details
+    String requestURL =
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
+
+    //Printing Request Details
+    log.info("REQUEST-URL:GET-" + requestURL);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .queryParam("{\"name\":\"\"}")
+            .get(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+    //JSON response Pay load validations
+    response.then().body("containsKey('offset')", is(true));
+    response.then().body("containsKey('totalCount')", is(true));
+    response.then().body("containsKey('resultCount')", is(true));
+
+    response.then().body("data.flatten().any {it.containsKey('id') }", is(true));
     response.then().body("data.flatten().any {it.containsKey('name') }", is(true));
-    response.then().body("data.flatten().any {it.containsKey('type') }", is(true));
     response.then().body("data.flatten().any {it.containsKey('is_active') }", is(true));
     response.then().body("data.flatten().any {it.containsKey('created_at') }", is(true));
     response.then().body("data.flatten().any {it.containsKey('updated_at') }", is(true));
   }
 
-  @Test(priority = 9)
-  public void verify_Get_Client_Pagination_InvalidAuth() {
+  @Test(priority = 6)
+  public void verify_Get_Collection_Of_Organizations_Pagination() {
 
     //Request Details
     String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_PAGINATION_END_POINT;
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
 
     //Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
@@ -293,11 +215,11 @@ public class Client {
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTH_INVALID)
-            .queryParam("{\"offset\":\"15\",\"limit\":\"15\",\"org_id\":\"1\"}")
+            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .queryParam("{\"name\":\"qa\",\"offset\":\"1\",\"limit\":\"15\",\"org_id\":\"\"}")
             .get(requestURL)
             .then()
-            .statusCode(401)
+            .statusCode(200)
             .extract()
             .response();
 
@@ -305,29 +227,81 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("status", is("access denied"));
-    response.then().body("msg", is("invalid token"));
+    response.then().body("offset", is("1"));
+    response.then().body("containsKey('totalCount')", is(true));
+    response.then().body("containsKey('resultCount')", is(true));
+
+    response.then().body("data.flatten().any {it.containsKey('id') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('is_active') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('created_at') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('updated_at') }", is(true));
+
+    //validating that all org names returned by this endpoint has the case insensitive string "qa"
+    for (int i = 0; i <= response.then().extract().jsonPath().getList("data").size() - 1; i++) {
+      Assert.assertTrue(
+          response
+              .then()
+              .extract()
+              .path("data.name[" + i + "]")
+              .toString()
+              .matches(".*qa.*|.*QA.*"));
+    }
   }
 
-  @Test(priority = 10)
-  public void verify_Post_New_Client() {
+  @Test(priority = 7)
+  public void verify_Get_Collection_Of_Organizations_Pagination_EmptyName() {
 
     //Request Details
-    String requestURL = CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    String requestBody =
-        "{\"data\":{\"name\": \""
-            + dynamicValue
-            + "\",\"org_id\": 132,\"category_id\": 2,\"type\": \"ios\"}}";
+    String requestURL =
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
 
     //Printing Request Details
-    log.info("REQUEST-URL:POST-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
+    log.info("REQUEST-URL:GET-" + requestURL);
 
     //Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
             .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .queryParam("{\"name\":\"\",\"offset\":\"0\",\"limit\":\"15\",\"org_id\":\"\"}")
+            .get(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+    //JSON response Pay load validations
+    response.then().body("offset", is("0"));
+    response.then().body("containsKey('totalCount')", is(true));
+    response.then().body("containsKey('resultCount')", is(true));
+
+    response.then().body("data.flatten().any {it.containsKey('id') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('is_active') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('created_at') }", is(true));
+    response.then().body("data.flatten().any {it.containsKey('updated_at') }", is(true));
+  }
+
+  @Test(priority = 8)
+  public void verify_Post_Create_New_Organization() {
+
+    //Request Details
+    String requestURL =
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
+    String requestBody = "{\"data\":{\"name\": \"" + dynamicValue + "\"}}";
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:-" + requestBody);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .request()
             .body(requestBody)
             .post(requestURL)
             .then()
@@ -339,136 +313,35 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //capturing created client ID
-    capturedNewCLIENT_ID = response.then().extract().path("data.id").toString();
-    log.info("Captured new Client ID:" + capturedNewCLIENT_ID);
+    capturedNewORGANIZATION_ID = response.then().extract().path("data.id").toString();
+    log.info("Captured new Organization ID:" + capturedNewORGANIZATION_ID);
 
     //JSON response Pay load validations
     response.then().body("data.id", is(notNullValue()));
-    response.then().body("data.org_id", is(132));
-    response.then().body("data.category_id", is(2));
     response.then().body("data.name", is(dynamicValue));
-    response.then().body("data.type", is("ios"));
     response.then().body("data.containsKey('is_active')", is(true));
     response.then().body("data.containsKey('created_at')", is(true));
     response.then().body("data.containsKey('updated_at')", is(true));
   }
 
-  @Test(priority = 11)
-  public void verify_Post_New_Client_emptyOrgID() {
+  @Test(priority = 9)
+  public void verify_Post_Create_New_Organization_EmptyName_InRequestBody() {
 
     //Request Details
-    String requestURL = CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    String requestBody =
-        "{\"data\":{\"name\": \""
-            + dynamicValue
-            + "\",\"org_id\": \"\",\"category_id\": 2,\"type\": \"ios\"}}";
+    String requestURL =
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
+    String requestBody = "{\"data\":{\"name\": \"\"}}";
 
     //Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
+    log.info("REQUEST-BODY:-" + requestBody);
 
     //Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
             .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
-            .body(requestBody)
-            .post(requestURL)
-            .then()
-            .statusCode(400)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE:" + response.asString());
-
-    //JSON response Pay load validations
-    response.then().body("error.messages.org_id", is("No organization specified."));
-  }
-
-  @Test(priority = 12)
-  public void verify_Post_New_Client_emptyCategoryID() {
-
-    //Request Details
-    String requestURL = CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    String requestBody =
-        "{\"data\":{\"name\": \""
-            + dynamicValue
-            + "\",\"org_id\": 132 ,\"category_id\": \"\",\"type\": \"ios\"}}";
-
-    //Printing Request Details
-    log.info("REQUEST-URL:POST-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
-            .body(requestBody)
-            .post(requestURL)
-            .then()
-            .statusCode(400)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE:" + response.asString());
-
-    //JSON response Pay load validations
-    response.then().body("error.messages.category_id", is("No category specified."));
-  }
-
-  @Test(priority = 13)
-  public void verify_Post_New_Client_emptyType() {
-
-    //Request Details
-    String requestURL = CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    String requestBody =
-        "{\"data\":{\"name\": \""
-            + dynamicValue
-            + "\",\"org_id\": 132 ,\"category_id\": 2,\"type\": \"\"}}";
-
-    //Printing Request Details
-    log.info("REQUEST-URL:POST-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
-            .body(requestBody)
-            .post(requestURL)
-            .then()
-            .statusCode(400)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE:" + response.asString());
-
-    //JSON response Pay load validations
-    response.then().body("error.messages.type", is("No type specified."));
-  }
-
-  @Test(priority = 14)
-  public void verify_Post_New_Client_emptyName() {
-
-    //Request Details
-    String requestURL = CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    String requestBody =
-        "{\"data\":{\"name\": \"\",\"org_id\": 132 ,\"category_id\": 2,\"type\": \"ios\"}}";
-
-    //Printing Request Details
-    log.info("REQUEST-URL:POST-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .request()
             .body(requestBody)
             .post(requestURL)
             .then()
@@ -483,29 +356,30 @@ public class Client {
     response.then().body("error.messages.name", is("The name must be at least 1 character long."));
   }
 
-  @Test(priority = 15)
-  public void verify_Put_Update_Existing_Client() {
+  @Test(priority = 10)
+  public void verify_Put_Update_Organization() {
 
     //Request Details
     String requestURL =
         CoreAPI_Constants.SERVICE_END_POINT
-            + CoreAPI_Constants.CLIENT_END_POINT
-            + capturedNewCLIENT_ID;
+            + CoreAPI_Constants.ORGANIZATION_END_POINT
+            + capturedNewORGANIZATION_ID;
     String requestBody =
         "{\"data\":{\"name\": \""
             + dynamicValue
             + "updated"
-            + "\",\"org_id\": 132,\"category_id\": 2,\"type\": \"ios\"}}";
+            + "\",\"services\": [\"analytics\",\"alerts\",\"content\",\"messaging\"]}}";
 
     //Printing Request Details
     log.info("REQUEST-URL:PUT-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
+    log.info("REQUEST-BODY:-" + requestBody);
 
     //Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
             .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .request()
             .body(requestBody)
             .put(requestURL)
             .then()
@@ -517,43 +391,38 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("data.id", is(Integer.parseInt(capturedNewCLIENT_ID)));
-    response.then().body("data.org_id", is(132));
-    response.then().body("data.category_id", is(2));
+    response.then().body("data.id", is(Integer.parseInt(capturedNewORGANIZATION_ID)));
     response.then().body("data.name", is(dynamicValue + "updated"));
-    response.then().body("data.type", is("ios"));
     response.then().body("data.containsKey('is_active')", is(true));
     response.then().body("data.containsKey('created_at')", is(true));
     response.then().body("data.containsKey('updated_at')", is(true));
   }
 
-  @Test(priority = 16)
-  public void verify_Put_Update_Existing_Client_InvalidAuth() {
+  @Test(priority = 11)
+  public void verify_Put_Update_Organization_EmptyName_InRequestBody() {
 
     //Request Details
     String requestURL =
         CoreAPI_Constants.SERVICE_END_POINT
-            + CoreAPI_Constants.CLIENT_END_POINT
-            + capturedNewCLIENT_ID;
+            + CoreAPI_Constants.ORGANIZATION_END_POINT
+            + capturedNewORGANIZATION_ID;
     String requestBody =
-        "{\"data\":{\"name\": \""
-            + dynamicValue
-            + "updatedAgain"
-            + "\",\"org_id\": 132,\"category_id\": 2,\"type\": \"ios\"}}";
+        "{\"data\":{\"name\": \"\",\"services\": [\"analytics\",\"alerts\",\"content\",\"messaging\"]}}";
 
     //Printing Request Details
     log.info("REQUEST-URL:PUT-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
+    log.info("REQUEST-BODY:-" + requestBody);
 
     //Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("Authorization", CoreAPI_Constants.AUTH_INVALID)
+            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .request()
             .body(requestBody)
             .put(requestURL)
             .then()
-            .statusCode(401)
+            .statusCode(400)
             .extract()
             .response();
 
@@ -561,31 +430,70 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("status", is("access denied"));
-    response.then().body("msg", is("invalid token"));
+    response.then().body("error.messages.name", is("The name must be at least 1 character long."));
   }
 
-  @Test(priority = 17)
-  public void verify_Put_Update_Invalid_Client() {
+  @Test(priority = 12)
+  public void verify_Put_Update_Organization_EmptyServices_InRequestBody() {
 
     //Request Details
     String requestURL =
-        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT + "000";
+        CoreAPI_Constants.SERVICE_END_POINT
+            + CoreAPI_Constants.ORGANIZATION_END_POINT
+            + capturedNewORGANIZATION_ID;
     String requestBody =
-        "{\"data\":{\"name\": \""
-            + dynamicValue
-            + "updatedAgain"
-            + "\",\"org_id\": 132,\"category_id\": 2,\"type\": \"ios\"}}";
+        "{\"data\":{\"name\": \"" + dynamicValue + "updated" + "\",\"services\":[\"\"]}}";
 
     //Printing Request Details
     log.info("REQUEST-URL:PUT-" + requestURL);
-    log.info("REQUEST-URL:BODY-" + requestBody);
+    log.info("REQUEST-BODY:-" + requestBody);
 
     //Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
             .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .request()
+            .body(requestBody)
+            .put(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+    //JSON response Pay load validations
+    response.then().body("data.id", is(Integer.parseInt(capturedNewORGANIZATION_ID)));
+    response.then().body("data.name", is(dynamicValue + "updated"));
+    response.then().body("data.containsKey('is_active')", is(true));
+    response.then().body("data.containsKey('created_at')", is(true));
+    response.then().body("data.containsKey('updated_at')", is(true));
+  }
+
+  @Test(priority = 13)
+  public void verify_Put_Update_Organization_InvalidOrganization() {
+
+    //Request Details
+    String requestURL =
+        CoreAPI_Constants.SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATION_END_POINT + "!@a3";
+    String requestBody =
+        "{\"data\":{\"name\": \""
+            + dynamicValue
+            + "update"
+            + "\",\"services\": [\"analytics\",\"alerts\",\"content\",\"messaging\"]}}";
+
+    //Printing Request Details
+    log.info("REQUEST-URL:PUT-" + requestURL);
+    log.info("REQUEST-BODY:-" + requestBody);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("Authorization", CoreAPI_Constants.AUTHORIZATION)
+            .request()
             .body(requestBody)
             .put(requestURL)
             .then()
@@ -597,22 +505,21 @@ public class Client {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    response.then().body("error.message", is("Client not found."));
+    response.then().body("error.message", is("Organization not found."));
   }
 
-  @Test(priority = 18)
-  public void verify_Delete_Client() {
+  @Test(priority = 14)
+  public void verify_Delete_ExistingOrganization() {
 
     //Request Details
     String requestURL =
         CoreAPI_Constants.SERVICE_END_POINT
-            + CoreAPI_Constants.CLIENT_END_POINT
-            + capturedNewCLIENT_ID;
+            + CoreAPI_Constants.ORGANIZATION_END_POINT
+            + capturedNewORGANIZATION_ID;
 
     //Printing Request Details
     log.info("REQUEST-URL:DELETE-" + requestURL);
 
-    //Extracting response after status code validation
     try {
       Response response =
           given()
@@ -624,7 +531,7 @@ public class Client {
               .extract()
               .response();
     } catch (Exception ClientProtocolException)  {
-      log.info("SKipping HttpResponseException");
+      log.info("skipping ResponseParseException exception");
     }
   }
 }

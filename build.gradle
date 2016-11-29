@@ -1,4 +1,4 @@
-group 'M3_API_Automation'
+group 'MAAS_API_Automation'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
@@ -23,18 +23,20 @@ dependencies {
 
 }
 
-
-
-// Gradle task to run core API TESTS
- task coreapi(type: Test) { 
-    useTestNG { 
-        suites '/src/test/resources/coreApi.xml' 
-     }
+test {
+    useTestNG(){
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen{false}
+        ignoreFailures = true
+        suites '/src/test/resources/testNG.xml'
+    }
 }
 
-
-test {
-    useTestNG {
-        suites '/src/test/resources/testNG.xml'
+task runCoreApi(type: Test){
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen{false}
+        ignoreFailures = true
+        suites '/src/test/resources/coreApi.xml'
     }
 }
