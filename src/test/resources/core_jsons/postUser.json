@@ -1,0 +1,18 @@
+{
+  "data": {
+    "first_name": "toChange",
+    "last_name": "toChange",
+    "email": "toChange@automation.com",
+    "time_zone": "America\/Chicago",
+    "is_active": 1,
+    "org_id": 132,
+    "role_id": 655,
+    "clients": [
+
+    ],
+    "orgs": [
+
+    ],
+    "password": "Password123"
+  }
+}
