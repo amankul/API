@@ -13,8 +13,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.phunware.m3.constants.GlobalConstants;
-import com.phunware.m3.utilities.PropertiesLoader;
-import com.phunware.m3.utilities.AuthHeader;
+import com.phunware.utility.PropertiesLoader;
+import com.phunware.utility.AuthHeader;
 
 /**
  * Created by knguyen on 7/13/16.

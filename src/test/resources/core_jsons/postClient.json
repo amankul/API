@@ -1,0 +1,8 @@
+{
+  "data": {
+    "name": "ClientNameToBeChanged",
+    "org_id": "OrgIdToBeChanged",
+    "category_id": "ClientCategoryIdToBeChanged",
+    "type": "ClientTypeToBeChanged"
+  }
+}

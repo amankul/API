@@ -13,7 +13,7 @@ dependencies {
     testCompile 'io.rest-assured:rest-assured:3.0.0'
     testCompile 'io.rest-assured:json-schema-validator:3.0.0'
     compile 'io.rest-assured:json-path:3.0.0'
-
+    compile group: 'org.json', name: 'json', version: '20160810'
     compile group: 'org.testng', name: 'testng', version: '6.9.10'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
 
@@ -23,20 +23,21 @@ dependencies {
 
 }
 
-test {
-    useTestNG(){
+
+task runCoreSTAGE(type: Test) {
+    useTestNG() {
         testLogging.showStandardStreams = true
-        outputs.upToDateWhen{false}
+        outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/testNG.xml'
+        suites '/src/test/resources/Core-STAGE.xml'
     }
 }
 
-task runCoreApi(type: Test){
+task runCorePROD(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
-        outputs.upToDateWhen{false}
+        outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/coreApi.xml'
+        suites '/src/test/resources/Core-PROD.xml'
     }
 }

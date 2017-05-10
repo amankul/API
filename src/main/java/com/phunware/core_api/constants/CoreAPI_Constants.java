@@ -4,12 +4,8 @@ package com.phunware.core_api.constants;
 public class CoreAPI_Constants {
 
   //GLOBAL CONSTANTS
-  public static final String SERVICE_END_POINT = "http://core-api-stage.phunware.com/";
-  public static final String AUTHORIZATION =
-      "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTczMCwiZW1haWwiOiJubG92ZXJpZGdlMUBwaHVud2FyZS5jb20iLCJmaXJzdF9uYW1lIjoiTmljayIsImxhc3RfbmFtZSI6IkxvdmVyaWRnZSIsIm9yZ3MiOltdLCJzZXNzaW9uX2lkIjoiZGY2NjFjYzhlNmI1ODU4ZGZlZjM0OWQ4OGM3YWFmMjAzYzJmYmRjOSIsIm9yZ19pZCI6bnVsbCwib3JnX25hbWUiOiIifQ.2ufhq7oBWoVOMbwZdzbKalPbTe0zNpLU6j1ncxLrxSQ";
-  public static final String AUTH_INVALID =
-      "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTY1OSwiZW1haWwiOiJubG92ZXJpZGdlMUBwaHVud2FyZS5jb20iLCJmaXJzdF9uYW1lIjoiTmljayIsImxhc3RfbmFtZSI6IkxvdmVyaWRnZSIsIm9yZ3MiOltdLCJzZXNzaW9uX2lkIjoiZGY2NjFjYzhlNmI1ODU4ZGZlZjM0OWQ4OGM3YWFmMjAzYzJnYmRjOSIsIm9yZ19pZCI6bnVsbCwib3JnX25hbWUiOiIifQ.SzV5HE1ozJrFgECtnNLXlQwnkk_1grs6hpfAO1McX7o";
-
+  public static String SERVICE_END_POINT_STAGE = "http://core-api-stage.phunware.com/";
+  public static String SERVICE_ENT_POINT_PROD = "http://core-api.phunware.com/";
   // Client
   // Resource-EndPoint
   public static final String CLIENT_END_POINT = "v2.0/clients/";
@@ -30,4 +26,6 @@ public class CoreAPI_Constants {
   // Users
   // Resource-EndPoint
   public static final String USERS_END_POINT = "v2.0/users";
+  public static final String AUTHENTICATE_USER_END_POINT = "v2.0/users/authenticate";
+  public static final String RESET_USER_END_POINT = "v2.0/users/reset-password";
 }
