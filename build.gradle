@@ -23,14 +23,6 @@ dependencies {
 
 }
 
-test {
-    useTestNG() {
-        testLogging.showStandardStreams = true
-        outputs.upToDateWhen { false }
-        ignoreFailures = true
-        suites '/src/test/resources/testNG.xml'
-    }
-}
 
 task runCoreSTAGE(type: Test) {
     useTestNG() {
