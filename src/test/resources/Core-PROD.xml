@@ -1,0 +1,374 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Core API TEST SUITE">
+    <parameter name="env" value="PROD"/>
+    <parameter name="clientId" value="1480"/>
+    <parameter name="validAuthorization"
+               value="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTU5LCJlbWFpbCI6InFhdGVzdG9ubHlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6InFhIiwibGFzdF9uYW1lIjoiYXV0b21hdGlvbnNzcyIsIm9yZ3MiOltdLCJzZXNzaW9uX2lkIjoiZGY2NjFjYzhlNmI1ODU4ZGZlZjM0OWQ4OGM3YWFmMjAzYzJmYmRjOSIsIm9yZ19pZCI6bnVsbCwib3JnX25hbWUiOiIifQ.iaMq44nZsojfane9hwK4w0r4nnyuNUIRYyV1hmUSnpo"/>
+    <parameter name="invalidAuthorization"
+               value="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTY1OSwiZW1haWwiOiJubG92ZXJpZGdlMUBwaHVud2FyZS5jb20iLCJmaXJzdF9uYW1lIjoiTmljayIsImxhc3RfbmFtZSI6IkxvdmVyaWRnZSIsIm9yZ3MiOltdLCJzZXNzaW9uX2lkIjoiZGY2NjFjYzhlNmI1ODU4ZGZlZjM0OWQ4OGM3YWFmMjAzYzJnYmRjOSIsIm9yZ19pZCI6bnVsbCwib3JnX25hbWUiOiIifQ.SzV5HE1ozJrFgECtnNLXlQwnkk_1grs6hpfAO1McX7o"/>
+    <parameter name="clientRequestBodyFilePath" value="src/test/resources/core_jsons/postClient.json"/>
+    <parameter name="organizationRequestBodyFilePath" value="src/test/resources/core_jsons/postOrganization.json"/>
+    <parameter name="organizationPutRequestBodyFilePath" value="src/test/resources/core_jsons/putOrganization.json"/>
+    <parameter name="userRolePostRequestBodyFilePath" value="src/test/resources/core_jsons/postUserRole.json"/>
+    <parameter name="userPostRequestBodyFilePath" value="src/test/resources/core_jsons/postUser.json"/>
+    <parameter name="userPutChangePasswordFilePath" value="src/test/resources/core_jsons/putUserChangePassword.json"/>
+    <parameter name="userPutResetPasswordFilePath" value="src/test/resources/core_jsons/putUserResetPassword.json"/>
+    <parameter name="categoryId" value="2"/>
+    <parameter name="orgId" value="386"/>
+    <parameter name="clientType" value="ios"/>
+    <parameter name="userId" value="959"/>
+
+
+
+    <test name="Get Client Details">
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_ClientDetails"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Get Client Details - Invalid Client Id">
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_ClientDetails_InvalidClientId"/>
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Get Client Details - Invalid Auth">
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_ClientDetails_InvalidAuth"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Client GET Client Types">
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+
+                    <include name="verify_Get_ClientTypes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Client GET Client Types - Invalid Auth">
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_ClientTypes_InvalidAuth"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="Client Category Tests">
+        <parameter name="queryParameters" value="{&quot;type_id&quot;:1}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_Client_Categories"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="Client Category Tests - Invalid Auth">
+        <parameter name="queryParameters" value="{&quot;type_id&quot;:1}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_Client_Categories_InvalidAuth"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+
+    <test name="Client Pagination">
+        <parameter name="queryParameters"
+                   value="{&quot;offset&quot; : &quot;15&quot;,&quot; limit &quot;:&quot; 3 &quot;,&quot; org_id &quot;:&quot; 386 &quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_Client_Pagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="Client Pagination - Invalid Auth">
+        <parameter name="queryParameters"
+                   value="{&quot;offset&quot; : &quot;15&quot;,&quot; limit &quot;:&quot; 3 &quot;,&quot; org_id &quot;:&quot; 386 &quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Client">
+                <methods>
+                    <include name="verify_Get_Client_Pagination_InvalidAuth"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+     <test name="Get Organisation Details">
+        <classes>
+            <class name="com.phunware.core.api.tests.Organization">
+                <methods>
+                    <include name="verify_Get_Organization_Details"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Get Organisation Details - Invalid Org">
+        <classes>
+            <class name="com.phunware.core.api.tests.Organization">
+                <methods>
+                    <include name="verify_Get_Organization_Details_InvalidOrgID"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Get Organisation Details - Invalid Authorization">
+        <classes>
+            <class name="com.phunware.core.api.tests.Organization">
+                <methods>
+                    <include name="verify_Get_Organization_Details_InvalidAuthorization"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Get Collection of Orgs">
+        <parameter name="queryParameters" value="{&quot;name&quot;:&quot;QA&quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Organization">
+                <methods>
+                    <include name="verify_Get_Collection_Of_Organizations"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Get Collection of Orgs with Empty String ">
+        <parameter name="queryParameters" value="{&quot;name&quot;:&quot;&quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Organization">
+                <methods>
+                    <include name="verify_Get_Collection_Of_Organizations_NameWithEmptyString"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Get Collection of Orgs Pagination">
+        <parameter name="queryParameters"
+                   value="    {&quot;name&quot;:&quot;qa&quot;,&quot;offset&quot;:&quot;1&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Organization">
+                <methods>
+                    <include name="verify_Get_Collection_Of_Organizations_Pagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="Get Collection of Orgs Pagination With Empty Name ">
+        <parameter name="queryParameters"
+                   value="{&quot;name&quot;:&quot;&quot;,&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.Organization">
+                <methods>
+                    <include name="verify_Get_Collection_Of_Organizations_Pagination_EmptyName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+       <test name="verify_Get_User_Role ">
+           <parameter name="queryParameters" value="{&quot;org_id&quot;:386}"/>
+           <classes>
+               <class name="com.phunware.core.api.tests.UserRole">
+                   <methods>
+                       <include name="verify_Get_User_Role"/>
+                   </methods>
+               </class>
+           </classes>
+       </test>
+
+       <test name="verify_Get_User_Role - Non Existing Org Id">
+           <parameter name="queryParameters" value="{&quot;org_id&quot;:&quot;abc&quot;}"/>
+           <classes>
+               <class name="com.phunware.core.api.tests.UserRole">
+                   <methods>
+                       <include name="verify_Get_UserRole_NonExistant_OrgID"/>
+                   </methods>
+               </class>
+           </classes>
+       </test>
+
+       <test name="verify_Get_User_Role - Invalid Parameter Structure">
+           <parameter name="queryParameters" value="{&quot;org_id&quot;:abc}"/>
+           <classes>
+               <class name="com.phunware.core.api.tests.UserRole">
+                   <methods>
+                       <include name="verify_Get_UserRole_Invalid_parameter_Structure"/>
+                   </methods>
+               </class>
+           </classes>
+       </test>
+
+       <test name="verify_Get_User_Role - Invalid Auth">
+           <parameter name="queryParameters" value="{&quot;org_id&quot;:386}"/>
+           <classes>
+               <class name="com.phunware.core.api.tests.UserRole">
+                   <methods>
+                       <include name="verify_Get_USerRole_InvalidAuth"/>
+                   </methods>
+               </class>
+           </classes>
+       </test>
+
+
+       <test name="verify_Get_User_Role - Pagination">
+           <parameter name="queryParameters"
+                      value="{&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;386&quot;}"/>
+           <classes>
+               <class name="com.phunware.core.api.tests.UserRole">
+                   <methods>
+                       <include name="verify_Get_UserRole_Pagination"/>
+                   </methods>
+               </class>
+           </classes>
+       </test>
+
+       <test name="verify_Get_User_Role - Pagination - Non Existant Org Id">
+           <parameter name="queryParameters"
+                      value="{&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;!2#&quot;}"/>
+           <classes>
+               <class name="com.phunware.core.api.tests.UserRole">
+                   <methods>
+                       <include name="verify_Get_UserRole_Pagination_NonExistant_OrgID"/>
+                   </methods>
+               </class>
+           </classes>
+       </test>
+
+       <test name="verify_Get_User_Role - Pagination - Invalid Auth">
+           <parameter name="queryParameters"
+                      value="{&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;386&quot;}"/>
+           <classes>
+               <class name="com.phunware.core.api.tests.UserRole">
+                   <methods>
+                       <include name="verify_Get_UserRole_Pagination_InvalidAuth"/>
+                   </methods>
+               </class>
+           </classes>
+       </test>
+
+          <test name="Get User Details">
+              <classes>
+                  <class name="com.phunware.core.api.tests.User">
+                      <methods>
+                          <include name="verify_Get_User"/>
+                      </methods>
+                  </class>
+              </classes>
+          </test>
+
+          <test name="Get User Details - Invalid ID">
+              <classes>
+                  <class name="com.phunware.core.api.tests.User">
+                      <methods>
+                          <include name="verify_Get_User_InvalidUserID"/>
+                      </methods>
+                  </class>
+              </classes>
+          </test>
+
+          <test name="Get User Details - Invalid Auth">
+              <classes>
+                  <class name="com.phunware.core.api.tests.User">
+                      <methods>
+                          <include name="verify_Get_User_InvalidAuth"/>
+                      </methods>
+                  </class>
+              </classes>
+          </test>
+
+          <test name="Verify Authenticate User">
+              <parameter name="queryParameters"
+                         value="{&quot;provider&quot;:&quot;phunware&quot;,&quot;email&quot;:&quot;qatestonly@phunware.com&quot;,&quot;password&quot;:&quot;Phunware10&quot;}"/>
+              <classes>
+                  <class name="com.phunware.core.api.tests.User">
+                      <methods>
+                          <include name="verify_Get_Authenticate_User"/>
+                      </methods>
+                  </class>
+              </classes>
+          </test>
+
+          <test name="Verify Authenticate User- Invalid Credentials">
+              <parameter name="queryParameters"
+                         value="{&quot;provider&quot;:&quot;phunware&quot;,&quot;email&quot;:&quot;asdf@phunware.com&quot;,&quot;password&quot;:&quot;Password1&quot;}"/>
+              <classes>
+                  <class name="com.phunware.core.api.tests.User">
+                      <methods>
+                          <include name="verify_Get_Authenticate_User_Invalid_Credentials"/>
+                      </methods>
+                  </class>
+              </classes>
+          </test>
+
+          <test name="Verify Authenticate User- Empty Credentials">
+              <parameter name="queryParameters"
+                         value="{&quot;provider&quot;:&quot;phunware&quot;,&quot;email&quot;:&quot;&quot;,&quot;password&quot;:&quot;&quot;}"/>
+              <classes>
+                  <class name="com.phunware.core.api.tests.User">
+                      <methods>
+                          <include name="verify_Get_Authenticate_User_Empty_Credentials"/>
+                      </methods>
+                  </class>
+              </classes>
+          </test>
+
+ <!--   <test name="Verify Get User Pagination">
+        <parameter name="queryParameters"
+                   value="{&quot;name&quot;:&quot;ngai caleb&quot;,&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.User">
+                <methods>
+                    <include name="verify_Get_UserPagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify Get User Pagination - Null Name">
+        <parameter name="queryParameters"
+                   value="{&quot;name&quot;:&quot;&quot;,&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
+        <classes>
+            <class name="com.phunware.core.api.tests.User">
+                <methods>
+                    <include name="verify_Get_UserPagination_NullName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+-->
+</suite>
