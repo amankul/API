@@ -1,292 +1,565 @@
 package com.phunware.m3.api.tests;
 
-import static io.restassured.RestAssured.*;
-import io.restassured.response.Response;
-
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.notNullValue;
-
-import org.apache.log4j.Logger;
-
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import com.phunware.m3.constants.GlobalConstants;
-import com.phunware.utility.PropertiesLoader;
+import com.phunware.me_api.constants.MeAPI_Constants;
 import com.phunware.utility.AuthHeader;
+import com.phunware.utility.FileUtils;
+import com.phunware.utility.HelperMethods;
+import io.restassured.response.Response;
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.Assert;
+
+import java.io.File;
+import java.io.IOException;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 /**
- * Created by knguyen on 7/21/16.
+ * Created by VinayKarumuri on 5/17/17.
  */
 public class Attributes {
 
-    GlobalConstants gc;
 
-    static PropertiesLoader env;
-    static PropertiesLoader path;
+  public static String serviceEndPoint = null;
+  public static String attributeName;
+  static Logger log;
+  public String xAuth = null;
+  FileUtils fileUtils = new FileUtils();
+  AuthHeader auth = new AuthHeader();
 
-    static AuthHeader auth;
-    static String AUTH_VALUE;
+  @BeforeSuite
+  @Parameters("env")
+  public void setEnv(String env) {
+    if (env.equalsIgnoreCase("PROD")) {
+      serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
+    } else if (env.equalsIgnoreCase("STAGE")) {
+      serviceEndPoint = MeAPI_Constants.SERVICE_END_POINT_STAGE;
+    } else {
+      log.info("Environment is not set properly. Please check your testng xml file");
+    }
+  }
 
-    static Logger log;
+  @BeforeClass
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key"})
+  public void preTestSteps() {
+    log = Logger.getLogger(Attributes.class);
+  }
 
-    @BeforeTest
-    public void instantiateEnvironment() {
+  @Parameters({"attributeName", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Test(priority = 1)
+  public void verify_Get_AttributeMetadata(String attributeName, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
 
-        gc = new GlobalConstants();
-        env = new PropertiesLoader(GlobalConstants.environment_M3_Stage);
-        path = new PropertiesLoader(GlobalConstants.m3_Attributes_Path);
-        log = Logger.getLogger(Attributes.class);
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
+
+    //Printing Request Details
+    log.info("REQUEST-URL:GET-" + requestURL);
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 1)
-    public void getOneAttribute() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // GET - http://msgadm-api-stage.phunware.com/v3/attribute-metadata/member_status
-        String URL = env.getProperty("domain") + path.getProperty("path_with_name");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = "";
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .get(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("GET", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .get(URL)
-                .then().statusCode(200).extract().response();
+    //JSON response Pay load validations
+    response.then().body("name", is(attributeName));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("attributeType"), is("ENUM"));
+    response.then().body(("any { it.key == 'lastUpdated'}"), is(true));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("any { it.key == 'attributeType'}"), is(true));
+    response.then().body(("any { it.key == 'dateCreated'}"), is(true));
+    response.then().body("allowedValues.size()" , greaterThan(0));
 
-        log.info(response.asString());
+  }
 
-        response.then().body("name", is(allOf(notNullValue(), instanceOf(String.class))));
-        response.then().body("allowedValues", is(allOf(notNullValue(), instanceOf(Object.class))));
-        response.then().body("enabled", is(allOf(notNullValue(), instanceOf(Boolean.class))));
-        response.then().body("dateCreated", is(allOf(notNullValue(), instanceOf(String.class))));
-        response.then().body("attributeType", is(allOf(notNullValue(), instanceOf(String.class))));
+  @Parameters({"attributeName", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Test(priority = 2)
+  public void verify_Get_Invalid_AttributeMetadata(String attributeName, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
 
-        response.then().body("name", equalTo("member_status"));
-        response.then().body("allowedValues", hasSize(4));
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + "000";
+
+    //Printing Request Details
+    log.info("REQUEST-URL:GET-" + requestURL);
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 2)
-    public void getAllAttributes() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // GET - http://msgadm-api-stage.phunware.com/v3/attribute-metadata/
-        String URL = env.getProperty("domain") + path.getProperty("path");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = "";
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .get(requestURL)
+            .then()
+            .statusCode(404)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("GET", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .get(URL)
-                .then().statusCode(200).extract().response();
+    //JSON response Pay load validations
+    Assert.assertEquals(response.asString(), "The requested resource could not be found but may be available again in the future.");
 
-        log.info(response.asString());
+  }
 
-        for (int i=0 ; i<=response.then().extract().jsonPath().getList("$").size()-1;i++ ) {
-            response.then().body("name["+i+"]",is(instanceOf(String.class)));
-            response.then().body("allowedValues["+i+"]",is(instanceOf(Object.class)));
-            response.then().body("dateCreated["+i+"]",is(instanceOf(String.class)));
-            response.then().body("enabled["+i+"]",is(instanceOf(Boolean.class)));
-            response.then().body("attributeType["+i+"]",is(instanceOf(String.class)));
-        }
+  @Parameters({ "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Test(priority = 3)
+  public void verify_Get_Collection_Of_AttributeMetadata( String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
+
+    //Printing Request Details
+    log.info("REQUEST-URL:GET-" + requestURL);
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 3)
-    public void enableOneAttribute() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // PUT - http://msgadm-api-stage.phunware.com/v3/attribute-metadata/member_status
-        String URL = env.getProperty("domain") + path.getProperty("path_with_name");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_enable_attribute_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .get(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("PUT", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .put(URL)
-                .then().extract().response();
+    //JSON response Pay load validations
+    //response.then().body("name", everyItem(hasItem("name")));
+    response.then().body("size()", is(greaterThan(0)));
+    response.then().body("flatten().any {it.containsKey('name') }", is(true));
+    response.then().body("flatten().any {it.containsKey('lastUpdated') }", is(true));
+    response.then().body("flatten().any {it.containsKey('allowedValues') }", is(true));
+    response.then().body("flatten().any {it.containsKey('enabled') }", is(true));
+    response.then().body("flatten().any {it.containsKey('dateCreated') }", is(true));
+    response.then().body("attributeType" , everyItem(is("ENUM")));
 
-        log.info(response.asString());
+  }
 
-        int status = response.getStatusCode();
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Test(priority = 4)
+  public void verify_Create_Attribute(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
 
-        if (status == 200)
-            response.then().body("enabled", is(true));
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
+
+    File file = new File(postAttributeRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    attributeName = "testingtypes" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", attributeName );
+    requestBodyJSONObject.remove("allowedValues");
+    JSONArray allowedValues = new JSONArray();
+    allowedValues.put("apitesting");
+    allowedValues.put("loadtesting");
+    allowedValues.put("automationtesting");
+    allowedValues.put("securitytesting");
+    requestBodyJSONObject.put("allowedValues", allowedValues);
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 4)
-    public void disableOneAttribute() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // PUT - http://msgadm-api-stage.phunware.com/v3/attribute-metadata/member_status
-        String URL = env.getProperty("domain") + path.getProperty("path_with_name");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_disable_attribute_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("PUT", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .put(URL)
-                .then().extract().response();
 
-        log.info(response.asString());
+    //JSON Response Validations
+    response.then().body("name", is(attributeName));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("attributeType"), is("ENUM"));
+    response.then().body(("any { it.key == 'lastUpdated'}"), is(true));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("any { it.key == 'attributeType'}"), is(true));
+    response.then().body(("any { it.key == 'dateCreated'}"), is(true));
+    response.then().body("allowedValues.size()" , greaterThan(0));
 
-        int status = response.getStatusCode();
-        String statusBody = response.asString();
+  }
 
-        if (status == 200)
-            response.then().body("enabled", is(false));
-        else if (status == 400)
-            Assert.assertEquals(statusBody, "requirement failed: Cannot disable attribute 'member_status' on an active profile");
+
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Test(priority = 5)
+  public void verify_Create_Attribute_WithOut_Name(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
+
+    File file = new File(postAttributeRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    requestBodyJSONObject.put("name", "" );
+    requestBodyJSONObject.remove("allowedValues");
+    JSONArray allowedValues = new JSONArray();
+    allowedValues.put("apitesting");
+    allowedValues.put("loadtesting");
+    allowedValues.put("automationtesting");
+    allowedValues.put("securitytesting");
+    requestBodyJSONObject.put("allowedValues", allowedValues);
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 5)
-    public void postOneAttribute() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // PUT - http://msgadm-api-stage.phunware.com/v3/attribute-metadata/
-        String URL = env.getProperty("domain") + path.getProperty("path");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_post_attribute_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(400)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("POST", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .post(URL)
-                .then().extract().response();
 
-        log.info(response.asString());
+    //JSON Response Validations
+    Assert.assertEquals(response.asString(), "The request content was malformed:\n" +
+        "requirement failed: allowed characters in name are: a-z, _ and 0-9");
 
-        int status = response.getStatusCode();
-        String statusBody = response.asString();
+  }
 
-        if (status == 200)
-            Assert.assertEquals(status, 200);
-        else if (status == 400)
-            assertThat(statusBody, containsString("Duplicate entry"));
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Test(priority = 6)
+  public void verify_Create_Attribute_WithOut_AllowedValues(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
+
+    File file = new File(postAttributeRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String name = "testingtypes" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", name );
+    requestBodyJSONObject.remove("allowedValues");
+    JSONArray allowedValues = new JSONArray();
+    requestBodyJSONObject.put("allowedValues", allowedValues);
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 6)
-    public void addOneValueToAttribute() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // PUT - http://msgadm-api-stage.phunware.com/v3/attribute-metadata/dang
-        String URL = env.getProperty("domain") + path.getProperty("path_with_name_to_add_values_to_attribute_body");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_add_one_value_to_attribute_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(400)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("PUT", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .put(URL)
-                .then().extract().response();
 
-        log.info(response.asString());
+    //JSON Response Validations
+    Assert.assertEquals(response.asString(), "The request content was malformed:\n" +
+        "requirement failed: ENUM must have allowedValues");
 
-        int status = response.getStatusCode();
-        String statusBody = response.asString();
+  }
 
-        if (status == 200)
-            response.then().body("allowedValues", hasItem("alot"));
-        else if (status == 400)
-            assertThat(statusBody, containsString("Cannot remove from allowedValues"));
+
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Test(priority = 7)
+  public void verify_Update_Attribute_AddValues(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
+
+    File file = new File(postAttributeRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    requestBodyJSONObject.put("name", attributeName );
+    requestBodyJSONObject.remove("allowedValues");
+    JSONArray allowedValues = new JSONArray();
+    allowedValues.put("apitesting");
+    allowedValues.put("loadtesting");
+    allowedValues.put("automationtesting");
+    allowedValues.put("securitytesting" );
+    allowedValues.put("uitesting");
+    requestBodyJSONObject.put("allowedValues", allowedValues);
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 7)
-    public void addMultipleValuesToAttribute() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // PUT - http://msgadm-api-stage.phunware.com/v3/attribute-metadata/dang
-        String URL = env.getProperty("domain") + path.getProperty("path_with_name_to_add_values_to_attribute_body");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_add_values_to_attribute_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .put(requestURL)
+            .then()
+//            .statusCode(200)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("PUT", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .put(URL)
-                .then().extract().response();
 
-        log.info(response.asString());
+    //JSON Response Validations
+    response.then().body("name", is(attributeName));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("attributeType"), is("ENUM"));
+    response.then().body(("any { it.key == 'lastUpdated'}"), is(true));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("any { it.key == 'attributeType'}"), is(true));
+    response.then().body(("any { it.key == 'dateCreated'}"), is(true));
+    response.then().body("allowedValues.size()" , greaterThan(0));
 
-        int status = response.getStatusCode();
-        String statusBody = response.asString();
+  }
 
-        if (status == 200)
-            response.then().body("allowedValues", hasItems("alot", "bro"));
-        else if (status == 400)
-            assertThat(statusBody, containsString("Cannot remove from allowedValues"));
+
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Test(priority = 7)
+  public void verify_Update_Attribute_EditValues(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
+
+    File file = new File(postAttributeRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    requestBodyJSONObject.put("name", attributeName );
+    requestBodyJSONObject.remove("allowedValues");
+    JSONArray allowedValues = new JSONArray();
+    allowedValues.put("apitesting_updated");
+    allowedValues.put("loadtesting_updated");
+    allowedValues.put("automationtesting_updated");
+    allowedValues.put("securitytesting_updated" );
+    allowedValues.put("uitesting_updated");
+    requestBodyJSONObject.put("allowedValues", allowedValues);
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-//    @Test(priority = 10)
-//    public void getCMS() {
-//
-//        String URL = "http://cms-api.phunware.com/v1.0/content?%7B%22containerId%22%3A%2256d9c8db7baa1b1564001fa1%22%2C%22structureId%22%3A%2215551%22%2C%22depth%22%3A2%2C%22limit%22%3A100%7D";
-//        //String URL = "http://cms-api.phunware.com/v1.0/content?{"containerId":"56d9c8db7baa1b1564001fa1","structureId":"15551","depth":2,"limit":100}";
-//        //String URL = "http://cms-api.phunware.com/v1.0/content?{containerId:56d9c8db7baa1b1564001fa1,structureId:15551,depth:2,limit:100}";
-//
-//        String accessKey = env.getProperty("accessKey");
-//        String signatureKey = env.getProperty("signatureKey");
-//        String body = "";
-//
-//        try {
-//            AUTH_VALUE = auth.generateAuthHeader("GET", accessKey, signatureKey, URL, body);
-//            System.out.println(AUTH_VALUE);
-//        } catch (Exception e) { e.printStackTrace();}
-//
-//        Response response = given()
-//                .header("Content-Type", "application/json")
-//                //.header("x-org-id", "1").header("x-client-id", "1")
-//                .header("X-Auth", AUTH_VALUE)
-//                .get(URL)
-//                .then().statusCode(200).extract().response();
-//
-//        log.info(response.asString());
-//        System.out.println(response);
-//    }
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .put(requestURL)
+            .then()
+            .statusCode(400)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+
+    //JSON Response Validations
+    Assert.assertEquals(response.asString(),"requirement failed: Cannot remove from allowedValues");
+
+  }
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Test(priority = 9)
+  public void verify_Disable_Attribute(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
+
+    File file = new File(postAttributeRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    requestBodyJSONObject.put("name", attributeName );
+    requestBodyJSONObject.remove("allowedValues");
+    JSONArray allowedValues = new JSONArray();
+    allowedValues.put("apitesting");
+    allowedValues.put("loadtesting");
+    allowedValues.put("automationtesting");
+    allowedValues.put("securitytesting" );
+    allowedValues.put("uitesting");
+    requestBodyJSONObject.put("allowedValues", allowedValues);
+    requestBodyJSONObject.put("enabled", false);
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .put(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+
+    //JSON Response Validations
+    response.then().body("name", is(attributeName));
+    response.then().body("enabled" , is(false));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("attributeType"), is("ENUM"));
+    response.then().body(("any { it.key == 'lastUpdated'}"), is(true));
+    response.then().body(("any { it.key == 'allowedValues'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("any { it.key == 'attributeType'}"), is(true));
+    response.then().body(("any { it.key == 'dateCreated'}"), is(true));
+    response.then().body("allowedValues.size()" , greaterThan(0));
+
+  }
+
 
 }
-

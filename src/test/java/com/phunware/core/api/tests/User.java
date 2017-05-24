@@ -594,7 +594,7 @@ public class User {
     response.then().body("error.messages.email", is("Invalid email address."));
   }
 
-  //TODO - FIND OUT THE RIGHT EXPECTED STATUS CODE
+  //PLAT-5633
   @Parameters({"validAuthorization", "userPostRequestBodyFilePath" , "orgId", "roleId"})
   @Test(priority = 13)
   public void verify_post_CreateNewUser_Null_Timezone(String validAuthorization, String userPostRequestBodyFilePath, String orgId, String roleId) throws IOException{
@@ -639,7 +639,7 @@ public class User {
 
   }
 
-  //TODO - FIND OUT THE RIGHT EXPECTED STATUS CODE
+  //Bug PLAT-5634
 
   @Parameters({"validAuthorization", "userPostRequestBodyFilePath" , "orgId", "roleId"})
   @Test(priority = 14)

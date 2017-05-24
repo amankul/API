@@ -1,0 +1,17 @@
+{
+  "name": "HondaCarNonPlatinum",
+  "rules": [
+    {
+      "attributeMetadataName": "car",
+      "operator": "Equal",
+      "value": "honda"
+    },
+    {
+      "attributeMetadataName": "member",
+      "operator": "NotEqual",
+      "value": "platinum"
+    }
+  ],
+  "enabled": true,
+  "description": "HondaCarNonPlatinum"
+}

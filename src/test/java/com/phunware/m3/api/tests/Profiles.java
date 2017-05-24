@@ -1,212 +1,607 @@
 package com.phunware.m3.api.tests;
 
-import static io.restassured.RestAssured.*;
+import com.phunware.me_api.constants.MeAPI_Constants;
+import com.phunware.utility.AuthHeader;
+import com.phunware.utility.FileUtils;
+import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
-
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.notNullValue;
-
-import org.apache.log4j.Logger;
-
+import org.apache.log4j.pattern.IntegerPatternConverter;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.apache.log4j.Logger;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.phunware.m3.constants.GlobalConstants;
-import com.phunware.utility.PropertiesLoader;
-import com.phunware.utility.AuthHeader;
+import java.io.File;
+import java.io.IOException;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 
 /**
- * Created by knguyen on 7/13/16.
+ * Created by VinayKarumuri on 5/18/17.
  */
 public class Profiles {
 
-    GlobalConstants gc;
 
-    static PropertiesLoader env;
-    static PropertiesLoader path;
 
-    static AuthHeader auth;
-    static String AUTH_VALUE;
+  public static String serviceEndPoint = null;
+  public static String newProfileId;
+  static Logger log;
+  public String xAuth = null;
+  FileUtils fileUtils = new FileUtils();
+  AuthHeader auth = new AuthHeader();
 
-    static Logger log;
+  @BeforeSuite
+  @Parameters("env")
+  public void setEnv(String env) {
+    if (env.equalsIgnoreCase("PROD")) {
+      serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
+    } else if (env.equalsIgnoreCase("STAGE")) {
+      serviceEndPoint = MeAPI_Constants.SERVICE_END_POINT_STAGE;
+    } else {
+      log.info("Environment is not set properly. Please check your testng xml file");
+    }
+  }
 
-    @BeforeTest
-    public void instantiateEnvironment() {
+  @BeforeClass
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key"})
+  public void preTestSteps() {
+    log = Logger.getLogger(Profiles.class);
+  }
 
-        gc = new GlobalConstants();
-        env = new PropertiesLoader(GlobalConstants.environment_M3_Stage);
-        path = new PropertiesLoader(GlobalConstants.m3_Profiles_Path);
-        log = Logger.getLogger(Profiles.class);
+  @Parameters({"profileId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Test(priority = 1)
+  public void verify_Get_Profile(String profileId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + profileId;
+
+    //Printing Request Details
+    log.info("REQUEST-URL:GET-" + requestURL);
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-    @Test(priority = 1)
-    public void getOneProfile() {
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .get(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
 
-        // GET - http://msgadm-api-stage.phunware.com/v3/profile/3
-        String URL = env.getProperty("domain") + path.getProperty("path_with_id");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = "";
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("GET", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //JSON response Pay load validations
+    response.then().body("id", is(Integer.parseInt(profileId)));
+    response.then().body(("any { it.key == 'name'}"), is(true));
+    response.then().body(("any { it.key == 'description'}"), is(true));
+    response.then().body(("any { it.key == 'date_created'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("rules.size()"), is(greaterThan(0)));
+  }
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .get(URL)
-                .then().statusCode(200).extract().response();
+  @Parameters({"profileId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Test(priority = 2)
+  public void verify_Get_InvalidProfileId(String profileId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
 
-        log.info(response.asString());
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + "000";
 
-        response.then().body("id", is(allOf(notNullValue(), instanceOf(Integer.class))));
-        response.then().body("name", is(allOf(notNullValue(), instanceOf(String.class))));
-        response.then().body("description", is(allOf(notNullValue(), instanceOf(String.class))));
-        response.then().body("enabled", is(allOf(notNullValue(), instanceOf(Boolean.class))));
-        response.then().body("date_created", is(allOf(notNullValue(), instanceOf(String.class))));
+    //Printing Request Details
+    log.info("REQUEST-URL:GET-" + requestURL);
 
-        response.then().body("rules", is(instanceOf(Object.class)));
-        response.then().body("rules.attributeMetadataName", notNullValue(String.class));
-        response.then().body("rules.operator", notNullValue(String.class));
-        response.then().body("rules.value", notNullValue(String.class));
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 2)
-    public void getAllProfiles() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        //GET - http://msgadm-api-stage.phunware.com/v3/profile/
-        String URL = env.getProperty("domain") + path.getProperty("path");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = "";
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .get(requestURL)
+            .then()
+            .statusCode(404)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("GET", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .get(URL)
-                .then().statusCode(200).extract().response();
+    //JSON response Pay load validations
+    Assert.assertEquals( response.asString(), "The requested resource could not be found but may be available again in the future.");
 
-        log.info(response.asString());
-
-        response.then().body("flatten().any {it.containsKey('id') }", is(true));
-        response.then().body("flatten().any {it.containsKey('name') }", is(true));
-        response.then().body("flatten().any {it.containsKey('description') }", is(true));
-        response.then().body("flatten().any {it.containsKey('enabled') }", is(true));
-        response.then().body("flatten().any {it.containsKey('date_created') }", is(true));
-
-        response.then().body("flatten().any {it.containsKey('rules') }", is(true));
-        response.then().body("rules.flatten().any {it.containsKey('attributeMetadataName') }", is(true));
-        response.then().body("rules.flatten().any {it.containsKey('operator') }", is(true));
-        response.then().body("rules.flatten().any {it.containsKey('value') }", is(true));
+  }
 
 
-        for (int i=0 ; i<=response.then().extract().jsonPath().getList("$").size()-1;i++ ) {
+  @Parameters({"profileId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Test(priority = 3)
+  public void verify_Get_Collection_Of_Profiles_By_Org(String profileId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
 
-            response.then().body("id["+i+"]",is(instanceOf(Integer.class)));
-            response.then().body("name["+i+"]",is(instanceOf(String.class)));
-            response.then().body("description["+i+"]",is(instanceOf(String.class)));
-            response.then().body("rules["+i+"]",is(instanceOf(Object.class)));
-            response.then().body("enabled["+i+"]",is(instanceOf(Boolean.class)));
-            response.then().body("date_created["+i+"]",is(instanceOf(String.class)));
-        }
+    //Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
 
+    //Printing Request Details
+    log.info("REQUEST-URL:GET-" + requestURL);
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 3)
-    public void createOneProfile() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // POST - http://msgadm-api-stage.phunware.com/v3/profile/
-        String URL = env.getProperty("domain") + path.getProperty("path");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_post_profile_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .get(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("POST", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given().header("Content-Type", "application/json").header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .post(env.getProperty("domain") + path.getProperty("path"))
-                .then().extract().response();
+    //JSON response Pay load validations
+    response.then().body("size()" , greaterThan(0));
+    response.then().body("flatten().any { it.containsKey('date_created') }" , is(true));
+    response.then().body("flatten().any { it.containsKey('name') }" , is(true));
+    response.then().body("flatten().any { it.containsKey('description') }" , is(true));
+    response.then().body("flatten().any { it.containsKey('enabled') }" , is(true));
+    response.then().body("flatten().any { it.containsKey('id') }" , is(true));
+    response.then().body("flatten().any { it.containsKey('rules') }" , is(true));
+    response.then().body("rules.flatten().any { it.containsKey('attributeMetadataName') }" , is(true));
+    response.then().body("rules.flatten().any { it.containsKey('operator') }" , is(true));
+    response.then().body("rules.flatten().any { it.containsKey('value') }" , is(true));
+  }
 
-        log.info(response.asString());
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Test(priority = 4)
+  public void verify_Create_Profile(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
 
-        int status = response.getStatusCode();
-        String statusBody = response.asString();
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
 
-        if (status == 200)
-            Assert.assertEquals(status, 200);
-        else if (status == 400)
-            Assert.assertEquals(statusBody, "requirement failed: Value provided for [name] is not unique, please provide an unique value.");
+    File file = new File(postProfileRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String profileName = "apitesting" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", profileName);
+    requestBodyJSONObject.remove("rules");
+    JSONArray rules = new JSONArray();
+    JSONObject rule1 = new JSONObject();
+    String car[] = {"honda", "tesla" , "camry"};
+    String member[] = {"silver","gold","platinum"};
+    String operator[] = {"Equal", "NotEqual"};
+    rule1.put("attributeMetadataName", "car");
+    rule1.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule1.put("value", car[HelperMethods.generateRandomNumber(2)]);
+    JSONObject rule2 = new JSONObject();
+    rule2.put("attributeMetadataName", "member");
+    rule2.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule2.put("value", member[HelperMethods.generateRandomNumber(2)]);
+    rules.put(rule1);
+    rules.put(rule2);
+    requestBodyJSONObject.put("rules" , rules);
+    requestBodyJSONObject.put("description", profileName);
+
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 4)
-    public void disableOneProfile() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // PUT - http://msgadm-api-stage.phunware.com/v3/profile/62
-        String URL = env.getProperty("domain") + path.getProperty("path_with_id_to_enable_disable");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_disable_profile_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("PUT", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .put(URL)
-                .then().extract().response();
 
-        log.info(response.asString());
+    //JSON Response Validations
+    response.then().body("id", is(greaterThan(0)));
+    response.then().body(("any { it.key == 'name'}"), is(true));
+    response.then().body(("any { it.key == 'description'}"), is(true));
+    response.then().body(("any { it.key == 'date_created'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("rules.size()"), is(greaterThan(0)));
 
-        int status = response.getStatusCode();
+    newProfileId = response.then().extract().path("id").toString();
 
-        if (status == 200)
-            response.then().body("enabled", is(false));
+  }
+
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Test(priority = 4)
+  public void verify_Create_Profile_WithoutEnabled(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
+
+    File file = new File(postProfileRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String profileName = "apitesting" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", profileName);
+    requestBodyJSONObject.remove("rules");
+    JSONArray rules = new JSONArray();
+    JSONObject rule1 = new JSONObject();
+    String car[] = {"honda", "tesla" , "camry"};
+    String member[] = {"silver","gold","platinum"};
+    String operator[] = {"Equal", "NotEqual"};
+    rule1.put("attributeMetadataName", "car");
+    rule1.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule1.put("value", car[HelperMethods.generateRandomNumber(2)]);
+    JSONObject rule2 = new JSONObject();
+    rule2.put("attributeMetadataName", "member");
+    rule2.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule2.put("value", member[HelperMethods.generateRandomNumber(2)]);
+    rules.put(rule1);
+    rules.put(rule2);
+    requestBodyJSONObject.put("rules" , rules);
+    requestBodyJSONObject.put("description", profileName);
+    requestBodyJSONObject.remove("enabled");
+
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Test(priority = 5)
-    public void enableOneProfile() {
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
 
-        // PUT - http://msgadm-api-stage.phunware.com/v3/profile/62
-        String URL = env.getProperty("domain") + path.getProperty("path_with_id_to_enable_disable");
-        String accessKey = env.getProperty("accessKey");
-        String signatureKey = env.getProperty("signatureKey");
-        String body = path.getProperty("valid_enable_profile_body");
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(400)
+            .extract()
+            .response();
 
-        try {
-            AUTH_VALUE = auth.generateAuthHeader("PUT", accessKey, signatureKey, URL, body);
-        } catch (Exception e) { e.printStackTrace();}
+    //printing response
+    log.info("RESPONSE:" + response.asString());
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .header("x-org-id", "1").header("x-client-id", "1")
-                .header("X-Auth", AUTH_VALUE)
-                .request().body(body)
-                .put(URL)
-                .then().statusCode(200).extract().response();
 
-        log.info(response.asString());
+    //JSON Response Validations
+    Assert.assertEquals(response.asString(), "The request content was malformed:\n" +
+        "key not found: enabled");
 
-        int status = response.getStatusCode();
+  }
 
-        if (status == 200)
-            response.then().body("enabled", is(true));
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Test(priority = 5)
+  public void verify_Create_Profile_Without_Description(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
+
+    File file = new File(postProfileRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String profileName = "apitesting" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", profileName);
+    requestBodyJSONObject.remove("rules");
+    JSONArray rules = new JSONArray();
+    JSONObject rule1 = new JSONObject();
+    String car[] = {"honda", "tesla" , "camry"};
+    String member[] = {"silver","gold","platinum"};
+    String operator[] = {"Equal", "NotEqual"};
+    rule1.put("attributeMetadataName", "car");
+    rule1.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule1.put("value", car[HelperMethods.generateRandomNumber(2)]);
+    JSONObject rule2 = new JSONObject();
+    rule2.put("attributeMetadataName", "member");
+    rule2.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule2.put("value", member[HelperMethods.generateRandomNumber(2)]);
+    rules.put(rule1);
+    rules.put(rule2);
+    requestBodyJSONObject.put("rules" , rules);
+    requestBodyJSONObject.remove("description");
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+
+    //JSON Response Validations
+    response.then().body("id", is(greaterThan(0)));
+    response.then().body(("any { it.key == 'name'}"), is(true));
+    response.then().body(("any { it.key == 'description'}"), is(true));
+    response.then().body(("any { it.key == 'date_created'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("rules.size()"), is(greaterThan(0)));
+
+  }
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Test(priority = 6)
+  public void Create_Profile_WithOut_Rules(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
+
+    File file = new File(postProfileRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String profileName = "apitesting" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", profileName);
+    requestBodyJSONObject.remove("rules");
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(400)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+
+    //JSON Response Validations
+    Assert.assertEquals(response.asString(), "The request content was malformed:\n" +
+        "requirement failed: rule(s) not found for profile Id: None");
+
+  }
+
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Test(priority = 7)
+  public void Create_Profile_WithOut_Name(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
+
+    File file = new File(postProfileRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String profileName = "apitesting" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", profileName);
+    requestBodyJSONObject.remove("rules");
+    JSONArray rules = new JSONArray();
+    JSONObject rule1 = new JSONObject();
+    String car[] = {"honda", "tesla" , "camry"};
+    String member[] = {"silver","gold","platinum"};
+    String operator[] = {"Equal", "NotEqual"};
+    rule1.put("attributeMetadataName", "car");
+    rule1.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule1.put("value", car[HelperMethods.generateRandomNumber(2)]);
+    JSONObject rule2 = new JSONObject();
+    rule2.put("attributeMetadataName", "member");
+    rule2.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule2.put("value", member[HelperMethods.generateRandomNumber(2)]);
+    rules.put(rule1);
+    rules.put(rule2);
+    requestBodyJSONObject.put("rules" , rules);
+    requestBodyJSONObject.remove("name");
+
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(400)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+
+    //JSON Response Validations
+    Assert.assertEquals(response.asString(), "The request content was malformed:\n" +
+        "key not found: name");
+
+  }
+
+
+  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Test(priority = 8)
+  public void Disable_Profile(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+
+    //Request Details
+    String requestURL =
+        serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + newProfileId;
+
+    File file = new File(postProfileRequestBodyPath);
+    String requestBody = fileUtils.getJsonText(file);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String profileName = "apitesting" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", profileName);
+    requestBodyJSONObject.remove("rules");
+    JSONArray rules = new JSONArray();
+    JSONObject rule1 = new JSONObject();
+    String car[] = {"honda", "tesla" , "camry"};
+    String member[] = {"silver","gold","platinum"};
+    String operator[] = {"Equal", "NotEqual"};
+    rule1.put("attributeMetadataName", "car");
+    rule1.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule1.put("value", car[HelperMethods.generateRandomNumber(2)]);
+    JSONObject rule2 = new JSONObject();
+    rule2.put("attributeMetadataName", "member");
+    rule2.put("operator", operator[HelperMethods.generateRandomNumber(1)]);
+    rule2.put("value", member[HelperMethods.generateRandomNumber(2)]);
+    rules.put(rule1);
+    rules.put(rule2);
+    requestBodyJSONObject.put("rules" , rules);
+    requestBodyJSONObject.put("enabled", false);
+    requestBodyJSONObject.put("id", Integer.parseInt(newProfileId));
+
+
+    //Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+    //Auth Generation
+    try {
+      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    //Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    //Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .put(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+
+    //JSON Response Validations
+
+    response.then().body("enabled", is(false));
+    response.then().body(("rules.size()"), is(greaterThan(0)));
+
+
+  }
+
 
 }
