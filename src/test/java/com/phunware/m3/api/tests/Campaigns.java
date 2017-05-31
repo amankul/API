@@ -59,14 +59,14 @@ public class Campaigns {
   }
 
   @BeforeClass
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key"})
   public void preTestSteps() {
     log = Logger.getLogger(Campaigns.class);
   }
 
-  @Parameters({"campaignId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"campaignId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 1)
-  public void Verify_Get_Campaign_By_Id(String campaignId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void Verify_Get_Campaign_By_Id(String campaignId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + campaignId;
@@ -76,7 +76,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -124,9 +124,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"campaignId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"campaignId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 2)
-  public void Verify_Get_Campaign_By_InvalidId(String campaignId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void Verify_Get_Campaign_By_InvalidId(String campaignId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + "000";
@@ -136,7 +136,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -164,9 +164,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"campaignType", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"campaignType", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 3)
-  public void Verify_Collection_Of_Campaigns_By_CampaignType(String campaignType, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void Verify_Collection_Of_Campaigns_By_CampaignType(String campaignType, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -177,7 +177,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -209,9 +209,9 @@ public class Campaigns {
 
   }
 
-  @Parameters({"status","appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"status","clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 4)
-  public void Verify_Collection_Of_Campaigns_By_Status(String status, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void Verify_Collection_Of_Campaigns_By_Status(String status, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -222,7 +222,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -256,9 +256,9 @@ public class Campaigns {
 
 
 
-  @Parameters({"sortBy","sortOrder", "limit", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"sortBy","sortOrder", "limit", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 5)
-  public void Verify_Collection_Of_Campaigns_SortByStartDate(String sortBy, String sortOrder, String limit,  String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void Verify_Collection_Of_Campaigns_SortByStartDate(String sortBy, String sortOrder, String limit,  String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -270,7 +270,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL,queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL,queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -305,9 +305,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"campaignId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"campaignId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 6)
-  public void Verify_Get_Campaign_Status(String campaignId,  String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void Verify_Get_Campaign_Status(String campaignId,  String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGN_STATUS_END_POINT.replace("<id>" , campaignId);
@@ -317,7 +317,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL,"");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL,"");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -345,9 +345,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 7)
-  public void verify_Create_Campaign(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -374,7 +374,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -433,9 +433,9 @@ public class Campaigns {
 
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 8)
-  public void verify_Create_Campaign_WithNoNameInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoNameInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -461,7 +461,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -491,9 +491,9 @@ public class Campaigns {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 9)
-  public void verify_Create_Campaign_WithNoStartDateInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoStartDateInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -518,7 +518,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -549,9 +549,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 10)
-  public void verify_Create_Campaign_WithNoEndDateInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoEndDateInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -575,7 +575,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -606,9 +606,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 11)
-  public void verify_Create_Campaign_WithNoDescriptionInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoDescriptionInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -635,7 +635,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -666,9 +666,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 12)
-  public void verify_Create_Campaign_WithNoCampaignTypeInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoCampaignTypeInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -695,7 +695,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -727,9 +727,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 13)
-  public void verify_Create_Campaign_WithNoRepeatFrequencyInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoRepeatFrequencyInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -756,7 +756,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -787,9 +787,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 14)
-  public void verify_Create_Campaign_WithNoTargetTimeZoneInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoTargetTimeZoneInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -816,7 +816,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -846,9 +846,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 15)
-  public void verify_Create_Campaign_WithNoNotificationTitleInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoNotificationTitleInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -875,7 +875,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -905,9 +905,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 16)
-  public void verify_Create_Campaign_WithNoNotificationMessageInBody(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoNotificationMessageInBody(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -934,7 +934,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -964,9 +964,9 @@ public class Campaigns {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 17)
-  public void verify_Update_Campaign(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Update_Campaign(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -995,7 +995,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1054,9 +1054,9 @@ public class Campaigns {
 
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postCampaignRequestBodyPath"})
   @Test(priority = 18)
-  public void verify_Delete_Campaign(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Delete_Campaign(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postCampaignRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1084,7 +1084,7 @@ public class Campaigns {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }

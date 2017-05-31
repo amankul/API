@@ -46,14 +46,14 @@ public class Attributes {
   }
 
   @BeforeClass
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key"})
   public void preTestSteps() {
     log = Logger.getLogger(Attributes.class);
   }
 
-  @Parameters({"attributeName", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"attributeName", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 1)
-  public void verify_Get_AttributeMetadata(String attributeName, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_AttributeMetadata(String attributeName, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
@@ -63,7 +63,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -99,9 +99,9 @@ public class Attributes {
 
   }
 
-  @Parameters({"attributeName", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"attributeName", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 2)
-  public void verify_Get_Invalid_AttributeMetadata(String attributeName, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Invalid_AttributeMetadata(String attributeName, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + "000";
@@ -111,7 +111,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -139,9 +139,9 @@ public class Attributes {
 
   }
 
-  @Parameters({ "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({ "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 3)
-  public void verify_Get_Collection_Of_AttributeMetadata( String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Collection_Of_AttributeMetadata( String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
@@ -151,7 +151,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -186,9 +186,9 @@ public class Attributes {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
   @Test(priority = 4)
-  public void verify_Create_Attribute(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Attribute(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -214,7 +214,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -254,9 +254,9 @@ public class Attributes {
 
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
   @Test(priority = 5)
-  public void verify_Create_Attribute_WithOut_Name(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Attribute_WithOut_Name(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -281,7 +281,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -313,9 +313,9 @@ public class Attributes {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
   @Test(priority = 6)
-  public void verify_Create_Attribute_WithOut_AllowedValues(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Attribute_WithOut_AllowedValues(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -337,7 +337,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -370,9 +370,9 @@ public class Attributes {
 
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
   @Test(priority = 7)
-  public void verify_Update_Attribute_AddValues(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Update_Attribute_AddValues(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
@@ -397,7 +397,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -414,7 +414,7 @@ public class Attributes {
             .body(requestBodyJSONObject.toString())
             .put(requestURL)
             .then()
-//            .statusCode(200)
+            .statusCode(200)
             .extract()
             .response();
 
@@ -437,9 +437,9 @@ public class Attributes {
 
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
   @Test(priority = 7)
-  public void verify_Update_Attribute_EditValues(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Update_Attribute_EditValues(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
@@ -464,7 +464,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -494,9 +494,9 @@ public class Attributes {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
   @Test(priority = 9)
-  public void verify_Disable_Attribute(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Disable_Attribute(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postAttributeRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
@@ -522,7 +522,7 @@ public class Attributes {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }

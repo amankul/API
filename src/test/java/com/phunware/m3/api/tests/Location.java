@@ -49,14 +49,14 @@ public class Location {
   }
 
   @BeforeClass
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key"})
   public void preTestSteps() {
     log = Logger.getLogger(Location.class);
   }
 
-  @Parameters({"locationId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"locationId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 1)
-  public void verify_Get_Location(String locationId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Location(String locationId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -69,7 +69,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -110,9 +110,9 @@ public class Location {
 
   }
 
-  @Parameters({"locationId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"locationId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 2)
-  public void verify_Get_Invalid_Location(String locationId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Invalid_Location(String locationId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -125,7 +125,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -150,9 +150,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 3)
-  public void verify_Get_Locations_By_Org(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Locations_By_Org(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -169,7 +169,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -202,9 +202,9 @@ public class Location {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 4)
-  public void verify_Get_Locations_By_InvalidOrg(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Locations_By_InvalidOrg(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -221,7 +221,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -248,9 +248,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 5)
-  public void verify_Get_Tags_By_Org(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Tags_By_Org(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -267,7 +267,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -297,9 +297,9 @@ public class Location {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "tags"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "tags"})
   @Test(priority = 6)
-  public void verify_Get_Locations_By_Tags(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String tags) {
+  public void verify_Get_Locations_By_Tags(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String tags) {
 
     //Request Details
     String requestURL =
@@ -316,7 +316,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -344,9 +344,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 7)
-  public void verify_Create_Location(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -366,7 +366,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -411,9 +411,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 8)
-  public void verify_Create_Location_InvalidState(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_InvalidState(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -434,7 +434,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -464,9 +464,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 9)
-  public void verify_Create_Location_NoTimezone(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoTimezone(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -487,7 +487,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -517,9 +517,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 10)
-  public void verify_Create_Location_NoLocationName(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoLocationName(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -538,7 +538,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -568,9 +568,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 11)
-  public void verify_Create_Location_NoCountry(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoCountry(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -591,7 +591,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -620,9 +620,9 @@ public class Location {
     Assert.assertEquals(response.asString(), "requirement failed: Value required for [country]; please provide [locationName: " + locationName + "]");
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 12)
-  public void verify_Create_Location_NoZip(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoZip(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -643,7 +643,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -672,9 +672,9 @@ public class Location {
     Assert.assertEquals(response.asString(), "requirement failed: Value required for [zip]; please provide [locationName: " + locationName + "]");
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 13)
-  public void verify_Create_Location_NoCity(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoCity(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -695,7 +695,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -725,9 +725,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
   @Test(priority = 14)
-  public void verify_Create_Location_NoAddress1(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoAddress1(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL =
@@ -748,7 +748,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -778,9 +778,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
   @Test(priority = 15)
-  public void verify_Update_Location(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
+  public void verify_Update_Location(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + capturedLocationId;
@@ -802,7 +802,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -845,9 +845,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
   @Test(priority = 16)
-  public void verify_Update_Location_InvalidId(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
+  public void verify_Update_Location_InvalidId(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + 0;
@@ -871,7 +871,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -901,9 +901,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
   @Test(priority = 17)
-  public void verify_Disable_Location(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
+  public void verify_Disable_Location(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + capturedLocationId;
@@ -925,7 +925,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -956,9 +956,9 @@ public class Location {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "tags"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "tags"})
   @Test(priority = 18)
-  public void verify_Download_Locations(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String tags) throws IOException {
+  public void verify_Download_Locations(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String tags) throws IOException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATIONS_DOWNLOAD_END_POINT;
@@ -974,7 +974,7 @@ public class Location {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }

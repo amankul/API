@@ -50,15 +50,15 @@ public class Beacons {
   }
 
   @BeforeClass
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key"})
   public void preTestSteps() {
     log = Logger.getLogger(Beacons.class);
   }
 
 
-  @Parameters({"beaconId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 1)
-  public void verify_Get_Beacon(String beaconId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacon(String beaconId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT + beaconId;
@@ -68,7 +68,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -107,9 +107,9 @@ public class Beacons {
     response.then().body(("any { it.key == 'createdById'}"), is(true));
   }
 
-  @Parameters({"beaconId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 2)
-  public void verify_Get_Beacon_InvalidId(String beaconId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacon_InvalidId(String beaconId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -122,7 +122,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -148,9 +148,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"beaconUuid", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 3)
-  public void verify_Get_Beacons_By_Uuid(String beaconUuid, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Uuid(String beaconUuid, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -166,7 +166,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -195,9 +195,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"beaconUuid", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 4)
-  public void verify_Get_Beacons_By_Invalid_Uuid(String beaconUuid, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Invalid_Uuid(String beaconUuid, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -213,7 +213,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -241,9 +241,9 @@ public class Beacons {
     Assert.assertEquals(response.asString(), "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({"beaconUuid", "beaconMajor", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "beaconMajor", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 5)
-  public void verify_Get_Beacons_By_Uuid_And_Major(String beaconUuid, String beaconMajor, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_Major(String beaconUuid, String beaconMajor, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -259,7 +259,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -288,9 +288,9 @@ public class Beacons {
     response.then().body("major", everyItem(is(Integer.parseInt(beaconMajor))));
   }
 
-  @Parameters({"beaconUuid", "beaconMajor", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "beaconMajor", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 6)
-  public void verify_Get_Beacons_By_Uuid_And_InvalidMajor(String beaconUuid, String beaconMajor, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_InvalidMajor(String beaconUuid, String beaconMajor, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -306,7 +306,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -335,9 +335,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"beaconUuid", "beaconMajor", "beaconMinor", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "beaconMajor", "beaconMinor", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 7)
-  public void verify_Get_Beacons_By_Uuid_Major_And_Minor(String beaconUuid, String beaconMajor, String beaconMinor, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Uuid_Major_And_Minor(String beaconUuid, String beaconMajor, String beaconMinor, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -353,7 +353,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -383,9 +383,9 @@ public class Beacons {
     response.then().body("major", is(Integer.parseInt(beaconMajor)));
   }
 
-  @Parameters({"beaconUuid", "beaconMajor", "beaconMinor", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "beaconMajor", "beaconMinor", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 8)
-  public void verify_Get_Beacons_By_Uuid_Major_And_InvalidMinor(String beaconUuid, String beaconMajor, String beaconMinor, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Uuid_Major_And_InvalidMinor(String beaconUuid, String beaconMajor, String beaconMinor, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -401,7 +401,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -430,9 +430,9 @@ public class Beacons {
 
   }
 
-  @Parameters({"beaconUuid", "beaconTags", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "beaconTags", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 9)
-  public void verify_Get_Beacons_By_Uuid_And_Tags(String beaconUuid, String beaconTags, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_Tags(String beaconUuid, String beaconTags, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -448,7 +448,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -477,9 +477,9 @@ public class Beacons {
     response.then().body("tags", everyItem(hasItem(beaconTags)));
   }
 
-  @Parameters({"beaconUuid", "beaconTags", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuid", "beaconTags", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 10)
-  public void verify_Get_Beacons_By_Uuid_And_InvalidTags(String beaconUuid, String beaconTags, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_InvalidTags(String beaconUuid, String beaconTags, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -495,7 +495,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -523,9 +523,9 @@ public class Beacons {
     Assert.assertEquals(response.asString(), "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({"beaconUuidAlias", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuidAlias", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 11)
-  public void verify_Get_UUID_By_Alias(String beaconUuidAlias, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_UUID_By_Alias(String beaconUuidAlias, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -541,7 +541,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -572,9 +572,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"beaconUuidAlias", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconUuidAlias", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 12)
-  public void verify_Get_UUID_By_InvalidAlias(String beaconUuidAlias, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_UUID_By_InvalidAlias(String beaconUuidAlias, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -590,7 +590,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -619,9 +619,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"beaconTags", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconTags", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 13)
-  public void verify_Get_Beacons_By_Tags(String beaconTags, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_Tags(String beaconTags, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -637,7 +637,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -665,9 +665,9 @@ public class Beacons {
     response.then().body("tags", everyItem(hasItem(beaconTags)));
   }
 
-  @Parameters({"beaconTags", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"beaconTags", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 14)
-  public void verify_Get_Beacons_By_InvalidTags(String beaconTags, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacons_By_InvalidTags(String beaconTags, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -683,7 +683,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, queryParameters);
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -711,9 +711,9 @@ public class Beacons {
     Assert.assertEquals(response.asString(), "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 15)
-  public void verify_Get_Beacon_Tags(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Beacon_Tags(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -726,7 +726,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -754,9 +754,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 16)
-  public void verify_Get_Uuids_By_Org(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Uuids_By_Org(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL =
@@ -769,7 +769,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -801,9 +801,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 17)
-  public void verify_Create_Beacon(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Beacon(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -829,7 +829,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -871,9 +871,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postUuidAliasRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postUuidAliasRequestBodyPath"})
   @Test(priority = 18)
-  public void verify_Create_Uuid_Alias(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postUuidAliasRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Uuid_Alias(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postUuidAliasRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT;
@@ -898,7 +898,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -930,9 +930,9 @@ public class Beacons {
 
 
   //here Invalid Means there is no beacon exist with this UUID.
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postUuidAliasRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postUuidAliasRequestBodyPath"})
   @Test(priority = 19)
-  public void verify_Create_Invalid_Uuid_Alias(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postUuidAliasRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Invalid_Uuid_Alias(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postUuidAliasRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT;
@@ -954,7 +954,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -983,9 +983,9 @@ public class Beacons {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postUuidAliasRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postUuidAliasRequestBodyPath"})
   @Test(priority = 20)
-  public void verify_Update_Uuid_Alias(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postUuidAliasRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Update_Uuid_Alias(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postUuidAliasRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT_1 + uuid;
@@ -1005,7 +1005,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1035,9 +1035,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 21)
-  public void verify_Update_Beacon(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Update_Beacon(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1063,7 +1063,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1103,9 +1103,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 22)
-  public void verify_Create_Beacon_No_Major(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Beacon_No_Major(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1131,7 +1131,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1162,9 +1162,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 23)
-  public void verify_Create_Beacon_No_Minor(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Beacon_No_Minor(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1190,7 +1190,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1221,9 +1221,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 24)
-  public void verify_Create_Beacon_No_MajorMinorDisplayType(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Beacon_No_MajorMinorDisplayType(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1250,7 +1250,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1281,9 +1281,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 25)
-  public void verify_Create_Beacon_No_Tags(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Beacon_No_Tags(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1307,7 +1307,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1335,9 +1335,9 @@ public class Beacons {
     response.then().body("id", is(greaterThan(0)));
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 26)
-  public void verify_Create_Beacon_No_Interval(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Beacon_No_Interval(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1364,7 +1364,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1395,9 +1395,9 @@ public class Beacons {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 27)
-  public void verify_Create_Beacon_No_TxPower(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Beacon_No_TxPower(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1424,7 +1424,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1454,9 +1454,9 @@ public class Beacons {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postBeaconRequestBodyPath"})
   @Test(priority = 28)
-  public void verify_Delete_Beacon(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Delete_Beacon(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postBeaconRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -1467,7 +1467,7 @@ public class Beacons {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("DELETE", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("DELETE", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
 
       //Printing xAuth
       log.info("X-AUTH " + xAuth);

@@ -6,8 +6,8 @@
     <parameter name="orgId" value="139"/>
     <parameter name="clientId" value="632"/>
     <parameter name="tags" value="qa"/>
-    <parameter name="appid_632_android_access_key" value="a9703774190655e3b6a3e82f5c3fa1eb2b9b8e20"/>
-    <parameter name="appid_632_android_signature_key" value="9a5941cdbf1099e2db20ea59eb0d131c09857316"/>
+    <parameter name="clientId_android_access_key" value="a9703774190655e3b6a3e82f5c3fa1eb2b9b8e20"/>
+    <parameter name="clientId_android_signature_key" value="9a5941cdbf1099e2db20ea59eb0d131c09857316"/>
     <parameter name="postLocationRequestBodyPath" value="src/test/resources/me_jsons/postLocation.json"/>
     <parameter name="putLocationRequestBodyPath" value="src/test/resources/me_jsons/putLocation.json"/>
     <parameter name="beaconId" value="2246"/>
@@ -29,6 +29,13 @@
     <parameter name="sortOrder" value="desc"/>
     <parameter name="limit" value="6"/>
     <parameter name="postCampaignRequestBodyPath" value="src/test/resources/me_jsons/postCampaign.json"/>
+    <parameter name="postDeviceRegistrationBodyPath" value="src/test/resources/me_jsons/postDeviceRegistration.json"/>
+    <parameter name="postDownloadGeofenceBodyPath" value="src/test/resources/me_jsons/postDownloadGeofence.json"/>
+    <parameter name="postGeofenceEntryBodyPath" value="src/test/resources/me_jsons/postGeofenceEntry.json"/>
+    <parameter name="postDeviceAttributesBodyPath" value="src/test/resources/me_jsons/postDeviceAttributes.json"/>
+    <parameter name="postGeofenceExitBodyPath" value="src/test/resources/me_jsons/postGeofenceExit.json"/>
+    <parameter name="postStaticIdSetBodyPath" value="src/test/resources/me_jsons/postStaticId.json"/>
+
 
 
     <!-- LOCATION TESTS -->
@@ -509,7 +516,7 @@
         </classes>
     </test>
 
-    <!--ATTRIBUTES-->
+    <!-- ATTRIBUTE TESTS -->
 
     <test name="1->Get Attribute Metadata">
         <classes>
@@ -607,7 +614,7 @@
         </classes>
     </test>
 
-     <!-- PROFILES-->
+     <!-- PROFILE -->
 
    <test name="1->Verify_Get_Profile">
         <classes>
@@ -700,7 +707,7 @@
         </classes>
     </test>
 
-   <!-- CAMPAIGNS-->
+   <!-- CAMPAIGNS -->
 
     <test name="1->Verify Retrieve Campaign">
         <classes>
@@ -890,6 +897,106 @@
     </test>
 
 
-    
+
+
+    <!-- DEVICE API - TESTS-->
+
+
+    <test name="1->Verify Device Registration">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Device_Registration"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="2->Verify Download Geofence">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Download_Geofence"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="3->Verify Geofence Entry">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Geofence_Entry"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="4->Verify Get Attribute Metadata">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Get_Attribute_Metadata"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="5->Verify Create Device Attribute">
+        <parameter name="deviceAttributeName" value="member"/>
+        <parameter name="deviceAttributeValue" value="gold"/>
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Create_Device_Attributes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="6->Verify Get Device Attributes">
+        <parameter name="deviceAttributeName" value="member"/>
+        <parameter name="deviceAttributeValue" value="gold"/>
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Get_Device_Attributes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="7->Verify Geofence Exit">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Geofence_Exit"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="8->Verify Set StaticId">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Set_StaticId"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="9->Verify Device Unregistration">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Device_Unregistration"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 
 </suite>

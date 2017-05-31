@@ -1,0 +1,392 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="M3 API TEST SUITE ">
+    <parameter name="env" value="PROD"/>
+    <parameter name="locationId" value="3971"/>
+    <parameter name="orgId" value="386"/>
+    <parameter name="clientId" value="1480"/>
+    <parameter name="tags" value="qa"/>
+    <parameter name="clientId_android_access_key" value="d9edc9b0b3bdc3418e344d46362bb046ad05f7f5"/>
+    <parameter name="clientId_android_signature_key" value="85acca897210670cf619a6be4ca903c2e4f633f9"/>
+    <parameter name="beaconId" value="270339"/>
+    <parameter name="beaconUuid" value="bd87d214-abd0-4db0-98d3-0fa33b7ee712"/>
+    <parameter name="beaconMajor" value="1234"/>
+    <parameter name="beaconMinor" value="121"/>
+    <parameter name="beaconTags" value="qa"/>
+    <parameter name="beaconUuidAlias" value="API_AUTOMATION"/>
+    <parameter name="attributeName" value="car"/>
+    <parameter name="profileId" value="191"/>
+    <parameter name="campaignId" value="4228"/>
+    <parameter name="campaignType" value="BROADCAST"/>
+    <parameter name="status" value="SCHEDULED"/>
+    <parameter name="sortBy" value="startDate"/>
+    <parameter name="sortOrder" value="desc"/>
+    <parameter name="limit" value="6"/>
+
+
+    <!-- LOCATION TESTS -->
+
+    <test name="Get Location">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Location"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Get Location - Invalid Location Id">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Invalid_Location"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Retrieve Collection of Locations By Org">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Locations_By_Org"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Retrieve Collection of Locations By Invalid Org">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Locations_By_InvalidOrg"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="Retrieve Collection of Tags By Org">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Tags_By_Org"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="6->Retrieve Collection of locations By Tags">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Locations_By_Tags"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+
+    <!-- BEACON TESTS -->
+
+    <test name="1->Verify Get Beacons">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacon"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="2->Verify Get Beacons - InvalidID">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacon_InvalidId"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="3->Verify Get Beacons - by UUID">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Uuid"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="4->Verify Get Beacons - by Invalid UUID">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Invalid_Uuid"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="5->Verify Get Beacons - by  UUID and Major">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Uuid_And_Major"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="6->Verify Get Beacons - by  UUID and Invalid Major">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Uuid_And_InvalidMajor"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="7->Verify Get Beacons - by  UUID Major and Minor">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Uuid_Major_And_Minor"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="8->Verify Get Beacons - by  UUID Major and Invalid Minor">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Uuid_Major_And_InvalidMinor"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="9->Verify Get Beacons - by  UUID and Tags">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Uuid_And_Tags"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="10->Verify Get Beacons - by  UUID and Tags">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Uuid_And_InvalidTags"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="11->Verify Get UUID Alias ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_UUID_By_Alias"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="12->Verify Get UUID Invalid Alias ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_UUID_By_InvalidAlias"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="13->Verify Get Beacons by Tags">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_Tags"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="14->Verify Get Beacons by Invalid Tags ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacons_By_InvalidTags"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="15->Verify Get Beacon  Tags ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Beacon_Tags"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="16->Verify Get All UUIDs">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Beacons">
+                <methods>
+                    <include name="verify_Get_Uuids_By_Org"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <!-- ATTRIBUTE TESTS -->
+
+    <test name="1->Get Attribute Metadata">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Attributes">
+                <methods>
+                    <include name="verify_Get_AttributeMetadata"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="2->Get Invalid Attribute Metadata">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Attributes">
+                <methods>
+                    <include name="verify_Get_Invalid_AttributeMetadata"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="3->Get Attribute Metadata for an org">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Attributes">
+                <methods>
+                    <include name="verify_Get_Collection_Of_AttributeMetadata"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <!-- PROFILE -->
+
+    <test name="1->Verify_Get_Profile">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Profiles">
+                <methods>
+                    <include name="verify_Get_Profile"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="2->Verify_Get Invalid Profile">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Profiles">
+                <methods>
+                    <include name="verify_Get_InvalidProfileId"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="3 ->Verify_Get Collection of Profile">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Profiles">
+                <methods>
+                    <include name="verify_Get_Collection_Of_Profiles_By_Org"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+
+    <!-- CAMPAIGNS -->
+
+    <test name="1->Verify Retrieve Campaign">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Campaigns">
+                <methods>
+                    <include name="Verify_Get_Campaign_By_Id"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="2->Verify Retrieve Campaign- Invalid Campaign Id ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Campaigns">
+                <methods>
+                    <include name="Verify_Get_Campaign_By_InvalidId"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="3->Verify Collection of Campaigns By CampaignType ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Campaigns">
+                <methods>
+                    <include name="Verify_Collection_Of_Campaigns_By_CampaignType"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="4->Verify Collection of Campaigns By Status ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Campaigns">
+                <methods>
+                    <include name="Verify_Collection_Of_Campaigns_By_Status"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="5->Verify Collection of Campaigns -  Sorting ">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Campaigns">
+                <methods>
+                    <include name="Verify_Collection_Of_Campaigns_SortByStartDate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="6->Verify Get Campaign Status">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Campaigns">
+                <methods>
+                    <include name="Verify_Get_Campaign_Status"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+
+</suite>

@@ -49,14 +49,14 @@ public class Profiles {
   }
 
   @BeforeClass
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key"})
   public void preTestSteps() {
     log = Logger.getLogger(Profiles.class);
   }
 
-  @Parameters({"profileId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"profileId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 1)
-  public void verify_Get_Profile(String profileId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Profile(String profileId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + profileId;
@@ -66,7 +66,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -98,9 +98,9 @@ public class Profiles {
     response.then().body(("rules.size()"), is(greaterThan(0)));
   }
 
-  @Parameters({"profileId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"profileId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 2)
-  public void verify_Get_InvalidProfileId(String profileId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_InvalidProfileId(String profileId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + "000";
@@ -110,7 +110,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -139,9 +139,9 @@ public class Profiles {
   }
 
 
-  @Parameters({"profileId", "appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId"})
+  @Parameters({"profileId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
   @Test(priority = 3)
-  public void verify_Get_Collection_Of_Profiles_By_Org(String profileId, String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Collection_Of_Profiles_By_Org(String profileId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
 
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
@@ -151,7 +151,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", appid_632_android_access_key, appid_632_android_signature_key, requestURL, "");
+      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -187,9 +187,9 @@ public class Profiles {
     response.then().body("rules.flatten().any { it.containsKey('value') }" , is(true));
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
   @Test(priority = 4)
-  public void verify_Create_Profile(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Profile(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -226,7 +226,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -264,9 +264,9 @@ public class Profiles {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
   @Test(priority = 4)
-  public void verify_Create_Profile_WithoutEnabled(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Profile_WithoutEnabled(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -304,7 +304,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -335,9 +335,9 @@ public class Profiles {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
   @Test(priority = 5)
-  public void verify_Create_Profile_Without_Description(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+  public void verify_Create_Profile_Without_Description(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -373,7 +373,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -408,9 +408,9 @@ public class Profiles {
 
   }
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
   @Test(priority = 6)
-  public void Create_Profile_WithOut_Rules(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+  public void Create_Profile_WithOut_Rules(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -429,7 +429,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -461,9 +461,9 @@ public class Profiles {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
   @Test(priority = 7)
-  public void Create_Profile_WithOut_Name(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+  public void Create_Profile_WithOut_Name(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -499,7 +499,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -531,9 +531,9 @@ public class Profiles {
   }
 
 
-  @Parameters({"appid_632_android_access_key", "appid_632_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
   @Test(priority = 8)
-  public void Disable_Profile(String appid_632_android_access_key, String appid_632_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
+  public void Disable_Profile(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) throws IOException, NullPointerException {
 
     //Request Details
     String requestURL =
@@ -570,7 +570,7 @@ public class Profiles {
 
     //Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", appid_632_android_access_key, appid_632_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }
