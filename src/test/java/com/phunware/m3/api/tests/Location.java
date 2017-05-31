@@ -36,9 +36,12 @@ public class Location {
   public String xAuth = null;
 
 
-  @BeforeSuite
+
+
+  @BeforeClass
   @Parameters("env")
-  public void setEnv(String env) {
+  public void preTestSteps(String env) {
+    log = Logger.getLogger(Location.class);
     if (env.equalsIgnoreCase("PROD")) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
     } else if (env.equalsIgnoreCase("STAGE")) {
@@ -46,12 +49,6 @@ public class Location {
     } else {
       log.info("Environment is not set properly. Please check your testng xml file");
     }
-  }
-
-  @BeforeClass
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key"})
-  public void preTestSteps() {
-    log = Logger.getLogger(Location.class);
   }
 
   @Parameters({"locationId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})

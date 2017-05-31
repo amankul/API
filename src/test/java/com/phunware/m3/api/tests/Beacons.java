@@ -37,9 +37,12 @@ public class Beacons {
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
-  @BeforeSuite
-  @Parameters("env")
-  public void setEnv(String env) {
+
+
+  @BeforeClass
+  @Parameters({"env"})
+  public void preTestSteps(String env) {
+    log = Logger.getLogger(Beacons.class);
     if (env.equalsIgnoreCase("PROD")) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
     } else if (env.equalsIgnoreCase("STAGE")) {
@@ -47,12 +50,7 @@ public class Beacons {
     } else {
       log.info("Environment is not set properly. Please check your testng xml file");
     }
-  }
 
-  @BeforeClass
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key"})
-  public void preTestSteps() {
-    log = Logger.getLogger(Beacons.class);
   }
 
 
