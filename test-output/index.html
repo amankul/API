@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -37,8 +37,8 @@
       <div class="suite">
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
-            <a href="#" class="navigator-link" panel-name="suite-M3_API_TEST_SUITE">
-              <span class="suite-name border-passed">M3 API TEST SUITE</span>
+            <a href="#" class="navigator-link" panel-name="suite-CORE_API_TEST_SUITE">
+              <span class="suite-name border-failed">CORE API TEST SUITE</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -48,37 +48,37 @@
             <div class="suite-section-content">
               <ul>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="test-xml-M3_API_TEST_SUITE">
-                    <span>testNG.xml</span>
+                  <a href="#" class="navigator-link " panel-name="test-xml-CORE_API_TEST_SUITE">
+                    <span>coreApi.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="testlist-M3_API_TEST_SUITE">
-                    <span class="test-stats">1 test</span>
+                  <a href="#" class="navigator-link " panel-name="testlist-CORE_API_TEST_SUITE">
+                    <span class="test-stats">2 tests</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="group-M3_API_TEST_SUITE">
+                  <a href="#" class="navigator-link " panel-name="group-CORE_API_TEST_SUITE">
                     <span>0 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="times-M3_API_TEST_SUITE">
+                  <a href="#" class="navigator-link " panel-name="times-CORE_API_TEST_SUITE">
                     <span>Times</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="reporter-M3_API_TEST_SUITE">
+                  <a href="#" class="navigator-link " panel-name="reporter-CORE_API_TEST_SUITE">
                     <span>Reporter output</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="ignored-methods-M3_API_TEST_SUITE">
+                  <a href="#" class="navigator-link " panel-name="ignored-methods-CORE_API_TEST_SUITE">
                     <span>Ignored methods</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="chronological-M3_API_TEST_SUITE">
+                  <a href="#" class="navigator-link " panel-name="chronological-CORE_API_TEST_SUITE">
                     <span>Chronological view</span>
                   </a> <!-- navigator-link  -->
                 </li>
@@ -91,116 +91,375 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">20 methods,   20 passed</span>
+                    <span class="method-stats">70 methods, 2 failed,   68 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-CORE_API_TEST_SUITE" class="hide-methods failed suite-CORE_API_TEST_SUITE"> (hide)</a> <!-- hide-methods failed suite-CORE_API_TEST_SUITE -->
+                      <a href="#" panel-name="suite-CORE_API_TEST_SUITE" class="show-methods failed suite-CORE_API_TEST_SUITE"> (show)</a> <!-- show-methods failed suite-CORE_API_TEST_SUITE -->
+                    </span>
+                    <div class="method-list-content failed suite-CORE_API_TEST_SUITE">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_post_CreateNewUser_Null_Timezone">verify_post_CreateNewUser_Null_Timezone</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_post_CreateNewUser_Null_isActive">verify_post_CreateNewUser_Null_isActive</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-CORE_API_TEST_SUITE -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
                     <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-M3_API_TEST_SUITE" class="hide-methods passed suite-M3_API_TEST_SUITE"> (hide)</a> <!-- hide-methods passed suite-M3_API_TEST_SUITE -->
-                      <a href="#" panel-name="suite-M3_API_TEST_SUITE" class="show-methods passed suite-M3_API_TEST_SUITE"> (show)</a> <!-- show-methods passed suite-M3_API_TEST_SUITE -->
+                      <a href="#" panel-name="suite-CORE_API_TEST_SUITE" class="hide-methods passed suite-CORE_API_TEST_SUITE"> (hide)</a> <!-- hide-methods passed suite-CORE_API_TEST_SUITE -->
+                      <a href="#" panel-name="suite-CORE_API_TEST_SUITE" class="show-methods passed suite-CORE_API_TEST_SUITE"> (show)</a> <!-- show-methods passed suite-CORE_API_TEST_SUITE -->
                     </span>
-                    <div class="method-list-content passed suite-M3_API_TEST_SUITE">
+                    <div class="method-list-content passed suite-CORE_API_TEST_SUITE">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="addMultipleValuesToAttribute">addMultipleValuesToAttribute</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Delete_Client">verify_Delete_Client</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="addOneValueToAttribute">addOneValueToAttribute</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Delete_ExistingOrganization">verify_Delete_ExistingOrganization</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Profiles" hash-for-method="createOneProfile">createOneProfile</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Delete_ExistingUserRole">verify_Delete_ExistingUserRole</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="disableOneAttribute">disableOneAttribute</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_Authenticate_User">verify_Get_Authenticate_User</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Profiles" hash-for-method="disableOneProfile">disableOneProfile</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_Authenticate_User_Empty_Credentials">verify_Get_Authenticate_User_Empty_Credentials</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="enableOneAttribute">enableOneAttribute</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_Authenticate_User_Invalid_Credentials">verify_Get_Authenticate_User_Invalid_Credentials</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Profiles" hash-for-method="enableOneProfile">enableOneProfile</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_ClientDetails">verify_Get_ClientDetails</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="getAllAttributes">getAllAttributes</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_ClientDetails_InvalidAuth">verify_Get_ClientDetails_InvalidAuth</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Profiles" hash-for-method="getAllProfiles">getAllProfiles</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_ClientDetails_InvalidCLIENT_ID">verify_Get_ClientDetails_InvalidCLIENT_ID</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconBy_UUID">getBeaconBy_UUID</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_ClientTypes">verify_Get_ClientTypes</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconBy_UUID_Major">getBeaconBy_UUID_Major</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_ClientTypes_InvalidAuth">verify_Get_ClientTypes_InvalidAuth</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconBy_UUID_Major_Minor">getBeaconBy_UUID_Major_Minor</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_Client_Categories">verify_Get_Client_Categories</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconBy_UUID_Tags">getBeaconBy_UUID_Tags</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_Client_Categories_InvalidAuth">verify_Get_Client_Categories_InvalidAuth</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconWith_Tags">getBeaconWith_Tags</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_Client_Pagination">verify_Get_Client_Pagination</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconsBy_Tags">getBeaconsBy_Tags</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Get_Client_Pagination_InvalidAuth">verify_Get_Client_Pagination_InvalidAuth</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getBeaconsBy_UUIDAlias">getBeaconsBy_UUIDAlias</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Get_Collection_Of_Organizations">verify_Get_Collection_Of_Organizations</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="getOneAttribute">getOneAttribute</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Get_Collection_Of_Organizations_NameWithEmptyString">verify_Get_Collection_Of_Organizations_NameWithEmptyString</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Beacons" hash-for-method="getOneBeaconBy_ID">getOneBeaconBy_ID</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Get_Collection_Of_Organizations_Pagination">verify_Get_Collection_Of_Organizations_Pagination</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Profiles" hash-for-method="getOneProfile">getOneProfile</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Get_Collection_Of_Organizations_Pagination_EmptyName">verify_Get_Collection_Of_Organizations_Pagination_EmptyName</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-M3_API_TEST_SUITE" title="com.phunware.m3.api.tests.Attributes" hash-for-method="postOneAttribute">postOneAttribute</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Get_Organization_Details">verify_Get_Organization_Details</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content passed suite-M3_API_TEST_SUITE -->
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Get_Organization_Details_InvalidAuthorization">verify_Get_Organization_Details_InvalidAuthorization</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Get_Organization_Details_InvalidOrgID">verify_Get_Organization_Details_InvalidOrgID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Get_USerRole_InvalidAuth">verify_Get_USerRole_InvalidAuth</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_UserPagination">verify_Get_UserPagination</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_UserPagination_NullName">verify_Get_UserPagination_NullName</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Get_UserRole_Invalid_parameter_Structure">verify_Get_UserRole_Invalid_parameter_Structure</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Get_UserRole_NonExistant_OrgID">verify_Get_UserRole_NonExistant_OrgID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Get_UserRole_Pagination">verify_Get_UserRole_Pagination</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Get_UserRole_Pagination_InvalidAuth">verify_Get_UserRole_Pagination_InvalidAuth</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Get_UserRole_Pagination_NonExistant_OrgID">verify_Get_UserRole_Pagination_NonExistant_OrgID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Get_User_Role">verify_Get_User_Role</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_User_Role">verify_Get_User_Role</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_User_Role_InvalidAuth">verify_Get_User_Role_InvalidAuth</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_Get_User_Role_InvalidUserID">verify_Get_User_Role_InvalidUserID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Post_Create_New_Organization">verify_Post_Create_New_Organization</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Post_Create_New_Organization_EmptyName_InRequestBody">verify_Post_Create_New_Organization_EmptyName_InRequestBody</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Post_Create_New_UserRole">verify_Post_Create_New_UserRole</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Post_Create_New_UserRole_InvalidAuth">verify_Post_Create_New_UserRole_InvalidAuth</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Post_New_Client">verify_Post_New_Client</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Post_New_Client_emptyCategoryID">verify_Post_New_Client_emptyCategoryID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Post_New_Client_emptyName">verify_Post_New_Client_emptyName</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Post_New_Client_emptyOrgID">verify_Post_New_Client_emptyOrgID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Post_New_Client_emptyType">verify_Post_New_Client_emptyType</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Put_Update_Existing_Client">verify_Put_Update_Existing_Client</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Put_Update_Existing_Client_InvalidAuth">verify_Put_Update_Existing_Client_InvalidAuth</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Client" hash-for-method="verify_Put_Update_Invalid_Client">verify_Put_Update_Invalid_Client</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Put_Update_Organization">verify_Put_Update_Organization</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Put_Update_Organization">verify_Put_Update_Organization</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Put_Update_Organization_EmptyName_InRequestBody">verify_Put_Update_Organization_EmptyName_InRequestBody</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Put_Update_Organization_EmptyName_InRequestBody">verify_Put_Update_Organization_EmptyName_InRequestBody</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Put_Update_Organization_EmptyServices_InRequestBody">verify_Put_Update_Organization_EmptyServices_InRequestBody</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.UserRole" hash-for-method="verify_Put_Update_Organization_InvalidOrganization">verify_Put_Update_Organization_InvalidOrganization</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.Organization" hash-for-method="verify_Put_Update_Organization_InvalidOrganization">verify_Put_Update_Organization_InvalidOrganization</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_delete_ExistingUser">verify_delete_ExistingUser</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_delete_ExistingUser_InvalidAuth">verify_delete_ExistingUser_InvalidAuth</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_delete_Invaliduser">verify_delete_Invaliduser</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_post_CreateNewUser">verify_post_CreateNewUser</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_post_CreateNewUser_Empty_FirstNameIn_Body">verify_post_CreateNewUser_Empty_FirstNameIn_Body</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_post_CreateNewUser_Empty_LastNameIn_Body">verify_post_CreateNewUser_Empty_LastNameIn_Body</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_post_CreateNewUser_Empty_Password">verify_post_CreateNewUser_Empty_Password</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_post_CreateNewUser_Empty_email">verify_post_CreateNewUser_Empty_email</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_put_Change_Password_ExistingUser">verify_put_Change_Password_ExistingUser</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_put_Change_Password_InvalidBodyParameters">verify_put_Change_Password_InvalidBodyParameters</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_put_Reset_Password_ExistingUser">verify_put_Reset_Password_ExistingUser</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_put_Reset_Password_InvalidBodyParameters">verify_put_Reset_Password_InvalidBodyParameters</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_put_Submit_NEw_Password_ExistingUser">verify_put_Submit_NEw_Password_ExistingUser</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_put_UpdateExistingUser">verify_put_UpdateExistingUser</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-CORE_API_TEST_SUITE" title="com.phunware.core.api.tests.User" hash-for-method="verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody">verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-CORE_API_TEST_SUITE -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -211,443 +470,1281 @@
     </div> <!-- navigator-root -->
     <div class="wrapper">
       <div class="main-panel-root">
-        <div panel-name="suite-M3_API_TEST_SUITE" class="panel M3_API_TEST_SUITE">
-          <div class="suite-M3_API_TEST_SUITE-class-passed">
+        <div panel-name="suite-CORE_API_TEST_SUITE" class="panel CORE_API_TEST_SUITE">
+          <div class="suite-CORE_API_TEST_SUITE-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.phunware.m3.api.tests.Beacons</span>
+              <img src="failed.png"/>
+              <span class="class-name">com.phunware.core.api.tests.User</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="getBeaconBy_UUID">
-                  </a> <!-- getBeaconBy_UUID -->
-                  <span class="method-name">getBeaconBy_UUID</span>
+                  <a name="verify_post_CreateNewUser_Null_Timezone">
+                  </a> <!-- verify_post_CreateNewUser_Null_Timezone -->
+                  <span class="method-name">verify_post_CreateNewUser_Null_Timezone</span>
+                  <div class="stack-trace">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;400&gt; doesn&apos;t match actual status code &lt;500&gt;.
+
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:60)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:235)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:247)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:451)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:613)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:210)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:59)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:166)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:120)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:128)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:117)
+	at com.phunware.core.api.tests.User.verify_post_CreateNewUser_Null_Timezone(User.java:537)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
+... Removed 36 stack frames
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="getBeaconBy_UUID_Major">
-                  </a> <!-- getBeaconBy_UUID_Major -->
-                  <span class="method-name">getBeaconBy_UUID_Major</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="getBeaconBy_UUID_Major_Minor">
-                  </a> <!-- getBeaconBy_UUID_Major_Minor -->
-                  <span class="method-name">getBeaconBy_UUID_Major_Minor</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="getBeaconBy_UUID_Tags">
-                  </a> <!-- getBeaconBy_UUID_Tags -->
-                  <span class="method-name">getBeaconBy_UUID_Tags</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="getBeaconWith_Tags">
-                  </a> <!-- getBeaconWith_Tags -->
-                  <span class="method-name">getBeaconWith_Tags</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="getBeaconsBy_Tags">
-                  </a> <!-- getBeaconsBy_Tags -->
-                  <span class="method-name">getBeaconsBy_Tags</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="getBeaconsBy_UUIDAlias">
-                  </a> <!-- getBeaconsBy_UUIDAlias -->
-                  <span class="method-name">getBeaconsBy_UUIDAlias</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="getOneBeaconBy_ID">
-                  </a> <!-- getOneBeaconBy_ID -->
-                  <span class="method-name">getOneBeaconBy_ID</span>
+                  <a name="verify_post_CreateNewUser_Null_isActive">
+                  </a> <!-- verify_post_CreateNewUser_Null_isActive -->
+                  <span class="method-name">verify_post_CreateNewUser_Null_isActive</span>
+                  <div class="stack-trace">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;400&gt; doesn&apos;t match actual status code &lt;500&gt;.
+
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:247)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:451)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:613)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:210)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:59)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:166)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:120)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:128)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:117)
+	at com.phunware.core.api.tests.User.verify_post_CreateNewUser_Null_isActive(User.java:568)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
+... Removed 36 stack frames
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-M3_API_TEST_SUITE-class-passed -->
-          <div class="suite-M3_API_TEST_SUITE-class-passed">
+          </div> <!-- suite-CORE_API_TEST_SUITE-class-failed -->
+          <div class="suite-CORE_API_TEST_SUITE-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.phunware.m3.api.tests.Profiles</span>
+              <span class="class-name">com.phunware.core.api.tests.Client</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="createOneProfile">
-                  </a> <!-- createOneProfile -->
-                  <span class="method-name">createOneProfile</span>
+                  <a name="verify_Delete_Client">
+                  </a> <!-- verify_Delete_Client -->
+                  <span class="method-name">verify_Delete_Client</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="disableOneProfile">
-                  </a> <!-- disableOneProfile -->
-                  <span class="method-name">disableOneProfile</span>
+                  <a name="verify_Get_ClientDetails">
+                  </a> <!-- verify_Get_ClientDetails -->
+                  <span class="method-name">verify_Get_ClientDetails</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="enableOneProfile">
-                  </a> <!-- enableOneProfile -->
-                  <span class="method-name">enableOneProfile</span>
+                  <a name="verify_Get_ClientDetails_InvalidAuth">
+                  </a> <!-- verify_Get_ClientDetails_InvalidAuth -->
+                  <span class="method-name">verify_Get_ClientDetails_InvalidAuth</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="getAllProfiles">
-                  </a> <!-- getAllProfiles -->
-                  <span class="method-name">getAllProfiles</span>
+                  <a name="verify_Get_ClientDetails_InvalidCLIENT_ID">
+                  </a> <!-- verify_Get_ClientDetails_InvalidCLIENT_ID -->
+                  <span class="method-name">verify_Get_ClientDetails_InvalidCLIENT_ID</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="getOneProfile">
-                  </a> <!-- getOneProfile -->
-                  <span class="method-name">getOneProfile</span>
+                  <a name="verify_Get_ClientTypes">
+                  </a> <!-- verify_Get_ClientTypes -->
+                  <span class="method-name">verify_Get_ClientTypes</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_ClientTypes_InvalidAuth">
+                  </a> <!-- verify_Get_ClientTypes_InvalidAuth -->
+                  <span class="method-name">verify_Get_ClientTypes_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Client_Categories">
+                  </a> <!-- verify_Get_Client_Categories -->
+                  <span class="method-name">verify_Get_Client_Categories</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Client_Categories_InvalidAuth">
+                  </a> <!-- verify_Get_Client_Categories_InvalidAuth -->
+                  <span class="method-name">verify_Get_Client_Categories_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Client_Pagination">
+                  </a> <!-- verify_Get_Client_Pagination -->
+                  <span class="method-name">verify_Get_Client_Pagination</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Client_Pagination_InvalidAuth">
+                  </a> <!-- verify_Get_Client_Pagination_InvalidAuth -->
+                  <span class="method-name">verify_Get_Client_Pagination_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_New_Client">
+                  </a> <!-- verify_Post_New_Client -->
+                  <span class="method-name">verify_Post_New_Client</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_New_Client_emptyCategoryID">
+                  </a> <!-- verify_Post_New_Client_emptyCategoryID -->
+                  <span class="method-name">verify_Post_New_Client_emptyCategoryID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_New_Client_emptyName">
+                  </a> <!-- verify_Post_New_Client_emptyName -->
+                  <span class="method-name">verify_Post_New_Client_emptyName</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_New_Client_emptyOrgID">
+                  </a> <!-- verify_Post_New_Client_emptyOrgID -->
+                  <span class="method-name">verify_Post_New_Client_emptyOrgID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_New_Client_emptyType">
+                  </a> <!-- verify_Post_New_Client_emptyType -->
+                  <span class="method-name">verify_Post_New_Client_emptyType</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Existing_Client">
+                  </a> <!-- verify_Put_Update_Existing_Client -->
+                  <span class="method-name">verify_Put_Update_Existing_Client</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Existing_Client_InvalidAuth">
+                  </a> <!-- verify_Put_Update_Existing_Client_InvalidAuth -->
+                  <span class="method-name">verify_Put_Update_Existing_Client_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Invalid_Client">
+                  </a> <!-- verify_Put_Update_Invalid_Client -->
+                  <span class="method-name">verify_Put_Update_Invalid_Client</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-M3_API_TEST_SUITE-class-passed -->
-          <div class="suite-M3_API_TEST_SUITE-class-passed">
+          </div> <!-- suite-CORE_API_TEST_SUITE-class-passed -->
+          <div class="suite-CORE_API_TEST_SUITE-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.phunware.m3.api.tests.Attributes</span>
+              <span class="class-name">com.phunware.core.api.tests.Organization</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="addMultipleValuesToAttribute">
-                  </a> <!-- addMultipleValuesToAttribute -->
-                  <span class="method-name">addMultipleValuesToAttribute</span>
+                  <a name="verify_Delete_ExistingOrganization">
+                  </a> <!-- verify_Delete_ExistingOrganization -->
+                  <span class="method-name">verify_Delete_ExistingOrganization</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="addOneValueToAttribute">
-                  </a> <!-- addOneValueToAttribute -->
-                  <span class="method-name">addOneValueToAttribute</span>
+                  <a name="verify_Get_Collection_Of_Organizations">
+                  </a> <!-- verify_Get_Collection_Of_Organizations -->
+                  <span class="method-name">verify_Get_Collection_Of_Organizations</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="disableOneAttribute">
-                  </a> <!-- disableOneAttribute -->
-                  <span class="method-name">disableOneAttribute</span>
+                  <a name="verify_Get_Collection_Of_Organizations_NameWithEmptyString">
+                  </a> <!-- verify_Get_Collection_Of_Organizations_NameWithEmptyString -->
+                  <span class="method-name">verify_Get_Collection_Of_Organizations_NameWithEmptyString</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="enableOneAttribute">
-                  </a> <!-- enableOneAttribute -->
-                  <span class="method-name">enableOneAttribute</span>
+                  <a name="verify_Get_Collection_Of_Organizations_Pagination">
+                  </a> <!-- verify_Get_Collection_Of_Organizations_Pagination -->
+                  <span class="method-name">verify_Get_Collection_Of_Organizations_Pagination</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="getAllAttributes">
-                  </a> <!-- getAllAttributes -->
-                  <span class="method-name">getAllAttributes</span>
+                  <a name="verify_Get_Collection_Of_Organizations_Pagination_EmptyName">
+                  </a> <!-- verify_Get_Collection_Of_Organizations_Pagination_EmptyName -->
+                  <span class="method-name">verify_Get_Collection_Of_Organizations_Pagination_EmptyName</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="getOneAttribute">
-                  </a> <!-- getOneAttribute -->
-                  <span class="method-name">getOneAttribute</span>
+                  <a name="verify_Get_Organization_Details">
+                  </a> <!-- verify_Get_Organization_Details -->
+                  <span class="method-name">verify_Get_Organization_Details</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="postOneAttribute">
-                  </a> <!-- postOneAttribute -->
-                  <span class="method-name">postOneAttribute</span>
+                  <a name="verify_Get_Organization_Details_InvalidAuthorization">
+                  </a> <!-- verify_Get_Organization_Details_InvalidAuthorization -->
+                  <span class="method-name">verify_Get_Organization_Details_InvalidAuthorization</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Organization_Details_InvalidOrgID">
+                  </a> <!-- verify_Get_Organization_Details_InvalidOrgID -->
+                  <span class="method-name">verify_Get_Organization_Details_InvalidOrgID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_Create_New_Organization">
+                  </a> <!-- verify_Post_Create_New_Organization -->
+                  <span class="method-name">verify_Post_Create_New_Organization</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_Create_New_Organization_EmptyName_InRequestBody">
+                  </a> <!-- verify_Post_Create_New_Organization_EmptyName_InRequestBody -->
+                  <span class="method-name">verify_Post_Create_New_Organization_EmptyName_InRequestBody</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Organization">
+                  </a> <!-- verify_Put_Update_Organization -->
+                  <span class="method-name">verify_Put_Update_Organization</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Organization_EmptyName_InRequestBody">
+                  </a> <!-- verify_Put_Update_Organization_EmptyName_InRequestBody -->
+                  <span class="method-name">verify_Put_Update_Organization_EmptyName_InRequestBody</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Organization_EmptyServices_InRequestBody">
+                  </a> <!-- verify_Put_Update_Organization_EmptyServices_InRequestBody -->
+                  <span class="method-name">verify_Put_Update_Organization_EmptyServices_InRequestBody</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Organization_InvalidOrganization">
+                  </a> <!-- verify_Put_Update_Organization_InvalidOrganization -->
+                  <span class="method-name">verify_Put_Update_Organization_InvalidOrganization</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-M3_API_TEST_SUITE-class-passed -->
-        </div> <!-- panel M3_API_TEST_SUITE -->
-        <div panel-name="test-xml-M3_API_TEST_SUITE" class="panel">
+          </div> <!-- suite-CORE_API_TEST_SUITE-class-passed -->
+          <div class="suite-CORE_API_TEST_SUITE-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.phunware.core.api.tests.UserRole</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Delete_ExistingUserRole">
+                  </a> <!-- verify_Delete_ExistingUserRole -->
+                  <span class="method-name">verify_Delete_ExistingUserRole</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_USerRole_InvalidAuth">
+                  </a> <!-- verify_Get_USerRole_InvalidAuth -->
+                  <span class="method-name">verify_Get_USerRole_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_UserRole_Invalid_parameter_Structure">
+                  </a> <!-- verify_Get_UserRole_Invalid_parameter_Structure -->
+                  <span class="method-name">verify_Get_UserRole_Invalid_parameter_Structure</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_UserRole_NonExistant_OrgID">
+                  </a> <!-- verify_Get_UserRole_NonExistant_OrgID -->
+                  <span class="method-name">verify_Get_UserRole_NonExistant_OrgID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_UserRole_Pagination">
+                  </a> <!-- verify_Get_UserRole_Pagination -->
+                  <span class="method-name">verify_Get_UserRole_Pagination</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_UserRole_Pagination_InvalidAuth">
+                  </a> <!-- verify_Get_UserRole_Pagination_InvalidAuth -->
+                  <span class="method-name">verify_Get_UserRole_Pagination_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_UserRole_Pagination_NonExistant_OrgID">
+                  </a> <!-- verify_Get_UserRole_Pagination_NonExistant_OrgID -->
+                  <span class="method-name">verify_Get_UserRole_Pagination_NonExistant_OrgID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_User_Role">
+                  </a> <!-- verify_Get_User_Role -->
+                  <span class="method-name">verify_Get_User_Role</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_Create_New_UserRole">
+                  </a> <!-- verify_Post_Create_New_UserRole -->
+                  <span class="method-name">verify_Post_Create_New_UserRole</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Post_Create_New_UserRole_InvalidAuth">
+                  </a> <!-- verify_Post_Create_New_UserRole_InvalidAuth -->
+                  <span class="method-name">verify_Post_Create_New_UserRole_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Organization">
+                  </a> <!-- verify_Put_Update_Organization -->
+                  <span class="method-name">verify_Put_Update_Organization</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Organization_EmptyName_InRequestBody">
+                  </a> <!-- verify_Put_Update_Organization_EmptyName_InRequestBody -->
+                  <span class="method-name">verify_Put_Update_Organization_EmptyName_InRequestBody</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Put_Update_Organization_InvalidOrganization">
+                  </a> <!-- verify_Put_Update_Organization_InvalidOrganization -->
+                  <span class="method-name">verify_Put_Update_Organization_InvalidOrganization</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-CORE_API_TEST_SUITE-class-passed -->
+          <div class="suite-CORE_API_TEST_SUITE-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.phunware.core.api.tests.User</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Authenticate_User">
+                  </a> <!-- verify_Get_Authenticate_User -->
+                  <span class="method-name">verify_Get_Authenticate_User</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Authenticate_User_Empty_Credentials">
+                  </a> <!-- verify_Get_Authenticate_User_Empty_Credentials -->
+                  <span class="method-name">verify_Get_Authenticate_User_Empty_Credentials</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_Authenticate_User_Invalid_Credentials">
+                  </a> <!-- verify_Get_Authenticate_User_Invalid_Credentials -->
+                  <span class="method-name">verify_Get_Authenticate_User_Invalid_Credentials</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_UserPagination">
+                  </a> <!-- verify_Get_UserPagination -->
+                  <span class="method-name">verify_Get_UserPagination</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_UserPagination_NullName">
+                  </a> <!-- verify_Get_UserPagination_NullName -->
+                  <span class="method-name">verify_Get_UserPagination_NullName</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_User_Role">
+                  </a> <!-- verify_Get_User_Role -->
+                  <span class="method-name">verify_Get_User_Role</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_User_Role_InvalidAuth">
+                  </a> <!-- verify_Get_User_Role_InvalidAuth -->
+                  <span class="method-name">verify_Get_User_Role_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_Get_User_Role_InvalidUserID">
+                  </a> <!-- verify_Get_User_Role_InvalidUserID -->
+                  <span class="method-name">verify_Get_User_Role_InvalidUserID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_delete_ExistingUser">
+                  </a> <!-- verify_delete_ExistingUser -->
+                  <span class="method-name">verify_delete_ExistingUser</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_delete_ExistingUser_InvalidAuth">
+                  </a> <!-- verify_delete_ExistingUser_InvalidAuth -->
+                  <span class="method-name">verify_delete_ExistingUser_InvalidAuth</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_delete_Invaliduser">
+                  </a> <!-- verify_delete_Invaliduser -->
+                  <span class="method-name">verify_delete_Invaliduser</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_post_CreateNewUser">
+                  </a> <!-- verify_post_CreateNewUser -->
+                  <span class="method-name">verify_post_CreateNewUser</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_post_CreateNewUser_Empty_FirstNameIn_Body">
+                  </a> <!-- verify_post_CreateNewUser_Empty_FirstNameIn_Body -->
+                  <span class="method-name">verify_post_CreateNewUser_Empty_FirstNameIn_Body</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_post_CreateNewUser_Empty_LastNameIn_Body">
+                  </a> <!-- verify_post_CreateNewUser_Empty_LastNameIn_Body -->
+                  <span class="method-name">verify_post_CreateNewUser_Empty_LastNameIn_Body</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_post_CreateNewUser_Empty_Password">
+                  </a> <!-- verify_post_CreateNewUser_Empty_Password -->
+                  <span class="method-name">verify_post_CreateNewUser_Empty_Password</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_post_CreateNewUser_Empty_email">
+                  </a> <!-- verify_post_CreateNewUser_Empty_email -->
+                  <span class="method-name">verify_post_CreateNewUser_Empty_email</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_put_Change_Password_ExistingUser">
+                  </a> <!-- verify_put_Change_Password_ExistingUser -->
+                  <span class="method-name">verify_put_Change_Password_ExistingUser</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_put_Change_Password_InvalidBodyParameters">
+                  </a> <!-- verify_put_Change_Password_InvalidBodyParameters -->
+                  <span class="method-name">verify_put_Change_Password_InvalidBodyParameters</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_put_Reset_Password_ExistingUser">
+                  </a> <!-- verify_put_Reset_Password_ExistingUser -->
+                  <span class="method-name">verify_put_Reset_Password_ExistingUser</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_put_Reset_Password_InvalidBodyParameters">
+                  </a> <!-- verify_put_Reset_Password_InvalidBodyParameters -->
+                  <span class="method-name">verify_put_Reset_Password_InvalidBodyParameters</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_put_Submit_NEw_Password_ExistingUser">
+                  </a> <!-- verify_put_Submit_NEw_Password_ExistingUser -->
+                  <span class="method-name">verify_put_Submit_NEw_Password_ExistingUser</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_put_UpdateExistingUser">
+                  </a> <!-- verify_put_UpdateExistingUser -->
+                  <span class="method-name">verify_put_UpdateExistingUser</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody">
+                  </a> <!-- verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody -->
+                  <span class="method-name">verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-CORE_API_TEST_SUITE-class-passed -->
+        </div> <!-- panel CORE_API_TEST_SUITE -->
+        <div panel-name="test-xml-CORE_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/Users/knguyen/M3_API_Automation/src/test/resources/testNG.xml</span>
+            <span class="header-content">/Users/VinayKarumuri/Documents/APIAutomationNew/MAAS_API_STAGE/qa-maas-api-automation/src/test/resources/coreApi.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;M3 API TEST SUITE&quot;&gt;
-  &lt;test name=&quot;M3 API Tests&quot;&gt;
+&lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;CORE API TEST SUITE&quot;&gt;
+  &lt;test name=&quot;CORE API Tests&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.phunware.m3.api.tests.Attributes&quot;/&gt;
-      &lt;class name=&quot;com.phunware.m3.api.tests.Beacons&quot;/&gt;
-      &lt;class name=&quot;com.phunware.m3.api.tests.Profiles&quot;/&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.Client&quot;/&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.Organization&quot;/&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.User&quot;/&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.UserRole&quot;/&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- M3 API Tests --&gt;
-&lt;/suite&gt; &lt;!-- M3 API TEST SUITE --&gt;
+  &lt;/test&gt; &lt;!-- CORE API Tests --&gt;
+  &lt;test name=&quot;CORE API Tests(failed)&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.Client&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;preTestSteps&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- com.phunware.core.api.tests.Client --&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.Organization&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;preTestSteps&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- com.phunware.core.api.tests.Organization --&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.UserRole&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;preTestSteps&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- com.phunware.core.api.tests.UserRole --&gt;
+      &lt;class name=&quot;com.phunware.core.api.tests.User&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;preTestSteps&quot;/&gt;
+          &lt;include name=&quot;verify_post_CreateNewUser_Null_isActive&quot;/&gt;
+          &lt;include name=&quot;verify_post_CreateNewUser_Null_Timezone&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- com.phunware.core.api.tests.User --&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- CORE API Tests(failed) --&gt;
+&lt;/suite&gt; &lt;!-- CORE API TEST SUITE --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="testlist-M3_API_TEST_SUITE" class="panel">
+        <div panel-name="testlist-CORE_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">Tests for M3 API TEST SUITE</span>
+            <span class="header-content">Tests for CORE API TEST SUITE</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">M3 API Tests (3 classes)</span>
+                <span class="test-name">CORE API Tests (4 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">CORE API Tests(failed) (4 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="group-M3_API_TEST_SUITE" class="panel">
+        <div panel-name="group-CORE_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">Groups for M3 API TEST SUITE</span>
+            <span class="header-content">Groups for CORE API TEST SUITE</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="times-M3_API_TEST_SUITE" class="panel">
+        <div panel-name="times-CORE_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">Times for M3 API TEST SUITE</span>
+            <span class="header-content">Times for CORE API TEST SUITE</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="times-div">
               <script type="text/javascript">
-suiteTableInitFunctions.push('tableData_M3_API_TEST_SUITE');
-function tableData_M3_API_TEST_SUITE() {
+suiteTableInitFunctions.push('tableData_CORE_API_TEST_SUITE');
+function tableData_CORE_API_TEST_SUITE() {
 var data = new google.visualization.DataTable();
 data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(20);
+data.addRows(70);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'getOneAttribute')
-data.setCell(0, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(0, 3, 2029);
+data.setCell(0, 1, 'verify_Get_ClientDetails')
+data.setCell(0, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(0, 3, 2013);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'getAllProfiles')
-data.setCell(1, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(1, 3, 1426);
+data.setCell(1, 1, 'verify_Post_New_Client')
+data.setCell(1, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(1, 3, 1035);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'getOneBeaconBy_ID')
-data.setCell(2, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(2, 3, 918);
+data.setCell(2, 1, 'verify_Get_UserRole_Pagination')
+data.setCell(2, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(2, 3, 546);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'getAllAttributes')
-data.setCell(3, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(3, 3, 896);
+data.setCell(3, 1, 'verify_Get_Collection_Of_Organizations_Pagination')
+data.setCell(3, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(3, 3, 443);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'getBeaconsBy_UUIDAlias')
-data.setCell(4, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(4, 3, 347);
+data.setCell(4, 1, 'verify_Get_Collection_Of_Organizations')
+data.setCell(4, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(4, 3, 401);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'getBeaconBy_UUID')
-data.setCell(5, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(5, 3, 343);
+data.setCell(5, 1, 'verify_Get_Client_Pagination')
+data.setCell(5, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(5, 3, 327);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'getBeaconBy_UUID_Tags')
-data.setCell(6, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(6, 3, 342);
+data.setCell(6, 1, 'verify_Delete_ExistingUserRole')
+data.setCell(6, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(6, 3, 326);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'getBeaconsBy_Tags')
-data.setCell(7, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(7, 3, 330);
+data.setCell(7, 1, 'verify_post_CreateNewUser_Empty_FirstNameIn_Body')
+data.setCell(7, 2, 'com.phunware.core.api.tests.User')
+data.setCell(7, 3, 301);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'getBeaconWith_Tags')
-data.setCell(8, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(8, 3, 322);
+data.setCell(8, 1, 'verify_Get_UserPagination')
+data.setCell(8, 2, 'com.phunware.core.api.tests.User')
+data.setCell(8, 3, 298);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'getBeaconBy_UUID_Major')
-data.setCell(9, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(9, 3, 321);
+data.setCell(9, 1, 'verify_Put_Update_Organization_InvalidOrganization')
+data.setCell(9, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(9, 3, 296);
 data.setCell(10, 0, 10)
-data.setCell(10, 1, 'getBeaconBy_UUID_Major_Minor')
-data.setCell(10, 2, 'com.phunware.m3.api.tests.Beacons')
-data.setCell(10, 3, 318);
+data.setCell(10, 1, 'verify_Get_UserPagination_NullName')
+data.setCell(10, 2, 'com.phunware.core.api.tests.User')
+data.setCell(10, 3, 289);
 data.setCell(11, 0, 11)
-data.setCell(11, 1, 'addOneValueToAttribute')
-data.setCell(11, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(11, 3, 295);
+data.setCell(11, 1, 'verify_post_CreateNewUser_Empty_LastNameIn_Body')
+data.setCell(11, 2, 'com.phunware.core.api.tests.User')
+data.setCell(11, 3, 285);
 data.setCell(12, 0, 12)
-data.setCell(12, 1, 'addMultipleValuesToAttribute')
-data.setCell(12, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(12, 3, 255);
+data.setCell(12, 1, 'verify_Post_Create_New_Organization')
+data.setCell(12, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(12, 3, 281);
 data.setCell(13, 0, 13)
-data.setCell(13, 1, 'enableOneAttribute')
-data.setCell(13, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(13, 3, 205);
+data.setCell(13, 1, 'verify_Get_User_Role')
+data.setCell(13, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(13, 3, 281);
 data.setCell(14, 0, 14)
-data.setCell(14, 1, 'getOneProfile')
-data.setCell(14, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(14, 3, 186);
+data.setCell(14, 1, 'verify_post_CreateNewUser')
+data.setCell(14, 2, 'com.phunware.core.api.tests.User')
+data.setCell(14, 3, 262);
 data.setCell(15, 0, 15)
-data.setCell(15, 1, 'disableOneAttribute')
-data.setCell(15, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(15, 3, 184);
+data.setCell(15, 1, 'verify_post_CreateNewUser_Empty_email')
+data.setCell(15, 2, 'com.phunware.core.api.tests.User')
+data.setCell(15, 3, 242);
 data.setCell(16, 0, 16)
-data.setCell(16, 1, 'disableOneProfile')
-data.setCell(16, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(16, 3, 171);
+data.setCell(16, 1, 'verify_Put_Update_Organization_EmptyServices_InRequestBody')
+data.setCell(16, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(16, 3, 239);
 data.setCell(17, 0, 17)
-data.setCell(17, 1, 'enableOneProfile')
-data.setCell(17, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(17, 3, 164);
+data.setCell(17, 1, 'verify_Get_Organization_Details')
+data.setCell(17, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(17, 3, 232);
 data.setCell(18, 0, 18)
-data.setCell(18, 1, 'createOneProfile')
-data.setCell(18, 2, 'com.phunware.m3.api.tests.Profiles')
-data.setCell(18, 3, 150);
+data.setCell(18, 1, 'verify_Get_Authenticate_User')
+data.setCell(18, 2, 'com.phunware.core.api.tests.User')
+data.setCell(18, 3, 231);
 data.setCell(19, 0, 19)
-data.setCell(19, 1, 'postOneAttribute')
-data.setCell(19, 2, 'com.phunware.m3.api.tests.Attributes')
-data.setCell(19, 3, 145);
-window.suiteTableData['M3_API_TEST_SUITE']= { tableData: data, tableDiv: 'times-div-M3_API_TEST_SUITE'}
+data.setCell(19, 1, 'verify_Get_Client_Categories')
+data.setCell(19, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(19, 3, 229);
+data.setCell(20, 0, 20)
+data.setCell(20, 1, 'verify_Get_Collection_Of_Organizations_NameWithEmptyString')
+data.setCell(20, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(20, 3, 228);
+data.setCell(21, 0, 21)
+data.setCell(21, 1, 'verify_Get_ClientTypes')
+data.setCell(21, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(21, 3, 228);
+data.setCell(22, 0, 22)
+data.setCell(22, 1, 'verify_delete_ExistingUser')
+data.setCell(22, 2, 'com.phunware.core.api.tests.User')
+data.setCell(22, 3, 224);
+data.setCell(23, 0, 23)
+data.setCell(23, 1, 'verify_Put_Update_Existing_Client')
+data.setCell(23, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(23, 3, 223);
+data.setCell(24, 0, 24)
+data.setCell(24, 1, 'verify_Post_Create_New_UserRole')
+data.setCell(24, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(24, 3, 223);
+data.setCell(25, 0, 25)
+data.setCell(25, 1, 'verify_Get_Collection_Of_Organizations_Pagination_EmptyName')
+data.setCell(25, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(25, 3, 220);
+data.setCell(26, 0, 26)
+data.setCell(26, 1, 'verify_Put_Update_Organization')
+data.setCell(26, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(26, 3, 220);
+data.setCell(27, 0, 27)
+data.setCell(27, 1, 'verify_put_UpdateExistingUser')
+data.setCell(27, 2, 'com.phunware.core.api.tests.User')
+data.setCell(27, 3, 214);
+data.setCell(28, 0, 28)
+data.setCell(28, 1, 'verify_Get_User_Role')
+data.setCell(28, 2, 'com.phunware.core.api.tests.User')
+data.setCell(28, 3, 210);
+data.setCell(29, 0, 29)
+data.setCell(29, 1, 'verify_Put_Update_Organization')
+data.setCell(29, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(29, 3, 205);
+data.setCell(30, 0, 30)
+data.setCell(30, 1, 'verify_Put_Update_Organization_EmptyName_InRequestBody')
+data.setCell(30, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(30, 3, 200);
+data.setCell(31, 0, 31)
+data.setCell(31, 1, 'verify_Post_New_Client_emptyCategoryID')
+data.setCell(31, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(31, 3, 195);
+data.setCell(32, 0, 32)
+data.setCell(32, 1, 'verify_Get_ClientDetails_InvalidCLIENT_ID')
+data.setCell(32, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(32, 3, 194);
+data.setCell(33, 0, 33)
+data.setCell(33, 1, 'verify_Post_New_Client_emptyOrgID')
+data.setCell(33, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(33, 3, 186);
+data.setCell(34, 0, 34)
+data.setCell(34, 1, 'verify_Get_Client_Pagination_InvalidAuth')
+data.setCell(34, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(34, 3, 185);
+data.setCell(35, 0, 35)
+data.setCell(35, 1, 'verify_Get_User_Role_InvalidUserID')
+data.setCell(35, 2, 'com.phunware.core.api.tests.User')
+data.setCell(35, 3, 185);
+data.setCell(36, 0, 36)
+data.setCell(36, 1, 'verify_Post_New_Client_emptyType')
+data.setCell(36, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(36, 3, 184);
+data.setCell(37, 0, 37)
+data.setCell(37, 1, 'verify_Put_Update_Existing_Client_InvalidAuth')
+data.setCell(37, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(37, 3, 183);
+data.setCell(38, 0, 38)
+data.setCell(38, 1, 'verify_Get_UserRole_NonExistant_OrgID')
+data.setCell(38, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(38, 3, 183);
+data.setCell(39, 0, 39)
+data.setCell(39, 1, 'verify_put_Change_Password_InvalidBodyParameters')
+data.setCell(39, 2, 'com.phunware.core.api.tests.User')
+data.setCell(39, 3, 182);
+data.setCell(40, 0, 40)
+data.setCell(40, 1, 'verify_Delete_Client')
+data.setCell(40, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(40, 3, 182);
+data.setCell(41, 0, 41)
+data.setCell(41, 1, 'verify_put_Change_Password_ExistingUser')
+data.setCell(41, 2, 'com.phunware.core.api.tests.User')
+data.setCell(41, 3, 181);
+data.setCell(42, 0, 42)
+data.setCell(42, 1, 'verify_Get_UserRole_Pagination_NonExistant_OrgID')
+data.setCell(42, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(42, 3, 181);
+data.setCell(43, 0, 43)
+data.setCell(43, 1, 'verify_Get_Client_Categories_InvalidAuth')
+data.setCell(43, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(43, 3, 180);
+data.setCell(44, 0, 44)
+data.setCell(44, 1, 'verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody')
+data.setCell(44, 2, 'com.phunware.core.api.tests.User')
+data.setCell(44, 3, 180);
+data.setCell(45, 0, 45)
+data.setCell(45, 1, 'verify_Get_User_Role_InvalidAuth')
+data.setCell(45, 2, 'com.phunware.core.api.tests.User')
+data.setCell(45, 3, 177);
+data.setCell(46, 0, 46)
+data.setCell(46, 1, 'verify_post_CreateNewUser_Null_Timezone')
+data.setCell(46, 2, 'com.phunware.core.api.tests.User')
+data.setCell(46, 3, 177);
+data.setCell(47, 0, 47)
+data.setCell(47, 1, 'verify_Put_Update_Organization_EmptyName_InRequestBody')
+data.setCell(47, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(47, 3, 176);
+data.setCell(48, 0, 48)
+data.setCell(48, 1, 'verify_Get_UserRole_Invalid_parameter_Structure')
+data.setCell(48, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(48, 3, 176);
+data.setCell(49, 0, 49)
+data.setCell(49, 1, 'verify_Get_ClientDetails_InvalidAuth')
+data.setCell(49, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(49, 3, 176);
+data.setCell(50, 0, 50)
+data.setCell(50, 1, 'verify_Post_New_Client_emptyName')
+data.setCell(50, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(50, 3, 175);
+data.setCell(51, 0, 51)
+data.setCell(51, 1, 'verify_put_Reset_Password_InvalidBodyParameters')
+data.setCell(51, 2, 'com.phunware.core.api.tests.User')
+data.setCell(51, 3, 174);
+data.setCell(52, 0, 52)
+data.setCell(52, 1, 'verify_Put_Update_Invalid_Client')
+data.setCell(52, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(52, 3, 174);
+data.setCell(53, 0, 53)
+data.setCell(53, 1, 'verify_Delete_ExistingOrganization')
+data.setCell(53, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(53, 3, 172);
+data.setCell(54, 0, 54)
+data.setCell(54, 1, 'verify_Get_Organization_Details_InvalidOrgID')
+data.setCell(54, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(54, 3, 172);
+data.setCell(55, 0, 55)
+data.setCell(55, 1, 'verify_post_CreateNewUser_Null_isActive')
+data.setCell(55, 2, 'com.phunware.core.api.tests.User')
+data.setCell(55, 3, 172);
+data.setCell(56, 0, 56)
+data.setCell(56, 1, 'verify_delete_Invaliduser')
+data.setCell(56, 2, 'com.phunware.core.api.tests.User')
+data.setCell(56, 3, 171);
+data.setCell(57, 0, 57)
+data.setCell(57, 1, 'verify_put_Reset_Password_ExistingUser')
+data.setCell(57, 2, 'com.phunware.core.api.tests.User')
+data.setCell(57, 3, 170);
+data.setCell(58, 0, 58)
+data.setCell(58, 1, 'verify_Post_Create_New_Organization_EmptyName_InRequestBody')
+data.setCell(58, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(58, 3, 170);
+data.setCell(59, 0, 59)
+data.setCell(59, 1, 'verify_Get_UserRole_Pagination_InvalidAuth')
+data.setCell(59, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(59, 3, 169);
+data.setCell(60, 0, 60)
+data.setCell(60, 1, 'verify_Get_Organization_Details_InvalidAuthorization')
+data.setCell(60, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(60, 3, 169);
+data.setCell(61, 0, 61)
+data.setCell(61, 1, 'verify_Get_ClientTypes_InvalidAuth')
+data.setCell(61, 2, 'com.phunware.core.api.tests.Client')
+data.setCell(61, 3, 168);
+data.setCell(62, 0, 62)
+data.setCell(62, 1, 'verify_Get_USerRole_InvalidAuth')
+data.setCell(62, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(62, 3, 168);
+data.setCell(63, 0, 63)
+data.setCell(63, 1, 'verify_Post_Create_New_UserRole_InvalidAuth')
+data.setCell(63, 2, 'com.phunware.core.api.tests.UserRole')
+data.setCell(63, 3, 168);
+data.setCell(64, 0, 64)
+data.setCell(64, 1, 'verify_Put_Update_Organization_InvalidOrganization')
+data.setCell(64, 2, 'com.phunware.core.api.tests.Organization')
+data.setCell(64, 3, 167);
+data.setCell(65, 0, 65)
+data.setCell(65, 1, 'verify_post_CreateNewUser_Empty_Password')
+data.setCell(65, 2, 'com.phunware.core.api.tests.User')
+data.setCell(65, 3, 163);
+data.setCell(66, 0, 66)
+data.setCell(66, 1, 'verify_Get_Authenticate_User_Empty_Credentials')
+data.setCell(66, 2, 'com.phunware.core.api.tests.User')
+data.setCell(66, 3, 161);
+data.setCell(67, 0, 67)
+data.setCell(67, 1, 'verify_Get_Authenticate_User_Invalid_Credentials')
+data.setCell(67, 2, 'com.phunware.core.api.tests.User')
+data.setCell(67, 3, 159);
+data.setCell(68, 0, 68)
+data.setCell(68, 1, 'verify_delete_ExistingUser_InvalidAuth')
+data.setCell(68, 2, 'com.phunware.core.api.tests.User')
+data.setCell(68, 3, 157);
+data.setCell(69, 0, 69)
+data.setCell(69, 1, 'verify_put_Submit_NEw_Password_ExistingUser')
+data.setCell(69, 2, 'com.phunware.core.api.tests.User')
+data.setCell(69, 3, 11);
+window.suiteTableData['CORE_API_TEST_SUITE']= { tableData: data, tableDiv: 'times-div-CORE_API_TEST_SUITE'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 9 seconds</span>
-              <div id="times-div-M3_API_TEST_SUITE">
-              </div> <!-- times-div-M3_API_TEST_SUITE -->
+              <span class="suite-total-time">Total running time: 17 seconds</span>
+              <div id="times-div-CORE_API_TEST_SUITE">
+              </div> <!-- times-div-CORE_API_TEST_SUITE -->
             </div> <!-- times-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="reporter-M3_API_TEST_SUITE" class="panel">
+        <div panel-name="reporter-CORE_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">Reporter output for M3 API TEST SUITE</span>
+            <span class="header-content">Reporter output for CORE API TEST SUITE</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="ignored-methods-M3_API_TEST_SUITE" class="panel">
+        <div panel-name="ignored-methods-CORE_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
             <span class="header-content">0 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="chronological-M3_API_TEST_SUITE" class="panel">
+        <div panel-name="chronological-CORE_API_TEST_SUITE" class="panel">
           <div class="main-panel-header rounded-window-top">
             <span class="header-content">Methods in chronological order</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.phunware.m3.api.tests.Attributes</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">instantiateEnvironment</span>
+              <div class="chronological-class-name">com.phunware.core.api.tests.Client</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">preTestSteps</span>
                 <span class="method-start">0 ms</span>
-              </div> <!-- configuration-test before -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">com.phunware.m3.api.tests.Beacons</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">instantiateEnvironment</span>
-                <span class="method-start">100 ms</span>
-              </div> <!-- configuration-test before -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">com.phunware.m3.api.tests.Profiles</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">instantiateEnvironment</span>
-                <span class="method-start">101 ms</span>
-              </div> <!-- configuration-test before -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">com.phunware.m3.api.tests.Attributes</div> <!-- chronological-class-name -->
+              </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">getOneAttribute</span>
-                <span class="method-start">112 ms</span>
+                <span class="method-name">verify_Get_ClientDetails</span>
+                <span class="method-start">89 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getAllAttributes</span>
-                <span class="method-start">2142 ms</span>
+                <span class="method-name">verify_Get_ClientDetails_InvalidCLIENT_ID</span>
+                <span class="method-start">2102 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">enableOneAttribute</span>
-                <span class="method-start">3038 ms</span>
+                <span class="method-name">verify_Get_ClientDetails_InvalidAuth</span>
+                <span class="method-start">2297 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">disableOneAttribute</span>
-                <span class="method-start">3243 ms</span>
+                <span class="method-name">verify_Get_ClientTypes</span>
+                <span class="method-start">2473 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">postOneAttribute</span>
-                <span class="method-start">3427 ms</span>
+                <span class="method-name">verify_Get_ClientTypes_InvalidAuth</span>
+                <span class="method-start">2701 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">addOneValueToAttribute</span>
-                <span class="method-start">3573 ms</span>
+                <span class="method-name">verify_Get_Client_Categories</span>
+                <span class="method-start">2870 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">addMultipleValuesToAttribute</span>
-                <span class="method-start">3868 ms</span>
-              </div> <!-- test-method -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">com.phunware.m3.api.tests.Beacons</div> <!-- chronological-class-name -->
-              <div class="test-method">
-                <span class="method-name">getOneBeaconBy_ID</span>
-                <span class="method-start">4124 ms</span>
+                <span class="method-name">verify_Get_Client_Categories_InvalidAuth</span>
+                <span class="method-start">3099 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getBeaconBy_UUID</span>
-                <span class="method-start">5042 ms</span>
+                <span class="method-name">verify_Get_Client_Pagination</span>
+                <span class="method-start">3279 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getBeaconBy_UUID_Major</span>
-                <span class="method-start">5385 ms</span>
+                <span class="method-name">verify_Get_Client_Pagination_InvalidAuth</span>
+                <span class="method-start">3607 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getBeaconBy_UUID_Major_Minor</span>
-                <span class="method-start">5706 ms</span>
+                <span class="method-name">verify_Post_New_Client</span>
+                <span class="method-start">3792 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getBeaconBy_UUID_Tags</span>
-                <span class="method-start">6025 ms</span>
+                <span class="method-name">verify_Post_New_Client_emptyOrgID</span>
+                <span class="method-start">4828 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getBeaconsBy_UUIDAlias</span>
-                <span class="method-start">6368 ms</span>
+                <span class="method-name">verify_Post_New_Client_emptyCategoryID</span>
+                <span class="method-start">5014 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getBeaconsBy_Tags</span>
-                <span class="method-start">6715 ms</span>
+                <span class="method-name">verify_Post_New_Client_emptyType</span>
+                <span class="method-start">5209 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getBeaconWith_Tags</span>
-                <span class="method-start">7045 ms</span>
+                <span class="method-name">verify_Post_New_Client_emptyName</span>
+                <span class="method-start">5393 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Existing_Client</span>
+                <span class="method-start">5569 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Existing_Client_InvalidAuth</span>
+                <span class="method-start">5793 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Invalid_Client</span>
+                <span class="method-start">5977 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Delete_Client</span>
+                <span class="method-start">6152 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
-              <div class="chronological-class-name">com.phunware.m3.api.tests.Profiles</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.phunware.core.api.tests.Organization</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">preTestSteps</span>
+                <span class="method-start">6335 ms</span>
+              </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">getOneProfile</span>
-                <span class="method-start">7368 ms</span>
+                <span class="method-name">verify_Get_Organization_Details</span>
+                <span class="method-start">6336 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getAllProfiles</span>
-                <span class="method-start">7554 ms</span>
+                <span class="method-name">verify_Get_Organization_Details_InvalidOrgID</span>
+                <span class="method-start">6568 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">createOneProfile</span>
-                <span class="method-start">8981 ms</span>
+                <span class="method-name">verify_Get_Organization_Details_InvalidAuthorization</span>
+                <span class="method-start">6741 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">disableOneProfile</span>
-                <span class="method-start">9132 ms</span>
+                <span class="method-name">verify_Get_Collection_Of_Organizations</span>
+                <span class="method-start">6910 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">enableOneProfile</span>
-                <span class="method-start">9303 ms</span>
+                <span class="method-name">verify_Get_Collection_Of_Organizations_NameWithEmptyString</span>
+                <span class="method-start">7311 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_Collection_Of_Organizations_Pagination</span>
+                <span class="method-start">7539 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_Collection_Of_Organizations_Pagination_EmptyName</span>
+                <span class="method-start">7982 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Post_Create_New_Organization</span>
+                <span class="method-start">8203 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Post_Create_New_Organization_EmptyName_InRequestBody</span>
+                <span class="method-start">8484 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Organization</span>
+                <span class="method-start">8654 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Organization_EmptyName_InRequestBody</span>
+                <span class="method-start">8874 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Organization_EmptyServices_InRequestBody</span>
+                <span class="method-start">9050 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Organization_InvalidOrganization</span>
+                <span class="method-start">9290 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Delete_ExistingOrganization</span>
+                <span class="method-start">9457 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.phunware.core.api.tests.User</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">preTestSteps</span>
+                <span class="method-start">9630 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_User_Role</span>
+                <span class="method-start">9631 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_User_Role_InvalidUserID</span>
+                <span class="method-start">9841 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_User_Role_InvalidAuth</span>
+                <span class="method-start">10027 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_Authenticate_User</span>
+                <span class="method-start">10204 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_Authenticate_User_Invalid_Credentials</span>
+                <span class="method-start">10435 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_Authenticate_User_Empty_Credentials</span>
+                <span class="method-start">10594 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_UserPagination</span>
+                <span class="method-start">10755 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_UserPagination_NullName</span>
+                <span class="method-start">11053 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_post_CreateNewUser</span>
+                <span class="method-start">11342 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_post_CreateNewUser_Empty_FirstNameIn_Body</span>
+                <span class="method-start">11604 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_post_CreateNewUser_Empty_LastNameIn_Body</span>
+                <span class="method-start">11905 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_post_CreateNewUser_Empty_email</span>
+                <span class="method-start">12190 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">verify_post_CreateNewUser_Null_Timezone</span>
+                <span class="method-start">12432 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">verify_post_CreateNewUser_Null_isActive</span>
+                <span class="method-start">12616 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_post_CreateNewUser_Empty_Password</span>
+                <span class="method-start">12789 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_put_UpdateExistingUser</span>
+                <span class="method-start">12952 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody</span>
+                <span class="method-start">13166 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_put_Change_Password_ExistingUser</span>
+                <span class="method-start">13346 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_put_Change_Password_InvalidBodyParameters</span>
+                <span class="method-start">13527 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_put_Reset_Password_ExistingUser</span>
+                <span class="method-start">13709 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_put_Reset_Password_InvalidBodyParameters</span>
+                <span class="method-start">13879 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_put_Submit_NEw_Password_ExistingUser</span>
+                <span class="method-start">14053 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_delete_ExistingUser</span>
+                <span class="method-start">14064 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_delete_Invaliduser</span>
+                <span class="method-start">14289 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_delete_ExistingUser_InvalidAuth</span>
+                <span class="method-start">14460 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.phunware.core.api.tests.UserRole</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">preTestSteps</span>
+                <span class="method-start">14617 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_User_Role</span>
+                <span class="method-start">14618 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_UserRole_NonExistant_OrgID</span>
+                <span class="method-start">14900 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_UserRole_Invalid_parameter_Structure</span>
+                <span class="method-start">15083 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_USerRole_InvalidAuth</span>
+                <span class="method-start">15259 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_UserRole_Pagination</span>
+                <span class="method-start">15428 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_UserRole_Pagination_NonExistant_OrgID</span>
+                <span class="method-start">15974 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Get_UserRole_Pagination_InvalidAuth</span>
+                <span class="method-start">16155 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Post_Create_New_UserRole</span>
+                <span class="method-start">16325 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Post_Create_New_UserRole_InvalidAuth</span>
+                <span class="method-start">16548 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Organization</span>
+                <span class="method-start">16716 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Organization_EmptyName_InRequestBody</span>
+                <span class="method-start">16921 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Put_Update_Organization_InvalidOrganization</span>
+                <span class="method-start">17121 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verify_Delete_ExistingUserRole</span>
+                <span class="method-start">17417 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

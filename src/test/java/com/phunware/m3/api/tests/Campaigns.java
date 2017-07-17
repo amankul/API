@@ -38,11 +38,11 @@ import static org.hamcrest.Matchers.*;
 public class Campaigns {
 
 
-  public static String serviceEndPoint = null;
-  public static String capturedCampaignId;
-  public static String capturedCampaignId1;
-  static Logger log;
-  public String xAuth = null;
+  private static String serviceEndPoint = null;
+  private static String capturedCampaignId;
+  private static String capturedCampaignId1;
+  static Logger log = Logger.getLogger(Campaigns.class);
+  private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
@@ -50,13 +50,12 @@ public class Campaigns {
   @BeforeClass
   @Parameters({"env"})
   public void preTestSteps(String env) {
-    log = Logger.getLogger(Campaigns.class);
     if (env.equalsIgnoreCase("PROD")) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
     } else if (env.equalsIgnoreCase("STAGE")) {
       serviceEndPoint = MeAPI_Constants.SERVICE_END_POINT_STAGE;
     } else {
-      log.info("Environment is not set properly. Please check your testng xml file");
+      log.error("Environment is not set properly. Please check your testng xml file");
     }
 
   }
@@ -75,7 +74,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -135,7 +134,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -176,7 +175,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -221,7 +220,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -269,7 +268,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL,queryParameters);
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -316,7 +315,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL,"");
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -373,7 +372,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -460,7 +459,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -517,7 +516,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -574,7 +573,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -634,7 +633,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -694,7 +693,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -755,7 +754,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -815,7 +814,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -874,7 +873,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -933,7 +932,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -994,7 +993,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -1083,7 +1082,7 @@ public class Campaigns {
     try {
       xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth

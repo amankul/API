@@ -17,8 +17,8 @@ import org.apache.commons.codec.binary.Hex;
  * Created by knguyen on 8/2/16.
  */
 
-/*
-  For GET requests, Please pass queryParameters in the method parameter "body" or else generated xAuth will not work
+/**
+  For GET requests, pass queryParameters in the method parameter "body" or else generated xAuth will not work
  */
 public class AuthHeader {
 

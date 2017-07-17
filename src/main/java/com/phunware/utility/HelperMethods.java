@@ -1,5 +1,7 @@
 package com.phunware.utility;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -36,6 +38,10 @@ public class HelperMethods {
     Calendar c = Calendar.getInstance();
     c.add(Calendar.DATE, noOfDays);
     return dateFormat.format(c.getTime());
+  }
+
+  public static String generateSHA256Hash(String stringToConvert){
+    return DigestUtils.sha256Hex(stringToConvert);
   }
 
 }

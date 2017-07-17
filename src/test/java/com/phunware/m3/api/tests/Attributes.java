@@ -26,10 +26,10 @@ import static org.hamcrest.Matchers.*;
 public class Attributes {
 
 
-  public static String serviceEndPoint = null;
-  public static String attributeName;
-  static Logger log;
-  public String xAuth = null;
+  private static String serviceEndPoint = null;
+  private static String attributeName;
+  static Logger log = Logger.getLogger(Attributes.class);
+  private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
   
@@ -37,13 +37,13 @@ public class Attributes {
   @BeforeClass
   @Parameters({"env"})
   public void preTestSteps(String env) {
-    log = Logger.getLogger(Attributes.class);
+
     if (env.equalsIgnoreCase("PROD")) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
     } else if (env.equalsIgnoreCase("STAGE")) {
       serviceEndPoint = MeAPI_Constants.SERVICE_END_POINT_STAGE;
     } else {
-      log.info("Environment is not set properly. Please check your testng xml file");
+      log.error("Environment is not set properly. Please check your testng xml file");
     }
 
   }
@@ -62,7 +62,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -110,7 +110,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -150,7 +150,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -172,7 +172,6 @@ public class Attributes {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-    //response.then().body("name", everyItem(hasItem("name")));
     response.then().body("size()", is(greaterThan(0)));
     response.then().body("flatten().any {it.containsKey('name') }", is(true));
     response.then().body("flatten().any {it.containsKey('lastUpdated') }", is(true));
@@ -213,7 +212,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -280,7 +279,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -336,7 +335,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -396,7 +395,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -463,7 +462,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth
@@ -521,7 +520,7 @@ public class Attributes {
     try {
       xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating auth header" + e);
     }
 
     //Printing xAuth

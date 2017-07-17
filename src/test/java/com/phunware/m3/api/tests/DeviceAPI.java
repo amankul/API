@@ -25,11 +25,11 @@ import static org.hamcrest.Matchers.*;
  */
 public class DeviceAPI {
 
-  public static String serviceEndPoint = null;
-  public static String deviceId = HelperMethods.getUUIDAsString();
-  public static String deviceRegKey = "d6BZSAdhNd8:APA91bHpVrhxUjCOHm-Tzf6HOZjtpsSUn3vgaxgMNiCdv7FjUds-OiyhjCKSFKMgHSAVNcwM5Eld8ZZz0QQzrzTRbjR7IdvzNcmiJeWu8uEi5Qr9oIPtL07vWFGLIAu2-X_FjQafXRHM_" + deviceId ;
-  static Logger log;
-  public String xAuth = null;
+  private static String serviceEndPoint = null;
+  private static String deviceId = HelperMethods.getUUIDAsString();
+  private static String deviceRegKey = "d6BZSAdhNd8:APA91bHpVrhxUjCOHm-Tzf6HOZjtpsSUn3vgaxgMNiCdv7FjUds-OiyhjCKSFKMgHSAVNcwM5Eld8ZZz0QQzrzTRbjR7IdvzNcmiJeWu8uEi5Qr9oIPtL07vWFGLIAu2-X_FjQafXRHM_" + deviceId ;
+  static Logger log = Logger.getLogger(DeviceAPI.class);
+  private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
@@ -38,13 +38,12 @@ public class DeviceAPI {
   @BeforeClass
   @Parameters({"env"})
   public void preTestSteps(String env) {
-    log = Logger.getLogger(DeviceAPI.class);
     if (env.equalsIgnoreCase("PROD")) {
       serviceEndPoint = null;
     } else if (env.equalsIgnoreCase("STAGE")) {
       serviceEndPoint = MeAPI_Constants.DEVICE_API_SERVICE_END_POINT_STAGE;
     } else {
-      log.info("Environment is not set properly. Please check your testng xml file");
+      log.error("Environment is not set properly. Please check your testng xml file");
     }
 
   }
@@ -71,7 +70,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -133,7 +132,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -194,7 +193,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -240,7 +239,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -293,7 +292,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -334,7 +333,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -382,7 +381,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -437,7 +436,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -487,7 +486,7 @@ public class DeviceAPI {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.debug( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
