@@ -1485,7 +1485,7 @@ public class Beacons {
       log.info("RESPONSE " + response.asString());
 
     } catch (Exception e) {
-      log.info("SKipping HttpResponseException & ");
+      log.info("SKipping HttpResponseException");
     }
   }
 
