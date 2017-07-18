@@ -6,6 +6,7 @@ import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -33,12 +34,13 @@ public class Client {
   @BeforeSuite
   @Parameters("env")
   public void setEnv(String env) {
-    if (env.equalsIgnoreCase("PROD")) {
+    if ("PROD".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_ENT_POINT_PROD;
-    } else if (env.equalsIgnoreCase("STAGE")) {
+    } else if ("STAGE".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_END_POINT_STAGE;
     } else {
-      log.info("Environment is not set properly. Please check your testng xml file");
+      log.error("Environment is not set properly. Please check your testng xml file");
+      Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
   }
 
@@ -361,8 +363,8 @@ public class Client {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "AppName" + HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -412,8 +414,7 @@ public class Client {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "AppName" + HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -452,8 +453,8 @@ public class Client {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "AppName" + HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -493,8 +494,8 @@ public class Client {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "AppName" + HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -533,8 +534,7 @@ public class Client {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT_1;
-    File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "";
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -579,8 +579,7 @@ public class Client {
             + CoreAPI_Constants.CLIENT_END_POINT
             + capturedNewclientId;
 
-    File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "AppName" + HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -630,8 +629,7 @@ public class Client {
         SERVICE_END_POINT
             + CoreAPI_Constants.CLIENT_END_POINT
             + capturedNewclientId;
-    File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "AppName" + HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -675,7 +673,7 @@ public class Client {
         SERVICE_END_POINT + CoreAPI_Constants.CLIENT_END_POINT + "000";
 
     File file = new File(clientRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(clientRequestBodyFilePath);
     String newClientName = "AppName" + HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");

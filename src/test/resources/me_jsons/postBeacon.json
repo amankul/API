@@ -1,0 +1,13 @@
+{
+  "uuid": "f7826da6-afa2-4eaa-8024-bc5b71e08941",
+  "major": 123,
+  "minor": 456,
+  "majorMinorDisplayType": "int",
+  "enabled": true,
+  "tags" : ["qa"],
+  "createdById": 0,
+  "modifiedById": 0,
+  "interval" : 21,
+  "txPower" : -59,
+  "summary" : "",
+}

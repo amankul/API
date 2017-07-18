@@ -15,7 +15,7 @@
     <parameter name="userPutChangePasswordFilePath" value="src/test/resources/core_jsons/putUserChangePassword.json"/>
     <parameter name="userPutResetPasswordFilePath" value="src/test/resources/core_jsons/putUserResetPassword.json"/>
     <parameter name="categoryId" value="2"/>
-    <parameter name="orgId" value="386"/>
+        <parameter name="orgId" value="386"/>
     <parameter name="clientType" value="ios"/>
     <parameter name="userId" value="959"/>
 

@@ -16,10 +16,8 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20160810'
     compile group: 'org.testng', name: 'testng', version: '6.9.10'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
-
+    compile 'commons-codec:commons-codec:1.10'
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    // https://mvnrepository.com/artifact/commons-codec/commons-codec
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.7'
 
 }
 
@@ -41,3 +39,23 @@ task runCorePROD(type: Test) {
         suites '/src/test/resources/Core-PROD.xml'
     }
 }
+
+
+task runMeSTAGE(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/Me-STAGE.xml'
+    }
+}
+
+task runMePROD(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/Me-PROD.xml'
+    }
+}
+
