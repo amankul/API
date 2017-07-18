@@ -31,21 +31,22 @@ public class Profiles {
 
   private static String serviceEndPoint = null;
   private static String newProfileId;
-  static Logger log = Logger.getLogger(Profiles.class);
+  private static Logger log = Logger.getLogger(Profiles.class);
   private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
 
   @BeforeClass
-  @Parameters("env")  public void preTestSteps(String env) {
-
-    if (env.equalsIgnoreCase("PROD")) {
+  @Parameters("env")
+  public void preTestSteps(String env) {
+    if ("PROD".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
-    } else if (env.equalsIgnoreCase("STAGE")) {
+    } else if ("STAGE".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.SERVICE_END_POINT_STAGE;
     } else {
       log.error("Environment is not set properly. Please check your testng xml file");
+      Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
   }
 
@@ -63,7 +64,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -107,7 +108,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -148,7 +149,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -223,7 +224,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -301,7 +302,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -370,7 +371,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -426,7 +427,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -496,7 +497,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
@@ -567,7 +568,7 @@ public class Profiles {
     try {
       xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.debug( "Error generating Auth header" + e);
+      log.error( "Error generating Auth header" + e);
     }
 
     //Printing xAuth
