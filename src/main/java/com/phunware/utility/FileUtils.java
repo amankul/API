@@ -10,11 +10,11 @@ import java.io.IOException;
  */
 public class FileUtils {
 
-    private String jsonText;
 
-    public String getJsonText(File file) throws IOException {
+    public String getJsonTextFromFile(String filePath) throws IOException {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String jsonText = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -27,5 +27,6 @@ public class FileUtils {
         }
         return jsonText;
     }
+
 
 }

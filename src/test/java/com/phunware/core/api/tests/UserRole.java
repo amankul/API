@@ -32,12 +32,13 @@ public class UserRole {
   @BeforeSuite
   @Parameters("env")
   public void setEnv(String env) {
-    if (env.equalsIgnoreCase("PROD")) {
+    if ("PROD".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_ENT_POINT_PROD;
-    } else if (env.equalsIgnoreCase("STAGE")) {
+    } else if ("STAGE".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_END_POINT_STAGE;
     } else {
-      log.info("Environment is not set properly. Please check your testng xml file");
+      log.error("Environment is not set properly. Please check your testng xml file");
+      Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
   }
 
@@ -304,8 +305,7 @@ public class UserRole {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USER_ROLE_END_POINT;
-    File file = new File(userRolePostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userRolePostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String userRoleName = "QAAPIAutomationRole" + HelperMethods.getDateAsString();
@@ -352,8 +352,7 @@ public class UserRole {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USER_ROLE_END_POINT;
-    File file = new File(userRolePostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userRolePostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     requestBodyData.put("name", "");
@@ -391,8 +390,7 @@ public class UserRole {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USER_ROLE_END_POINT;
-    File file = new File(userRolePostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userRolePostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String userRoleName = "QAAPIAutomationRole" + HelperMethods.getDateAsString();
@@ -434,8 +432,7 @@ public class UserRole {
             + CoreAPI_Constants.USER_ROLE_END_POINT
             + "/"
             + capturedNewUserRoleID;
-    File file = new File(userRolePostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userRolePostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String userRoleName = "QAAPIAutomationRole" + HelperMethods.getDateAsString() + "Updated";
@@ -483,8 +480,7 @@ public class UserRole {
             + "/"
             + capturedNewUserRoleID;
 
-    File file = new File(userRolePostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userRolePostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String userRoleName = null;
@@ -530,8 +526,7 @@ public class UserRole {
     String requestURL =
         SERVICE_END_POINT + CoreAPI_Constants.USER_ROLE_END_POINT + "/" + "!@a3";
 
-    File file = new File(userRolePostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userRolePostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String userRoleName = "QAAPIAutomationRole" + HelperMethods.getDateAsString() + "Updated";

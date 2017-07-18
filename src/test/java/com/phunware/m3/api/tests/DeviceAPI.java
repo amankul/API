@@ -56,8 +56,7 @@ public class DeviceAPI {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
 
-    File file = new File(postDeviceRegistrationBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postDeviceRegistrationBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("deviceId", deviceId );
     requestBodyJSONObject.put("deviceRegKey", deviceRegKey);
@@ -119,8 +118,7 @@ public class DeviceAPI {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
 
-    File file = new File(postDownloadGeofenceBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postDownloadGeofenceBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("deviceId", deviceId );
 
@@ -180,8 +178,7 @@ public class DeviceAPI {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
 
-    File file = new File(postGeofenceEntryBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postGeofenceEntryBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("deviceId", deviceId );
 
@@ -277,8 +274,7 @@ public class DeviceAPI {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_ATTRIBUTE_API_END_POINT;
 
-    File file = new File(postDeviceAttributesBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postDeviceAttributesBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyProfileAttributes = requestBodyJSONObject.getJSONObject("profileAttributes");
     requestBodyProfileAttributes.put(deviceAttributeName, deviceAttributeValue);
@@ -368,8 +364,7 @@ public class DeviceAPI {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
 
-    File file = new File(postGeofenceExitBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postGeofenceExitBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("deviceId", deviceId );
 
@@ -421,8 +416,7 @@ public class DeviceAPI {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
 
-    File file = new File(postStaticIdSetBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postStaticIdSetBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("deviceId", deviceId );
     requestBodyJSONObject.put("staticId", HelperMethods.generateSHA256Hash(deviceId));
@@ -469,8 +463,7 @@ public class DeviceAPI {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
 
-    File file = new File(postDeviceRegistrationBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postDeviceRegistrationBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("deviceId", deviceId );
     requestBodyJSONObject.put("deviceRegKey", deviceRegKey);

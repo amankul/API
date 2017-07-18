@@ -8,11 +8,10 @@ import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -191,8 +190,7 @@ public class Attributes {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
 
-    File file = new File(postAttributeRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postAttributeRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     attributeName = "testingtypes" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", attributeName );
@@ -259,8 +257,7 @@ public class Attributes {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
 
-    File file = new File(postAttributeRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postAttributeRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("name", "" );
     requestBodyJSONObject.remove("allowedValues");
@@ -318,8 +315,7 @@ public class Attributes {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
 
-    File file = new File(postAttributeRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postAttributeRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String name = "testingtypes" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", name );
@@ -374,8 +370,7 @@ public class Attributes {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
 
-    File file = new File(postAttributeRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postAttributeRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("name", attributeName );
     requestBodyJSONObject.remove("allowedValues");
@@ -441,8 +436,7 @@ public class Attributes {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
 
-    File file = new File(postAttributeRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postAttributeRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("name", attributeName );
     requestBodyJSONObject.remove("allowedValues");
@@ -498,8 +492,7 @@ public class Attributes {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT + attributeName;
 
-    File file = new File(postAttributeRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postAttributeRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("name", attributeName );
     requestBodyJSONObject.remove("allowedValues");

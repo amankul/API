@@ -38,12 +38,13 @@ public class User {
   @BeforeSuite
   @Parameters("env")
   public void setEnv(String env){
-    if(env.equalsIgnoreCase("PROD")){
+    if ("PROD".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_ENT_POINT_PROD;
-    }else if(env.equalsIgnoreCase("STAGE")){
+    } else if ("STAGE".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_END_POINT_STAGE;
-    }else{
-      log.info("Environment is not set properly. Please check your testng xml file");
+    } else {
+      log.error("Environment is not set properly. Please check your testng xml file");
+      Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
   }
 
@@ -389,8 +390,7 @@ public class User {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT;
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "qa";
@@ -445,8 +445,8 @@ public class User {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT;
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "";
@@ -502,8 +502,8 @@ public class User {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT;
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "qa"+ HelperMethods.getDateAsString();
@@ -558,8 +558,7 @@ public class User {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT;
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "firstName";
@@ -601,8 +600,7 @@ public class User {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT;
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "firstName";
@@ -648,8 +646,7 @@ public class User {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT;
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "firstName";
@@ -692,8 +689,8 @@ public class User {
 
     //Request Details
     String requestURL = SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT;
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "firstName";
@@ -745,8 +742,7 @@ public class User {
             + "/"
             + capturedNewUserID;
 
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = "qa";
@@ -803,8 +799,7 @@ public class User {
             + "/"
             + capturedNewUserID;
 
-    File file = new File(userPostRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPostRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     String firstName = null;
@@ -858,8 +853,7 @@ public class User {
             + "/"
             + capturedNewUserID
             + "/change-password";
-    File file = new File(userPutChangePasswordFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPutChangePasswordFilePath);
 
 
     //Printing Request Details
@@ -901,8 +895,7 @@ public class User {
             + capturedNewUserID
             + "/change-password";
 
-    File file = new File(userPutChangePasswordFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPutChangePasswordFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("new_password", "aaaa");
 
@@ -937,8 +930,7 @@ public class User {
     String requestURL =
         SERVICE_END_POINT + CoreAPI_Constants.USERS_END_POINT + "/reset-password";
 
-    File file = new File(userPutResetPasswordFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPutResetPasswordFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("email", newUserEmailId);
 
@@ -977,7 +969,7 @@ public class User {
     String requestURL =
         SERVICE_END_POINT + CoreAPI_Constants.RESET_USER_END_POINT;
     File file = new File(userPutResetPasswordFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(userPutResetPasswordFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("email", "nouserlikethis@gmail.com");
 

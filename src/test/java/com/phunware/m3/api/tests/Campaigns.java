@@ -3,29 +3,17 @@ package com.phunware.m3.api.tests;
 import com.phunware.me_api.constants.MeAPI_Constants;
 import com.phunware.utility.AuthHeader;
 import com.phunware.utility.FileUtils;
-import org.apache.log4j.Logger;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
-
-
-import com.phunware.me_api.constants.MeAPI_Constants;
-import com.phunware.utility.AuthHeader;
-import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -350,8 +338,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String campaignName  = "CampaignName" + HelperMethods.getDateAsString();
     String startDate = HelperMethods.addDaystoCurrentDate(365);
@@ -438,8 +425,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -496,8 +482,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -554,8 +539,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -611,8 +595,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -671,8 +654,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -732,8 +714,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -792,8 +773,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -851,8 +831,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -910,8 +889,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String startDate = HelperMethods.addDaystoCurrentDate(365);
     String endDate = HelperMethods.addDaystoCurrentDate(369);
@@ -969,8 +947,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + capturedCampaignId ;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String campaignName  = "CampaignName" + HelperMethods.getDateAsString() + "Updated";
     String startDate = HelperMethods.addDaystoCurrentDate(366);
@@ -1059,8 +1036,7 @@ public class Campaigns {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + capturedCampaignId;
 
-    File file = new File(postCampaignRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String campaignName  = "CampaignName" + HelperMethods.getDateAsString() + "Updated";
     String startDate = HelperMethods.addDaystoCurrentDate(366);

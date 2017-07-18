@@ -807,8 +807,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();
@@ -876,8 +875,7 @@ public class Beacons {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT;
 
-    File file = new File(postUuidAliasRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postUuidAliasRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     log.info("REQUEST-BODY -2:" + requestBodyJSONObject.toString());
     log.info("UUID" + uuid);
@@ -935,8 +933,7 @@ public class Beacons {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT;
 
-    File file = new File(postUuidAliasRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postUuidAliasRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("uuid", HelperMethods.getUUIDAsString());
 
@@ -988,8 +985,7 @@ public class Beacons {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT_1 + uuid;
 
-    File file = new File(postUuidAliasRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postUuidAliasRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String uuidAlias = "qa" + HelperMethods.getDateAsString() + "Updated";
     requestBodyJSONObject.put("uuidAlias", uuidAlias);
@@ -1041,8 +1037,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT + capturedNewBeaaconId;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();
@@ -1109,8 +1104,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();
@@ -1168,8 +1162,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();
@@ -1227,8 +1220,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();
@@ -1287,8 +1279,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();
@@ -1341,8 +1332,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();
@@ -1401,8 +1391,7 @@ public class Beacons {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
 
-    File file = new File(postBeaconRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postBeaconRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.remove("tags");
     JSONArray tags = new JSONArray();

@@ -351,8 +351,7 @@ public class Location {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-    File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);
@@ -418,8 +417,7 @@ public class Location {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-    File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);
@@ -471,8 +469,7 @@ public class Location {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-    File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString() + "no time zone" + HelperMethods.generateRandomNumber(100);
     requestBodyJSONObject.put("locationName", locationName);
@@ -524,8 +521,7 @@ public class Location {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-    File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", "");
@@ -576,7 +572,7 @@ public class Location {
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);
@@ -627,8 +623,7 @@ public class Location {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-    File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);
@@ -679,8 +674,7 @@ public class Location {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-    File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);
@@ -732,8 +726,7 @@ public class Location {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-    File file = new File(postLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);
@@ -784,8 +777,7 @@ public class Location {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + capturedLocationId;
 
-    File file = new File(putLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(putLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     JSONArray requestBodyTags = requestBodyJSONObject.getJSONArray("tags");
@@ -851,8 +843,7 @@ public class Location {
     //Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + 0;
 
-    File file = new File(putLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(putLocationRequestBodyPath);
     //  log.info("REQUEST BODY"  + requestBody);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
@@ -908,8 +899,7 @@ public class Location {
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + capturedLocationId;
 
 
-    File file = new File(putLocationRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(putLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);

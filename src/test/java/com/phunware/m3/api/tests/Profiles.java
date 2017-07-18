@@ -191,8 +191,7 @@ public class Profiles {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
 
-    File file = new File(postProfileRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postProfileRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String profileName = "apitesting" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", profileName);
@@ -268,8 +267,7 @@ public class Profiles {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
 
-    File file = new File(postProfileRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postProfileRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String profileName = "apitesting" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", profileName);
@@ -339,8 +337,7 @@ public class Profiles {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
 
-    File file = new File(postProfileRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postProfileRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String profileName = "apitesting" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", profileName);
@@ -412,8 +409,7 @@ public class Profiles {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
 
-    File file = new File(postProfileRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postProfileRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String profileName = "apitesting" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", profileName);
@@ -465,8 +461,7 @@ public class Profiles {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
 
-    File file = new File(postProfileRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postProfileRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String profileName = "apitesting" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", profileName);
@@ -535,8 +530,7 @@ public class Profiles {
     String requestURL =
         serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + newProfileId;
 
-    File file = new File(postProfileRequestBodyPath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(postProfileRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String profileName = "apitesting" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("name", profileName);

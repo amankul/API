@@ -30,12 +30,13 @@ public class Organization {
   @BeforeSuite
   @Parameters("env")
   public void setEnv(String env){
-    if(env.equalsIgnoreCase("PROD")){
+    if ("PROD".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_ENT_POINT_PROD;
-    }else if(env.equalsIgnoreCase("STAGE")){
+    } else if ("STAGE".equalsIgnoreCase(env)) {
       SERVICE_END_POINT = CoreAPI_Constants.SERVICE_END_POINT_STAGE;
-    }else{
-      log.info("Environment is not set properly. Please check your testng xml file");
+    } else {
+      log.error("Environment is not set properly. Please check your testng xml file");
+      Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
   }
 
@@ -330,8 +331,7 @@ public class Organization {
     String requestURL =
         SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
 
-    File file = new File(organizationRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(organizationRequestBodyFilePath);
     String newOrgName = "QAAPIAutomation"+ HelperMethods.getDateAsString();
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -375,8 +375,7 @@ public class Organization {
   String requestURL =
       SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATIONS_COLLECTION_END_POINT;
 
-  File file = new File(organizationRequestBodyFilePath);
-  String requestBody = fileUtils.getJsonText(file);
+  String requestBody = fileUtils.getJsonTextFromFile(organizationRequestBodyFilePath);
   JSONObject requestBodyJSONObject = new JSONObject(requestBody);
   JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
   requestBodyData.put("name", "");
@@ -414,8 +413,8 @@ public class Organization {
             + CoreAPI_Constants.ORGANIZATION_END_POINT
             + capturedNewORGANIZATION_ID;
     String newOrgName = "QAAPIAutomation"+ HelperMethods.getDateAsString() + "Updated";
-    File file = new File(organizationPutRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+
+    String requestBody = fileUtils.getJsonTextFromFile(organizationPutRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     requestBodyData.put("name", newOrgName);
@@ -459,8 +458,7 @@ public class Organization {
             + CoreAPI_Constants.ORGANIZATION_END_POINT
             + capturedNewORGANIZATION_ID;
 
-    File file = new File(organizationPutRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(organizationPutRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     requestBodyData.put("name", "");
@@ -501,8 +499,7 @@ public class Organization {
 
 
     String newOrgName = "QAAPIAutomation"+ HelperMethods.getDateAsString() + "Updated";
-    File file = new File(organizationPutRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(organizationPutRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     requestBodyData.put("name", newOrgName);
@@ -546,8 +543,7 @@ public class Organization {
         SERVICE_END_POINT + CoreAPI_Constants.ORGANIZATION_END_POINT + "!@a3";
 
     String newOrgName = "QAAPIAutomation"+ HelperMethods.getDateAsString() + "Updated";
-    File file = new File(organizationPutRequestBodyFilePath);
-    String requestBody = fileUtils.getJsonText(file);
+    String requestBody = fileUtils.getJsonTextFromFile(organizationPutRequestBodyFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     requestBodyData.put("name", newOrgName);
