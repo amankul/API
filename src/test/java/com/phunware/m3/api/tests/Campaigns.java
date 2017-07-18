@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -326,7 +325,7 @@ public class Campaigns {
     log.info("RESPONSE:" + response.asString());
 
     //JSON response Pay load validations
-   response.then().body("status", isOneOf("SCHEDULED" , "ACTIVE", "COMPLETED"));
+    response.then().body("status", isOneOf("SCHEDULED" , "ACTIVE", "COMPLETED"));
   }
 
 
@@ -1078,7 +1077,7 @@ public class Campaigns {
             .extract()
             .response();
 
-      log.info(response.statusCode());
+    log.info(response.statusCode());
 
 
     //printing response

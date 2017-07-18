@@ -6,17 +6,13 @@ import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;

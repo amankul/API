@@ -13,7 +13,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
@@ -31,7 +30,7 @@ public class Attributes {
   private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
-  
+
 
   @BeforeClass
   @Parameters({"env"})

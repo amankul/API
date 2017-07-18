@@ -1,9 +1,8 @@
 package com.phunware.m3.api.tests;
 
 import com.phunware.me_api.constants.MeAPI_Constants;
-import com.phunware.utility.FileUtils;
 import com.phunware.utility.AuthHeader;
-
+import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
@@ -11,14 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.InterruptedIOException;
-import java.util.UUID;
-
-import java.io.File;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
