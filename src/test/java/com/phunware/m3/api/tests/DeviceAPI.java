@@ -36,9 +36,9 @@ public class DeviceAPI {
   @Parameters({"env"})
   public void preTestSteps(String env) {
     if ("PROD".equalsIgnoreCase(env)) {
-      serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
+      serviceEndPoint = MeAPI_Constants.DEVICE_API_SERVICE_END_POINT_STAGE;
     } else if ("STAGE".equalsIgnoreCase(env)) {
-      serviceEndPoint = MeAPI_Constants.SERVICE_END_POINT_STAGE;
+      serviceEndPoint = MeAPI_Constants.DEVICE_API_SERVICE_END_POINT_STAGE;
     } else {
       log.error("Environment is not set properly. Please check your testng xml file");
       Assert.fail("Environment is not set properly. Please check your testng xml file");
