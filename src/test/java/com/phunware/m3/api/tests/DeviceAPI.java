@@ -36,7 +36,8 @@ public class DeviceAPI {
   @Parameters({"env"})
   public void preTestSteps(String env) {
     if ("PROD".equalsIgnoreCase(env)) {
-      serviceEndPoint = MeAPI_Constants.DEVICE_API_SERVICE_END_POINT_STAGE;
+      serviceEndPoint = null;
+      Assert.fail("Environment is PROD. Device API tests should not be run in PROD");
     } else if ("STAGE".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.DEVICE_API_SERVICE_END_POINT_STAGE;
     } else {
