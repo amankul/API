@@ -1,0 +1,51 @@
+{
+  "venueGuid": "fceb0175-d585-45b4-a984-4d79aec9b9ef",
+  "buildingId": 5881,
+  "name": "Automation three",
+  "originalMapUrl": "http://image.com/level1.pdf",
+  "level": 1,
+  "isOutdoor": false,
+  "width": 100,
+  "height": 200,
+  "offsetX": 0,
+  "offsetY": 0,
+  "locationMapHierarchy": "somecampus>somebuilding>somefloor",
+  "maxZoomLevel": 3,
+  "referencePoints":
+  {
+    "rotation": 214,
+    "portal":
+    {
+      "topRight":
+      {
+        "latitude": 33.77403309960294,
+        "longitude": -84.32867120304763
+      },
+      "bottomLeft":
+      {
+        "latitude": 33.7740738782866,
+        "longitude": -84.32673443277963
+      }
+    },
+    "topLeft":
+    {
+      "latitude": 33.773309,
+      "longitude": -84.327331
+    },
+    "topRight":
+    {
+      "latitude": 33.774033,
+      "longitude": -84.328671
+    },
+    "bottomLeft":
+    {
+      "latitude": 33.774073,
+      "longitude": -84.326734
+    },
+    "bottomRight":
+    {
+      "latitude": 33.774797,
+      "longitude": -84.328074
+    }
+  }
+}
