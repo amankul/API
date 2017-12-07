@@ -68,3 +68,14 @@ task runMapJwtSTAGE(type: Test) {
 
     }
 }
+
+task runMapSPSTAGE(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/Map-SP-STAGE.xml'
+
+    }
+}
+
