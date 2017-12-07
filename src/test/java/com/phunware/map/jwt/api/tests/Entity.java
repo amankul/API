@@ -25,8 +25,6 @@ public class Entity {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;

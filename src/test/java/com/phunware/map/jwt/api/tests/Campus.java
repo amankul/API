@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 
 public class Campus {
-    //public String dynamicValue;;
+
     private static String capturedCampusId;
     private static Integer resultcount;
     private static String serviceEndPoint = null;
@@ -31,8 +31,6 @@ public class Campus {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -52,7 +50,6 @@ public class Campus {
     public void verify_Get_Live_Campuses_By_Venue(String jwt) {
         //Request Details
         String queryParameters = "DraftStatus=" + "Live";
-
 
         //Printing Request Details
         log.info("REQUEST-URL:GET-" + campusURL);
@@ -78,6 +75,7 @@ public class Campus {
         response.then().body("resultCount", is(greaterThan(0)));
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt"})
@@ -110,6 +108,7 @@ public class Campus {
         response.then().body("resultCount", is(greaterThan(0)));
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt", "CreateCampusRequestBodyPath"})
@@ -180,7 +179,6 @@ public class Campus {
 
         //Request Details
         String campusURL1 = campusURL + "/" + capturedCampusId;
-
         String requestBody = fileUtils.getJsonTextFromFile(UpdateCampusRequestBodyPath);
         JSONObject requestBodyJSONObject = new JSONObject(requestBody);
         String name = "PhunwareAustin" + HelperMethods.getDateAsString();
@@ -232,7 +230,6 @@ public class Campus {
         //printing response
         log.info("RESPONSE:" + response.asString());
         Assert.assertEquals(response.asString(), "");
-        
 
     }
 

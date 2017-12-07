@@ -14,7 +14,6 @@ import static io.restassured.RestAssured.given;
 
 public class PoiType {
 
-    //public String dynamicValue;
     private static String serviceEndPoint = null;
     FileUtils fileUtils = new FileUtils();
     private static Logger log = Logger.getLogger(PoiType.class);
@@ -24,8 +23,6 @@ public class PoiType {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -58,7 +55,6 @@ public class PoiType {
 
         //printing response
         log.info("RESPONSE:" + response.asString());
-        
 
     }
 
@@ -87,7 +83,6 @@ public class PoiType {
 
         //printing response
         log.info("RESPONSE:" + response.asString());
-        
 
     }
 

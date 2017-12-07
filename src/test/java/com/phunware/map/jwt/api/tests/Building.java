@@ -31,8 +31,6 @@ public class Building {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -73,7 +71,6 @@ public class Building {
 
         //printing response
         log.info("RESPONSE:" + response.asString());
-        log.info("RESPONSE CODE:" + response.then().statusCode(200));
 
         resultcount = response.then().extract().path("resultCount");
         response.then().body("totalCount", is(greaterThan(0)));

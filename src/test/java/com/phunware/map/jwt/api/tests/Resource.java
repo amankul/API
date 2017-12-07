@@ -32,7 +32,6 @@ public class Resource {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -70,7 +69,6 @@ public class Resource {
 
         //printing response
         log.info("RESPONSE:" + response.asString());
-        log.info("RESPONSE CODE:" + response.then().statusCode(200));
 
     }
 
@@ -202,7 +200,6 @@ public class Resource {
 
         //Request Details
         String resourceURL1 = resourceURL + "/" + capturedResourceId;
-
 
         //Printing Request Details
         log.info("REQUEST-URL:GET-" + resourceURL1);

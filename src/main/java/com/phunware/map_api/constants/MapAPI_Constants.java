@@ -15,7 +15,6 @@ public class MapAPI_Constants {
     public static final String POINT_END_POINT = "/v2.0/points";
     public static final String POITYPE_END_POINT = "/v2.0/poi-types";
     public static final String ROUTE_END_POINT = "/v2.0/routes";
-    public static final String ROUTE_END_POINT_1 = "/v2.0/routes/getFromLocation";
     public static final String ROUTE_END_POINT_2 = "/v2.0/routes/reset";
     public static final String SEGMENT_END_POINT = "/v2.0/segments/";
     public static final String ENTITY_END_POINT = "/v2.0/entities";

@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.is;
 
 public class Point {
 
-    //public String dynamicValue;
     private static String capturedPointId;
     private static Integer resultcount;
     private static String serviceEndPoint = null;
@@ -33,8 +32,6 @@ public class Point {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -77,6 +74,7 @@ public class Point {
         resultcount = response.then().extract().path("resultCount");
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt"})
@@ -109,6 +107,7 @@ public class Point {
         resultcount = response.then().extract().path("resultCount");
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt", "CreatePointRequestBodyPath"})

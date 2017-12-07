@@ -32,8 +32,6 @@ public class Venue {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -119,7 +117,6 @@ public class Venue {
         JSONObject requestBodyJSONObject = new JSONObject(requestBody);
         String name = "Sidvita_Test_4" + HelperMethods.getDateAsString();
         requestBodyJSONObject.put("name", name);
-
 
         //Printing Request Details
         log.info("REQUEST-URL:GET-" + venueURL);

@@ -31,8 +31,6 @@ public class Floor {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -77,6 +75,7 @@ public class Floor {
         response.then().body(("any { it.key == 'offset'}"), is(true));
         resultcount = response.then().extract().path("resultCount");
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt"})
@@ -109,6 +108,7 @@ public class Floor {
         response.then().body(("any { it.key == 'offset'}"), is(true));
         resultcount = response.then().extract().path("resultCount");
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt", "CreateFloorRequestBodyPath"})

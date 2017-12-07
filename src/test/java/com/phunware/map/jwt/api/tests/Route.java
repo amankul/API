@@ -19,7 +19,6 @@ import static org.hamcrest.Matchers.is;
 
 public class Route {
 
-    //public String dynamicValue;
     private static String capturedRouteId;
     private static String capturedRouteId2;
     private static String capturedRouteLat;
@@ -33,7 +32,6 @@ public class Route {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -135,7 +133,6 @@ public class Route {
 
         //printing response
         log.info("RESPONSE:" + response.asString());
-        
 
     }
 
@@ -168,7 +165,6 @@ public class Route {
         capturedRouteId2 = response.then().extract().path("data.id").toString();
         Assert.assertNotNull(capturedRouteId2);
         log.info(capturedRouteId2);
-        
 
     }
 
@@ -232,7 +228,7 @@ public class Route {
     }
 
 
-    /*@Parameters({"jwt"})
+    @Parameters({"jwt"})
     @Test(priority = 3)
     public void verify_Delete_Route_By_Id( String jwt) throws IOException {
         //Request Details
@@ -255,7 +251,7 @@ public class Route {
         //printing response
         log.info("RESPONSE:" + response.asString());
         
-    }*/
+    }
 
 
 }

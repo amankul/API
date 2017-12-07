@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.is;
 
 public class Segment {
 
-    //public String dynamicValue;
     private static String capturedSegmentId;
     private static Integer resultcount;
     private static String serviceEndPoint = null;
@@ -32,8 +31,6 @@ public class Segment {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/IdeaProjects/qa-mass-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -78,6 +75,7 @@ public class Segment {
         response.then().body("resultCount", is(greaterThan(0)));
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt", "CreateSegmentRequestBodyPath"})
@@ -170,6 +168,7 @@ public class Segment {
         //printing response
         log.info("RESPONSE:" + response.asString());
         Assert.assertEquals(response.asString(), "");
+
     }
 
     @Parameters({"jwt"})
