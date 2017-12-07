@@ -31,8 +31,6 @@ public class Floor {
     @BeforeClass
     @Parameters("env")
     public void preTestSteps(String env) {
-        PropertyConfigurator.configure("/Users/sidvitahegde/Documents/new_mapping/qa-maas-api-automation/src/main/resources/log4j.properties");
-
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
