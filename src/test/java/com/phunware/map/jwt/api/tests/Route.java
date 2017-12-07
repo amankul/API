@@ -76,6 +76,7 @@ public class Route {
         log.info(capturedRouteId);
         log.info(capturedRouteLat);
         log.info(capturedRouteLon);
+
     }
 
     @Parameters({"jwt"})

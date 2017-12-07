@@ -68,6 +68,7 @@ public class Entity {
         response.then().body("resultCount", is(greaterThan(0)));
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(greaterThan(0)));
+
     }
 
     @Parameters({"jwt"})

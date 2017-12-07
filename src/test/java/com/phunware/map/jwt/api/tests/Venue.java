@@ -75,6 +75,7 @@ public class Venue {
         response.then().body("resultCount", is(greaterThan(0)));
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt"})
@@ -107,6 +108,7 @@ public class Venue {
         response.then().body("resultCount", is(greaterThan(0)));
         response.then().body(("any { it.key == 'offset'}"), is(true));
         response.then().body("items.size", is(resultcount));
+
     }
 
     @Parameters({"jwt", "CreateVenueRequestBodyPath"})
