@@ -59,3 +59,12 @@ task runMePROD(type: Test) {
     }
 }
 
+task runMapJwtSTAGE(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/Map-JWT-STAGE.xml'
+
+    }
+}
