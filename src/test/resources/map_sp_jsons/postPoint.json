@@ -1,0 +1,21 @@
+{
+  "name": "Test",
+  "poiType": 53,
+  "category": null,
+  "description": "",
+  "isActive": true,
+  "imageUrl": null,
+  "customIconImageUrl": "",
+  "x": 0,
+  "y": 0,
+  "level": 2,
+  "zoomLevel": -1,
+  "maxZoomLevel": -1,
+  "floorId": 15242,
+  "buildingId": 5542,
+  "annotation": null,
+  "location": {
+    "latitude": 30.359966,
+    "longitude": -97.742524
+  }
+}
