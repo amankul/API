@@ -1,0 +1,14 @@
+{
+  "name": "Sidvita_Test_5",
+  "appId": null,
+  "clientIds": "632",
+  "orgIds": "139",
+  "isActive": false,
+  "mseUdi": null,
+  "callbackUrl": null,
+  "createdAt": "2017-09-08T16:00:40Z",
+  "updatedAt": "2017-09-08T16:00:40Z",
+  "supportsGeographicCoordinates": true,
+  "externalGuid": "e60d0360-e7ef-4256-8e75-7833497fc9e9",
+  "draftStatus": "DRAFT"
+}
