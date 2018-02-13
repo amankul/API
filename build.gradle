@@ -26,7 +26,6 @@ task runCoreSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        ignoreFailures = true
         suites '/src/test/resources/Core-STAGE.xml'
     }
 }
@@ -35,7 +34,6 @@ task runCorePROD(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        ignoreFailures = true
         suites '/src/test/resources/Core-PROD.xml'
     }
 }
@@ -45,7 +43,6 @@ task runMeSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        ignoreFailures = true
         suites '/src/test/resources/Me-STAGE.xml'
     }
 }
@@ -54,7 +51,6 @@ task runMePROD(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        ignoreFailures = true
         suites '/src/test/resources/Me-PROD.xml'
     }
 }
@@ -63,7 +59,6 @@ task runMapJwtSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        ignoreFailures = true
         suites '/src/test/resources/Map-JWT-STAGE.xml'
 
     }
@@ -73,7 +68,6 @@ task runMapSPSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        ignoreFailures = true
         suites '/src/test/resources/Map-SP-STAGE.xml'
 
     }
