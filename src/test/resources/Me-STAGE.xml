@@ -37,165 +37,163 @@
     <parameter name="postStaticIdSetBodyPath" value="src/test/resources/me_jsons/postStaticId.json"/>
 
 
-
     <!-- LOCATION TESTS -->
 
- <test name="Get Location">
-          <classes>
-              <class name="com.phunware.m3.api.tests.Location">
-                  <methods>
-                      <include name="verify_Get_Location"/>
-                  </methods>
-              </class>
-          </classes>
-      </test>
+    <test name="Get Location">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Location"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-         <test name="Get Location - Invalid Location Id">
-             <classes>
-                 <class name="com.phunware.m3.api.tests.Location">
-                     <methods>
-                         <include name="verify_Get_Invalid_Location"/>
-                     </methods>
-                 </class>
-             </classes>
-         </test>
+    <test name="Get Location - Invalid Location Id">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Invalid_Location"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-         <test name="Retrieve Collection of Locations By Org">
-             <classes>
-                 <class name="com.phunware.m3.api.tests.Location">
-                     <methods>
-                         <include name="verify_Get_Locations_By_Org"/>
-                     </methods>
-                 </class>
-             </classes>
-         </test>
+    <test name="Retrieve Collection of Locations By Org">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Locations_By_Org"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-         <test name="Retrieve Collection of Locations By Invalid Org">
-             <classes>
-                 <class name="com.phunware.m3.api.tests.Location">
-                     <methods>
-                         <include name="verify_Get_Locations_By_InvalidOrg"/>
-                     </methods>
-                 </class>
-             </classes>
-         </test>
-
-
-         <test name="Retrieve Collection of Tags By Org">
-             <classes>
-                 <class name="com.phunware.m3.api.tests.Location">
-                     <methods>
-                         <include name="verify_Get_Tags_By_Org"/>
-                     </methods>
-                 </class>
-             </classes>
-         </test>
-
-         <test name="6->Retrieve Collection of locations By Tags">
-             <classes>
-                 <class name="com.phunware.m3.api.tests.Location">
-                     <methods>
-                         <include name="verify_Get_Locations_By_Tags"/>
-                     </methods>
-                 </class>
-             </classes>
-         </test>
-
-     <test name="7->Create Location">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
-
-     <test name="8->Create Location Invalid State in JSON Payload">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location_InvalidState"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
-
-     <test name="9->Create Location with Empty TimeZone in JSON Payload">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location_NoTimezone"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
+    <test name="Retrieve Collection of Locations By Invalid Org">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Locations_By_InvalidOrg"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 
-     <test name="10->Create Location with No Location Name in JSON Payload">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location_NoLocationName"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
+    <test name="Retrieve Collection of Tags By Org">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Tags_By_Org"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="6->Retrieve Collection of locations By Tags">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Get_Locations_By_Tags"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="7->Create Location">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="8->Create Location Invalid State in JSON Payload">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location_InvalidState"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="9->Create Location with Empty TimeZone in JSON Payload">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location_NoTimezone"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 
-
-     <test name="11->Create Location with No Country in JSON Payload">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location_NoCountry"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
-
-     <test name="12->Create Location with No Zip in JSON Payload">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location_NoZip"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
+    <test name="10->Create Location with No Location Name in JSON Payload">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location_NoLocationName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 
-     <test name="13->Create Location with No City in JSON Payload">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location_NoCity"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
+    <test name="11->Create Location with No Country in JSON Payload">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location_NoCountry"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="12->Create Location with No Zip in JSON Payload">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location_NoZip"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 
-     <test name="14->Create Location with No Address1 in JSON Payload">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Create_Location_NoAddress1"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
+    <test name="13->Create Location with No City in JSON Payload">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location_NoCity"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 
-     <test name="15->Update Location">
-         <classes>
-             <class name="com.phunware.m3.api.tests.Location">
-                 <methods>
-                     <include name="verify_Update_Location"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
+    <test name="14->Create Location with No Address1 in JSON Payload">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Create_Location_NoAddress1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="15->Update Location">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location">
+                <methods>
+                    <include name="verify_Update_Location"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
     <test name="16->Update Location Invalid Id">
         <classes>
@@ -228,7 +226,8 @@
         </classes>
     </test>
 
-    <!-- BEACON TESTS -->
+
+    <!-- BEACON TESTS-->
 
     <test name="1->Verify Get Beacons">
         <classes>
@@ -516,7 +515,7 @@
         </classes>
     </test>
 
-    <!-- ATTRIBUTE TESTS -->
+    <!--ATTRIBUTE TESTS-->
 
     <test name="1->Get Attribute Metadata">
         <classes>
@@ -558,7 +557,6 @@
             </class>
         </classes>
     </test>
-
 
 
     <test name="5->Verify Create Attribute_WithOut_Name">
@@ -614,9 +612,9 @@
         </classes>
     </test>
 
-     <!-- PROFILE -->
+    <!-- PROFILE  -->
 
-   <test name="1->Verify_Get_Profile">
+    <test name="1->Verify_Get_Profile">
         <classes>
             <class name="com.phunware.m3.api.tests.Profiles">
                 <methods>
@@ -676,11 +674,11 @@
         </classes>
     </test>
 
-    <test name="6 ->Create Profile With out Rules">
+    <test name="6 ->Create Profile With out Attributes">
         <classes>
             <class name="com.phunware.m3.api.tests.Profiles">
                 <methods>
-                    <include name="Create_Profile_WithOut_Rules"/>
+                    <include name="Create_Profile_WithOut_Attributes"/>
                 </methods>
             </class>
         </classes>
@@ -707,7 +705,7 @@
         </classes>
     </test>
 
-   <!-- CAMPAIGNS -->
+    <!--CAMPAIGNS-->
 
     <test name="1->Verify Retrieve Campaign">
         <classes>
@@ -740,7 +738,7 @@
     </test>
 
 
-   <test name="4->Verify Collection of Campaigns By Status ">
+    <test name="4->Verify Collection of Campaigns By Status ">
         <classes>
             <class name="com.phunware.m3.api.tests.Campaigns">
                 <methods>
@@ -833,7 +831,6 @@
     </test>
 
 
-
     <test name="13->Verify Create Campaign with No repeatFrequency">
         <classes>
             <class name="com.phunware.m3.api.tests.Campaigns">
@@ -897,9 +894,7 @@
     </test>
 
 
-
-
-    <!-- DEVICE API - TESTS-->
+    <!-- DEVICE API - TESTS -->
 
 
     <test name="1->Verify Device Registration">
