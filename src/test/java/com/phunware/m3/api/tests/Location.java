@@ -19,23 +19,16 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/**
- * Created by VinayKarumuri on 5/11/17.
- */
+/** Created by VinayKarumuri on 5/11/17. */
 public class Location {
 
-
-  //public String dynamicValue;
+  // public String dynamicValue;
   private String xAuth = null;
   private static String capturedLocationId;
   private static String serviceEndPoint = null;
   AuthHeader auth = new AuthHeader();
   FileUtils fileUtils = new FileUtils();
   private static Logger log = Logger.getLogger(Location.class);
-
-
-
-
 
   @BeforeClass
   @Parameters("env")
@@ -51,44 +44,55 @@ public class Location {
     }
   }
 
-  @Parameters({"locationId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
+  @Parameters({
+    "locationId",
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId"
+  })
   @Test(priority = 1)
-  public void verify_Get_Location(String locationId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Location(
+      String locationId,
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId) {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + locationId;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + locationId;
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
+      xAuth =
+          auth.generateAuthHeader(
+              "GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .get(requestURL)
             .then()
             .statusCode(200)
             .extract()
             .response();
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON response Pay load validations
+    // JSON response Pay load validations
     response.then().body("id", is(Integer.parseInt(locationId)));
     response.then().body("orgId", is(Integer.parseInt(orgId)));
     response.then().body(("any { it.key == 'locationName'}"), is(true));
@@ -104,81 +108,102 @@ public class Location {
     response.then().body(("any { it.key == 'address1'}"), is(true));
     response.then().body(("any { it.key == 'address2'}"), is(true));
     response.then().body(("any { it.key == 'timeZone'}"), is(true));
-
   }
 
-  @Parameters({"locationId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
+  @Parameters({
+    "locationId",
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId"
+  })
   @Test(priority = 2)
-  public void verify_Get_Invalid_Location(String locationId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Invalid_Location(
+      String locationId,
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId) {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + "000";
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + "000";
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
+      xAuth =
+          auth.generateAuthHeader(
+              "GET", clientId_android_access_key, clientId_android_signature_key, requestURL, "");
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .get(requestURL)
             .then()
             .statusCode(404)
             .extract()
             .response();
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
-
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId"
+  })
   @Test(priority = 3)
-  public void verify_Get_Locations_By_Org(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Locations_By_Org(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId) {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
 
-    //Query Parameters
+    // Query Parameters
     String queryParameters = "orgId=" + orgId;
     log.info("QUERY-PARAMETERS " + queryParameters);
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
+      xAuth =
+          auth.generateAuthHeader(
+              "GET",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              queryParameters);
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .queryParam("orgId", orgId)
             .get(requestURL)
@@ -187,50 +212,62 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON response validations
+    // JSON response validations
     response.then().body("totalCount", is(greaterThan(0)));
     response.then().body("resultCount", is(greaterThan(0)));
     response.then().body(("any { it.key == 'offset'}"), is(true));
     response.then().body("items.size", is(greaterThan(0)));
     response.then().body("items.any { it.containsKey('locationName') }", is(true));
-
   }
 
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId"
+  })
   @Test(priority = 4)
-  public void verify_Get_Locations_By_InvalidOrg(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Locations_By_InvalidOrg(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId) {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
 
-    //Query Parameters
+    // Query Parameters
     String queryParameters = "orgId=12c";
     log.info(queryParameters);
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
+      xAuth =
+          auth.generateAuthHeader(
+              "GET",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              queryParameters);
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .queryParam("orgId", "12c")
             .get(requestURL)
@@ -239,44 +276,55 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
-
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId"
+  })
   @Test(priority = 5)
-  public void verify_Get_Tags_By_Org(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId) {
+  public void verify_Get_Tags_By_Org(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId) {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.TAG_END_POINT;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.TAG_END_POINT;
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
 
-    //Query Parameters
+    // Query Parameters
     String queryParameters = "orgId=" + orgId;
     log.info(queryParameters);
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
+      xAuth =
+          auth.generateAuthHeader(
+              "GET",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              queryParameters);
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .queryParam("orgId", orgId)
             .get(requestURL)
@@ -285,47 +333,61 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON response validations
+    // JSON response validations
 
     response.then().body("size()", is(greaterThan(0)));
-
   }
 
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "tags"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "tags"
+  })
   @Test(priority = 6)
-  public void verify_Get_Locations_By_Tags(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String tags) {
+  public void verify_Get_Locations_By_Tags(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String tags) {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:GET-" + requestURL);
 
-    //Query Parameters
+    // Query Parameters
     String queryParameters = "tags=" + tags;
     log.info(queryParameters);
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
+      xAuth =
+          auth.generateAuthHeader(
+              "GET",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              queryParameters);
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .queryParam("tags", tags)
             .get(requestURL)
@@ -334,47 +396,62 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
     response.then().body("items.tags", everyItem(hasItem("qa")));
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 7)
-  public void verify_Create_Location(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", locationName);
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -383,10 +460,10 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON Response Validations
+    // JSON Response Validations
     response.then().body(("any { it.key == 'id'}"), is(true));
     response.then().body("orgId", is(Integer.parseInt(orgId)));
     response.then().body(("any { it.key == 'locationName'}"), is(true));
@@ -406,14 +483,24 @@ public class Location {
     capturedLocationId = response.then().extract().path("id").toString();
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 8)
-  public void verify_Create_Location_InvalidState(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_InvalidState(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -421,27 +508,32 @@ public class Location {
     requestBodyJSONObject.put("locationName", locationName);
     requestBodyJSONObject.put("state", "OO");
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -450,50 +542,68 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-
-    //JSON response validations
+    // JSON response validations
     Assert.assertEquals(response.asString(), "Address not found");
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 9)
-  public void verify_Create_Location_NoTimezone(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoTimezone(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
-    String locationName = "PhunwareAustin" + HelperMethods.getDateAsString() + "no time zone" + HelperMethods.generateRandomNumber(100);
+    String locationName =
+        "PhunwareAustin"
+            + HelperMethods.getDateAsString()
+            + "no time zone"
+            + HelperMethods.generateRandomNumber(100);
     requestBodyJSONObject.put("locationName", locationName);
     requestBodyJSONObject.put("timeZone", "");
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -502,48 +612,67 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-
-    //JSON response validations
-    Assert.assertEquals(response.asString(), "requirement failed: Value required for [timeZone]; please provide [locationName: " + locationName + "]");
+    // JSON response validations
+    Assert.assertEquals(
+        response.asString(),
+        "requirement failed: Value required for [timeZone]; please provide [locationName: "
+            + locationName
+            + "]");
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 10)
-  public void verify_Create_Location_NoLocationName(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoLocationName(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
     requestBodyJSONObject.put("locationName", "");
 
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -552,22 +681,33 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-
-    //JSON response validations
-    Assert.assertEquals(response.asString(), "requirement failed: Value required for [locationName]; please provide");
+    // JSON response validations
+    Assert.assertEquals(
+        response.asString(),
+        "requirement failed: Value required for [locationName]; please provide");
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 11)
-  public void verify_Create_Location_NoCountry(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoCountry(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     File file = new File(postLocationRequestBodyPath);
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
@@ -576,27 +716,32 @@ public class Location {
     requestBodyJSONObject.put("locationName", locationName);
     requestBodyJSONObject.put("country", "");
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -605,21 +750,35 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-
-    //JSON response validations
-    Assert.assertEquals(response.asString(), "requirement failed: Value required for [country]; please provide [locationName: " + locationName + "]");
+    // JSON response validations
+    Assert.assertEquals(
+        response.asString(),
+        "requirement failed: Value required for [country]; please provide [locationName: "
+            + locationName
+            + "]");
   }
 
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 12)
-  public void verify_Create_Location_NoZip(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoZip(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -627,27 +786,32 @@ public class Location {
     requestBodyJSONObject.put("locationName", locationName);
     requestBodyJSONObject.put("zip", "");
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -656,21 +820,35 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-
-    //JSON response validations
-    Assert.assertEquals(response.asString(), "requirement failed: Value required for [zip]; please provide [locationName: " + locationName + "]");
+    // JSON response validations
+    Assert.assertEquals(
+        response.asString(),
+        "requirement failed: Value required for [zip]; please provide [locationName: "
+            + locationName
+            + "]");
   }
 
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 13)
-  public void verify_Create_Location_NoCity(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoCity(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -678,27 +856,32 @@ public class Location {
     requestBodyJSONObject.put("locationName", locationName);
     requestBodyJSONObject.put("city", "");
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -707,22 +890,35 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-
-    //JSON response validations
-    Assert.assertEquals(response.asString(), "requirement failed: Value required for [city]; please provide [locationName: " + locationName + "]");
+    // JSON response validations
+    Assert.assertEquals(
+        response.asString(),
+        "requirement failed: Value required for [city]; please provide [locationName: "
+            + locationName
+            + "]");
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "postLocationRequestBodyPath"
+  })
   @Test(priority = 14)
-  public void verify_Create_Location_NoAddress1(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postLocationRequestBodyPath) throws IOException {
+  public void verify_Create_Location_NoAddress1(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String postLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
-    String requestURL =
-        serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
 
     String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -730,27 +926,32 @@ public class Location {
     requestBodyJSONObject.put("locationName", locationName);
     requestBodyJSONObject.put("address1", "");
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("POST", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .post(requestURL)
@@ -759,20 +960,32 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-
-    //JSON response validations
-    Assert.assertEquals(response.asString(), "requirement failed: missing address1 [locationName: " + locationName + "]");
+    // JSON response validations
+    Assert.assertEquals(
+        response.asString(),
+        "requirement failed: missing address1 [locationName: " + locationName + "]");
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "putLocationRequestBodyPath"
+  })
   @Test(priority = 15)
-  public void verify_Update_Location(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
+  public void verify_Update_Location(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String putLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
+    // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + capturedLocationId;
 
     String requestBody = fileUtils.getJsonTextFromFile(putLocationRequestBodyPath);
@@ -783,27 +996,32 @@ public class Location {
     requestBodyJSONObject.put("id", Integer.parseInt(capturedLocationId));
     requestBodyJSONObject.put("locationName", locationName);
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "PUT",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .put(requestURL)
@@ -812,10 +1030,10 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON response validations
+    // JSON response validations
     response.then().body("id", is(Integer.parseInt(capturedLocationId)));
     response.then().body("orgId", is(Integer.parseInt(orgId)));
     response.then().body(("any { it.key == 'locationName'}"), is(true));
@@ -833,12 +1051,23 @@ public class Location {
     response.then().body(("any { it.key == 'timeZone'}"), is(true));
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "putLocationRequestBodyPath"
+  })
   @Test(priority = 16)
-  public void verify_Update_Location_InvalidId(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
+  public void verify_Update_Location_InvalidId(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String putLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
+    // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + 0;
 
     String requestBody = fileUtils.getJsonTextFromFile(putLocationRequestBodyPath);
@@ -851,27 +1080,32 @@ public class Location {
     requestBodyTags.put(HelperMethods.getDateAsString());
     requestBodyJSONObject.put("id", 0);
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "PUT",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .put(requestURL)
@@ -880,22 +1114,33 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON response validations
-    Assert.assertEquals(response.asString(), "The requested resource could not be found but may be available again in the future.");
-
+    // JSON response validations
+    Assert.assertEquals(
+        response.asString(),
+        "The requested resource could not be found but may be available again in the future.");
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "putLocationRequestBodyPath"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "putLocationRequestBodyPath"
+  })
   @Test(priority = 17)
-  public void verify_Disable_Location(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String putLocationRequestBodyPath) throws IOException {
+  public void verify_Disable_Location(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String putLocationRequestBodyPath)
+      throws IOException {
 
-    //Request Details
+    // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT + capturedLocationId;
-
 
     String requestBody = fileUtils.getJsonTextFromFile(putLocationRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -904,76 +1149,95 @@ public class Location {
     requestBodyJSONObject.put("enabled", false);
     requestBodyJSONObject.put("id", Integer.parseInt(capturedLocationId));
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("PUT", clientId_android_access_key, clientId_android_signature_key, requestURL, requestBodyJSONObject.toString());
+      xAuth =
+          auth.generateAuthHeader(
+              "PUT",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .body(requestBodyJSONObject.toString())
             .put(requestURL)
             .then()
-//            .statusCode(200)
+            //            .statusCode(200)
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON response validations
+    // JSON response validations
     response.then().body("enabled", is(false));
-
-
   }
 
-
-  @Parameters({"clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "tags"})
+  @Parameters({
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "tags"
+  })
   @Test(priority = 18)
-  public void verify_Download_Locations(String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String tags) throws IOException {
+  public void verify_Download_Locations(
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String tags)
+      throws IOException {
 
-    //Request Details
+    // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.LOCATIONS_DOWNLOAD_END_POINT;
 
-    //Query Parameters
+    // Query Parameters
     String queryParameters = "tags=" + tags;
 
-
-    //Printing Request Details
+    // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
     log.info("QUERY-PARAMETERS" + queryParameters);
 
-
-    //Auth Generation
+    // Auth Generation
     try {
-      xAuth = auth.generateAuthHeader("GET", clientId_android_access_key, clientId_android_signature_key, requestURL, queryParameters);
+      xAuth =
+          auth.generateAuthHeader(
+              "GET",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              queryParameters);
     } catch (Exception e) {
-      log.error( "Error generating Auth header" + e);
+      log.error("Error generating Auth header" + e);
     }
 
-    //Printing xAuth
+    // Printing xAuth
     log.info("X-AUTH " + xAuth);
 
-    //Extracting response after status code validation
+    // Extracting response after status code validation
     Response response =
         given()
             .header("Content-Type", "application/json")
-            .header("x-org-id", orgId).header("x-client-id", clientId)
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
             .queryParam("tags", tags)
             .get(requestURL)
@@ -982,14 +1246,11 @@ public class Location {
             .extract()
             .response();
 
-    //printing response
+    // printing response
     log.info("RESPONSE:" + response.asString());
 
-    //JSON response validations
+    // JSON response validations
     response.then().body(("any { it.key == 'filePathInS3'}"), is(true));
     response.then().body("errorMessage", isEmptyString());
-
   }
-
-
 }

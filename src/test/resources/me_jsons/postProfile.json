@@ -1,17 +1,24 @@
 {
   "name": "HondaCarNonPlatinum",
-  "rules": [
+  "description": "HondaCarNonPlatinum",
+  "enabled": true,
+  "groups": [
     {
-      "attributeMetadataName": "car",
-      "operator": "Equal",
-      "value": "honda"
-    },
-    {
-      "attributeMetadataName": "member",
-      "operator": "NotEqual",
-      "value": "platinum"
+      "sequenceNumber": 1,
+      "groupOperator": "AND",
+      "attributes": [
+        {
+          "attributeMetadataName": "car",
+          "operator": "Equal",
+          "value": "honda"
+        },
+        {
+          "attributeMetadataName": "member",
+          "operator": "NotEqual",
+          "value": "platinum"
+        }
+      ]
     }
   ],
-  "enabled": true,
-  "description": "HondaCarNonPlatinum"
+  "profileOperator": "AND"
 }
