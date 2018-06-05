@@ -993,5 +993,14 @@
         </classes>
     </test>
 
+    <test name="10->Verify Device registration key update">
+        <classes>
+            <class name="com.phunware.m3.api.tests.DeviceAPI">
+                <methods>
+                    <include name="Verify_Device_Registration_Key_Update"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 </suite>

@@ -655,4 +655,70 @@ public class DeviceAPI {
     response.then().body(("geoFences"), hasKey("plus"));
     response.then().body(("geoFences"), hasKey("minus"));
   }
+
+  //Verify_Device_Registration_Key_Update
+  @Parameters({
+          "clientId_android_access_key",
+          "clientId_android_signature_key",
+          "orgId",
+          "clientId",
+          "postDeviceRegistrationBodyPath"
+  })
+  @Test
+  public void Verify_Device_Registration_Key_Update(
+          String clientId_android_access_key,
+          String clientId_android_signature_key,
+          String orgId,
+          String clientId,
+          String postDeviceRegistrationBodyPath)
+          throws IOException {
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
+
+    String requestBody = fileUtils.getJsonTextFromFile(postDeviceRegistrationBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    requestBodyJSONObject.put("deviceId", deviceId);
+    requestBodyJSONObject.put("deviceRegKey", deviceRegKey);
+    requestBodyJSONObject.remove("apiVersion");
+    requestBodyJSONObject.put("eventType", "DEVICE_REGKEY_UPDATE");
+
+    // Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+    // Auth Generation
+    try {
+      xAuth =
+              auth.generateAuthHeader(
+                      "POST",
+                      clientId_android_access_key,
+                      clientId_android_signature_key,
+                      requestURL,
+                      requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      log.error("Error generating Auth header" + e);
+    }
+
+    // Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .header("Content-Type", "application/json")
+                    .header("x-org-id", orgId)
+                    .header("x-client-id", clientId)
+                    .header("X-Auth", xAuth)
+                    .body(requestBodyJSONObject.toString())
+                    .post(requestURL)
+                    .then()
+                    .statusCode(200)
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+
+  }
 }
