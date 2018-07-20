@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="CME V2 API TEST SUITE ">
+    <parameter name="env" value="STAGE"/>
+    <parameter name="jwt"
+               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTI5MiwiZW1haWwiOiJ2a2FydW11cmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IlZpbmF5IiwibGFzdF9uYW1lIjoiS2FydW11cmkiLCJzZXNzaW9uX2lkIjoiOWEwM2YxOTk4MTUyYjI4YjRmOTYyYjA2ZWE0MWE0NDQ4YWU4MGFjZSIsIm9yZ19pZCI6MTA5LCJvcmdfbmFtZSI6IlFBIFRlc3QiLCJvcmdzIjpbXSwiaWF0IjoxNTMyMDI0NjIxLCJleHAiOjE1MzIyMDAyNDZ9.O0szdsDcEGCx8IRq6tyjvJZ6x9OVp60k5cF2BEV3nbo"/>
+
+    <parameter name="postVscAppSchema" value="src/test/resources/cme_v2_jsons/postSchemaVscApp.json"/>
+    <parameter name="postVscAppVersionSchema" value="src/test/resources/cme_v2_jsons/postSchemaVscAppVersion.json"/>
+
+    <parameter name="orgId" value="109"/>
+
+    <test name="CMEV2">
+        <classes>
+            <class name="com.phunware.cme.v2.api.tests.Schema"/>
+        </classes>
+    </test>
+
+
+</suite>

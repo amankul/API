@@ -1,0 +1,43 @@
+{
+  "data": {
+    "attributes": [],
+    "description": "Application Configuration",
+    "fields": [
+      {
+        "label": "Application Name",
+        "field": "vscAppName",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Default Venue",
+        "field": "vscDefaultAppVenue",
+        "description": "The Default Venue GUID that's going to use the App",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Default Campus",
+        "field": "vscDefaultCampus",
+        "description": "The Default Campus corresponding to the Venue",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Default Building",
+        "field": "vscDefaultBuilding",
+        "description": "The Default Building the app is going to load corresponding to the campus given",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      }
+    ],
+    "name": "VSC - App",
+    "orgId": 109,
+    "tags": [],
+    "id": "55abc3973544839a26000aa9"
+  }
+}
