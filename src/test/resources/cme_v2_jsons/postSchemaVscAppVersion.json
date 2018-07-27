@@ -36,7 +36,7 @@
         "type": "boolean"
       }
     ],
-    "name": "VS - App Version",
+    "name": "VSC - App Version",
     "orgId": 109,
     "tags": []
   }

@@ -1,0 +1,36 @@
+{
+  "data": {
+    "attributes": [],
+    "description": "The representation for a building",
+    "fields": [
+      {
+        "label": "Building Name",
+        "field": "vscBuildingName",
+        "description": "The MaaS Building Name",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Building Id",
+        "field": "vscBuildingId",
+        "description": "The MaaS Building Id",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Active",
+        "field": "vscBuildingActive",
+        "description": "Whether this building is active",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      }
+    ],
+    "name": "VSC - Building",
+    "orgId": 109,
+    "tags": [],
+    "id": "55abc3973544839a26000aac"
+  }
+}

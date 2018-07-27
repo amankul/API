@@ -1,0 +1,39 @@
+{
+  "data": {
+    "attributes": [],
+    "description": "A Beacon",
+    "fields": [
+      {
+        "label": "Beacon name",
+        "field": "vscBeaconName",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Proximity Identifier",
+        "field": "vscBeaconUUID",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Major Version",
+        "field": "vscBeaconMajor",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Minor Version",
+        "field": "vscBeaconMinor",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "integer"
+      }
+    ],
+    "name": "VSC - Beacon",
+    "orgId": 109,
+    "tags": []
+  }
+}

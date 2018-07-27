@@ -1,0 +1,68 @@
+{
+  "data": {
+    "attributes": [],
+    "description": "Advertisement Settings for a VSC App",
+    "fields": [
+      {
+        "label": "Configuration Name",
+        "field": "vscAdsConfigurationName",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Banner Zone Id",
+        "field": "vscAdsBannerZone",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Banner Frequency",
+        "field": "vscAdsBannerFrequency",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "number"
+      },
+      {
+        "label": "Interstitial Zone",
+        "field": "vscAdsInterstitialZone",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Interstitial Frequency",
+        "field": "vscAdsInterstitialFrequency",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "number"
+      },
+      {
+        "label": "Native Banner Zone Id",
+        "field": "vscAdsNativeBannerZone",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Embedded Banner Row",
+        "field": "vscAdsDirectoryRow",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Use Native Ads",
+        "field": "vscAdsNativeEnable",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      }
+    ],
+    "name": "VSC - Advertisement Settings",
+    "orgId": 109,
+    "tags": [],
+    "id": "55abc3963544839a26000aa8"
+  }
+}

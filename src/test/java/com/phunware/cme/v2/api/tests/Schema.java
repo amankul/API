@@ -52,6 +52,7 @@ public class Schema {
 
   @BeforeClass
   public void preTestSteps() {
+
     log = Logger.getLogger(Schema.class);
   }
 
@@ -111,7 +112,7 @@ public class Schema {
     requestBodyData.put("orgId", ORGID);
 
 
-    //Printing Request Details
+    //logging Request Details
     log.info("REQUEST-URL:POST-" + postSchemaRequestURL);
     log.info("REQUEST-URL:BODY-" + requestBodyJSONObject.toString());
 
@@ -135,6 +136,46 @@ public class Schema {
     log.info("VSCAppVersionSchemaId = " + VSCAppVersionSchemaId);
   }
 
+
+
+  @Parameters("postVscPlatformSchema")
+  @Test(priority = 3)
+  public void verify_Post_VscPlatform(String postVscPlatformSchema ) throws IOException {
+
+
+    //Request Details
+    log.info(postVscPlatformSchema);
+    String datetime = HelperMethods.getDateAsString();
+
+      JSONObject requestBodyData=HelperMethods.generateRequestBody(postVscPlatformSchema);
+
+    requestBodyData.put("name", "VSC-Platform"+datetime);
+    requestBodyData.put("orgId", ORGID);
+
+
+    //logging Request Details
+    log.info("REQUEST-URL:POST-" + postSchemaRequestURL);
+    log.info("REQUEST-URL:BODY-" + requestBodyData);
+
+    //Extracting response after status code validation
+    Response response =
+            given()
+                    .header("Content-Type", "application/json")
+                    .header("Authorization", JWT)
+                    .body(requestBodyData.toString())
+                    .post(postSchemaRequestURL)
+                    .then()
+                    .statusCode(200)
+                    .extract()
+                    .response();
+
+    //printing response
+    log.info("RESPONSE:" + response.asString());
+
+    //JSON response Pay load validations
+    String VSCPlatformSchemaId = response.getBody().jsonPath().get("id");
+    log.info("VSCPlatformSchemaId = " +  VSCPlatformSchemaId);
+  }
 
 }
 
