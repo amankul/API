@@ -61,7 +61,7 @@
 
 
       @Test(dataProvider = "usesParameter")
-      public void verify_Post_VscPlatform(String path) throws IOException {
+      public void verify_Post_Schema(String path) throws IOException {
 
         //Request Details
           String datetime = HelperMethods.getDateAsString();
