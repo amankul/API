@@ -5,9 +5,21 @@
     <parameter name="jwt"
                value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTIwOCwiZW1haWwiOiJ2a3VtYXJAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IlZpbm9kIiwibGFzdF9uYW1lIjoiS3VtYXIiLCJzZXNzaW9uX2lkIjoiZmIwM2ExODFhNTI3YTQzMmQyMWQyMGE3YWU3NzNkZjgyYjBmZmM1MyIsIm9yZ19pZCI6MTA5LCJvcmdfbmFtZSI6IlFBIFRlc3QiLCJvcmdzIjpbXSwiaWF0IjoxNTMyNzA3NjYyLCJleHAiOjE1MzI3OTQwODJ9.h74ThJ_agA7IsEnYH1tTBgY0wMnbjmwgF9S6WighGVQ"/>
 
-     <parameter name="postVscAppSchema" value="src/test/resources/cme_v2_jsons/postSchemaVscApp.json"/>
-     <parameter name="postVscAppVersionSchema" value="src/test/resources/cme_v2_jsons/postSchemaVscAppVersion.json"/>
-     <parameter name="postVscPlatformSchema" value="src/test/resources/cme_v2_jsons/postSchemaVscPlatform.json"/>
+     <parameter name="postSchemaVscAdvertisingSetting" value="src/test/resources/cme_v2_jsons/postSchemaVscAdvertisingSetting.json"/>
+     <parameter name="postSchemaVscApp" value="src/test/resources/cme_v2_jsons/postSchemaVscApp.json"/>
+     <parameter name="postSchemaVscAppVersion" value="src/test/resources/cme_v2_jsons/postSchemaVscAppVersion.json"/>
+    <parameter name="postSchemaVscBeacon" value="src/test/resources/cme_v2_jsons/postSchemaVscBeacon.json"/>
+    <parameter name="postSchemaVscBuilding" value="src/test/resources/cme_v2_jsons/postSchemaVscBuilding.json"/>
+    <parameter name="postSchemaVscDatabaseVersion" value="src/test/resources/cme_v2_jsons/postSchemaVscDatabaseVersion.json"/>
+    <parameter name="postSchemaVscFloor" value="src/test/resources/cme_v2_jsons/postSchemaVscFloor.json"/>
+    <parameter name="postSchemaVscGeoSettings" value="src/test/resources/cme_v2_jsons/postSchemaVscGeoSettings.json"/>
+    <parameter name="postSchemaVscMapSettings" value="src/test/resources/cme_v2_jsons/postSchemaVscMapSettings.json"/>
+    <parameter name="postSchemaVscPlatform" value="src/test/resources/cme_v2_jsons/postSchemaVscPlatform.json"/>
+    <parameter name="postSchemaVscPreCachingConfiguration" value="src/test/resources/cme_v2_jsons/postSchemaVscPreCachingConfiguration.json"/>
+    <parameter name="postSchemaVscProximityAlert" value="src/test/resources/cme_v2_jsons/postSchemaVscProximityAlert.json"/>
+    <parameter name="postSchemaVscSettings" value="src/test/resources/cme_v2_jsons/postSchemaVscSettings.json"/>
+    <parameter name="postSchemaVscVenue" value="src/test/resources/cme_v2_jsons/postSchemaVscVenue.json"/>
+    <parameter name="postSchemaVscVenueCampuses" value="src/test/resources/cme_v2_jsons/postSchemaVscVenueCampuses.json"/>
 
 
 

@@ -9,11 +9,11 @@ public class CmeV2_API_Constants {
 
 
   //Schema
-  public static String SCHEMAS_END_POINT = "/v2.0/schemas";
+  public static String SCHEMAS_END_POINT = "v2.0/schemas";
 
 
   //Container
-  public static String CONTAINERS_END_POINT = "/v2.0/containers";
+  public static String CONTAINERS_END_POINT = "v2.0/containers";
 
 
 

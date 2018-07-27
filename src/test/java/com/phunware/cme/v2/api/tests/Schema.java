@@ -16,6 +16,7 @@
     import java.util.HashMap;
 
     import static io.restassured.RestAssured.given;
+    import static java.lang.System.out;
     import static org.hamcrest.Matchers.is;
 
     /**
@@ -60,15 +61,18 @@
 
 
       @Test(dataProvider = "usesParameter")
-      public void verify_Post_VscPlatform(String param) throws IOException {
+      public void verify_Post_VscPlatform(String path) throws IOException {
 
         //Request Details
           String datetime = HelperMethods.getDateAsString();
-          String requestBody = fileUtils.getJsonTextFromFile(param);
+          String requestBody = fileUtils.getJsonTextFromFile(path);
           JSONObject requestBodyJSONObject = new JSONObject(requestBody);
           JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
 
-          requestBodyData.put("name", "VSC-AppVersion"+datetime);
+          int index = path.indexOf("Vsc");
+          String name =  path.substring(index).replaceAll(".json","");
+
+          requestBodyData.put("name", name+datetime);
           requestBodyData.put("orgId", ORGID);
 
 
@@ -77,9 +81,6 @@
           log.info("REQUEST-URL:BODY-" + requestBodyJSONObject.toString());
 
 
-        //logging Request Details
-        log.info("REQUEST-URL:POST-" + postSchemaRequestURL);
-        log.info("REQUEST-URL:BODY-" + requestBodyData);
 
         //Extracting response after status code validation
         Response response =
@@ -97,8 +98,8 @@
         log.info("RESPONSE:" + response.asString());
 
         //Get schema ID and put it into Hashmap
-          hashMap.put(param,response.getBody().jsonPath().get("id"));
-        log.info("Schema: " + param + " Schema_ID: " + response.getBody().jsonPath().get("id"));
+          hashMap.put(name,response.getBody().jsonPath().get("id"));
+        log.info("Schema: " + name + " Schema_ID: " + response.getBody().jsonPath().get("id"));
       }
 
 
@@ -106,10 +107,26 @@
 
         @DataProvider(name = "usesParameter")
         public Object[][] provideTestParam(ITestContext context) {
-             String postVscAppSchema = context.getCurrentXmlTest().getParameter("postVscAppSchema");
-             String postVscAppVersionSchema= context.getCurrentXmlTest().getParameter("postVscAppVersionSchema");
-             String postVscPlatformSchema = context.getCurrentXmlTest().getParameter("postVscPlatformSchema");
-            return new Object[][] {{postVscAppSchema },{postVscAppVersionSchema},{postVscPlatformSchema}};
+//             String postVscAppSchema = context.getCurrentXmlTest().getParameter("postVscAppSchema");
+//             String postVscAppVersionSchema= context.getCurrentXmlTest().getParameter("postVscAppVersionSchema");
+//             String postVscPlatformSchema = context.getCurrentXmlTest().getParameter("postVscPlatformSchema");
+//            return new Object[][] {{postVscAppSchema },{postVscAppVersionSchema},{postVscPlatformSchema}};
+          return new Object[][] {{context.getCurrentXmlTest().getParameter("postSchemaVscAdvertisingSetting") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscApp") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscAppVersion") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscBeacon") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscBuilding") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscDatabaseVersion") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscFloor") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscGeoSettings") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscMapSettings") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscPlatform") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscPreCachingConfiguration") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscProximityAlert") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscSettings") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscVenue") },
+                  {context.getCurrentXmlTest().getParameter("postSchemaVscVenueCampuses") }};
+
         }
 
 
