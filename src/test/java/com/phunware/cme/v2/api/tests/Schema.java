@@ -35,7 +35,7 @@
       public static String VSCAppVersionSchemaId=null;
 
         FileUtils fileUtils = new FileUtils();
-        HashMap<String,Integer> hashMap= new HashMap<String,Integer>();
+        HashMap<String,String> hashMap= new HashMap<String,String>();
 
 
       @BeforeSuite
@@ -98,6 +98,7 @@
         log.info("RESPONSE:" + response.asString());
 
         //Get schema ID and put it into Hashmap
+
           hashMap.put(name,response.getBody().jsonPath().get("id"));
         log.info("Schema: " + name + " Schema_ID: " + response.getBody().jsonPath().get("id"));
       }
