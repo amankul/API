@@ -15,6 +15,9 @@ public class CmeV2_API_Constants {
   //Container
   public static String CONTAINERS_END_POINT = "v2.0/containers";
 
+  //Structure
+  public static String STRUCTURE_END_POINT = "/v2.0/structure";
+
 
 
 

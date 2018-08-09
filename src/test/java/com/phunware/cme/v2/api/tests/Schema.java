@@ -28,7 +28,7 @@ public class Schema {
   public static String VSCAppVersionSchemaId = null;
   static Logger log;
   FileUtils fileUtils = new FileUtils();
-  HashMap<String, String> hashMap = new HashMap<String, String>();
+  public static HashMap<String, String> hashMap = new HashMap<String, String>();
 
   @BeforeSuite
   @Parameters({"env", "jwt", "orgId"})
