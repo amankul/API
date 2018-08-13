@@ -12,7 +12,7 @@ import org.testng.annotations.*;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static com.phunware.cme.v2.api.tests.Schema.hashMap;
+import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
 import static io.restassured.RestAssured.given;
 
 
@@ -41,12 +41,26 @@ public class Structure {
 
   public static final String structureTypeOBJECT = "object";
   public static final String structureTypeARRAY = "array";
+  public static String applicationsStructureName = "Applications";
   public static String applicationStructureName = "Application";
-  public static String appVersionStructureName = "AppVersion";
 
-  public static int applicationstructureId=0;
+  public static String platformsStructureName = "Platforms";
+    public static String platformStructureName = "Platform";
+    public static String appVersionStructureName = "AppVersion";
+    public static String cachingSettingsStructureName = "CachingSettings";
+    public static String advertisementSettingsStructureName = "AdvertisementSettings";
+    public static String settingsStructureName = "Settings";
+    public static String platformvenuesStructureName = "Platform_Venues";
+    public static String platformvenueStructureName = "Platform_Venue";
+    public static String platformdatabasesStructureName = "Platform_Databases";
+    public static String platformdatabaseStructureName = "Platform_Database";
+    public static String venuedatabasesStructureName = "Venue_Databases";
+    public static String venuedatabaseStructureName = "Venue_Database";
 
-  public HashMap<String, Integer> structure = new HashMap<String, Integer>();
+
+    public static int applicationstructureId=0;
+
+  public static HashMap<String,Integer> structureMap = new HashMap<String,Integer>();
 
 
   @BeforeClass
@@ -65,7 +79,7 @@ public class Structure {
     postSchemaRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.SCHEMAS_END_POINT;
     postStructureRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.STRUCTURE_END_POINT;
     postContainerRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTAINERS_END_POINT;
-    log.info("Hah " + postContainerRequestURL);
+    log.info("Container " + postContainerRequestURL);
     dateTime = HelperMethods.getDateAsString();
     structureRequestBody = fileUtils.getJsonTextFromFile(postStructureFilePath);
   }
@@ -74,14 +88,14 @@ public class Structure {
 
   @Parameters("postContainerFilePath")
   @Test(priority = 1)
-  public void verify_Post_Container(String postContainerFilePath) throws IOException {
+  public void  verify_Post_Container(String postContainerFilePath) throws IOException {
 
     //Request Details
     //log.info(postContainerFilePath);
     String requestBody = fileUtils.getJsonTextFromFile(postContainerFilePath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
-    requestBodyData.put("name", "DignityAutomation"+dateTime);
+    requestBodyData.put("name", "Dignity Health "+dateTime);
 
     //Printing Request Details
     log.info("REQUEST-URL:POST-" + postContainerRequestURL);
@@ -112,7 +126,7 @@ public class Structure {
     - ContainerId
     - name
     - type
-    - field
+    - field (same as name)
     - schemaId
     - parentId
     - Structure Id - corresponding to each to store
@@ -121,8 +135,22 @@ public class Structure {
   @DataProvider(name = "dignityStructure")
   public Object[][] dignityStructureDataSet() {
     return new Object[][]{
-        {containerId,applicationStructureName, structureTypeOBJECT,applicationStructureName, hashMap.get("VscApp"), ""},
-        {containerId,appVersionStructureName, structureTypeOBJECT,appVersionStructureName + dateTime,hashMap.get("VscAppVersion"),applicationStructureName}
+
+            {containerId,applicationsStructureName, structureTypeARRAY,applicationsStructureName, "", ""},
+            {containerId,applicationStructureName, structureTypeOBJECT,applicationStructureName, schemaMap.get("VscApp"), applicationsStructureName},
+            {containerId,platformsStructureName, structureTypeARRAY,platformsStructureName, "", applicationStructureName},
+            {containerId,platformStructureName, structureTypeOBJECT,platformStructureName, schemaMap.get("VscPlatform"), platformsStructureName},
+
+            {containerId,appVersionStructureName, structureTypeOBJECT,appVersionStructureName, schemaMap.get("VscAppVersion"), platformStructureName},
+            {containerId,cachingSettingsStructureName, structureTypeOBJECT,cachingSettingsStructureName, schemaMap.get("VscPreCachingConfiguration"), platformStructureName},
+            {containerId,advertisementSettingsStructureName, structureTypeOBJECT,advertisementSettingsStructureName, schemaMap.get("VscAdvertisingSetting"), platformStructureName},
+            {containerId,settingsStructureName, structureTypeOBJECT,settingsStructureName, schemaMap.get("VscSettings"), platformStructureName},
+            {containerId,platformvenuesStructureName, structureTypeARRAY,platformvenuesStructureName, "", platformStructureName},
+            {containerId,platformvenueStructureName, structureTypeOBJECT,platformvenueStructureName, schemaMap.get("VscVenue"), platformvenuesStructureName},
+            {containerId,platformdatabasesStructureName, structureTypeARRAY,platformdatabasesStructureName, "", platformStructureName},
+            {containerId,platformdatabaseStructureName, structureTypeOBJECT,platformdatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformdatabasesStructureName},
+            {containerId,venuedatabasesStructureName, structureTypeARRAY,venuedatabasesStructureName, "", platformvenueStructureName},
+            {containerId,venuedatabaseStructureName, structureTypeOBJECT,venuedatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venuedatabasesStructureName}
 
     };
   }
@@ -131,10 +159,9 @@ public class Structure {
 
 
   @Test(dataProvider = "dignityStructure", priority = 2)
-  public void verify_Post_Structure(String containerId, String name ,String type,String field ,String schemaId ,String parentId) throws IOException {
+  public void verify_Post_Structure(String containerId, String name ,String type,String field ,String schemaId ,String parent) throws IOException {
 
     //Request Details
-    log.info(structureRequestBody);
     JSONObject requestBodyJSONObject = new JSONObject(structureRequestBody);
     JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
     requestBodyData.put("containerId" , containerId );
@@ -142,13 +169,13 @@ public class Structure {
     requestBodyData.put("type" , type );
     requestBodyData.put("field", field);
     requestBodyData.put("schemaId" , schemaId);
-    log.info("parentId " + structure.get(parentId));
-    requestBodyData.put("parentId", structure.get(parentId));
+    log.info("parentId " + structureMap.get(parent));
+    requestBodyData.put("parentId", structureMap.get(parent));
 
 
     //Printing Request Details
-    log.info("REQUEST-URL:POST-" + postStructureRequestURL);
-    log.info("REQUEST-URL:BODY-" + requestBodyJSONObject.toString());
+    log.info("REQUEST-URL: POST- " + postStructureRequestURL);
+    log.info("REQUEST-URL: BODY- " + requestBodyJSONObject.toString());
 
     //Extracting response after status code validation
     Response response =
@@ -163,13 +190,14 @@ public class Structure {
             .response();
 
     //printing response
-    log.info("RESPONSE:" + response.asString());
+    log.info("RESPONSE: " + response.asString());
 
     //JSON response Pay load validations
     int StructureId  = response.getBody().jsonPath().get("id");
-    log.info("structureId = " + StructureId );
-    structure.put(name,StructureId);
-    log.info("Structure Id " + structure);
+    log.info("NAME: " + name);
+    structureMap.put(name,StructureId);
+    log.info("STRUCTURE MAP: " + structureMap);
+    log.info("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
   }
 

@@ -3,7 +3,7 @@
 <suite name="CME V2 API TEST SUITE ">
     <parameter name="env" value="STAGE"/>
     <parameter name="jwt"
-               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTI5MiwiZW1haWwiOiJ2a2FydW11cmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IlZpbmF5IiwibGFzdF9uYW1lIjoiS2FydW11cmkiLCJzZXNzaW9uX2lkIjoiMTUxZWZkNmY1ZmNlMzRjY2Y0MDg0MGE0MTM0NjNjZDhlZDg3ZmYxYSIsIm9yZ19pZCI6MTA5LCJvcmdfbmFtZSI6IlFBIFRlc3QiLCJvcmdzIjpbXSwiaWF0IjoxNTMzNjc2NTEzLCJleHAiOjE1MzM5Mzc0OTZ9.1KYyhlqmmBIvBIJRvAfytsKUrmAUqQDogBtROxuT1TU"/>
+               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjYyMywiZW1haWwiOiJha3Vsa2FybmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IkFtaXQiLCJsYXN0X25hbWUiOiJLdWxrYXJuaSIsInNlc3Npb25faWQiOiJhY2M3ZmUyNGJjYmEzYjU1MmQ5ZGJmOGJjZDljNzRmNWZlZjliMDUyIiwib3JnX2lkIjoxMDksIm9yZ19uYW1lIjoiUUEgVGVzdCIsIm9yZ3MiOltdLCJpYXQiOjE1MzQxNzczODQsImV4cCI6MTUzNDI2Mzc5M30.fP7Rn7dgNz16Nlp6MunCY0fwp-Rawp7aBjiEQJ3p0LY"/>
 
     <!--SCHEMAS-->
     <parameter name="postSchemaVscAdvertisingSetting" value="src/test/resources/cme_v2_jsons/postSchemaVscAdvertisingSetting.json"/>

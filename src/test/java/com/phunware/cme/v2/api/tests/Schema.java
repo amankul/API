@@ -28,7 +28,7 @@ public class Schema {
   public static String VSCAppVersionSchemaId = null;
   static Logger log;
   FileUtils fileUtils = new FileUtils();
-  public static HashMap<String, String> hashMap = new HashMap<String, String>();
+  public static HashMap<String, String> schemaMap = new HashMap<String, String>();
 
   @BeforeSuite
   @Parameters({"env", "jwt", "orgId"})
@@ -86,7 +86,7 @@ public class Schema {
 
     response.then().statusCode(200);
     // Get schema ID and put it into Hashmap
-    hashMap.put(name, response.getBody().jsonPath().get("id"));
+    schemaMap.put(name, response.getBody().jsonPath().get("id"));
   }
 
   @DataProvider(name = "usesParameter")
@@ -113,6 +113,6 @@ public class Schema {
   @AfterClass
   public void tearDown() {
 
-    System.out.println("HashMap: " + hashMap);
+    System.out.println("Schema Map: " + schemaMap);
   }
 }
