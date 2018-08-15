@@ -31,13 +31,8 @@ public class Structure {
   public static String postStructureRequestURL = null;
   public static String postContainerRequestURL = null;
   public static String dateTime = null;
-
-
   public static String structureRequestBody = null;
-
-
   public static String containerId = null;
-
   public static final String structureTypeOBJECT = "object";
   public static final String structureTypeARRAY = "array";
   public static String applicationsStructureName = "Applications";
@@ -54,6 +49,7 @@ public class Structure {
   public static String platformdatabaseStructureName = "Platform_Database";
   public static String venuedatabasesStructureName = "Venue_Databases";
   public static String venuedatabaseStructureName = "Venue_Database";
+  public static int applicationstructureId=0;
 
 
   public static HashMap<String,Integer> structureMap = new HashMap<String,Integer>();
@@ -80,7 +76,7 @@ public class Structure {
   }
 
 
-
+ /** Creating container for Dignity Health **/
   @Parameters("postContainerFilePath")
   @Test(priority = 1)
   public void  verify_Post_Container(String postContainerFilePath) throws IOException {
@@ -116,40 +112,8 @@ public class Structure {
     log.info("ContainerId = " + containerId);
   }
 
-  /*
-    DataProviders has these variables
-    - ContainerId
-    - name
-    - type
-    - field (same as name)
-    - schemaId
-    - parentId
-    - Output is Structure Id - Store in hash map using name
 
-  */
-  @DataProvider(name = "dignityStructure")
-  public Object[][] dignityStructureDataSet() {
-    return new Object[][]{
-
-            {containerId,applicationsStructureName, structureTypeARRAY,applicationsStructureName, "", ""},
-            {containerId,applicationStructureName, structureTypeOBJECT,applicationStructureName, schemaMap.get("VscApp"), applicationsStructureName},
-            {containerId,platformsStructureName, structureTypeARRAY,platformsStructureName, "", applicationStructureName},
-            {containerId,platformStructureName, structureTypeOBJECT,platformStructureName, schemaMap.get("VscPlatform"), platformsStructureName},
-            {containerId,appVersionStructureName, structureTypeOBJECT,appVersionStructureName, schemaMap.get("VscAppVersion"), platformStructureName},
-            {containerId,cachingSettingsStructureName, structureTypeOBJECT,cachingSettingsStructureName, schemaMap.get("VscPreCachingConfiguration"), platformStructureName},
-            {containerId,advertisementSettingsStructureName, structureTypeOBJECT,advertisementSettingsStructureName, schemaMap.get("VscAdvertisingSetting"), platformStructureName},
-            {containerId,settingsStructureName, structureTypeOBJECT,settingsStructureName, schemaMap.get("VscSettings"), platformStructureName},
-            {containerId,platformvenuesStructureName, structureTypeARRAY,platformvenuesStructureName, "", platformStructureName},
-            {containerId,platformvenueStructureName, structureTypeOBJECT,platformvenueStructureName, schemaMap.get("VscVenue"), platformvenuesStructureName},
-            {containerId,platformdatabasesStructureName, structureTypeARRAY,platformdatabasesStructureName, "", platformStructureName},
-            {containerId,platformdatabaseStructureName, structureTypeOBJECT,platformdatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformdatabasesStructureName},
-            {containerId,venuedatabasesStructureName, structureTypeARRAY,venuedatabasesStructureName, "", platformvenueStructureName},
-            {containerId,venuedatabaseStructureName, structureTypeOBJECT,venuedatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venuedatabasesStructureName}
-
-    };
-  }
-
-
+/** Creating Structures to the above container **/
   @Test(dataProvider = "dignityStructure", priority = 2)
   public void verify_Post_Structure(String containerId, String name ,String type,String field ,String schemaId ,String parent) throws IOException {
 
@@ -193,4 +157,28 @@ public class Structure {
     log.info("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
   }
+
+
+  @DataProvider(name = "dignityStructure")
+  public Object[][] dignityStructureDataSet() {
+    return new Object[][]{
+
+            {containerId,applicationsStructureName, structureTypeARRAY,applicationsStructureName, "", ""},
+            {containerId,applicationStructureName, structureTypeOBJECT,applicationStructureName, schemaMap.get("VscApp"), applicationsStructureName},
+            {containerId,platformsStructureName, structureTypeARRAY,platformsStructureName, "", applicationStructureName},
+            {containerId,platformStructureName, structureTypeOBJECT,platformStructureName, schemaMap.get("VscPlatform"), platformsStructureName},
+            {containerId,appVersionStructureName, structureTypeOBJECT,appVersionStructureName, schemaMap.get("VscAppVersion"), platformStructureName},
+            {containerId,cachingSettingsStructureName, structureTypeOBJECT,cachingSettingsStructureName, schemaMap.get("VscPreCachingConfiguration"), platformStructureName},
+            {containerId,advertisementSettingsStructureName, structureTypeOBJECT,advertisementSettingsStructureName, schemaMap.get("VscAdvertisingSetting"), platformStructureName},
+            {containerId,settingsStructureName, structureTypeOBJECT,settingsStructureName, schemaMap.get("VscSettings"), platformStructureName},
+            {containerId,platformvenuesStructureName, structureTypeARRAY,platformvenuesStructureName, "", platformStructureName},
+            {containerId,platformvenueStructureName, structureTypeOBJECT,platformvenueStructureName, schemaMap.get("VscVenue"), platformvenuesStructureName},
+            {containerId,platformdatabasesStructureName, structureTypeARRAY,platformdatabasesStructureName, "", platformStructureName},
+            {containerId,platformdatabaseStructureName, structureTypeOBJECT,platformdatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformdatabasesStructureName},
+            {containerId,venuedatabasesStructureName, structureTypeARRAY,venuedatabasesStructureName, "", platformvenueStructureName},
+            {containerId,venuedatabaseStructureName, structureTypeOBJECT,venuedatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venuedatabasesStructureName}
+
+    };
+  }
+
 }

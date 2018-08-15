@@ -1,0 +1,123 @@
+{
+  "data": {
+    "attributes": [],
+    "description": "This schema can be use to create a list of events for the App Framework Events Module",
+    "fields": [
+      {
+        "label": "Event Title (Required)",
+        "field": "name",
+        "description": "This field is used to name the event, and is the text shown on event lists, at the same time is used as the title in the details view of each event.",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Description (Optional)",
+        "field": "description",
+        "description": "You can use this field to add additional information to an event. This text is generally available in the details view of the event.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textMulti"
+      },
+      {
+        "label": "Additional Details (Optional)",
+        "field": "details",
+        "description": "This field is used to provide additional information for an event.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textMulti"
+      },
+      {
+        "label": "Start Date (Required)",
+        "field": "startDate",
+        "description": "Use this field to communicate the start date of an event. Note that this is only meant for the date, time has a different input.",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "date"
+      },
+      {
+        "label": "Start Time (Optional)",
+        "field": "startTime",
+        "description": "Time when the event is supposed to start.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "time"
+      },
+      {
+        "label": "End Date (Optional)",
+        "field": "endDate",
+        "description": "Use this field to communicate the end date of the event.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "date"
+      },
+      {
+        "label": "End Time (Optional)",
+        "field": "endTime",
+        "description": "Optional field that specifies what is the end time of the event.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "time"
+      },
+      {
+        "label": "Thumbnail Image (Optional)",
+        "field": "thumbnail",
+        "description": "This should be the URL of the image used to shown in the events list.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Detail Image (Optional)",
+        "field": "imageURL",
+        "description": "Use this field to specify the URL of the image to show in the events detail view.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Phone Number (Optional)",
+        "field": "phone",
+        "description": "Use this field to provide a valid phone number for your event detail phone number button, that will be used to enable users to call from their devices.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Website (Optional)",
+        "field": "URL",
+        "description": "Use this field to provide data for your event detail website button, allowing customers to view more information associated to this event",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Ticket Purchase URL (Optional)",
+        "field": "tickets",
+        "description": "Use this field to provide a url for your event detail tickets purchasing button.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Map Building Id (Optional)",
+        "field": "buildingId",
+        "description": "Use this field to associate this event to Map Building Id, in combination with the POI for location and routing purposes. (Optional only if no POI is selected)",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "mappingBuildingId"
+      },
+      {
+        "label": "Map POI (Optional)",
+        "field": "POI",
+        "description": "Use this field in combination with Map Building Id, to identify a map point of interest for location and routing purposes. (Optional only if no Building Id is selected)",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "mappingPoiId"
+      }
+    ],
+    "name": "Events - Events Item",
+    "orgId": 109,
+    "tags": []
+  }
+}

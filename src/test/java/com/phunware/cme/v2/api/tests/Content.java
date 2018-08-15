@@ -31,7 +31,7 @@ public class Content {
   public static String JWT = null;
   public static String postContentRequestURL;
   public static String dateTime = null;
-
+  public Schema schema = new Schema();
 
   @BeforeClass
   @Parameters({"env","jwt","orgId"})
@@ -51,12 +51,9 @@ public class Content {
     dateTime = HelperMethods.getDateAsString();
   }
 
-
-
-
-
+/** Creating Content for Dignity Health **/
   @Test(dataProvider = "usesParameter")
-  public void verify_Post_Schema(String path, Integer structureId, Integer parentId) throws IOException {
+  public void verify_Post_Content(String path, Integer structureId, Integer parentId) throws IOException {
 
     // Request Details
     String datetime = HelperMethods.getDateAsString();
@@ -87,6 +84,7 @@ public class Content {
 
     response.then().statusCode(200);
   }
+
 
   @DataProvider(name = "usesParameter")
   public Object[][] provideTestParam(ITestContext context) {
