@@ -29,7 +29,6 @@ public class Structure {
   public static String SERVICE_END_POINT = null;
   public static String JWT = null;
   public static String postStructureRequestURL = null;
-  public static String postSchemaRequestURL = null;
   public static String postContainerRequestURL = null;
   public static String dateTime = null;
 
@@ -43,22 +42,19 @@ public class Structure {
   public static final String structureTypeARRAY = "array";
   public static String applicationsStructureName = "Applications";
   public static String applicationStructureName = "Application";
-
   public static String platformsStructureName = "Platforms";
-    public static String platformStructureName = "Platform";
-    public static String appVersionStructureName = "AppVersion";
-    public static String cachingSettingsStructureName = "CachingSettings";
-    public static String advertisementSettingsStructureName = "AdvertisementSettings";
-    public static String settingsStructureName = "Settings";
-    public static String platformvenuesStructureName = "Platform_Venues";
-    public static String platformvenueStructureName = "Platform_Venue";
-    public static String platformdatabasesStructureName = "Platform_Databases";
-    public static String platformdatabaseStructureName = "Platform_Database";
-    public static String venuedatabasesStructureName = "Venue_Databases";
-    public static String venuedatabaseStructureName = "Venue_Database";
+  public static String platformStructureName = "Platform";
+  public static String appVersionStructureName = "AppVersion";
+  public static String cachingSettingsStructureName = "CachingSettings";
+  public static String advertisementSettingsStructureName = "AdvertisementSettings";
+  public static String settingsStructureName = "Settings";
+  public static String platformvenuesStructureName = "Platform_Venues";
+  public static String platformvenueStructureName = "Platform_Venue";
+  public static String platformdatabasesStructureName = "Platform_Databases";
+  public static String platformdatabaseStructureName = "Platform_Database";
+  public static String venuedatabasesStructureName = "Venue_Databases";
+  public static String venuedatabaseStructureName = "Venue_Database";
 
-
-    public static int applicationstructureId=0;
 
   public static HashMap<String,Integer> structureMap = new HashMap<String,Integer>();
 
@@ -76,7 +72,6 @@ public class Structure {
       log.error("Environment is not set properly. Please check your testng xml file");
       Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
-    postSchemaRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.SCHEMAS_END_POINT;
     postStructureRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.STRUCTURE_END_POINT;
     postContainerRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTAINERS_END_POINT;
     log.info("Container " + postContainerRequestURL);
@@ -129,7 +124,7 @@ public class Structure {
     - field (same as name)
     - schemaId
     - parentId
-    - Structure Id - corresponding to each to store
+    - Output is Structure Id - Store in hash map using name
 
   */
   @DataProvider(name = "dignityStructure")
@@ -140,7 +135,6 @@ public class Structure {
             {containerId,applicationStructureName, structureTypeOBJECT,applicationStructureName, schemaMap.get("VscApp"), applicationsStructureName},
             {containerId,platformsStructureName, structureTypeARRAY,platformsStructureName, "", applicationStructureName},
             {containerId,platformStructureName, structureTypeOBJECT,platformStructureName, schemaMap.get("VscPlatform"), platformsStructureName},
-
             {containerId,appVersionStructureName, structureTypeOBJECT,appVersionStructureName, schemaMap.get("VscAppVersion"), platformStructureName},
             {containerId,cachingSettingsStructureName, structureTypeOBJECT,cachingSettingsStructureName, schemaMap.get("VscPreCachingConfiguration"), platformStructureName},
             {containerId,advertisementSettingsStructureName, structureTypeOBJECT,advertisementSettingsStructureName, schemaMap.get("VscAdvertisingSetting"), platformStructureName},
@@ -154,8 +148,6 @@ public class Structure {
 
     };
   }
-
-
 
 
   @Test(dataProvider = "dignityStructure", priority = 2)
@@ -195,12 +187,10 @@ public class Structure {
     //JSON response Pay load validations
     int StructureId  = response.getBody().jsonPath().get("id");
     log.info("NAME: " + name);
+    log.info("structureId = " + StructureId );
     structureMap.put(name,StructureId);
     log.info("STRUCTURE MAP: " + structureMap);
     log.info("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
   }
-
-
-
 }
