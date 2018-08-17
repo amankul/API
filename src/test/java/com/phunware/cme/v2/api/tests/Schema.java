@@ -111,7 +111,8 @@ public class Schema {
       {context.getCurrentXmlTest().getParameter("postSchemaVscPreCachingConfiguration")},
       {context.getCurrentXmlTest().getParameter("postSchemaVscProximityAlert")},
       {context.getCurrentXmlTest().getParameter("postSchemaVscSettings")},
-      {context.getCurrentXmlTest().getParameter("postSchemaVscVenue")}
+      {context.getCurrentXmlTest().getParameter("postSchemaVscVenue")},
+      {context.getCurrentXmlTest().getParameter("postSchemaVscCampus")}
     };
   }
 

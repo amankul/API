@@ -49,6 +49,23 @@ public class Structure {
   public static String platformdatabaseStructureName = "Platform_Database";
   public static String venuedatabasesStructureName = "Venue_Databases";
   public static String venuedatabaseStructureName = "Venue_Database";
+
+  public static String venuesStructureName = "Venues";
+  public static String venueStructureName = "Venue";
+  public static String campusesStructureName = "Campuses";
+  public static String campusStructureName = "Campus";
+  public static String buildingsStructureName = "Buildings";
+  public static String buildingStructureName = "Building";
+  public static String floorsStructureName = "Floors";
+  public static String floorStructureName = "Floors";
+  public static String mapSettingsStructureName = "MapSettings";
+  public static String geoSettingsStructureName = "GeoSettings";
+  public static String beaconsStructureName = "Beacons";
+  public static String beaconStructureName = "Beacon";
+  public static String alertsStructureName = "Alerts";
+  public static String alertStructureName = "Alert";
+
+
   public static int applicationstructureId=0;
 
 
@@ -176,7 +193,25 @@ public class Structure {
             {containerId,platformdatabasesStructureName, structureTypeARRAY,platformdatabasesStructureName, "", platformStructureName},
             {containerId,platformdatabaseStructureName, structureTypeOBJECT,platformdatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformdatabasesStructureName},
             {containerId,venuedatabasesStructureName, structureTypeARRAY,venuedatabasesStructureName, "", platformvenueStructureName},
-            {containerId,venuedatabaseStructureName, structureTypeOBJECT,venuedatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venuedatabasesStructureName}
+            {containerId,venuedatabaseStructureName, structureTypeOBJECT,venuedatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venuedatabasesStructureName},
+
+            {containerId,venuesStructureName, structureTypeARRAY,venuesStructureName, "", ""},
+            {containerId,venueStructureName, structureTypeOBJECT,venueStructureName, schemaMap.get("VscVenue"), venuesStructureName},
+            {containerId,campusesStructureName, structureTypeARRAY,campusesStructureName, "", venueStructureName},
+            {containerId,campusStructureName, structureTypeOBJECT,campusStructureName, schemaMap.get("VscCampus"), campusesStructureName},
+            {containerId,buildingsStructureName, structureTypeARRAY,buildingsStructureName, "", campusStructureName},
+            {containerId,buildingStructureName, structureTypeOBJECT,buildingStructureName, schemaMap.get("VscBuilding"), buildingsStructureName},
+            {containerId,floorsStructureName, structureTypeARRAY,floorsStructureName, "", buildingStructureName},
+            {containerId,mapSettingsStructureName, structureTypeOBJECT,mapSettingsStructureName, schemaMap.get("VscMapSettings"), buildingStructureName},
+            {containerId,geoSettingsStructureName, structureTypeOBJECT,geoSettingsStructureName, schemaMap.get("VscGeoSettings"), buildingStructureName},
+            {containerId,floorStructureName, structureTypeOBJECT,floorStructureName, schemaMap.get("VscFloor"), floorsStructureName},
+            {containerId,beaconsStructureName, structureTypeARRAY,beaconsStructureName, "", floorStructureName},
+            {containerId,beaconStructureName, structureTypeOBJECT,beaconStructureName, schemaMap.get("VscBeacon"), beaconsStructureName},
+            {containerId,alertsStructureName, structureTypeARRAY,alertsStructureName, "", beaconStructureName},
+            {containerId,alertStructureName, structureTypeOBJECT,alertStructureName, schemaMap.get("VscProximityAlert"), alertsStructureName}
+
+
+
 
     };
   }
