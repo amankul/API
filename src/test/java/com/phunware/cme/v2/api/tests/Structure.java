@@ -210,9 +210,6 @@ public class Structure {
             {containerId,alertsStructureName, structureTypeARRAY,alertsStructureName, "", beaconStructureName},
             {containerId,alertStructureName, structureTypeOBJECT,alertStructureName, schemaMap.get("VscProximityAlert"), alertsStructureName}
 
-
-
-
     };
   }
 

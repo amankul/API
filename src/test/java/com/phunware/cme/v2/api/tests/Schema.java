@@ -5,7 +5,6 @@ import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
-import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -95,8 +94,6 @@ public class Schema {
     /** Data provider for schema: Dignity Health **/
   @DataProvider(name = "usesParameter")
   public Object[][] provideTestParam(ITestContext context) {
-
-
     return new Object[][] {
       {context.getCurrentXmlTest().getParameter("postSchemaVscAdvertisingSetting")},
       {context.getCurrentXmlTest().getParameter("postSchemaVscApp")},

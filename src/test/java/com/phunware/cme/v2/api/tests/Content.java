@@ -6,16 +6,21 @@ import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.junit.*;
 import org.testng.Assert;
 import org.testng.ITestContext;
+import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
+
 import static com.phunware.cme.v2.api.tests.Structure.structureMap;
 import static com.phunware.cme.v2.api.tests.Structure.containerId;
+import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
 import static io.restassured.RestAssured.given;
 
 
@@ -30,6 +35,9 @@ public class Content {
   public static String SERVICE_END_POINT = null;
   public static String JWT = null;
   public static String postContentRequestURL;
+  public static String deleteContainerRequestURL;
+  public static String deleteSchemaRequestURL;
+
   public static String dateTime = null;
   public Schema schema = new Schema();
 
@@ -47,6 +55,9 @@ public class Content {
       Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
     postContentRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTENT_END_POINT;
+    deleteContainerRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
+    deleteSchemaRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.SCHEMAS_END_POINT + "/";
+
     log.info("Content URL" + postContentRequestURL);
     dateTime = HelperMethods.getDateAsString();
   }
@@ -91,6 +102,51 @@ public class Content {
     return new Object[][] {
         {context.getCurrentXmlTest().getParameter("postApplicationContentFilePath"), structureMap.get("Application"), null},
     };
+  }
+
+
+  @AfterClass
+  public void deleteContainer(){
+    // logging Request Details
+    log.info("-------------------------------------------------------------------------------------");
+    log.info("Deleting the Container - it deletes the content and structure in it");
+    log.info("REQUEST-URL:DELETE-" + deleteContainerRequestURL+containerId);
+
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .header("Content-Type", "application/json")
+            .header("Authorization", JWT)
+            .delete(deleteContainerRequestURL+containerId)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+    log.info("-------------------------------------------------------------------------------------");
+  }
+
+  @AfterSuite
+  public void deleteSchema(){
+    // logging Request Details
+    log.info("Schema Map" +schemaMap);
+    log.info("Deleting the Schema");
+    log.info("REQUEST-URL:DELETE-" + deleteSchemaRequestURL);
+
+    Iterator entries = schemaMap.entrySet().iterator();
+    while(entries.hasNext()){
+      Map.Entry entry = (Map.Entry) entries.next();
+      log.info("Deleting " + deleteSchemaRequestURL + entry.getValue().toString());
+      Response response =
+          given()
+              .header("Content-Type", "application/json")
+              .header("Authorization", JWT)
+              .delete(deleteSchemaRequestURL + entry.getValue().toString())
+              .then()
+              .statusCode(200)
+              .extract()
+              .response();
+      log.info("-------------------------------------------------------------------------------------");
+    }
   }
 
 
