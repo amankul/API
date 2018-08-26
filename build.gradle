@@ -81,3 +81,14 @@ task runMapSPSTAGE(type: Test) {
     }
 }
 
+task runCMEDignityHealthStage(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/Map-SP-STAGE.xml'
+
+    }
+}
+
+
