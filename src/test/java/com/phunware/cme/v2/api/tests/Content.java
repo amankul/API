@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -39,7 +40,8 @@ public class Content {
   public static String deleteSchemaRequestURL;
 
   public static String dateTime = null;
-  public Schema schema = new Schema();
+  public static HashMap<String,String> contentMap = new HashMap<String,String>();
+
 
   @BeforeClass
   @Parameters({"env","jwt","orgId"})
@@ -64,7 +66,7 @@ public class Content {
 
 /** Creating Content for Dignity Health **/
   @Test(dataProvider = "usesParameter")
-  public void verify_Post_Content(String path, Integer structureId, Integer parentId) throws IOException {
+  public void verify_Post_Content(String path, Integer structureId, String parentId) throws IOException {
 
     // Request Details
     String datetime = HelperMethods.getDateAsString();
@@ -72,7 +74,7 @@ public class Content {
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
     requestBodyJSONObject.put("containerId",containerId);
     requestBodyJSONObject.put("structureId", structureId);
-    requestBodyJSONObject.put("parentId", parentId);
+    requestBodyJSONObject.put("parentId", contentMap.get(parentId));
 
 
     // logging Request Details
@@ -94,17 +96,43 @@ public class Content {
     log.info("RESPONSE:" + response.asString());
 
     response.then().statusCode(200);
+    String contentId = response.getBody().jsonPath().get("id");
+
+    int index = path.indexOf("Content");
+    String name = path.substring(index).replaceAll(".json", "").replaceAll("Content", "");
+    contentMap.put(name,contentId);
+    log.info("Content Map : " +contentMap);
   }
 
 
   @DataProvider(name = "usesParameter")
   public Object[][] provideTestParam(ITestContext context) {
     return new Object[][] {
-        {context.getCurrentXmlTest().getParameter("postApplicationContentFilePath"), structureMap.get("Application"), null},
+        {context.getCurrentXmlTest().getParameter("postContentApplication"), structureMap.get("Application"), null},
+        {context.getCurrentXmlTest().getParameter("postContentPlatform"), structureMap.get("Platform"), "Application"},
+        {context.getCurrentXmlTest().getParameter("postContentAppVersion"), structureMap.get("AppVersion"), "Platform"},
+        {context.getCurrentXmlTest().getParameter("postContentPreCachingConfiguration"), structureMap.get("CachingSettings"), "Platform"},
+        {context.getCurrentXmlTest().getParameter("postContentAdvertisingSetting"), structureMap.get("AdvertisementSettings"), "Platform"},
+        {context.getCurrentXmlTest().getParameter("postContentSettings"), structureMap.get("Settings"), "Platform"},
+        {context.getCurrentXmlTest().getParameter("postContentDatabaseVersion"), structureMap.get("Platform_Database"), "Platform"},
+        {context.getCurrentXmlTest().getParameter("postContentPlatformVenueTexas"), structureMap.get("Platform_Venue"), "Platform"},
+        {context.getCurrentXmlTest().getParameter("postContentTexasDatabaseVersion"), structureMap.get("Venue_Database"), "VenueTexas"},
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexas"), structureMap.get("Venue"), null},
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampus"), structureMap.get("Campus"), "VenueTexas"},
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuilding"), structureMap.get("Building"), "VenueTexasCampus"},
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloor"), structureMap.get("Floor"), "VenueTexasCampusBuilding"},
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingMapSettings"), structureMap.get("MapSettings"), "VenueTexasCampusBuilding"},
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingGeoSettings"), structureMap.get("GeoSettings"), "VenueTexasCampusBuilding"},
+
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloorBeacon"), structureMap.get("Beacon"), "VenueTexasCampusBuildingFloor"},
+        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloorBeaconAlert"), structureMap.get("Alert"), "VenueTexasCampusBuildingFloor"},
+
+
     };
   }
 
 
+  /*
   @AfterClass
   public void deleteContainer(){
     // logging Request Details
@@ -149,7 +177,7 @@ public class Content {
     }
   }
 
-
+  */
 
 
 }

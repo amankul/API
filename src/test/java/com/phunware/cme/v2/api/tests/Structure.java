@@ -57,7 +57,7 @@ public class Structure {
   public static String buildingsStructureName = "Buildings";
   public static String buildingStructureName = "Building";
   public static String floorsStructureName = "Floors";
-  public static String floorStructureName = "Floors";
+  public static String floorStructureName = "Floor";
   public static String mapSettingsStructureName = "MapSettings";
   public static String geoSettingsStructureName = "GeoSettings";
   public static String beaconsStructureName = "Beacons";
@@ -194,7 +194,6 @@ public class Structure {
             {containerId,platformdatabaseStructureName, structureTypeOBJECT,platformdatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformdatabasesStructureName},
             {containerId,venuedatabasesStructureName, structureTypeARRAY,venuedatabasesStructureName, "", platformvenueStructureName},
             {containerId,venuedatabaseStructureName, structureTypeOBJECT,venuedatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venuedatabasesStructureName},
-
             {containerId,venuesStructureName, structureTypeARRAY,venuesStructureName, "", ""},
             {containerId,venueStructureName, structureTypeOBJECT,venueStructureName, schemaMap.get("VscVenue"), venuesStructureName},
             {containerId,campusesStructureName, structureTypeARRAY,campusesStructureName, "", venueStructureName},

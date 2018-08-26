@@ -1,0 +1,16 @@
+{
+  "containerId": "582b81db00fbc8dc79000182",
+  "structureId": 17,
+  "parentId": "58a2385bae1ce97e08d9022c",
+  "data":
+  {
+    "vscAdsConfigurationName" : "Ads",
+    "vscAdsBannerZone" : 123,
+    "vscAdsBannerFrequency" : 3,
+    "vscAdsInterstitialZone" : 123,
+    "vscAdsInterstitialFrequency" : 1,
+    "vscAdsNativeBannerZone" : 23,
+    "vscAdsDirectoryRow" : 2,
+    "vscAdsNativeEnable": true
+  }
+}

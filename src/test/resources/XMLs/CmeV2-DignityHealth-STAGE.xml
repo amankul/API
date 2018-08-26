@@ -30,7 +30,26 @@
     <parameter name="postContainerFilePath" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContainer.json"/>
 
     <!--CONTENT-->
-    <parameter name="postApplicationContentFilePath" value="src/test/resources/JSONs/cme_v2_jsons/postApplicationContent.json"/>
+    <parameter name="postContentApplication" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentApplication.json"/>
+    <parameter name="postContentPlatform" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentPlatform.json"/>
+    <parameter name="postContentAppVersion" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentAppVersion.json"/>
+    <parameter name="postContentPreCachingConfiguration" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentPreCachingConfiguration.json"/>
+    <parameter name="postContentAdvertisingSetting" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentAdvertisingSetting.json"/>
+    <parameter name="postContentSettings" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentSettings.json"/>
+    <parameter name="postContentDatabaseVersion" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentDatabaseVersion.json"/>
+    <parameter name="postContentPlatformVenueTexas" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentPlatformVenueTexas.json"/>
+    <parameter name="postContentTexasDatabaseVersion" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentTexasDatabaseVersion.json"/>
+    <parameter name="postContentVenueTexas" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexas.json"/>
+    <parameter name="postContentVenueTexasCampus" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampus.json"/>
+    <parameter name="postContentVenueTexasCampusBuilding" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuilding.json"/>
+    <parameter name="postContentVenueTexasCampusBuildingFloor" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingFloor.json"/>
+    <parameter name="postContentVenueTexasCampusBuildingMapSettings" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingMapSettings.json"/>
+    <parameter name="postContentVenueTexasCampusBuildingGeoSettings" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingGeoSettings.json"/>
+
+    <parameter name="postContentVenueTexasCampusBuildingFloorBeacon" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingFloorBeacon.json"/>
+    <parameter name="postContentVenueTexasCampusBuildingFloorBeaconAlert" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingFloorBeaconAlert.json"/>
+
+
 
     <!--DATA-->
     <parameter name="orgId" value="109"/>
