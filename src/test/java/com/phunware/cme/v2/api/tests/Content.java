@@ -132,7 +132,6 @@ public class Content {
   }
 
 
-  /*
   @AfterClass
   public void deleteContainer(){
     // logging Request Details
@@ -176,8 +175,6 @@ public class Content {
       log.info("-------------------------------------------------------------------------------------");
     }
   }
-
-  */
 
 
 }
