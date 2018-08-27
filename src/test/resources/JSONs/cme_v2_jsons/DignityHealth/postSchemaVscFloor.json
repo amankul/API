@@ -1,0 +1,60 @@
+
+{
+  "data": {
+    "attributes": [],
+    "description": "The definition for a floor",
+    "fields": [
+      {
+        "label": "Floor Name",
+        "field": "vscFloorName",
+        "description": "The name given to the floor in MaaS",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Floor Id",
+        "field": "vscFloorId",
+        "description": "The id given in MaaS to the floor",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Active",
+        "field": "vscFloorActive",
+        "description": "Whether this floor is active",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      },
+      {
+        "label": "Senion Floor Id",
+        "field": "vscSenionFloorId",
+        "description": "The Android senion floor id",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Senion Key iOS",
+        "field": "vscSenionFloorKeyiOS",
+        "description": "The Floor key for the senion indoor location provider",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "MSE Key iOS",
+        "field": "vscMSEFloorKeyiOS",
+        "description": "The Floor Key for the MSE indoor location provider",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      }
+    ],
+    "name": "VSC - Floor",
+    "orgId": 109,
+    "tags": []
+  }
+}

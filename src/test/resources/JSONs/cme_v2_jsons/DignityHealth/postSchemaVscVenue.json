@@ -1,0 +1,60 @@
+
+{
+  "data": {
+    "attributes": [],
+    "description": "The representation of a venue",
+    "fields": [
+      {
+        "label": "Venue Name",
+        "field": "vscVenueName",
+        "description": "The MaaS name for the venue",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Venue UUID",
+        "field": "vscVenueUUID",
+        "description": "The Venue UUID given in MaaS",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Subtitle",
+        "field": "vscVenueSubtitle",
+        "description": "This is the subtitle that's going to be used for the venue",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Image",
+        "field": "vscVenueImage",
+        "description": "A file that's going to be used in the venue selector",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "file"
+      },
+      {
+        "label": "Property UUID",
+        "field": "vscVenuePropertyUUID",
+        "description": "The associated property uuid to the venue",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Active",
+        "field": "vscVenueActive",
+        "description": "Whether the venue is currently active",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      }
+    ],
+    "name": "VSC - Venue",
+    "orgId": 109,
+    "tags": []
+  }
+}
