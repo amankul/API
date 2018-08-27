@@ -11,7 +11,7 @@ import java.io.IOException;
 public class FileUtils {
 
 
-    public String getJsonTextFromFile(String filePath) throws IOException {
+    public static String getJsonTextFromFile(String filePath) throws IOException {
 
         String jsonText = null;
         try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {

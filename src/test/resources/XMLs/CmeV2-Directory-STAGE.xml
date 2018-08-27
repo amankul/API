@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="CME V2 API TEST SUITE ">
+    <parameter name="env" value="STAGE"/>
+    <parameter name="jwt"
+               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjYyMywiZW1haWwiOiJha3Vsa2FybmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IkFtaXQiLCJsYXN0X25hbWUiOiJLdWxrYXJuaSIsInNlc3Npb25faWQiOiJhY2M3ZmUyNGJjYmEzYjU1MmQ5ZGJmOGJjZDljNzRmNWZlZjliMDUyIiwib3JnX2lkIjoxMDksIm9yZ19uYW1lIjoiUUEgVGVzdCIsIm9yZ3MiOltdLCJpYXQiOjE1MzQxNzczODQsImV4cCI6MTUzNDI2Mzc5M30.fP7Rn7dgNz16Nlp6MunCY0fwp-Rawp7aBjiEQJ3p0LY"/>
+
+    <!--SCHEMAS-->
+    <parameter name="postSchemaDirectory" value="src/test/resources/cme_v2_jsons/WeBuildApps/PostSchemaDirectory.json"/>
+
+    <!--STRUCTURE-->
+    <parameter name="postStructureFilePath" value="src/test/resources/cme_v2_jsons/"/>
+
+
+    <!--CONTAINER-->
+    <parameter name="postContainerFilePath" value="src/test/resources/cme_v2_jsons/"/>
+
+
+    <!--DATA-->
+    <parameter name="orgId" value="109"/>
+
+    <test name="CMEV2">
+        <classes>
+            <class name="com.phunware.cme.v2.api.tests.Schema"/>
+            <class name="com.phunware.cme.v2.api.tests.Structure"/>
+        </classes>
+    </test>
+
+
+</suite>

@@ -1,0 +1,70 @@
+
+{
+  "data": {
+    "attributes": [],
+    "description": "The representation for a campus",
+    "fields": [
+      {
+        "label": "Campus Name",
+        "field": "vscCampusName",
+        "description": "The MaaS Name for the campus",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Campus Id",
+        "field": "vscCampusId",
+        "description": "The MaaS Id for the campus",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Campus Subtitle",
+        "field": "vscCampusSubtitle",
+        "description": "The subtitle for the campus",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Campus Description",
+        "field": "vscCampusDescription",
+        "description": "The description for the campus",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textMulti"
+      },
+      {
+        "label": "Active",
+        "field": "vscCampusActive",
+        "description": "Whether this campus is active on the app",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      },
+      {
+        "label": "Property UUID",
+        "field": "vscCampusPropertyUUID",
+        "description": "The property UUID from the production portal if applies",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Image",
+        "field": "vscCampusImage",
+        "description": "The image to be used for the campus",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "file"
+      }
+    ],
+    "name": "VSC - Campus",
+    "orgId": 142,
+    "createdAt": "2015-07-19T15:34:47Z",
+    "tags": [],
+    "id": "55abc3973544839a26000aad"
+  }
+}

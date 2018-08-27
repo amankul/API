@@ -1,0 +1,15 @@
+
+{
+  "containerId": "582b81db00fbc8dc79000182",
+  "structureId": 17,
+  "parentId": "58a2385bae1ce97e08d9022c",
+  "data":
+  {
+    "vscFloorName": "Austin Floor",
+    "vscFloorId":1234,
+    "vscFloorActive" : true,
+    "vscSenionFloorId" : "1234",
+    "vscSenionFloorKeyiOS" : "SenionKey",
+    "vscMSEFloorKeyiOS" : "MSEFloorKey"
+  }
+}

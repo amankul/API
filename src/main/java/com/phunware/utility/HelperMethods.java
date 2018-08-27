@@ -1,7 +1,9 @@
 package com.phunware.utility;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,6 +16,8 @@ import java.util.UUID;
  * Created by VinayKarumuri on 5/1/17.
  */
 public class HelperMethods {
+
+  FileUtils fileUtils = new FileUtils();
 
   public static String getDateAsString() {
     return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -41,6 +45,13 @@ public class HelperMethods {
 
   public static String generateSHA256Hash(String stringToConvert){
     return DigestUtils.sha256Hex(stringToConvert);
+  }
+
+  public static JSONObject generateRequestBody(String fileName) throws IOException {
+    String requestBody = FileUtils.getJsonTextFromFile(fileName);
+    JSONObject requestBodyData = new JSONObject(requestBody);
+
+    return requestBodyData;
   }
 
 }

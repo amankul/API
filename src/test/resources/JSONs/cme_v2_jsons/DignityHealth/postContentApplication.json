@@ -1,0 +1,13 @@
+
+{
+  "containerId": "582b81db00fbc8dc79000182",
+  "structureId": 17,
+  "parentId": "58a2385bae1ce97e08d9022c",
+  "data":
+  {
+    "vscAppName" : "Dignity Health",
+    "vscDefaultAppVenue" : "1f77d84b-ea92-4dce-8046-ec37b76e2a56",
+    "vscDefaultCampus" : 649,
+    "vscDefaultBuilding" : 17739
+  }
+}
