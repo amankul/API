@@ -13,12 +13,19 @@
     "Key": "Value"
   },
   "actionType": "EDITOR",
-  "locationTags": ["qa"],
-  "profiles": [445],
+  "locationTags": [
+    "qa"
+  ],
+  "profiles": [
+    445
+  ],
   "notificationTitle": "Notification Title",
   "notificationMessage": "Notification Message",
-  "createdById" :1,
-  "modifiedById" : 1,
-  "targetedEntryLocationTags" : ["austin"],
-  "targetedEntryEndDate" : "2016-05-05 10:15:00"
+  "createdById": 1,
+  "modifiedById": 1,
+  "archived": false,
+  "targetedEntryLocationTags": [
+    "austin"
+  ],
+  "targetedEntryEndDate": "2016-05-05 10:15:00"
 }
