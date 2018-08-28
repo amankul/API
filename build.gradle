@@ -28,7 +28,8 @@ task runCoreSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        suites '/src/test/resources/Core-STAGE.xml'
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/Core-STAGE.xml'
     }
 }
 
@@ -36,7 +37,8 @@ task runCorePROD(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        suites '/src/test/resources/Core-PROD.xml'
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/Core-PROD.xml'
     }
 }
 
@@ -45,7 +47,8 @@ task runMeSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        suites '/src/test/resources/Me-STAGE.xml'
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/Me-STAGE.xml'
     }
 }
 
@@ -53,7 +56,8 @@ task runMePROD(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        suites '/src/test/resources/Me-PROD.xml'
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/Me-PROD.xml'
     }
 }
 
@@ -61,7 +65,8 @@ task runMapJwtSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        suites '/src/test/resources/Map-JWT-STAGE.xml'
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/Map-JWT-STAGE.xml'
 
     }
 }
@@ -70,7 +75,8 @@ task runMapSPSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
-        suites '/src/test/resources/Map-SP-STAGE.xml'
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/Map-SP-STAGE.xml'
 
     }
 }
@@ -81,7 +87,6 @@ task runCMEDignityHealthStage(type: Test) {
         outputs.upToDateWhen { false }
         ignoreFailures = true
         suites '/src/test/resources/XMLs/CmeV2-DignityHealth-STAGE.xml'
-
     }
 }
 

@@ -17,8 +17,6 @@ import java.util.UUID;
  */
 public class HelperMethods {
 
-  FileUtils fileUtils = new FileUtils();
-
   public static String getDateAsString() {
     return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
   }
