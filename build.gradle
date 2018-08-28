@@ -29,7 +29,7 @@ task runCoreSTAGE(type: Test) {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/Core-STAGE.xml'
+        suites '/src/test/resources/XMLs/Core-STAGE.xml'
     }
 }
 
@@ -38,7 +38,7 @@ task runCorePROD(type: Test) {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/Core-PROD.xml'
+        suites '/src/test/resources/XMLs/Core-PROD.xml'
     }
 }
 
@@ -48,7 +48,7 @@ task runMeSTAGE(type: Test) {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/Me-STAGE.xml'
+        suites '/src/test/resources/XMLs/Me-STAGE.xml'
     }
 }
 
@@ -57,7 +57,7 @@ task runMePROD(type: Test) {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/Me-PROD.xml'
+        suites '/src/test/resources/XMLs/Me-PROD.xml'
     }
 }
 
@@ -66,7 +66,7 @@ task runMapJwtSTAGE(type: Test) {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/Map-JWT-STAGE.xml'
+        suites '/src/test/resources/XMLs/Map-JWT-STAGE.xml'
 
     }
 }
@@ -76,7 +76,7 @@ task runMapSPSTAGE(type: Test) {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
         ignoreFailures = true
-        suites '/src/test/resources/Map-SP-STAGE.xml'
+        suites '/src/test/resources/XMLs/Map-SP-STAGE.xml'
 
     }
 }
@@ -87,7 +87,6 @@ task runCMEDignityHealthStage(type: Test) {
         outputs.upToDateWhen { false }
         ignoreFailures = true
         suites '/src/test/resources/XMLs/CmeV2-DignityHealth-STAGE.xml'
-
     }
 }
 
