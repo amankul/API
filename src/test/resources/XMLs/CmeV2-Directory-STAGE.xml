@@ -1,20 +1,22 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="CME V2 API TEST SUITE ">
+<suite name="CME V2 - QA Test Directory-All Container">
     <parameter name="env" value="STAGE"/>
     <parameter name="jwt"
-               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjYyMywiZW1haWwiOiJha3Vsa2FybmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IkFtaXQiLCJsYXN0X25hbWUiOiJLdWxrYXJuaSIsInNlc3Npb25faWQiOiJhY2M3ZmUyNGJjYmEzYjU1MmQ5ZGJmOGJjZDljNzRmNWZlZjliMDUyIiwib3JnX2lkIjoxMDksIm9yZ19uYW1lIjoiUUEgVGVzdCIsIm9yZ3MiOltdLCJpYXQiOjE1MzQxNzczODQsImV4cCI6MTUzNDI2Mzc5M30.fP7Rn7dgNz16Nlp6MunCY0fwp-Rawp7aBjiEQJ3p0LY"/>
-
+               value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTIwOCwiZW1haWwiOiJ2a3VtYXJAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IlZpbm9kIiwibGFzdF9uYW1lIjoiS3VtYXIiLCJzZXNzaW9uX2lkIjoiZDYwODExYzYyNGNjMWI0Mzk5MDNhYjdiODAxMTBiMWZmNTM2NDU1MCIsIm9yZ19pZCI6MTA5LCJvcmdfbmFtZSI6IlFBIFRlc3QiLCJvcmdzIjpbXSwiaWF0IjoxNTM2NjkzNTI4LCJleHAiOjE1MzY3Nzk5Mzl9.2yu2eQFuqYnriQfX_scAIPvP1CG3SYdDuVgLoaXTWXk"/>
+    <parameter name="containerName" value="Directory" />
     <!--SCHEMAS-->
-    <parameter name="postSchemaDirectory" value="src/test/resources/cme_v2_jsons/WeBuildApps/PostSchemaDirectory.json"/>
-
+    <parameter name="postSchemaDirectory" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postSchemaDirectory.json"/>
     <!--STRUCTURE-->
-    <parameter name="postStructureFilePath" value="src/test/resources/cme_v2_jsons/"/>
+    <parameter name="postStructureFilePath" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postStructure.json"/>
 
 
     <!--CONTAINER-->
-    <parameter name="postContainerFilePath" value="src/test/resources/cme_v2_jsons/"/>
+    <parameter name="postContainerFilePath" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContainer.json"/>
 
+
+    <!--CONTENT-->
+    <parameter />
 
     <!--DATA-->
     <parameter name="orgId" value="109"/>
