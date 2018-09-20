@@ -18,7 +18,7 @@
     <!--CONTENT-->
     <parameter name="postContentAAA" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAAA.json"/>
     <parameter name="postContentAthleta" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAthleta.json"/>
-    <parameter name="postContentBSpot" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentBspot.json"/>
+    <parameter name="postContentBSpot" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentBSpot.json"/>
     <parameter name="postContentStarbucks" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentStarbucks.json"/>
     <parameter name="postContentSubway" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentSubway.json"/>
 
