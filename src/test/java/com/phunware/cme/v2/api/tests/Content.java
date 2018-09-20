@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class Content {
     public static String deleteContainerRequestURL;
     public static String deleteSchemaRequestURL;
     private String containerName;
+    private String contentId;
 
     public static String dateTime = null;
     public static HashMap<String, String> contentMap = new HashMap<String, String>();
@@ -68,7 +70,7 @@ public class Content {
      * Creating Content for Dignity Health
      **/
     @Test(dataProvider = "usesParameter", priority = 0)
-    public void verify_Post_Content(String path, Integer structureId, String parentId) throws IOException {
+    public void verify_Post_Content(String path, Integer structureId, String  parentId) throws IOException {
 
         /* Request Details */
         String datetime = HelperMethods.getDateAsString();
@@ -98,7 +100,7 @@ public class Content {
         log.info("RESPONSE:" + response.asString());
 
         response.then().statusCode(200);
-        String contentId = response.getBody().jsonPath().get("id");
+        contentId = response.getBody().jsonPath().get("id");
 
         int index = path.indexOf("Content");
         String name = path.substring(index).replaceAll(".json", "").replaceAll("Content", "");
@@ -134,7 +136,11 @@ public class Content {
                 };
             case "Directory":
                 return new Object[][]{
-                        {context.getCurrentXmlTest().getParameter("")}
+                        {context.getCurrentXmlTest().getParameter("postContentAAA"),structureMap.get("Item"),"Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentAthleta"),structureMap.get("Item"),"Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentBSpot"),structureMap.get("Item"),"Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentStarbucks"),structureMap.get("Item"),"Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentSubway"),structureMap.get("Item"),"Items"}
                 };
             default:
                 return null;
@@ -142,6 +148,11 @@ public class Content {
 
     }
 
+
+
+    @Test
+    public void verifyGetContent() {
+    }
 
     @Test(priority = 1)
     public void deleteContainer() {
@@ -184,6 +195,13 @@ public class Content {
                             .response();
             log.info("-------------------------------------------------------------------------------------");
         }
+    }
+
+
+/** For debug purposes. OK to delete **/
+    @AfterClass
+    public void tearDown() {
+        System.out.println(Arrays.asList(contentMap));
     }
 
 

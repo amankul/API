@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
@@ -219,6 +220,14 @@ public class Structure {
             default:
                 return null;
         }
+    }
+
+
+
+    /** debug method. Delete. **/
+    @AfterClass
+    public void printMap() {
+        System.out.println(Arrays.asList(structureMap));
     }
 }
 
