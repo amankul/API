@@ -29,5 +29,4 @@ public class PropertiesLoader {
         return pro.getProperty(propertyName);
     }
 
-
 }

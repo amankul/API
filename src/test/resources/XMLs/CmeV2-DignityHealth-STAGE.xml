@@ -1,9 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="CME V2 API TEST SUITE ">
+<suite name="CME V2 - Dignity Health ">
     <parameter name="env" value="STAGE"/>
     <parameter name="jwt"
-               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTI5MiwiZW1haWwiOiJ2a2FydW11cmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IlZpbmF5IiwibGFzdF9uYW1lIjoiS2FydW11cmkiLCJzZXNzaW9uX2lkIjoiZGI0ZjQ4Mzg1OWM1ZTQ1MDgzMDZkMTE3NGEyNDUyNDRkNGUzOWE2OCIsIm9yZ19pZCI6MTA5LCJvcmdfbmFtZSI6IlFBIFRlc3QiLCJvcmdzIjpbXSwiaWF0IjoxNTM0MzQ3MjA3LCJleHAiOjE2OTIyOTc5NTd9.L5ykgjVMMCH7it5_Stkv7lovM8IiGmOSdR9-BDDeuyA"/>
+               value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTIwOCwiZW1haWwiOiJ2a3VtYXJAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IlZpbm9kIiwibGFzdF9uYW1lIjoiS3VtYXIiLCJzZXNzaW9uX2lkIjoiMjZkNGE2NDM5NjA3NGUzYTAyNDYyNzE0YTlkNzExMWIwYjc2YzM0YyIsIm9yZ19pZCI6MTA5LCJvcmdfbmFtZSI6IlFBIFRlc3QiLCJvcmdzIjpbXSwiaWF0IjoxNTM3NDYwNzc4LCJleHAiOjE1Mzc1NDcxODl9.HFwikmejP1ePs8V8S9uJc27_CcTPhbelN_ko5xf5-TQ"/>
+    <parameter name="containerName" value="DignityHealth" />
+
 
     <!--SCHEMAS-->
     <parameter name="postSchemaVscAdvertisingSetting" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postSchemaVscAdvertisingSetting.json"/>
@@ -45,7 +47,6 @@
     <parameter name="postContentVenueTexasCampusBuildingFloor" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingFloor.json"/>
     <parameter name="postContentVenueTexasCampusBuildingMapSettings" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingMapSettings.json"/>
     <parameter name="postContentVenueTexasCampusBuildingGeoSettings" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingGeoSettings.json"/>
-
     <parameter name="postContentVenueTexasCampusBuildingFloorBeacon" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingFloorBeacon.json"/>
     <parameter name="postContentVenueTexasCampusBuildingFloorBeaconAlert" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingFloorBeaconAlert.json"/>
 

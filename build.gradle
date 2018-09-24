@@ -90,4 +90,12 @@ task runCMEDignityHealthStage(type: Test) {
     }
 }
 
+task runCMEDirectoryStage(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/CmeV2-Directory-STAGE.xml'
 
+    }
+}

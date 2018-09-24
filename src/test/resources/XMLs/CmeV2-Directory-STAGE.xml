@@ -1,19 +1,27 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="CME V2 API TEST SUITE ">
+<suite name="CME V2 - QA Test Directory-All Container">
     <parameter name="env" value="STAGE"/>
     <parameter name="jwt"
-               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjYyMywiZW1haWwiOiJha3Vsa2FybmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IkFtaXQiLCJsYXN0X25hbWUiOiJLdWxrYXJuaSIsInNlc3Npb25faWQiOiJhY2M3ZmUyNGJjYmEzYjU1MmQ5ZGJmOGJjZDljNzRmNWZlZjliMDUyIiwib3JnX2lkIjoxMDksIm9yZ19uYW1lIjoiUUEgVGVzdCIsIm9yZ3MiOltdLCJpYXQiOjE1MzQxNzczODQsImV4cCI6MTUzNDI2Mzc5M30.fP7Rn7dgNz16Nlp6MunCY0fwp-Rawp7aBjiEQJ3p0LY"/>
-
+               value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTIwOCwiZW1haWwiOiJ2a3VtYXJAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IlZpbm9kIiwibGFzdF9uYW1lIjoiS3VtYXIiLCJzZXNzaW9uX2lkIjoiMjZkNGE2NDM5NjA3NGUzYTAyNDYyNzE0YTlkNzExMWIwYjc2YzM0YyIsIm9yZ19pZCI6MTA5LCJvcmdfbmFtZSI6IlFBIFRlc3QiLCJvcmdzIjpbXSwiaWF0IjoxNTM3NDYwNzc4LCJleHAiOjE1Mzc1NDcxODl9.HFwikmejP1ePs8V8S9uJc27_CcTPhbelN_ko5xf5-TQ"/>
+    <parameter name="containerName" value="Directory" />
     <!--SCHEMAS-->
-    <parameter name="postSchemaDirectory" value="src/test/resources/cme_v2_jsons/WeBuildApps/PostSchemaDirectory.json"/>
-
+    <parameter name="postSchemaDirectory" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postSchemaDirectory.json"/>
     <!--STRUCTURE-->
-    <parameter name="postStructureFilePath" value="src/test/resources/cme_v2_jsons/"/>
+    <parameter name="postStructureFilePath" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postStructure.json"/>
 
 
     <!--CONTAINER-->
-    <parameter name="postContainerFilePath" value="src/test/resources/cme_v2_jsons/"/>
+    <parameter name="postContainerFilePath" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContainer.json"/>
+
+
+    <!--CONTENT-->
+    <parameter name="postContentAAA" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAAA.json"/>
+    <parameter name="postContentAthleta" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAthleta.json"/>
+    <parameter name="postContentBSpot" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentBSpot.json"/>
+    <parameter name="postContentStarbucks" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentStarbucks.json"/>
+    <parameter name="postContentSubway" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentSubway.json"/>
+
 
 
     <!--DATA-->
@@ -23,6 +31,7 @@
         <classes>
             <class name="com.phunware.cme.v2.api.tests.Schema"/>
             <class name="com.phunware.cme.v2.api.tests.Structure"/>
+            <class name="com.phunware.cme.v2.api.tests.Content"/>
         </classes>
     </test>
 
