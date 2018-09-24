@@ -3,6 +3,7 @@ package com.phunware.cme.v2.api.tests;
 import com.phunware.cmev2_api.constants.CmeV2_API_Constants;
 import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
+import com.phunware.utility.JWTUtils;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -21,43 +22,40 @@ import static io.restassured.RestAssured.given;
  */
 public class Schema {
 
-    public static String SERVICE_END_POINT = null;
-    public static String JWT = null;
-    public static String ORGID = null;
-    public static String postSchemaRequestURL = null;
+    private static String serviceEndPoint = null;
+    private static String jwt = null;
+    private static String orgId = null;
+    private static String postSchemaRequestURL = null;
     private String containerName;
     private String name;
-    static Logger log;
+    private static Logger log;
     public static HashMap<String, String> schemaMap = new HashMap<String, String>();
 
-    @BeforeSuite
-    @Parameters({"env", "jwt", "orgId", "containerName"})
-    private void setEnv(String env, String jwt, String orgId, String containerName) {
+
+    @BeforeClass
+    @Parameters({"env", "orgId", "containerName"})
+    private void setEnv(String env, int orgId, String containerName) {
+
+        log = Logger.getLogger(Schema.class);
+
         this.containerName = containerName;
-        System.out.println(containerName);
-        JWT = jwt;
-        ORGID = orgId;
+        jwt = JWTUtils.getJWTForAdmin(env,orgId);
+
         if ("PROD".equalsIgnoreCase(env)) {
-            SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
         } else if ("STAGE".equalsIgnoreCase(env)) {
-            SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
         } else {
             log.error("Environment is not set properly. Please check your testng xml file");
             Assert.fail("Environment is not set properly. Please check your testng xml file");
         }
-        postSchemaRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.SCHEMAS_END_POINT;
-        System.out.println("schemaUrl: " + postSchemaRequestURL);
-    }
-
-    @BeforeClass
-    public void preTestSteps() {
-
-        log = Logger.getLogger(Schema.class);
+        postSchemaRequestURL = serviceEndPoint + CmeV2_API_Constants.SCHEMAS_END_POINT;
+        log.info("POST Schema URL: "+ postSchemaRequestURL);
     }
 
 
     /**
-     * Method to post schema.  Source files are from resources directory.
+     * Create schema.  Source files are from resources directory.
      **/
     @Test(dataProvider = "usesParameter")
     public void verify_Post_Schema(String path) throws IOException {
@@ -68,18 +66,18 @@ public class Schema {
         JSONObject requestBodyJSONObject = new JSONObject(requestBody);
         JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
 
+
         // DignityHealth json's have a VSC prefix in name and so making exception here.
-        if (containerName.equals("DignityHealth")) {
+        if ("DignityHealth".equals(containerName)) {
             int index = path.indexOf("Vsc");
             name = path.substring(index).replaceAll(".json", "");
         } else {
             name = new File(path).getName();
             name = name.substring(10, name.lastIndexOf('.'));
-            System.out.println("file name: " + name);
         }
 
         requestBodyData.put("name", name + datetime);
-        requestBodyData.put("orgId", ORGID);
+        requestBodyData.put("orgId", orgId);
 
         // logging Request Details
         log.info("REQUEST-URL:POST-" + postSchemaRequestURL);
@@ -89,7 +87,7 @@ public class Schema {
         Response response =
                 given()
                         .header("Content-Type", "application/json")
-                        .header("Authorization", JWT)
+                        .header("Authorization", jwt)
                         .body(requestBodyJSONObject.toString())
                         .post(postSchemaRequestURL)
                         .then()
@@ -100,7 +98,7 @@ public class Schema {
         log.info("RESPONSE:" + response.asString());
 
         response.then().statusCode(200);
-        // Get schema ID and put it into Hashmap
+        // Get schema ID and put it into hash map
         schemaMap.put(name, response.getBody().jsonPath().get("id"));
     }
 
@@ -131,21 +129,15 @@ public class Schema {
                         {context.getCurrentXmlTest().getParameter("postSchemaVscCampus")}
                 };
             case "Directory":
-                System.out.println("else if block of data provider");
                 return new Object[][]{
                         {context.getCurrentXmlTest().getParameter("postSchemaDirectory")}
                 };
 
             default:
-                System.out.println("in else block for data provider");
                 return null;
         }
 
     }
 
-    @AfterClass
-    public void tearDown() {
 
-        System.out.println("Schema Map: " + schemaMap);
-    }
 }

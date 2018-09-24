@@ -3,6 +3,7 @@ package com.phunware.cme.v2.api.tests;
 import com.phunware.cmev2_api.constants.CmeV2_API_Constants;
 import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
+import com.phunware.utility.JWTUtils;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -23,68 +24,71 @@ import static io.restassured.RestAssured.given;
 
 public class Structure {
 
-    static Logger log;
-    public static String SERVICE_END_POINT = null;
-    public static String JWT = null;
-    public static String postStructureRequestURL = null;
-    public static String postContainerRequestURL = null;
-    public static String dateTime = null;
-    public static String structureRequestBody = null;
-    public static String containerId = null;
-    public static final String structureTypeOBJECT = "object";
-    public static final String structureTypeARRAY = "array";
-    public static String applicationsStructureName = "Applications";
-    public static String applicationStructureName = "Application";
-    public static String platformsStructureName = "Platforms";
-    public static String platformStructureName = "Platform";
-    public static String appVersionStructureName = "AppVersion";
-    public static String cachingSettingsStructureName = "CachingSettings";
-    public static String advertisementSettingsStructureName = "AdvertisementSettings";
-    public static String settingsStructureName = "Settings";
-    public static String platformVenuesStructureName = "Platform_Venues";
-    public static String platformVenueStructureName = "Platform_Venue";
-    public static String platformDatabasesStructureName = "Platform_Databases";
-    public static String platformDatabaseStructureName = "Platform_Database";
-    public static String venueDatabasesStructureName = "Venue_Databases";
-    public static String venueDatabaseStructureName = "Venue_Database";
-    private static String items_StructureName = "Items";
-    private static String item_StructureName = "Item";
-    public static String venuesStructureName = "Venues";
-    public static String venueStructureName = "Venue";
-    public static String campusesStructureName = "Campuses";
-    public static String campusStructureName = "Campus";
-    public static String buildingsStructureName = "Buildings";
-    public static String buildingStructureName = "Building";
-    public static String floorsStructureName = "Floors";
-    public static String floorStructureName = "Floor";
-    public static String mapSettingsStructureName = "MapSettings";
-    public static String geoSettingsStructureName = "GeoSettings";
-    public static String beaconsStructureName = "Beacons";
-    public static String beaconStructureName = "Beacon";
-    public static String alertsStructureName = "Alerts";
-    public static String alertStructureName = "Alert";
-
-
+    private static Logger log;
+    private static String serviceEndPoint = null;
+    private  static String jwt = null;
+    private  static String postStructureRequestURL = null;
+    private  static String postContainerRequestURL = null;
+    private  static String dateTime = null;
+    private  static String structureRequestBody = null;
+    private  static final String structureTypeOBJECT = "object";
+    private  static final String structureTypeARRAY = "array";
+    private  static String applicationsStructureName = "Applications";
+    private  static String applicationStructureName = "Application";
+    private  static String platformsStructureName = "Platforms";
+    private  static String platformStructureName = "Platform";
+    private  static String appVersionStructureName = "AppVersion";
+    private  static String cachingSettingsStructureName = "CachingSettings";
+    private  static String advertisementSettingsStructureName = "AdvertisementSettings";
+    private  static String settingsStructureName = "Settings";
+    private  static String platformVenuesStructureName = "Platform_Venues";
+    private  static String platformVenueStructureName = "Platform_Venue";
+    private  static String platformDatabasesStructureName = "Platform_Databases";
+    private  static String platformDatabaseStructureName = "Platform_Database";
+    private  static String venueDatabasesStructureName = "Venue_Databases";
+    private  static String venueDatabaseStructureName = "Venue_Database";
+    private  static String items_StructureName = "Items";
+    private  static String item_StructureName = "Item";
+    private  static String venuesStructureName = "Venues";
+    private  static String venueStructureName = "Venue";
+    private  static String campusesStructureName = "Campuses";
+    private  static String campusStructureName = "Campus";
+    private  static String buildingsStructureName = "Buildings";
+    private  static String buildingStructureName = "Building";
+    private  static String floorsStructureName = "Floors";
+    private  static String floorStructureName = "Floor";
+    private  static String mapSettingsStructureName = "MapSettings";
+    private  static String geoSettingsStructureName = "GeoSettings";
+    private  static String beaconsStructureName = "Beacons";
+    private  static String beaconStructureName = "Beacon";
+    private  static String alertsStructureName = "Alerts";
+    private  static String alertStructureName = "Alert";
     private String containerName;
+    public  static String containerId = null;
+
+
     public static HashMap<String, Integer> structureMap = new HashMap<String, Integer>();
 
 
     @BeforeClass
-    @Parameters({"env", "jwt", "orgId", "postStructureFilePath", "containerName"})
-    private void setEnv(String env, String jwt, String orgId, String postStructureFilePath, String containerName) throws IOException {
-        this.containerName = containerName;
+    @Parameters({"env", "orgId", "postStructureFilePath", "containerName"})
+    private void setEnv(String env, int orgId, String postStructureFilePath, String containerName) throws IOException {
+
         log = Logger.getLogger(Structure.class);
-        JWT = jwt;
+        jwt = JWTUtils.getJWTForAdmin(env,orgId);
+        this.containerName = containerName;
+
+
         if ("PROD".equalsIgnoreCase(env)) {
-            SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
         } else if ("STAGE".equalsIgnoreCase(env)) {
-            SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
         } else {
             log.error("Environment is not set properly. Please check your testng xml file");
             Assert.fail("Environment is not set properly. Please check your testng xml file");
         }
-        postStructureRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.STRUCTURE_END_POINT;
-        postContainerRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTAINERS_END_POINT;
+        postStructureRequestURL = serviceEndPoint + CmeV2_API_Constants.STRUCTURE_END_POINT;
+        postContainerRequestURL = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT;
         log.info("Container Url: " + postContainerRequestURL);
         dateTime = HelperMethods.getDateAsString();
         structureRequestBody = FileUtils.getJsonTextFromFile(postStructureFilePath);
@@ -98,8 +102,7 @@ public class Structure {
     @Test(priority = 1)
     public void verify_Post_Container(String postContainerFilePath) throws IOException {
 
-        //Request Details
-        log.info(postContainerFilePath);
+
         String requestBody = FileUtils.getJsonTextFromFile(postContainerFilePath);
         JSONObject requestBodyJSONObject = new JSONObject(requestBody);
         JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
@@ -113,7 +116,7 @@ public class Structure {
         Response response =
                 given()
                         .header("Content-Type", "application/json")
-                        .header("Authorization", JWT)
+                        .header("Authorization", jwt)
                         .body(requestBodyJSONObject.toString())
                         .post(postContainerRequestURL)
                         .then()
@@ -151,19 +154,19 @@ public class Structure {
         log.info("REQUEST-URL: POST- " + postStructureRequestURL);
         log.info("REQUEST-URL: BODY- " + requestBodyJSONObject.toString());
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .header("Content-Type", "application/json")
-                        .header("Authorization", JWT)
-                        .body(requestBodyJSONObject.toString())
-                        .post(postStructureRequestURL)
-                        .then()
-                        .statusCode(200)
-                        .extract()
-                        .response();
+            //Extracting response after status code validation
+            Response response =
+                    given()
+                            .header("Content-Type", "application/json")
+                            .header("Authorization", jwt)
+                            .body(requestBodyJSONObject.toString())
+                            .post(postStructureRequestURL)
+                            .then()
+                            .extract()
+                            .response();
+            log.info("RESPONSE: " + response.asString());
 
-        log.info("RESPONSE: " + response.asString());
+            response.then().equals(200);
 
         //JSON response Pay load validations
         int StructureId = response.getBody().jsonPath().get("id");
@@ -222,12 +225,5 @@ public class Structure {
         }
     }
 
-
-
-    /** debug method. Delete. **/
-    @AfterClass
-    public void printMap() {
-        System.out.println(Arrays.asList(structureMap));
-    }
 }
 
