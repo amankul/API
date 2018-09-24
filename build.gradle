@@ -52,6 +52,7 @@ task runMeSTAGE(type: Test) {
         outputs.upToDateWhen { false }
         ignoreFailures = true
         suites '/src/test/resources/XMLs/Me-STAGE.xml'
+
     }
 }
 
@@ -98,6 +99,17 @@ task runCMEDirectoryStage(type: Test) {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }
         ignoreFailures = true
+        suites '/src/test/resources/XMLs/CmeV2-Directory-STAGE.xml'
+
+    }
+}
+
+task runCMEAPIAutomation(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/CmeV2-DignityHealth-STAGE.xml'
         suites '/src/test/resources/XMLs/CmeV2-Directory-STAGE.xml'
 
     }
