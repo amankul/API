@@ -24,7 +24,7 @@ public class Schema {
 
     private static String serviceEndPoint = null;
     private static String jwt = null;
-    private static String orgId = null;
+    private int orgId;
     private static String postSchemaRequestURL = null;
     private String containerName;
     private String name;
@@ -39,6 +39,8 @@ public class Schema {
         log = Logger.getLogger(Schema.class);
 
         this.containerName = containerName;
+        this.orgId=orgId;
+
         jwt = JWTUtils.getJWTForAdmin(env,orgId);
 
         if ("PROD".equalsIgnoreCase(env)) {
@@ -76,6 +78,7 @@ public class Schema {
             name = name.substring(10, name.lastIndexOf('.'));
         }
 
+        log.info("orgId: "+orgId);
         requestBodyData.put("name", name + datetime);
         requestBodyData.put("orgId", orgId);
 
