@@ -48,9 +48,9 @@ public class Schema {
 
         jwt = JWTUtils.getJWTForAdmin(env, orgId);
 
-        if ("PROD".equalsIgnoreCase(env)) {
+        if (env.equalsIgnoreCase("PROD")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
-        } else if ("STAGE".equalsIgnoreCase(env)) {
+        } else if (env.equalsIgnoreCase("STAGE")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
         } else {
             log.error("Environment is not set properly. Please check your testng xml file");
@@ -67,6 +67,9 @@ public class Schema {
     @Test(dataProvider = "usesParameter")
     public void verify_Post_Schema(String path) throws IOException {
 
+
+        Assert.assertNotNull(path);
+
         log.info("FILE PATH for SCHEMA JSON: " + path);
         String datetime = HelperMethods.getDateAsString();
         String requestBody = FileUtils.getJsonTextFromFile(path);
@@ -75,7 +78,7 @@ public class Schema {
 
 
         // DignityHealth json's have a VSC prefix in name and so making exception here. Should fix this in future.
-        if ("DignityHealth".equals(containerName)) {
+        if (containerName.equals("DignityHealth")) {
             int index = path.indexOf("Vsc");
             name = path.substring(index).replaceAll(".json", "");
         } else {
@@ -88,8 +91,8 @@ public class Schema {
         requestBodyData.put("orgId", orgId);
 
         // logging Request Details
-        log.info("REQUEST-URL:POST-" + postSchemaRequestURL);
-        log.info("REQUEST-URL:BODY-" + requestBodyJSONObject.toString());
+        log.info("REQUEST: POST-" + postSchemaRequestURL);
+        log.info("REQUEST: BODY-" + requestBodyJSONObject.toString());
 
         // Extracting response after status code validation
         Response response =

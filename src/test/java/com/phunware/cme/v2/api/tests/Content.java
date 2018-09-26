@@ -32,9 +32,9 @@ public class Content {
     private static Logger log;
     private static String serviceEndPoint = null;
     private static String jwt = null;
-    private static String postContentRequestURL;
-    private static String deleteContainerRequestURL;
-    private static String deleteSchemaRequestURL;
+    private static String postContentRequestUrl;
+    private static String deleteContainerRequestUrl;
+    private static String deleteSchemaRequestUrl;
     private String contentId;
 
     protected static String dateTime = null;
@@ -48,19 +48,19 @@ public class Content {
         jwt = JWTUtils.getJWTForAdmin(env, orgId);
 
 
-        if ("PROD".equalsIgnoreCase(env)) {
+        if (env.equalsIgnoreCase("PROD")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
-        } else if ("STAGE".equalsIgnoreCase(env)) {
+        } else if (env.equalsIgnoreCase("STAGE")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
         } else {
             log.error("Environment is not set properly. Please check testng xml.");
             Assert.fail("Environment is not set properly. Please check testng xml.");
         }
-        postContentRequestURL = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT;
-        deleteContainerRequestURL = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
-        deleteSchemaRequestURL = serviceEndPoint + CmeV2_API_Constants.SCHEMAS_END_POINT + "/";
+        postContentRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT;
+        deleteContainerRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
+        deleteSchemaRequestUrl = serviceEndPoint + CmeV2_API_Constants.SCHEMAS_END_POINT + "/";
 
-        log.info("Content URL: " + postContentRequestURL);
+        log.info("Content URL: " + postContentRequestUrl);
         dateTime = HelperMethods.getDateAsString();
     }
 
@@ -71,7 +71,8 @@ public class Content {
     @Test(dataProvider = "usesParameter", priority = 0)
     public void verify_Post_Content(String path, Integer structureId, String parentId) throws IOException {
 
-
+        // verify dataprovider is not sending NULL values. Path should be enough to test this scenario.
+        Assert.assertNotNull(path);
         log.info("File Path for Content JSON: " + path);
         String requestBody = FileUtils.getJsonTextFromFile(path);
         JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -81,8 +82,8 @@ public class Content {
 
 
         // logging Request Details
-        log.info("REQUEST-URL:POST-" + postContentRequestURL);
-        log.info("REQUEST-URL:BODY-" + requestBodyJSONObject.toString());
+        log.info("REQUEST: POST-" + postContentRequestUrl);
+        log.info("REQUEST: BODY-" + requestBodyJSONObject.toString());
 
         // Extracting response after status code validation
         Response response =
@@ -90,7 +91,7 @@ public class Content {
                         .header("Content-Type", "application/json")
                         .header("Authorization", jwt)
                         .body(requestBodyJSONObject.toString())
-                        .post(postContentRequestURL)
+                        .post(postContentRequestUrl)
                         .then()
                         .extract()
                         .response();
@@ -110,30 +111,22 @@ public class Content {
     }
 
 
-    @Test(priority = 0)
-    public void verify_Get_Content() {
-
-    }
-
     /** Deleting Container. This will delete content and structure contained it." **/
     @Test(priority = 1)
     public void deleteContainer() {
-        // logging Request Details
-        log.info("-------------------------------------------------------------------------------------");
-        log.info("Deleting Container Test: ");
-        log.info("REQUEST-URL:DELETE-" + deleteContainerRequestURL + containerId);
+
+        log.info("REQUEST: DELETE-" + deleteContainerRequestUrl + containerId);
 
         // Extracting response after status code validation
         Response response =
                 given()
                         .header("Content-Type", "application/json")
                         .header("Authorization", jwt)
-                        .delete(deleteContainerRequestURL + containerId)
+                        .delete(deleteContainerRequestUrl + containerId)
                         .then()
                         .statusCode(200)
                         .extract()
                         .response();
-        log.info("-------------------------------------------------------------------------------------");
 
     }
 
@@ -145,20 +138,19 @@ public class Content {
         // logging Request Details
         log.info("Schema Map" + schemaMap);
         log.info("Deleting the Schema");
-        log.info("REQUEST-URL:DELETE-" + deleteSchemaRequestURL);
+        log.info("REQUEST: DELETE-" + deleteSchemaRequestUrl);
 
         for (Map.Entry<String, String> entry : schemaMap.entrySet()) {
-            log.info("Deleting " + deleteSchemaRequestURL + entry.getValue().toString());
+            log.info("Deleting " + deleteSchemaRequestUrl + entry.getValue().toString());
             Response response =
                     given()
                             .header("Content-Type", "application/json")
                             .header("Authorization", jwt)
-                            .delete(deleteSchemaRequestURL + entry.getValue().toString())
+                            .delete(deleteSchemaRequestUrl + entry.getValue().toString())
                             .then()
                             .statusCode(200)
                             .extract()
                             .response();
-            log.info("-------------------------------------------------------------------------------------");
         }
     }
 

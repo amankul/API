@@ -15,9 +15,7 @@ public class PropertiesLoader {
         try {
             fi= new FileInputStream(path);
             pro.load(fi);
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (IOException ioe) {
+        }  catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
