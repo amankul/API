@@ -26,19 +26,24 @@ public class Schema {
     private static String jwt = null;
     private int orgId;
     private static String postSchemaRequestURL = null;
-    private String containerName;
+    public static String containerName;
     private String name;
     private static Logger log;
     protected static HashMap<String, String> schemaMap = new HashMap<String, String>();
 
 
+    @BeforeSuite
+    @Parameters("containerName")
+    private void setUpSuite(String containerName) {
+        this.containerName=containerName;
+    }
+
+
     @BeforeClass
-    @Parameters({"env", "orgId", "containerName"})
-    private void setEnv(String env, int orgId, String containerName) {
+    @Parameters({"env", "orgId" })
+    private void setEnv(String env, int orgId) {
 
         log = Logger.getLogger(Schema.class);
-
-        this.containerName = containerName;
         this.orgId = orgId;
 
         jwt = JWTUtils.getJWTForAdmin(env, orgId);

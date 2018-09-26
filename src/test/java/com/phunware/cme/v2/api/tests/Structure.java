@@ -11,10 +11,10 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
+import static com.phunware.cme.v2.api.tests.Schema.containerName;
 import static io.restassured.RestAssured.given;
 
 
@@ -63,7 +63,6 @@ public class Structure {
     private static String beaconStructureName = "Beacon";
     private static String alertsStructureName = "Alerts";
     private static String alertStructureName = "Alert";
-    private String containerName;
     private int structureId;
     protected static String containerId = null;
 
@@ -71,12 +70,11 @@ public class Structure {
 
 
     @BeforeClass
-    @Parameters({"env", "orgId", "postStructureFilePath", "containerName"})
-    private void setEnv(String env, int orgId, String postStructureFilePath, String containerName) throws IOException {
+    @Parameters({"env", "orgId", "postStructureFilePath"})
+    private void setEnv(String env, int orgId, String postStructureFilePath) throws IOException {
 
         log = Logger.getLogger(Structure.class);
         jwt = JWTUtils.getJWTForAdmin(env, orgId);
-        this.containerName = containerName;
 
 
         if ("PROD".equalsIgnoreCase(env)) {
@@ -106,7 +104,7 @@ public class Structure {
         String requestBody = FileUtils.getJsonTextFromFile(postContainerFilePath);
         JSONObject requestBodyJSONObject = new JSONObject(requestBody);
         JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
-        requestBodyData.put("name", containerName + dateTime);
+        requestBodyData.put("name", Schema.containerName + dateTime);
 
         //Printing Request Details
         log.info("REQUEST-URL:POST-" + postContainerRequestURL);
@@ -180,7 +178,7 @@ public class Structure {
     @DataProvider(name = "dignityStructure")
     public Object[][] dignityStructureDataSet() {
 
-        switch (containerName) {
+        switch (Schema.containerName) {
             case "DignityHealth":
                 return new Object[][]{
                         {containerId, applicationsStructureName, structureTypeARRAY, applicationsStructureName, "", ""},

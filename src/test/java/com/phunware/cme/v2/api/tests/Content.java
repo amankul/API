@@ -20,6 +20,7 @@ import java.util.Map;
 import static com.phunware.cme.v2.api.tests.Structure.structureMap;
 import static com.phunware.cme.v2.api.tests.Structure.containerId;
 import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
+import static com.phunware.cme.v2.api.tests.Schema.containerName;
 import static io.restassured.RestAssured.given;
 
 
@@ -36,15 +37,13 @@ public class Content {
     private static String deleteSchemaRequestURL;
     private String contentId;
 
-    protected String containerName;
     protected static String dateTime = null;
     protected static HashMap<String, String> contentMap = new HashMap<String, String>();
 
 
     @BeforeClass
-    @Parameters({"env", "orgId", "containerName"})
-    private void setEnv(String env, int orgId, String containerName) throws IOException {
-        this.containerName = containerName;
+    @Parameters({"env", "orgId"})
+    private void setEnv(String env, int orgId) throws IOException {
         log = Logger.getLogger(Structure.class);
         jwt = JWTUtils.getJWTForAdmin(env, orgId);
 
@@ -167,7 +166,7 @@ public class Content {
     @DataProvider(name = "usesParameter")
     public Object[][] provideTestParam(ITestContext context) {
 
-        switch (containerName) {
+        switch (Schema.containerName) {
             case "DignityHealth":
                 return new Object[][]{
                         {context.getCurrentXmlTest().getParameter("postContentApplication"), structureMap.get("Application"), null},
