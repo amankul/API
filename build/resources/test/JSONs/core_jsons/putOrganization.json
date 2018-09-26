@@ -1,6 +1,0 @@
-{
-  "data": {
-    "name": "OrgNameToBeChanged",
-    "services": ["analytics","alerts","content","marketing-automation"]
-  }
-}
