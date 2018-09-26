@@ -23,7 +23,6 @@ import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
 import static io.restassured.RestAssured.given;
 
 
-
 /**
  * Created by VinayKarumuri on 8/10/18.
  */
@@ -47,7 +46,7 @@ public class Content {
     private void setEnv(String env, int orgId, String containerName) throws IOException {
         this.containerName = containerName;
         log = Logger.getLogger(Structure.class);
-        jwt= JWTUtils.getJWTForAdmin(env,orgId);
+        jwt = JWTUtils.getJWTForAdmin(env, orgId);
 
 
         if ("PROD".equalsIgnoreCase(env)) {
@@ -71,7 +70,7 @@ public class Content {
      * Creating Content for container
      **/
     @Test(dataProvider = "usesParameter", priority = 0)
-    public void verify_Post_Content(String path, Integer structureId, String  parentId) throws IOException {
+    public void verify_Post_Content(String path, Integer structureId, String parentId) throws IOException {
 
 
         log.info("File Path for Content JSON: " + path);
@@ -111,6 +110,12 @@ public class Content {
 
     }
 
+
+    @Test(priority = 0)
+    public void verify_Get_Content() {
+
+    }
+
     /** Deleting Container. This will delete content and structure contained it." **/
     @Test(priority = 1)
     public void deleteContainer() {
@@ -133,7 +138,9 @@ public class Content {
 
     }
 
-    /** Schema can be deleted after the parent Container has been deleted. **/
+    /**
+     * Schema can be deleted after the parent Container has been deleted.
+     **/
     @Test(priority = 2)
     public void deleteSchema() {
         // logging Request Details
@@ -141,7 +148,7 @@ public class Content {
         log.info("Deleting the Schema");
         log.info("REQUEST-URL:DELETE-" + deleteSchemaRequestURL);
 
-        for (Map.Entry<String,String> entry: schemaMap.entrySet()) {
+        for (Map.Entry<String, String> entry : schemaMap.entrySet()) {
             log.info("Deleting " + deleteSchemaRequestURL + entry.getValue().toString());
             Response response =
                     given()
@@ -155,7 +162,6 @@ public class Content {
             log.info("-------------------------------------------------------------------------------------");
         }
     }
-
 
 
     @DataProvider(name = "usesParameter")
@@ -184,11 +190,11 @@ public class Content {
                 };
             case "Directory":
                 return new Object[][]{
-                        {context.getCurrentXmlTest().getParameter("postContentAAA"),structureMap.get("Item"),"Items"},
-                        {context.getCurrentXmlTest().getParameter("postContentAthleta"),structureMap.get("Item"),"Items"},
-                        {context.getCurrentXmlTest().getParameter("postContentBSpot"),structureMap.get("Item"),"Items"},
-                        {context.getCurrentXmlTest().getParameter("postContentStarbucks"),structureMap.get("Item"),"Items"},
-                        {context.getCurrentXmlTest().getParameter("postContentSubway"),structureMap.get("Item"),"Items"}
+                        {context.getCurrentXmlTest().getParameter("postContentAAA"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentAthleta"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentBSpot"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentStarbucks"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentSubway"), structureMap.get("Item"), "Items"}
                 };
             default:
                 return null;

@@ -4,6 +4,8 @@ target
 .settings/
 .gradle
 .idea
+build/
+.class
 
 
 Logging

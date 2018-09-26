@@ -69,8 +69,7 @@ public class JWTUtils {
       log.error("Error in Generating JWT Token in " + env);
       log.error(e.getMessage());
     }
-
-
+    log.info(jwtToken);
     return jwtToken;
   }
 

@@ -39,9 +39,9 @@ public class Schema {
         log = Logger.getLogger(Schema.class);
 
         this.containerName = containerName;
-        this.orgId=orgId;
+        this.orgId = orgId;
 
-        jwt = JWTUtils.getJWTForAdmin(env,orgId);
+        jwt = JWTUtils.getJWTForAdmin(env, orgId);
 
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
@@ -52,7 +52,7 @@ public class Schema {
             Assert.fail("Environment is not set properly. Please check your testng xml file");
         }
         postSchemaRequestURL = serviceEndPoint + CmeV2_API_Constants.SCHEMAS_END_POINT;
-        log.info("POST Schema URL: "+ postSchemaRequestURL);
+        log.info("POST Schema URL: " + postSchemaRequestURL);
     }
 
 
@@ -78,7 +78,7 @@ public class Schema {
             name = name.substring(10, name.lastIndexOf('.'));
         }
 
-        log.info("orgId: "+orgId);
+        log.info("orgId: " + orgId);
         requestBodyData.put("name", name + datetime);
         requestBodyData.put("orgId", orgId);
 
@@ -90,7 +90,7 @@ public class Schema {
         Response response =
                 given()
                         .header("Content-Type", "application/json")
-                        .header("Authorization", jwt)
+                        .auth().oauth2(jwt)
                         .body(requestBodyJSONObject.toString())
                         .post(postSchemaRequestURL)
                         .then()
@@ -101,11 +101,8 @@ public class Schema {
         log.info("RESPONSE: " + response.asString());
         Assert.assertEquals(response.getStatusCode(), 200);
 
-        //JSON response Pay load validations
-        if (response.getStatusCode() == 200) {
             // Get schema ID and put it into hash map
             schemaMap.put(name, response.getBody().jsonPath().get("id"));
-        }
     }
 
 

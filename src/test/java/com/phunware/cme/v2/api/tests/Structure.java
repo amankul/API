@@ -26,46 +26,46 @@ public class Structure {
 
     private static Logger log;
     private static String serviceEndPoint = null;
-    private  static String jwt = null;
-    private  static String postStructureRequestURL = null;
-    private  static String postContainerRequestURL = null;
-    private  static String dateTime = null;
-    private  static String structureRequestBody = null;
-    private  static final String structureTypeOBJECT = "object";
-    private  static final String structureTypeARRAY = "array";
-    private  static String applicationsStructureName = "Applications";
-    private  static String applicationStructureName = "Application";
-    private  static String platformsStructureName = "Platforms";
-    private  static String platformStructureName = "Platform";
-    private  static String appVersionStructureName = "AppVersion";
-    private  static String cachingSettingsStructureName = "CachingSettings";
-    private  static String advertisementSettingsStructureName = "AdvertisementSettings";
-    private  static String settingsStructureName = "Settings";
-    private  static String platformVenuesStructureName = "Platform_Venues";
-    private  static String platformVenueStructureName = "Platform_Venue";
-    private  static String platformDatabasesStructureName = "Platform_Databases";
-    private  static String platformDatabaseStructureName = "Platform_Database";
-    private  static String venueDatabasesStructureName = "Venue_Databases";
-    private  static String venueDatabaseStructureName = "Venue_Database";
-    private  static String items_StructureName = "Items";
-    private  static String item_StructureName = "Item";
-    private  static String venuesStructureName = "Venues";
-    private  static String venueStructureName = "Venue";
-    private  static String campusesStructureName = "Campuses";
-    private  static String campusStructureName = "Campus";
-    private  static String buildingsStructureName = "Buildings";
-    private  static String buildingStructureName = "Building";
-    private  static String floorsStructureName = "Floors";
-    private  static String floorStructureName = "Floor";
-    private  static String mapSettingsStructureName = "MapSettings";
-    private  static String geoSettingsStructureName = "GeoSettings";
-    private  static String beaconsStructureName = "Beacons";
-    private  static String beaconStructureName = "Beacon";
-    private  static String alertsStructureName = "Alerts";
-    private  static String alertStructureName = "Alert";
+    private static String jwt = null;
+    private static String postStructureRequestURL = null;
+    private static String postContainerRequestURL = null;
+    private static String dateTime = null;
+    private static String structureRequestBody = null;
+    private static final String structureTypeOBJECT = "object";
+    private static final String structureTypeARRAY = "array";
+    private static String applicationsStructureName = "Applications";
+    private static String applicationStructureName = "Application";
+    private static String platformsStructureName = "Platforms";
+    private static String platformStructureName = "Platform";
+    private static String appVersionStructureName = "AppVersion";
+    private static String cachingSettingsStructureName = "CachingSettings";
+    private static String advertisementSettingsStructureName = "AdvertisementSettings";
+    private static String settingsStructureName = "Settings";
+    private static String platformVenuesStructureName = "Platform_Venues";
+    private static String platformVenueStructureName = "Platform_Venue";
+    private static String platformDatabasesStructureName = "Platform_Databases";
+    private static String platformDatabaseStructureName = "Platform_Database";
+    private static String venueDatabasesStructureName = "Venue_Databases";
+    private static String venueDatabaseStructureName = "Venue_Database";
+    private static String items_StructureName = "Items";
+    private static String item_StructureName = "Item";
+    private static String venuesStructureName = "Venues";
+    private static String venueStructureName = "Venue";
+    private static String campusesStructureName = "Campuses";
+    private static String campusStructureName = "Campus";
+    private static String buildingsStructureName = "Buildings";
+    private static String buildingStructureName = "Building";
+    private static String floorsStructureName = "Floors";
+    private static String floorStructureName = "Floor";
+    private static String mapSettingsStructureName = "MapSettings";
+    private static String geoSettingsStructureName = "GeoSettings";
+    private static String beaconsStructureName = "Beacons";
+    private static String beaconStructureName = "Beacon";
+    private static String alertsStructureName = "Alerts";
+    private static String alertStructureName = "Alert";
     private String containerName;
     private int structureId;
-    protected   static String containerId = null;
+    protected static String containerId = null;
 
     protected static HashMap<String, Integer> structureMap = new HashMap<String, Integer>();
 
@@ -75,7 +75,7 @@ public class Structure {
     private void setEnv(String env, int orgId, String postStructureFilePath, String containerName) throws IOException {
 
         log = Logger.getLogger(Structure.class);
-        jwt = JWTUtils.getJWTForAdmin(env,orgId);
+        jwt = JWTUtils.getJWTForAdmin(env, orgId);
         this.containerName = containerName;
 
 
@@ -127,12 +127,10 @@ public class Structure {
         log.info("RESPONSE:" + response.asString());
         Assert.assertEquals(response.getStatusCode(), 200);
 
-        //JSON response Pay load validations
-        if (response.getStatusCode() == 200) {
             //JSON response Pay load validations
             containerId = response.getBody().jsonPath().get("id");
             log.info("ContainerId = " + containerId);
-        }
+
     }
 
     /**
@@ -156,29 +154,25 @@ public class Structure {
         log.info("REQUEST-URL: POST- " + postStructureRequestURL);
         log.info("REQUEST-URL: BODY- " + requestBodyJSONObject.toString());
 
-            //Extracting response after status code validation
-            Response response =
-                    given()
-                            .header("Content-Type", "application/json")
-                            .header("Authorization", jwt)
-                            .body(requestBodyJSONObject.toString())
-                            .post(postStructureRequestURL)
-                            .then()
-                            .extract()
-                            .response();
-            log.info("RESPONSE: " + response.asString());
+        //Extracting response after status code validation
+        Response response =
+                given()
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", jwt)
+                        .body(requestBodyJSONObject.toString())
+                        .post(postStructureRequestURL)
+                        .then()
+                        .extract()
+                        .response();
+        log.info("RESPONSE: " + response.asString());
 
-            Assert.assertEquals(response.getStatusCode(),200);
-
-        //JSON response Pay load validations
-        if(response.getStatusCode()==200) {
+        Assert.assertEquals(response.getStatusCode(), 200);
             structureId = response.getBody().jsonPath().get("id");
             log.info("NAME: " + name);
             log.info("structureId: " + structureId);
             structureMap.put(name, structureId);
             log.info("STRUCTURE MAP: " + structureMap);
             log.info("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        }
 
     }
 
