@@ -2,19 +2,22 @@
 
 <suite name="CME V2 API TEST SUITE ">
     <parameter name="env" value="STAGE"/>
-    <parameter name="jwt"
-               value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjYyMywiZW1haWwiOiJha3Vsa2FybmlAcGh1bndhcmUuY29tIiwiZmlyc3RfbmFtZSI6IkFtaXQiLCJsYXN0X25hbWUiOiJLdWxrYXJuaSIsInNlc3Npb25faWQiOiJhY2M3ZmUyNGJjYmEzYjU1MmQ5ZGJmOGJjZDljNzRmNWZlZjliMDUyIiwib3JnX2lkIjoxMDksIm9yZ19uYW1lIjoiUUEgVGVzdCIsIm9yZ3MiOltdLCJpYXQiOjE1MzQxNzczODQsImV4cCI6MTUzNDI2Mzc5M30.fP7Rn7dgNz16Nlp6MunCY0fwp-Rawp7aBjiEQJ3p0LY"/>
-
+    <parameter name="containerName" value="Directory" />
     <!--SCHEMAS-->
-    <parameter name="postSchemaDirectory" value="src/test/resources/cme_v2_jsons/WeBuildApps/PostSchemaDirectory.json"/>
+    <parameter name="postSchemaDirectory" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postSchemaDirectory.json"/>
 
     <!--STRUCTURE-->
-    <parameter name="postStructureFilePath" value="src/test/resources/cme_v2_jsons/"/>
-
+    <parameter name="postStructureFilePath" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postStructure.json"/>
 
     <!--CONTAINER-->
-    <parameter name="postContainerFilePath" value="src/test/resources/cme_v2_jsons/"/>
+    <parameter name="postContainerFilePath" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContainer.json"/>
 
+    <!--CONTENT-->
+    <parameter name="postContentAAA" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAAA.json"/>
+    <parameter name="postContentAthleta" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAthleta.json"/>
+    <parameter name="postContentBSpot" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentBSpot.json"/>
+    <parameter name="postContentStarbucks" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentStarbucks.json"/>
+    <parameter name="postContentSubway" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentSubway.json"/>
 
     <!--DATA-->
     <parameter name="orgId" value="109"/>
@@ -23,6 +26,7 @@
         <classes>
             <class name="com.phunware.cme.v2.api.tests.Schema"/>
             <class name="com.phunware.cme.v2.api.tests.Structure"/>
+            <class name="com.phunware.cme.v2.api.tests.Content"/>
         </classes>
     </test>
 

@@ -3,6 +3,7 @@ package com.phunware.cme.v2.api.tests;
 import com.phunware.cmev2_api.constants.CmeV2_API_Constants;
 import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
+import com.phunware.utility.JWTUtils;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -13,8 +14,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
+import static com.phunware.cme.v2.api.tests.Schema.containerName;
 import static io.restassured.RestAssured.given;
-
 
 
 /**
@@ -23,193 +24,203 @@ import static io.restassured.RestAssured.given;
 
 public class Structure {
 
-  static Logger log;
-  //public String dynamicValue;
-  FileUtils fileUtils = new FileUtils();
-  public static String SERVICE_END_POINT = null;
-  public static String JWT = null;
-  public static String postStructureRequestURL = null;
-  public static String postContainerRequestURL = null;
-  public static String dateTime = null;
-  public static String structureRequestBody = null;
-  public static String containerId = null;
-  public static final String structureTypeOBJECT = "object";
-  public static final String structureTypeARRAY = "array";
-  public static String applicationsStructureName = "Applications";
-  public static String applicationStructureName = "Application";
-  public static String platformsStructureName = "Platforms";
-  public static String platformStructureName = "Platform";
-  public static String appVersionStructureName = "AppVersion";
-  public static String cachingSettingsStructureName = "CachingSettings";
-  public static String advertisementSettingsStructureName = "AdvertisementSettings";
-  public static String settingsStructureName = "Settings";
-  public static String platformvenuesStructureName = "Platform_Venues";
-  public static String platformvenueStructureName = "Platform_Venue";
-  public static String platformdatabasesStructureName = "Platform_Databases";
-  public static String platformdatabaseStructureName = "Platform_Database";
-  public static String venuedatabasesStructureName = "Venue_Databases";
-  public static String venuedatabaseStructureName = "Venue_Database";
+    private static Logger log;
+    private static String serviceEndPoint = null;
+    private static String jwt = null;
+    private static String postStructureRequestURL = null;
+    private static String postContainerRequestURL = null;
+    private static String dateTime = null;
+    private static String structureRequestBody = null;
+    private static final String STRUCTURE_TYPE_OBJECT = "object";
+    private static final String STRUCTURE_TYPE_ARRAY = "array";
+    private static String applicationsStructureName = "Applications";
+    private static String applicationStructureName = "Application";
+    private static String platformsStructureName = "Platforms";
+    private static String platformStructureName = "Platform";
+    private static String appVersionStructureName = "AppVersion";
+    private static String cachingSettingsStructureName = "CachingSettings";
+    private static String advertisementSettingsStructureName = "AdvertisementSettings";
+    private static String settingsStructureName = "Settings";
+    private static String platformVenuesStructureName = "Platform_Venues";
+    private static String platformVenueStructureName = "Platform_Venue";
+    private static String platformDatabasesStructureName = "Platform_Databases";
+    private static String platformDatabaseStructureName = "Platform_Database";
+    private static String venueDatabasesStructureName = "Venue_Databases";
+    private static String venueDatabaseStructureName = "Venue_Database";
+    private static String items_StructureName = "Items";
+    private static String item_StructureName = "Item";
+    private static String venuesStructureName = "Venues";
+    private static String venueStructureName = "Venue";
+    private static String campusesStructureName = "Campuses";
+    private static String campusStructureName = "Campus";
+    private static String buildingsStructureName = "Buildings";
+    private static String buildingStructureName = "Building";
+    private static String floorsStructureName = "Floors";
+    private static String floorStructureName = "Floor";
+    private static String mapSettingsStructureName = "MapSettings";
+    private static String geoSettingsStructureName = "GeoSettings";
+    private static String beaconsStructureName = "Beacons";
+    private static String beaconStructureName = "Beacon";
+    private static String alertsStructureName = "Alerts";
+    private static String alertStructureName = "Alert";
+    private int structureId;
+    protected static String containerId = null;
 
-  public static String venuesStructureName = "Venues";
-  public static String venueStructureName = "Venue";
-  public static String campusesStructureName = "Campuses";
-  public static String campusStructureName = "Campus";
-  public static String buildingsStructureName = "Buildings";
-  public static String buildingStructureName = "Building";
-  public static String floorsStructureName = "Floors";
-  public static String floorStructureName = "Floor";
-  public static String mapSettingsStructureName = "MapSettings";
-  public static String geoSettingsStructureName = "GeoSettings";
-  public static String beaconsStructureName = "Beacons";
-  public static String beaconStructureName = "Beacon";
-  public static String alertsStructureName = "Alerts";
-  public static String alertStructureName = "Alert";
-
-
-  public static int applicationstructureId=0;
-
-
-  public static HashMap<String,Integer> structureMap = new HashMap<String,Integer>();
+    protected static HashMap<String, Integer> structureMap = new HashMap<String, Integer>();
 
 
-  @BeforeClass
-  @Parameters({"env","jwt","orgId","postStructureFilePath"})
-  public void setEnv(String env, String jwt, String orgId, String postStructureFilePath) throws IOException{
-    log = Logger.getLogger(Structure.class);
-    JWT = jwt;
-    if ("PROD".equalsIgnoreCase(env)) {
-      SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
-    } else if ("STAGE".equalsIgnoreCase(env)) {
-      SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
-    } else {
-      log.error("Environment is not set properly. Please check your testng xml file");
-      Assert.fail("Environment is not set properly. Please check your testng xml file");
+    @BeforeClass
+    @Parameters({"env", "orgId", "postStructureFilePath"})
+    private void setEnv(String env, int orgId, String postStructureFilePath) throws IOException {
+
+        log = Logger.getLogger(Structure.class);
+        jwt = JWTUtils.getJWTForAdmin(env, orgId);
+
+
+        if (env.equalsIgnoreCase("PROD")) {
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
+        } else if (env.equalsIgnoreCase("STAGE")) {
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
+        } else {
+            log.error("Environment is not set properly. Please check your testng xml file");
+            Assert.fail("Environment is not set properly. Please check your testng xml file");
+        }
+        postStructureRequestURL = serviceEndPoint + CmeV2_API_Constants.STRUCTURE_END_POINT;
+        postContainerRequestURL = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT;
+        log.info("Container Url: " + postContainerRequestURL);
+        dateTime = HelperMethods.getDateAsString();
+        structureRequestBody = FileUtils.getJsonTextFromFile(postStructureFilePath);
     }
-    postStructureRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.STRUCTURE_END_POINT;
-    postContainerRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTAINERS_END_POINT;
-    log.info("Container " + postContainerRequestURL);
-    dateTime = HelperMethods.getDateAsString();
-    structureRequestBody = fileUtils.getJsonTextFromFile(postStructureFilePath);
-  }
 
 
- /** Creating container for Dignity Health **/
-  @Parameters("postContainerFilePath")
-  @Test(priority = 1)
-  public void  verify_Post_Container(String postContainerFilePath) throws IOException {
+    /**
+     * Creating container
+     **/
+    @Parameters("postContainerFilePath")
+    @Test(priority = 1)
+    public void verify_Post_Container(String postContainerFilePath) throws IOException {
 
-    //Request Details
-    //log.info(postContainerFilePath);
-    String requestBody = fileUtils.getJsonTextFromFile(postContainerFilePath);
-    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
-    JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
-    requestBodyData.put("name", "Dignity Health "+dateTime);
+        String requestBody = FileUtils.getJsonTextFromFile(postContainerFilePath);
+        JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+        JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
+        requestBodyData.put("name", Schema.containerName + dateTime);
 
-    //Printing Request Details
-    log.info("REQUEST-URL:POST-" + postContainerRequestURL);
-    log.info("REQUEST-URL:BODY-" + requestBodyJSONObject.toString());
+        //Printing Request Details
+        log.info("REQUEST: POST-" + postContainerRequestURL);
+        log.info("REQUEST: BODY-" + requestBodyJSONObject.toString());
 
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", JWT)
-            .body(requestBodyJSONObject.toString())
-            .post(postContainerRequestURL)
-            .then()
-            .statusCode(200)
-            .extract()
-            .response();
+        //Extracting response after status code validation
+        Response response =
+                given()
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", jwt)
+                        .body(requestBodyJSONObject.toString())
+                        .post(postContainerRequestURL)
+                        .then()
+                        .extract()
+                        .response();
 
-    //printing response
-    log.info("RESPONSE:" + response.asString());
+        //printing response
+        log.info("RESPONSE:" + response.asString());
+        Assert.assertEquals(response.getStatusCode(), 200);
 
-    //JSON response Pay load validations
-    containerId = response.getBody().jsonPath().get("id");
-    log.info("ContainerId = " + containerId);
-  }
+            //JSON response Pay load validations
+            containerId = response.getBody().jsonPath().get("id");
+            log.info("ContainerId = " + containerId);
 
+    }
 
-/** Creating Structures to the above container **/
-  @Test(dataProvider = "dignityStructure", priority = 2)
-  public void verify_Post_Structure(String containerId, String name ,String type,String field ,String schemaId ,String parent) throws IOException {
+    /**
+     * Creating Structures for the above container
+     **/
+    @Test(dataProvider = "dignityStructure", priority = 2)
+    public void verify_Post_Structure(String containerId, String name, String type, String field, String schemaId, String parent) throws IOException {
 
-    //Request Details
-    JSONObject requestBodyJSONObject = new JSONObject(structureRequestBody);
-    JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
-    requestBodyData.put("containerId" , containerId );
-    requestBodyData.put("name", name + dateTime);
-    requestBodyData.put("type" , type );
-    requestBodyData.put("field", field);
-    requestBodyData.put("schemaId" , schemaId);
-    log.info("parentId " + structureMap.get(parent));
-    requestBodyData.put("parentId", structureMap.get(parent));
+        // Enough to assert containerId for NULL to verify if dataprovider is sending NULL
+        Assert.assertNotNull(containerId);
 
-
-    //Printing Request Details
-    log.info("REQUEST-URL: POST- " + postStructureRequestURL);
-    log.info("REQUEST-URL: BODY- " + requestBodyJSONObject.toString());
-
-    //Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", JWT)
-            .body(requestBodyJSONObject.toString())
-            .post(postStructureRequestURL)
-            .then()
-            .statusCode(200)
-            .extract()
-            .response();
-
-    //printing response
-    log.info("RESPONSE: " + response.asString());
-
-    //JSON response Pay load validations
-    int StructureId  = response.getBody().jsonPath().get("id");
-    log.info("NAME: " + name);
-    log.info("structureId = " + StructureId );
-    structureMap.put(name,StructureId);
-    log.info("STRUCTURE MAP: " + structureMap);
-    log.info("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-  }
+        //Request Details
+        JSONObject requestBodyJSONObject = new JSONObject(structureRequestBody);
+        JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
+        requestBodyData.put("containerId", containerId);
+        requestBodyData.put("name", name + dateTime);
+        requestBodyData.put("type", type);
+        requestBodyData.put("field", field);
+        requestBodyData.put("schemaId", schemaId);
+        log.info("parentId for Structure: " + structureMap.get(parent));
+        requestBodyData.put("parentId", structureMap.get(parent));
 
 
-  @DataProvider(name = "dignityStructure")
-  public Object[][] dignityStructureDataSet() {
-    return new Object[][]{
+        log.info("REQUEST: POST- " + postStructureRequestURL);
+        log.info("REQUEST: BODY- " + requestBodyJSONObject.toString());
 
-            {containerId,applicationsStructureName, structureTypeARRAY,applicationsStructureName, "", ""},
-            {containerId,applicationStructureName, structureTypeOBJECT,applicationStructureName, schemaMap.get("VscApp"), applicationsStructureName},
-            {containerId,platformsStructureName, structureTypeARRAY,platformsStructureName, "", applicationStructureName},
-            {containerId,platformStructureName, structureTypeOBJECT,platformStructureName, schemaMap.get("VscPlatform"), platformsStructureName},
-            {containerId,appVersionStructureName, structureTypeOBJECT,appVersionStructureName, schemaMap.get("VscAppVersion"), platformStructureName},
-            {containerId,cachingSettingsStructureName, structureTypeOBJECT,cachingSettingsStructureName, schemaMap.get("VscPreCachingConfiguration"), platformStructureName},
-            {containerId,advertisementSettingsStructureName, structureTypeOBJECT,advertisementSettingsStructureName, schemaMap.get("VscAdvertisingSetting"), platformStructureName},
-            {containerId,settingsStructureName, structureTypeOBJECT,settingsStructureName, schemaMap.get("VscSettings"), platformStructureName},
-            {containerId,platformvenuesStructureName, structureTypeARRAY,platformvenuesStructureName, "", platformStructureName},
-            {containerId,platformvenueStructureName, structureTypeOBJECT,platformvenueStructureName, schemaMap.get("VscVenue"), platformvenuesStructureName},
-            {containerId,platformdatabasesStructureName, structureTypeARRAY,platformdatabasesStructureName, "", platformStructureName},
-            {containerId,platformdatabaseStructureName, structureTypeOBJECT,platformdatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformdatabasesStructureName},
-            {containerId,venuedatabasesStructureName, structureTypeARRAY,venuedatabasesStructureName, "", platformvenueStructureName},
-            {containerId,venuedatabaseStructureName, structureTypeOBJECT,venuedatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venuedatabasesStructureName},
-            {containerId,venuesStructureName, structureTypeARRAY,venuesStructureName, "", ""},
-            {containerId,venueStructureName, structureTypeOBJECT,venueStructureName, schemaMap.get("VscVenue"), venuesStructureName},
-            {containerId,campusesStructureName, structureTypeARRAY,campusesStructureName, "", venueStructureName},
-            {containerId,campusStructureName, structureTypeOBJECT,campusStructureName, schemaMap.get("VscCampus"), campusesStructureName},
-            {containerId,buildingsStructureName, structureTypeARRAY,buildingsStructureName, "", campusStructureName},
-            {containerId,buildingStructureName, structureTypeOBJECT,buildingStructureName, schemaMap.get("VscBuilding"), buildingsStructureName},
-            {containerId,floorsStructureName, structureTypeARRAY,floorsStructureName, "", buildingStructureName},
-            {containerId,mapSettingsStructureName, structureTypeOBJECT,mapSettingsStructureName, schemaMap.get("VscMapSettings"), buildingStructureName},
-            {containerId,geoSettingsStructureName, structureTypeOBJECT,geoSettingsStructureName, schemaMap.get("VscGeoSettings"), buildingStructureName},
-            {containerId,floorStructureName, structureTypeOBJECT,floorStructureName, schemaMap.get("VscFloor"), floorsStructureName},
-            {containerId,beaconsStructureName, structureTypeARRAY,beaconsStructureName, "", floorStructureName},
-            {containerId,beaconStructureName, structureTypeOBJECT,beaconStructureName, schemaMap.get("VscBeacon"), beaconsStructureName},
-            {containerId,alertsStructureName, structureTypeARRAY,alertsStructureName, "", beaconStructureName},
-            {containerId,alertStructureName, structureTypeOBJECT,alertStructureName, schemaMap.get("VscProximityAlert"), alertsStructureName}
+        //Extracting response after status code validation
+        Response response =
+                given()
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", jwt)
+                        .body(requestBodyJSONObject.toString())
+                        .post(postStructureRequestURL)
+                        .then()
+                        .extract()
+                        .response();
+        log.info("RESPONSE: " + response.asString());
 
-    };
-  }
+        Assert.assertEquals(response.getStatusCode(), 200);
+            structureId = response.getBody().jsonPath().get("id");
+            log.info("NAME: " + name);
+            log.info("structureId: " + structureId);
+            structureMap.put(name, structureId);
+            log.info("STRUCTURE MAP: " + structureMap);
+
+    }
+
+
+    @DataProvider(name = "dignityStructure")
+    public Object[][] dignityStructureDataSet() {
+
+        switch (Schema.containerName) {
+            case "DignityHealth":
+                return new Object[][]{
+                        {containerId, applicationsStructureName, STRUCTURE_TYPE_ARRAY, applicationsStructureName, "", ""},
+                        {containerId, applicationStructureName, STRUCTURE_TYPE_OBJECT, applicationStructureName, schemaMap.get("VscApp"), applicationsStructureName},
+                        {containerId, platformsStructureName, STRUCTURE_TYPE_ARRAY, platformsStructureName, "", applicationStructureName},
+                        {containerId, platformStructureName, STRUCTURE_TYPE_OBJECT, platformStructureName, schemaMap.get("VscPlatform"), platformsStructureName},
+                        {containerId, appVersionStructureName, STRUCTURE_TYPE_OBJECT, appVersionStructureName, schemaMap.get("VscAppVersion"), platformStructureName},
+                        {containerId, cachingSettingsStructureName, STRUCTURE_TYPE_OBJECT, cachingSettingsStructureName, schemaMap.get("VscPreCachingConfiguration"), platformStructureName},
+                        {containerId, advertisementSettingsStructureName, STRUCTURE_TYPE_OBJECT, advertisementSettingsStructureName, schemaMap.get("VscAdvertisingSetting"), platformStructureName},
+                        {containerId, settingsStructureName, STRUCTURE_TYPE_OBJECT, settingsStructureName, schemaMap.get("VscSettings"), platformStructureName},
+                        {containerId, platformVenuesStructureName, STRUCTURE_TYPE_ARRAY, platformVenuesStructureName, "", platformStructureName},
+                        {containerId, platformVenueStructureName, STRUCTURE_TYPE_OBJECT, platformVenueStructureName, schemaMap.get("VscVenue"), platformVenuesStructureName},
+                        {containerId, platformDatabasesStructureName, STRUCTURE_TYPE_ARRAY, platformDatabasesStructureName, "", platformStructureName},
+                        {containerId, platformDatabaseStructureName, STRUCTURE_TYPE_OBJECT, platformDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformDatabasesStructureName},
+                        {containerId, venueDatabasesStructureName, STRUCTURE_TYPE_OBJECT, venueDatabasesStructureName, "", platformVenuesStructureName},
+                        {containerId, venueDatabaseStructureName, STRUCTURE_TYPE_OBJECT, venueDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venueDatabasesStructureName},
+                        {containerId, venuesStructureName, STRUCTURE_TYPE_ARRAY, venuesStructureName, "", ""},
+                        {containerId, venueStructureName, STRUCTURE_TYPE_OBJECT, venueStructureName, schemaMap.get("VscVenue"), venuesStructureName},
+                        {containerId, campusesStructureName, STRUCTURE_TYPE_ARRAY, campusesStructureName, "", venueStructureName},
+                        {containerId, campusStructureName, STRUCTURE_TYPE_OBJECT, campusStructureName, schemaMap.get("VscCampus"), campusesStructureName},
+                        {containerId, buildingsStructureName, STRUCTURE_TYPE_ARRAY, buildingsStructureName, "", campusStructureName},
+                        {containerId, buildingStructureName, STRUCTURE_TYPE_OBJECT, buildingStructureName, schemaMap.get("VscBuilding"), buildingsStructureName},
+                        {containerId, floorsStructureName, STRUCTURE_TYPE_ARRAY, floorsStructureName, "", buildingStructureName},
+                        {containerId, mapSettingsStructureName, STRUCTURE_TYPE_OBJECT, mapSettingsStructureName, schemaMap.get("VscMapSettings"), buildingStructureName},
+                        {containerId, geoSettingsStructureName, STRUCTURE_TYPE_OBJECT, geoSettingsStructureName, schemaMap.get("VscGeoSettings"), buildingStructureName},
+                        {containerId, floorStructureName, STRUCTURE_TYPE_OBJECT, floorStructureName, schemaMap.get("VscFloor"), floorsStructureName},
+                        {containerId, beaconsStructureName, STRUCTURE_TYPE_ARRAY, beaconsStructureName, "", floorStructureName},
+                        {containerId, beaconStructureName, STRUCTURE_TYPE_OBJECT, beaconStructureName, schemaMap.get("VscBeacon"), beaconsStructureName},
+                        {containerId, alertsStructureName, STRUCTURE_TYPE_ARRAY, alertsStructureName, "", beaconStructureName},
+                        {containerId, alertStructureName, STRUCTURE_TYPE_OBJECT, alertStructureName, schemaMap.get("VscProximityAlert"), alertsStructureName}
+
+                };
+            case "Directory":
+                return new Object[][]{
+                        {containerId, items_StructureName, STRUCTURE_TYPE_ARRAY, items_StructureName, "", ""},
+                        {containerId, item_StructureName, STRUCTURE_TYPE_OBJECT, item_StructureName, schemaMap.get("Directory"), items_StructureName}
+                };
+            default:
+                return null;
+        }
+    }
 
 }
+

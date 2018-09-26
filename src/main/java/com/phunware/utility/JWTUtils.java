@@ -3,13 +3,16 @@ package com.phunware.utility;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
 import java.time.Instant;
 import java.util.Date;
 import org.apache.log4j.Logger;
 
+
 /**
  * Created by VinayKarumuri on 9/7/18.
  */
+
 public class JWTUtils {
 
   private static final String JWT_SECRET_KEY_STAGE_ENV = "g7sXZBzouwh9mUttvHJoG8Wk6DH9XmAa";
@@ -32,7 +35,7 @@ public class JWTUtils {
    * SESSION ID is a constant. For the purpose of automation, we are using a new user.
    * Claims order should not be changed
    * JWT token generated will only work for the org specified.
-   * Issued at is current date
+   * Valid is current date
    * Expiration is current date + 1
    * For the purposes of API automation, Organization name can be constant.
    * This works because server will not validate the org name. so we are leveraging that here.
@@ -64,9 +67,9 @@ public class JWTUtils {
               .compact();
     }catch (Exception e){
       log.error("Error in Generating JWT Token in " + env);
+      log.error(e.getMessage());
     }
-
-
+    log.info(jwtToken);
     return jwtToken;
   }
 

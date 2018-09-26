@@ -50,9 +50,12 @@
     <orderEntry type="library" scope="TEST" name="Gradle: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.fge:msg-simple:1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.guava:guava:16.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.fge:btf:1.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.2.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.2.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.jsonwebtoken:jjwt-api:0.10.5" level="project" />
+    <orderEntry type="library" name="Gradle: io.jsonwebtoken:jjwt-impl:0.10.5" level="project" />
+    <orderEntry type="library" name="Gradle: io.jsonwebtoken:jjwt-jackson:0.10.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.9.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.9.6" level="project" />
   </component>
 </module>
