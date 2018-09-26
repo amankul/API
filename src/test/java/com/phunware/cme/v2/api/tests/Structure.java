@@ -64,10 +64,10 @@ public class Structure {
     private  static String alertsStructureName = "Alerts";
     private  static String alertStructureName = "Alert";
     private String containerName;
-    public  static String containerId = null;
+    private int structureId;
+    protected   static String containerId = null;
 
-
-    public static HashMap<String, Integer> structureMap = new HashMap<String, Integer>();
+    protected static HashMap<String, Integer> structureMap = new HashMap<String, Integer>();
 
 
     @BeforeClass
@@ -120,18 +120,20 @@ public class Structure {
                         .body(requestBodyJSONObject.toString())
                         .post(postContainerRequestURL)
                         .then()
-                        .statusCode(200)
                         .extract()
                         .response();
 
         //printing response
         log.info("RESPONSE:" + response.asString());
+        Assert.assertEquals(response.getStatusCode(), 200);
 
         //JSON response Pay load validations
-        containerId = response.getBody().jsonPath().get("id");
-        log.info("ContainerId = " + containerId);
+        if (response.getStatusCode() == 200) {
+            //JSON response Pay load validations
+            containerId = response.getBody().jsonPath().get("id");
+            log.info("ContainerId = " + containerId);
+        }
     }
-
 
     /**
      * Creating Structures for the above container
@@ -166,15 +168,17 @@ public class Structure {
                             .response();
             log.info("RESPONSE: " + response.asString());
 
-            response.then().equals(200);
+            Assert.assertEquals(response.getStatusCode(),200);
 
         //JSON response Pay load validations
-        int StructureId = response.getBody().jsonPath().get("id");
-        log.info("NAME: " + name);
-        log.info("structureId = " + StructureId);
-        structureMap.put(name, StructureId);
-        log.info("STRUCTURE MAP: " + structureMap);
-        log.info("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        if(response.getStatusCode()==200) {
+            structureId = response.getBody().jsonPath().get("id");
+            log.info("NAME: " + name);
+            log.info("structureId: " + structureId);
+            structureMap.put(name, structureId);
+            log.info("STRUCTURE MAP: " + structureMap);
+            log.info("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        }
 
     }
 
@@ -197,7 +201,7 @@ public class Structure {
                         {containerId, platformVenueStructureName, structureTypeOBJECT, platformVenueStructureName, schemaMap.get("VscVenue"), platformVenuesStructureName},
                         {containerId, platformDatabasesStructureName, structureTypeARRAY, platformDatabasesStructureName, "", platformStructureName},
                         {containerId, platformDatabaseStructureName, structureTypeOBJECT, platformDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformDatabasesStructureName},
-                        {containerId, venueDatabasesStructureName, structureTypeARRAY, venueDatabasesStructureName, "", platformVenuesStructureName},
+                        {containerId, venueDatabasesStructureName, structureTypeOBJECT, venueDatabasesStructureName, "", platformVenuesStructureName},
                         {containerId, venueDatabaseStructureName, structureTypeOBJECT, venueDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venueDatabasesStructureName},
                         {containerId, venuesStructureName, structureTypeARRAY, venuesStructureName, "", ""},
                         {containerId, venueStructureName, structureTypeOBJECT, venueStructureName, schemaMap.get("VscVenue"), venuesStructureName},

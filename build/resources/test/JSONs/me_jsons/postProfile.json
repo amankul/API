@@ -1,0 +1,24 @@
+{
+  "name": "HondaCarNonPlatinum",
+  "description": "HondaCarNonPlatinum",
+  "enabled": true,
+  "groups": [
+    {
+      "sequenceNumber": 1,
+      "groupOperator": "AND",
+      "attributes": [
+        {
+          "attributeMetadataName": "car",
+          "operator": "Equal",
+          "value": "honda"
+        },
+        {
+          "attributeMetadataName": "member",
+          "operator": "NotEqual",
+          "value": "platinum"
+        }
+      ]
+    }
+  ],
+  "profileOperator": "AND"
+}

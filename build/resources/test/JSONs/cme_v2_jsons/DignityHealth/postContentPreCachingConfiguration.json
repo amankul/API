@@ -1,0 +1,13 @@
+
+{
+  "containerId": "582b81db00fbc8dc79000182",
+  "structureId": 17,
+  "parentId": "58a2385bae1ce97e08d9022c",
+  "data":
+  {
+    "vscPrecachingName" : "CacheSettings",
+    "vscDirectoryPrecaching": true,
+    "vscEventsPrecaching" : true,
+    "vscPOIPrecaching" : false
+  }
+}

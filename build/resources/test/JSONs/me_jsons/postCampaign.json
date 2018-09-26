@@ -1,0 +1,31 @@
+{
+  "enabled": true,
+  "campaignName": "CampaignName",
+  "description": "Campaign Description",
+  "campaignType": "BROADCAST",
+  "startDate": "2016-07-30 16:31:00",
+  "endDate": "2016-07-30 16:31:00",
+  "repeatFrequency": 0,
+  "targetTimeZone": "Device_Time_Zone",
+  "actionTitle": "Promotion Title",
+  "actionHTML": "<p>PROMO ACTION HTML </p>\n",
+  "messageMetadata": {
+    "Key": "Value"
+  },
+  "actionType": "EDITOR",
+  "locationTags": [
+    "qa"
+  ],
+  "profiles": [
+    445
+  ],
+  "notificationTitle": "Notification Title",
+  "notificationMessage": "Notification Message",
+  "createdById": 1,
+  "modifiedById": 1,
+  "archived": false,
+  "targetedEntryLocationTags": [
+    "austin"
+  ],
+  "targetedEntryEndDate": "2016-05-05 10:15:00"
+}

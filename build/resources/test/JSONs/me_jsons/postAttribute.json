@@ -1,0 +1,12 @@
+{
+  "name": "loyalty_status",
+  "allowedValues":
+  [
+    "GOLD",
+    "SILVER",
+    "PLATINUM",
+    "DIAMOND"
+  ],
+  "enabled": true,
+  "attributeType": "ENUM"
+}

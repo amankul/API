@@ -1,0 +1,92 @@
+
+{
+  "data": {
+    "attributes": [],
+    "description": "The Map settings",
+    "fields": [
+      {
+        "label": "Map Settings Name",
+        "field": "vscMapSettingsName",
+        "description": "The name for these settings.",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Default Floor Number",
+        "field": "vscMapDefaultFloor",
+        "description": "The default floor number (1 index based) for this building.",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Zoom Level",
+        "field": "vscMapZoomLevel",
+        "description": "The default zoom level for this building",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "integer"
+      },
+      {
+        "label": "Camera Eye Altitude",
+        "field": "vscMapEyeAltitude",
+        "description": "The default eye altitude for the camera",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "decimal"
+      },
+      {
+        "label": "Android Senion Customer Identifier",
+        "field": "vscSenionCustomerId",
+        "description": "Customer Identifier for the Senion Indoor Location Provider",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Android Senion Map Identifier",
+        "field": "vscSenionMapId",
+        "description": "Map Identifier for the Senion Indoor Location Provider",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "iOS Senion Customer Identifier\t",
+        "field": "vscSenionCustomerIdiOS",
+        "description": "The customer id for the senion indoor location provider for iOS",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "iOS Senion Map Identifier",
+        "field": "vscSenionMapIdiOS",
+        "description": "The map identifier for the senion indoor location provider for iOS",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Android MSE Map Identifier\t",
+        "field": "vscMSEMapId",
+        "description": "The map identifier for the MSE indoor location provider for Android",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "iOS MSE Map Identifier\t",
+        "field": "vscMSEMapIdiOS",
+        "description": "The map identifier for the MSE indoor location provider for iOS",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      }
+    ],
+    "name": "VSC - Map Settings",
+    "orgId": 109,
+    "tags": []
+  }
+}

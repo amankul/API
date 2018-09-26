@@ -35,11 +35,11 @@ public class Content {
     private static String postContentRequestURL;
     private static String deleteContainerRequestURL;
     private static String deleteSchemaRequestURL;
-    public String containerName;
     private String contentId;
 
-    public static String dateTime = null;
-    public static HashMap<String, String> contentMap = new HashMap<String, String>();
+    protected String containerName;
+    protected static String dateTime = null;
+    protected static HashMap<String, String> contentMap = new HashMap<String, String>();
 
 
     @BeforeClass
@@ -48,13 +48,15 @@ public class Content {
         this.containerName = containerName;
         log = Logger.getLogger(Structure.class);
         jwt= JWTUtils.getJWTForAdmin(env,orgId);
+
+
         if ("PROD".equalsIgnoreCase(env)) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
         } else if ("STAGE".equalsIgnoreCase(env)) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
         } else {
-            log.error("Environment is not set properly. Please check your testng xml file");
-            Assert.fail("Environment is not set properly. Please check your testng xml file");
+            log.error("Environment is not set properly. Please check testng xml.");
+            Assert.fail("Environment is not set properly. Please check testng xml.");
         }
         postContentRequestURL = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT;
         deleteContainerRequestURL = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
@@ -71,8 +73,8 @@ public class Content {
     @Test(dataProvider = "usesParameter", priority = 0)
     public void verify_Post_Content(String path, Integer structureId, String  parentId) throws IOException {
 
-        //delete this variable if unused
-        //String datetime = HelperMethods.getDateAsString();
+
+        log.info("File Path for Content JSON: " + path);
         String requestBody = FileUtils.getJsonTextFromFile(path);
         JSONObject requestBodyJSONObject = new JSONObject(requestBody);
         requestBodyJSONObject.put("containerId", containerId);
@@ -97,18 +99,16 @@ public class Content {
 
         // printing response
         log.info("RESPONSE:" + response.asString());
-        log.info("RESPONSE:" + response.body());
 
         response.then().statusCode(200);
         contentId = response.getBody().jsonPath().get("id");
-
-
         int index = path.indexOf("Content");
 
         //stripping prefix and postfix from source file name and pushing into hashMap
         String name = path.substring(index).replaceAll(".json", "").replaceAll("Content", "");
         contentMap.put(name, contentId);
         log.info("Content Map : " + contentMap);
+
     }
 
     /** Deleting Container. This will delete content and structure contained it." **/

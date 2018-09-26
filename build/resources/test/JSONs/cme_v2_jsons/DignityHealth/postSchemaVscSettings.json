@@ -1,0 +1,38 @@
+
+{
+  "data": {
+    "attributes": [],
+    "description": "Settings for the App/Platform",
+    "fields": [
+      {
+        "label": "Configuration Name",
+        "field": "vscSettingsName",
+        "description": "The name given to these settings",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Default Indoor Location Provider",
+        "field": "vscDefaultIndoorLocationProvider",
+        "description": "The Default Indoor Location Provider to load at App startup. Overrides user settings",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "selectSingle",
+        "attributes": {
+          "options": {
+            "PWMockLocationManager": "Mock Indoor Location Provider",
+            "PWMSELocationManager": "MSE Indoor Location Provider",
+            "PWSLLocationManager": "BLE Indoor Location Provider",
+            "PWFusedLocationManager": "Fused Indoor Location Provider",
+            "PWGPSLocationManager": "GPS / Apple Indoor (if available)",
+            "None": "No Indoor Location Provider"
+          }
+        }
+      }
+    ],
+    "name": "VSC - Settings",
+    "orgId": 109,
+    "tags": []
+  }
+}

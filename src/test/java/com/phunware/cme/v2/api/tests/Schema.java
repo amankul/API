@@ -29,7 +29,7 @@ public class Schema {
     private String containerName;
     private String name;
     private static Logger log;
-    public static HashMap<String, String> schemaMap = new HashMap<String, String>();
+    protected static HashMap<String, String> schemaMap = new HashMap<String, String>();
 
 
     @BeforeClass
@@ -67,7 +67,7 @@ public class Schema {
         JSONObject requestBodyData = (JSONObject) requestBodyJSONObject.get("data");
 
 
-        // DignityHealth json's have a VSC prefix in name and so making exception here.
+        // DignityHealth json's have a VSC prefix in name and so making exception here. Should fix this in future.
         if ("DignityHealth".equals(containerName)) {
             int index = path.indexOf("Vsc");
             name = path.substring(index).replaceAll(".json", "");
@@ -95,11 +95,14 @@ public class Schema {
                         .response();
 
         // printing response
-        log.info("RESPONSE:" + response.asString());
+        log.info("RESPONSE: " + response.asString());
+        Assert.assertEquals(response.getStatusCode(), 200);
 
-        response.then().statusCode(200);
-        // Get schema ID and put it into hash map
-        schemaMap.put(name, response.getBody().jsonPath().get("id"));
+        //JSON response Pay load validations
+        if (response.getStatusCode() == 200) {
+            // Get schema ID and put it into hash map
+            schemaMap.put(name, response.getBody().jsonPath().get("id"));
+        }
     }
 
 

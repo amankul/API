@@ -1,0 +1,27 @@
+{
+  "containerId": "58bf1fce080c8f9c38eb1d73",
+  "structureId": 5906,
+  "schemaId":"58b0a9346173505d7d11c469",
+  "data":
+  {
+    "structureId": 25432,
+    "id": "59555209b7f3f8725d877b3f",
+    "updatedAt": "2017-06-29T19:16:25Z",
+    "createdAt": "2017-06-29T19:16:25Z",
+    "ancestors": [],
+    "schemaId": "592d9d1cb06c6f1c2500a5de",
+    "itemId": "",
+    "keywords": "",
+    "email": "",
+    "url": "www.subway.com",
+    "phone": "(440) 871-2101",
+    "imageURL": "http://www.crockerpark.com/wp-content/uploads/2014/06/SubwayPromenade_HeaderPhoto.jpg",
+    "thumbnail": "http://solutions-img.phunware.com/resources/5ed3d797-8b15-45b7-851c-b8d8ff0d6318/20172061092544628SubwayPromenade.png",
+    "poi": 46010491,
+    "buildingId": 57468,
+    "category": "DINE",
+    "description": "At Subway every sandwich is made fresh to order. Featuring $5 footlong subs, classics like chicken & Italian, Selects like the Subway Melt & roast beef, plus breakfast items & Kids Meals. We also cater events with Sandwich Platters, Giant Subs & Cookie Platters.\n\nMon. ‐ Fri. 7:00 AM ‐ 9:30 PM\nSat. 8:00 AM ‐ 9:30 PM\nSun. 9:00 AM ‐ 9:00 PM",
+    "level": "Ground Floor",
+    "name": "Subway"
+  }
+}
