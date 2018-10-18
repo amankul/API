@@ -25,14 +25,67 @@ public class DeviceAPI {
   private static String deviceRegKey =
       "d6BZSAdhNd8:APA91bHpVrhxUjCOHm-Tzf6HOZjtpsSUn3vgaxgMNiCdv7FjUds-OiyhjCKSFKMgHSAVNcwM5Eld8ZZz0QQzrzTRbjR7IdvzNcmiJeWu8uEi5Qr9oIPtL07vWFGLIAu2-X_FjQafXRHM_"
           + deviceId;
+  private static String clientId_android_access_key =null;
+  private static String clientId_android_signature_key =null;
+  private static String orgId =null;
+  private static String clientId =null;
+  private static String postDeviceRegistrationBodyPath = null;
+  private static String postDownloadGeofenceBodyPath = null;
+  private static String postGeofenceEntryBodyPath = null;
+  private static String postDeviceAttributesBodyPath =null;
+  private static String deviceAttributeName = null;
+  private static String deviceAttributeValue = null;
+  private static String postGeofenceExitBodyPath = null;
+  private static String postStaticIdSetBodyPath = null;
+
   private static Logger log = Logger.getLogger(DeviceAPI.class);
   private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
   @BeforeClass
-  @Parameters({"env"})
-  public void preTestSteps(String env) {
+  @Parameters({"env",
+              "clientId_android_access_key",
+              "clientId_android_signature_key",
+              "orgId",
+              "clientId",
+              "postDeviceRegistrationBodyPath",
+              "postDownloadGeofenceBodyPath",
+              "postGeofenceEntryBodyPath",
+              "postDeviceAttributesBodyPath",
+              "deviceAttributeName",
+              "deviceAttributeValue",
+              "postGeofenceExitBodyPath",
+              "postStaticIdSetBodyPath"})
+  public void preTestSteps(String env,
+                           String clientId_android_access_key,
+                           String clientId_android_signature_key,
+                           String orgId,
+                           String clientId,
+                           String postDeviceRegistrationBodyPath,
+                           String postDownloadGeofenceBodyPath,
+                           String postGeofenceEntryBodyPath,
+                           String postDeviceAttributesBodyPath,
+                           String deviceAttributeName,
+                           String deviceAttributeValue,
+                           String postGeofenceExitBodyPath,
+                           String postStaticIdSetBodyPath) {
+
+    this.clientId_android_access_key = clientId_android_access_key;
+    this.clientId_android_signature_key = clientId_android_signature_key;
+    this.clientId = clientId;
+    this.orgId = orgId;
+    this.postDeviceRegistrationBodyPath = postDeviceRegistrationBodyPath;
+    this.postDownloadGeofenceBodyPath = postDownloadGeofenceBodyPath;
+    this.postGeofenceEntryBodyPath = postGeofenceEntryBodyPath;
+    this.postDeviceAttributesBodyPath = postDeviceAttributesBodyPath;
+    this.deviceAttributeName = deviceAttributeName;
+    this.deviceAttributeValue = deviceAttributeValue;
+    this.postGeofenceExitBodyPath = postGeofenceExitBodyPath;
+    this.postStaticIdSetBodyPath = postStaticIdSetBodyPath;
+    this.postDeviceRegistrationBodyPath = postDeviceRegistrationBodyPath;
+
+
     if ("PROD".equalsIgnoreCase(env)) {
       serviceEndPoint = null;
       Assert.fail("Environment is PROD. Device API tests should not be run in PROD");
@@ -44,20 +97,8 @@ public class DeviceAPI {
     }
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postDeviceRegistrationBodyPath"
-  })
   @Test(priority = 1)
-  public void Verify_Device_Registration(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postDeviceRegistrationBodyPath)
+  public void Verify_Device_Registration()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
@@ -126,20 +167,8 @@ public class DeviceAPI {
     response.then().body(("geoFences"), hasKey("minus"));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postDownloadGeofenceBodyPath"
-  })
-  @Test
-  public void Verify_Download_Geofence(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postDownloadGeofenceBodyPath)
+  @Test(priority = 2)
+  public void Verify_Download_Geofence()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
@@ -207,20 +236,8 @@ public class DeviceAPI {
     response.then().body(("geoFences"), hasKey("minus"));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postGeofenceEntryBodyPath"
-  })
-  @Test(priority = 2)
-  public void Verify_Geofence_Entry(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postGeofenceEntryBodyPath)
+  @Test(priority = 3)
+  public void Verify_Geofence_Entry()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
@@ -274,18 +291,8 @@ public class DeviceAPI {
     response.then().body(("geoFences"), hasKey("minus"));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
-  @Test
-  public void Verify_Get_Attribute_Metadata(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId)
+  @Test(priority = 4)
+  public void Verify_Get_Attribute_Metadata()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.ATTRIBUTE_METADATA_END_POINT_1;
@@ -329,24 +336,8 @@ public class DeviceAPI {
     response.then().body("attributeType", everyItem(is("ENUM")));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postDeviceAttributesBodyPath",
-    "deviceAttributeName",
-    "deviceAttributeValue"
-  })
-  @Test
-  public void Verify_Create_Device_Attributes(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postDeviceAttributesBodyPath,
-      String deviceAttributeName,
-      String deviceAttributeValue)
+  @Test(priority = 5)
+  public void Verify_Create_Device_Attributes()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_ATTRIBUTE_API_END_POINT;
@@ -396,22 +387,8 @@ public class DeviceAPI {
     log.info("RESPONSE:" + response.asString());
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "deviceAttributeName",
-    "deviceAttributeValue"
-  })
-  @Test
-  public void Verify_Get_Device_Attributes(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String deviceAttributeName,
-      String deviceAttributeValue)
+  @Test(priority = 6)
+  public void Verify_Get_Device_Attributes()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_ATTRIBUTE_API_END_POINT;
@@ -458,20 +435,8 @@ public class DeviceAPI {
     response.then().body(("any { it.key == 'profileAttributes'}"), is(true));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postGeofenceExitBodyPath"
-  })
-  @Test
-  public void Verify_Geofence_Exit(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postGeofenceExitBodyPath)
+  @Test(priority = 7)
+  public void Verify_Geofence_Exit()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
@@ -525,20 +490,9 @@ public class DeviceAPI {
     response.then().body(("geoFences"), hasKey("minus"));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postStaticIdSetBodyPath"
-  })
-  @Test
-  public void Verify_Set_StaticId(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postStaticIdSetBodyPath)
+
+  @Test(priority = 8)
+  public void Verify_Set_StaticId()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
@@ -586,20 +540,8 @@ public class DeviceAPI {
     log.info("RESPONSE:" + response.asString());
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postDeviceRegistrationBodyPath"
-  })
-  @Test
-  public void Verify_Device_Unregistration(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postDeviceRegistrationBodyPath)
+  @Test(priority = 9)
+  public void Verify_Device_Unregistration()
       throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
@@ -657,20 +599,8 @@ public class DeviceAPI {
   }
 
   //Verify_Device_Registration_Key_Update
-  @Parameters({
-          "clientId_android_access_key",
-          "clientId_android_signature_key",
-          "orgId",
-          "clientId",
-          "postDeviceRegistrationBodyPath"
-  })
-  @Test
-  public void Verify_Device_Registration_Key_Update(
-          String clientId_android_access_key,
-          String clientId_android_signature_key,
-          String orgId,
-          String clientId,
-          String postDeviceRegistrationBodyPath)
+  @Test(priority = 10)
+  public void Verify_Device_Registration_Key_Update()
           throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;

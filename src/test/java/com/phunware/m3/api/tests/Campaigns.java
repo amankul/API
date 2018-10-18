@@ -25,14 +25,50 @@ public class Campaigns {
   private static String serviceEndPoint = null;
   private static String capturedCampaignId;
   private static String capturedCampaignId1;
+  private static String campaignId;
+  private static String clientId_android_access_key;
+  private static String clientId_android_signature_key;
+  private static String orgId;
+  private static String clientId;
+  private static String campaignType;
+  private static String status;
+  private static String sortBy;
+  private static String sortOrder;
+  private static String limit;
+  private static String postCampaignRequestBodyPath;
+
   private static Logger log = Logger.getLogger(Campaigns.class);
   private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
   @BeforeClass
-  @Parameters({"env"})
-  public void preTestSteps(String env) {
+  @Parameters({"env", "campaignId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "campaignType", "status", "sortBy", "sortOrder", "limit", "postCampaignRequestBodyPath"})
+  public void preTestSteps(String env,
+                           String campaignId,
+                           String clientId_android_access_key,
+                           String clientId_android_signature_key,
+                           String orgId,
+                           String clientId,
+                           String campaignType,
+                           String status,
+                           String sortBy,
+                           String sortOrder,
+                           String limit,
+                           String postCampaignRequestBodyPath){
+
+    this.clientId_android_access_key = clientId_android_access_key;
+    this.clientId_android_signature_key = clientId_android_signature_key;
+    this.clientId = clientId;
+    this.orgId = orgId;
+    this.campaignId = campaignId;
+    this.campaignType = campaignType;
+    this.status = status;
+    this.sortBy = sortBy;
+    this.sortOrder = sortOrder;
+    this.limit = limit;
+    this.postCampaignRequestBodyPath = postCampaignRequestBodyPath;
+
     if ("PROD".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
     } else if ("STAGE".equalsIgnoreCase(env)) {
@@ -43,20 +79,8 @@ public class Campaigns {
     }
   }
 
-  @Parameters({
-    "campaignId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 1)
-  public void Verify_Get_Campaign_By_Id(
-      String campaignId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void Verify_Get_Campaign_By_Id() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + campaignId;
@@ -115,20 +139,8 @@ public class Campaigns {
     response.then().body(("any { it.key == 'profiles'}"), is(true));
   }
 
-  @Parameters({
-    "campaignId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 2)
-  public void Verify_Get_Campaign_By_InvalidId(
-      String campaignId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void Verify_Get_Campaign_By_InvalidId() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + "000";
@@ -170,20 +182,8 @@ public class Campaigns {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "campaignType",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 3)
-  public void Verify_Collection_Of_Campaigns_By_CampaignType(
-      String campaignType,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void Verify_Collection_Of_Campaigns_By_CampaignType() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -233,20 +233,8 @@ public class Campaigns {
     response.then().body("items.campaignType", everyItem(is("BROADCAST")));
   }
 
-  @Parameters({
-    "status",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 4)
-  public void Verify_Collection_Of_Campaigns_By_Status(
-      String status,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void Verify_Collection_Of_Campaigns_By_Status() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -296,24 +284,8 @@ public class Campaigns {
     response.then().body("items.status", everyItem(is("SCHEDULED")));
   }
 
-  @Parameters({
-    "sortBy",
-    "sortOrder",
-    "limit",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 5)
-  public void Verify_Collection_Of_Campaigns_SortByStartDate(
-      String sortBy,
-      String sortOrder,
-      String limit,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void Verify_Collection_Of_Campaigns_SortByStartDate() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -367,20 +339,8 @@ public class Campaigns {
         CampaignsList.stream().sorted().collect(Collectors.toList()).equals(CampaignsList));
   }
 
-  @Parameters({
-    "campaignId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 6)
-  public void Verify_Get_Campaign_Status(
-      String campaignId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void Verify_Get_Campaign_Status() {
 
     // Request Details
     String requestURL =
@@ -421,20 +381,8 @@ public class Campaigns {
     response.then().body("status", isOneOf("SCHEDULED", "ACTIVE", "COMPLETED"));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 7)
-  public void verify_Create_Campaign(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -520,20 +468,8 @@ public class Campaigns {
     capturedCampaignId = response.then().extract().path("id").toString();
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 8)
-  public void verify_Create_Campaign_WithNoNameInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoNameInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -593,20 +529,8 @@ public class Campaigns {
             + "Required field [campaignName] is missing; please provide field and value in your request.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 9)
-  public void verify_Create_Campaign_WithNoStartDateInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoStartDateInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -665,20 +589,8 @@ public class Campaigns {
             + "Required field [startDate] is missing; please provide field and value in your request.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 10)
-  public void verify_Create_Campaign_WithNoEndDateInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoEndDateInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -736,20 +648,8 @@ public class Campaigns {
             + "Required field [endDate] is missing; please provide field and value in your request.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 11)
-  public void verify_Create_Campaign_WithNoDescriptionInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoDescriptionInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -807,20 +707,8 @@ public class Campaigns {
     capturedCampaignId1 = response.then().extract().path("id").toString();
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 12)
-  public void verify_Create_Campaign_WithNoCampaignTypeInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoCampaignTypeInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -881,20 +769,8 @@ public class Campaigns {
             + "Required field [campaignType] is missing; please provide field and value in your request.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 13)
-  public void verify_Create_Campaign_WithNoRepeatFrequencyInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoRepeatFrequencyInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -953,20 +829,8 @@ public class Campaigns {
         response.asString(), "requirement failed: repeatFrequency required in the request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 14)
-  public void verify_Create_Campaign_WithNoTargetTimeZoneInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoTargetTimeZoneInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1025,20 +889,8 @@ public class Campaigns {
         response.asString(), "requirement failed: targetTimeZone not found in the request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 15)
-  public void verify_Create_Campaign_WithNoNotificationTitleInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoNotificationTitleInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1097,20 +949,8 @@ public class Campaigns {
         response.asString(), "requirement failed: notificationTitle not found in the request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 16)
-  public void verify_Create_Campaign_WithNoNotificationMessageInBody(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Create_Campaign_WithNoNotificationMessageInBody()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1169,20 +1009,8 @@ public class Campaigns {
         response.asString(), "requirement failed: notificationMessage not found in the request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 17)
-  public void verify_Update_Campaign(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Update_Campaign()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1270,20 +1098,8 @@ public class Campaigns {
 
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postCampaignRequestBodyPath"
-  })
   @Test(priority = 18)
-  public void verify_Delete_Campaign(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postCampaignRequestBodyPath)
+  public void verify_Delete_Campaign()
       throws IOException, NullPointerException {
 
     // Request Details
