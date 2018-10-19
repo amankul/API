@@ -194,7 +194,7 @@ public class Structure {
                         {containerId, platformVenueStructureName, STRUCTURE_TYPE_OBJECT, platformVenueStructureName, schemaMap.get("VscVenue"), platformVenuesStructureName},
                         {containerId, platformDatabasesStructureName, STRUCTURE_TYPE_ARRAY, platformDatabasesStructureName, "", platformStructureName},
                         {containerId, platformDatabaseStructureName, STRUCTURE_TYPE_OBJECT, platformDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformDatabasesStructureName},
-                        {containerId, venueDatabasesStructureName, STRUCTURE_TYPE_OBJECT, venueDatabasesStructureName, "", platformVenuesStructureName},
+                        {containerId, venueDatabasesStructureName, STRUCTURE_TYPE_ARRAY, venueDatabasesStructureName, "", platformVenueStructureName},
                         {containerId, venueDatabaseStructureName, STRUCTURE_TYPE_OBJECT, venueDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venueDatabasesStructureName},
                         {containerId, venuesStructureName, STRUCTURE_TYPE_ARRAY, venuesStructureName, "", ""},
                         {containerId, venueStructureName, STRUCTURE_TYPE_OBJECT, venueStructureName, schemaMap.get("VscVenue"), venuesStructureName},

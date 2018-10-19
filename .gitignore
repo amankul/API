@@ -5,6 +5,10 @@ target
 .gradle
 .idea
 
+
+build
+.class
+
 Logging
 test-output
 

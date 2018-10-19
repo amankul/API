@@ -6,6 +6,7 @@ import com.phunware.utility.HelperMethods;
 import com.phunware.utility.JWTUtils;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
+import org.codehaus.groovy.runtime.typehandling.IntegerMath;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -13,14 +14,16 @@ import org.testng.annotations.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import static com.phunware.cme.v2.api.tests.Schema.containerName;
 import static com.phunware.cme.v2.api.tests.Structure.structureMap;
 import static com.phunware.cme.v2.api.tests.Structure.containerId;
 import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
-import static com.phunware.cme.v2.api.tests.Schema.containerName;
 import static io.restassured.RestAssured.given;
 
 
@@ -32,13 +35,16 @@ public class Content {
     private static Logger log;
     private static String serviceEndPoint = null;
     private static String jwt = null;
-    private static String postContentRequestUrl;
+    private static String contentRequestUrl;
     private static String deleteContainerRequestUrl;
     private static String deleteSchemaRequestUrl;
     private String contentId;
+    private int spacesToIndentEachLevel = 2;
+    private int structureId=0;
 
     protected static String dateTime = null;
     protected static HashMap<String, String> contentMap = new HashMap<String, String>();
+
 
 
     @BeforeClass
@@ -56,11 +62,12 @@ public class Content {
             log.error("Environment is not set properly. Please check testng xml.");
             Assert.fail("Environment is not set properly. Please check testng xml.");
         }
-        postContentRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT;
+        contentRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT+"/";
         deleteContainerRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
         deleteSchemaRequestUrl = serviceEndPoint + CmeV2_API_Constants.SCHEMAS_END_POINT + "/";
 
-        log.info("Content URL: " + postContentRequestUrl);
+
+        log.info("Content URL: " + contentRequestUrl);
         dateTime = HelperMethods.getDateAsString();
     }
 
@@ -82,7 +89,7 @@ public class Content {
 
 
         // logging Request Details
-        log.info("REQUEST: POST-" + postContentRequestUrl);
+        log.info("REQUEST: URL-" + contentRequestUrl);
         log.info("REQUEST: BODY-" + requestBodyJSONObject.toString());
 
         // Extracting response after status code validation
@@ -91,7 +98,7 @@ public class Content {
                         .header("Content-Type", "application/json")
                         .header("Authorization", jwt)
                         .body(requestBodyJSONObject.toString())
-                        .post(postContentRequestUrl)
+                        .post(contentRequestUrl)
                         .then()
                         .extract()
                         .response();
@@ -106,14 +113,135 @@ public class Content {
         //stripping prefix and postfix from source file name and pushing into hashMap
         String name = path.substring(index).replaceAll(".json", "").replaceAll("Content", "");
         contentMap.put(name, contentId);
-        log.info("Content Map : " + contentMap);
+        log.info("Content Name : " + name + " Content ID: "+ contentId);
 
     }
 
 
-    /** Deleting Container. This will delete content and structure contained it." **/
+
+/** Verify GET CONTENT by Content Id (with containerId in the body)
+     **
+     **
+ **/
     @Test(priority = 1)
-    public void deleteContainer() {
+    public void verify_Get_Content_by_contentId() {
+
+        Random generator = new Random();
+        Object[] values = contentMap.values().toArray();
+        Object randomValue = values[generator.nextInt(values.length)];
+
+        log.info("randomValue: "+randomValue);
+
+
+            log.info("Get Content: By Content ID:  " + contentRequestUrl + randomValue);
+            Response response =
+                    given()
+                            .header("Content-Type", "application/json")
+                            .header("Authorization", jwt)
+                            .body(containerId)
+                            .get(contentRequestUrl+randomValue)
+                            .then()
+                            .statusCode(200)
+                            .extract()
+                            .response();
+            log.info("Get Content Response value: "+response.asString());
+
+        Assert(!response.body().)
+    }
+
+
+
+
+
+
+/** Verify GET CONTENT by Container ID. This option is when the structure is of type Object.
+     *  Structure ID
+     *  Parent ID
+     *  Org ID
+     *
+     *  get content for only one content and remove this comment
+     *  **/
+
+    @Test(priority = 3)
+    public void verify_Get_Content_by_containerId_for_Structure_Object() {
+
+        Random generator = new Random();
+        Object[] values = contentMap.values().toArray();
+        Object randomValue = values[generator.nextInt(values.length)];
+
+        JSONObject jo =new JSONObject();
+        jo.put("orgId",109);
+        jo.put("containerId",containerId);
+        jo.put("structureId",structureId);
+
+        log.info(jo.toString(spacesToIndentEachLevel));
+
+            Response response =
+                    given()
+                            .header("Content-Type", "application/json")
+                            .header("Authorization", jwt)
+                            .body(jo.toString())
+                            .get(contentRequestUrl+randomValue)
+                            .then()
+                            .statusCode(200)
+                            .extract()
+                            .response();
+            log.info("Get Content Response value: "+response.asString());
+
+    }
+
+
+    /** Verify GET Content with below fields. This option is when the structure is of type ARRAY.
+     *  Structure ID
+     *  Parent ID
+     *  Limit
+     *  Offset
+     **/
+
+    @Test(priority = 4)
+    public void verify_Get_Content_by_containerId_for_Structure_Array() {
+
+        // Get content for "Platform" as this has Structure of type Array. This needs to be hard-coded here. Hence this testcase has be run only for DignityHealth.
+
+        if (containerName.equals("DignityHealth")) {
+
+
+            log.info("structureID: "+ structureMap.get("Venues"));
+
+            JSONObject jo =new JSONObject();
+            jo.put("orgId",109);
+            jo.put("containerId",containerId);
+            jo.put("structureId",structureMap.get("Venues"));
+            jo.put("limit",10);
+            jo.put("offset",0);
+
+            log.info(jo.toString(spacesToIndentEachLevel));
+
+
+                log.info("Get Content: By Container ID:  " + contentRequestUrl );
+                Response response =
+                        given()
+                                .header("Content-Type", "application/json")
+                                .header("Authorization", jwt)
+                                .body("?"+jo.toString())
+                                .log().all().request()
+                                .get(contentRequestUrl)
+                                .then()
+                                .statusCode(200)
+                                .extract()
+                                .response();
+                log.info("Response value: "+response.asString());
+
+
+            }
+    }
+
+
+
+
+    /** Deleting Container. This will delete content and structure contained it." **/
+    @Test(priority = 8)
+    public void delete_Container() {
 
         log.info("REQUEST: DELETE-" + deleteContainerRequestUrl + containerId);
 
@@ -133,8 +261,8 @@ public class Content {
     /**
      * Schema can be deleted after the parent Container has been deleted.
      **/
-    @Test(priority = 2)
-    public void deleteSchema() {
+    @Test(priority = 9)
+    public void delete_Schema() {
         // logging Request Details
         log.info("Schema Map" + schemaMap);
         log.info("Deleting the Schema");
@@ -171,6 +299,10 @@ public class Content {
                         {context.getCurrentXmlTest().getParameter("postContentPlatformVenueTexas"), structureMap.get("Platform_Venue"), "Platform"},
                         {context.getCurrentXmlTest().getParameter("postContentTexasDatabaseVersion"), structureMap.get("Venue_Database"), "VenueTexas"},
                         {context.getCurrentXmlTest().getParameter("postContentVenueTexas"), structureMap.get("Venue"), null},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueArizona"), structureMap.get("Venue"), null},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueCalifornia"), structureMap.get("Venue"), null},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueHawaii"), structureMap.get("Venue"), null},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueColorado"), structureMap.get("Venue"), null},
                         {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampus"), structureMap.get("Campus"), "VenueTexas"},
                         {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuilding"), structureMap.get("Building"), "VenueTexasCampus"},
                         {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloor"), structureMap.get("Floor"), "VenueTexasCampusBuilding"},

@@ -38,6 +38,10 @@
     <parameter name="postContentPlatformVenueTexas" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentPlatformVenueTexas.json"/>
     <parameter name="postContentTexasDatabaseVersion" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentTexasDatabaseVersion.json"/>
     <parameter name="postContentVenueTexas" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexas.json"/>
+    <parameter name="postContentVenueCalifornia" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueCalifornia.json"/>
+    <parameter name="postContentVenueArizona" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueArizona.json"/>
+    <parameter name="postContentVenueHawaii" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueHawaii.json"/>
+    <parameter name="postContentVenueColorado" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueColorado.json"/>
     <parameter name="postContentVenueTexasCampus" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampus.json"/>
     <parameter name="postContentVenueTexasCampusBuilding" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuilding.json"/>
     <parameter name="postContentVenueTexasCampusBuildingFloor" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContentVenueTexasCampusBuildingFloor.json"/>
