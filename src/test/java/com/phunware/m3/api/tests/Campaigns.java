@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/** Created by VinayKarumuri on 5/22/17. */
+/**
+ * Created by VinayKarumuri on 5/22/17.
+ */
 public class Campaigns {
 
   private static String serviceEndPoint = null;
@@ -55,7 +57,7 @@ public class Campaigns {
                            String sortBy,
                            String sortOrder,
                            String limit,
-                           String postCampaignRequestBodyPath){
+                           String postCampaignRequestBodyPath) {
 
     this.clientId_android_access_key = clientId_android_access_key;
     this.clientId_android_signature_key = clientId_android_signature_key;

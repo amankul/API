@@ -19,18 +19,20 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/** Created by VinayKarumuri on 5/11/17. */
+/**
+ * Created by VinayKarumuri on 5/11/17.
+ */
 public class Location {
 
   // public String dynamicValue;
   private String xAuth = null;
   private static String capturedLocationId;
   private static String serviceEndPoint = null;
-  private static String locationId =null;
-  private static String clientId_android_access_key =null;
-  private static String clientId_android_signature_key =null;
-  private static String orgId =null;
-  private static String clientId =null;
+  private static String locationId = null;
+  private static String clientId_android_access_key = null;
+  private static String clientId_android_signature_key = null;
+  private static String orgId = null;
+  private static String clientId = null;
   private static String tags = null;
   private static String postLocationRequestBodyPath = null;
   private static String putLocationRequestBodyPath = null;
@@ -40,7 +42,7 @@ public class Location {
   private static Logger log = Logger.getLogger(Location.class);
 
   @BeforeClass
-  @Parameters({"env",  "locationId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "tags", "postLocationRequestBodyPath", "putLocationRequestBodyPath"})
+  @Parameters({"env", "locationId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "tags", "postLocationRequestBodyPath", "putLocationRequestBodyPath"})
   public void preTestSteps(String env,
                            String locationId,
                            String clientId_android_access_key,

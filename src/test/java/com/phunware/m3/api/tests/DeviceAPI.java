@@ -17,7 +17,9 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/** Created by VinayKarumuri on 5/24/17. */
+/**
+ * Created by VinayKarumuri on 5/24/17.
+ */
 public class DeviceAPI {
 
   private static String serviceEndPoint = null;
@@ -25,38 +27,38 @@ public class DeviceAPI {
   private static String deviceRegKey =
       "d6BZSAdhNd8:APA91bHpVrhxUjCOHm-Tzf6HOZjtpsSUn3vgaxgMNiCdv7FjUds-OiyhjCKSFKMgHSAVNcwM5Eld8ZZz0QQzrzTRbjR7IdvzNcmiJeWu8uEi5Qr9oIPtL07vWFGLIAu2-X_FjQafXRHM_"
           + deviceId;
-  private static String clientId_android_access_key =null;
-  private static String clientId_android_signature_key =null;
-  private static String orgId =null;
-  private static String clientId =null;
+  private static String clientId_android_access_key = null;
+  private static String clientId_android_signature_key = null;
+  private static String orgId = null;
+  private static String clientId = null;
   private static String postDeviceRegistrationBodyPath = null;
   private static String postDownloadGeofenceBodyPath = null;
   private static String postGeofenceEntryBodyPath = null;
-  private static String postDeviceAttributesBodyPath =null;
+  private static String postDeviceAttributesBodyPath = null;
   private static String deviceAttributeName = null;
   private static String deviceAttributeValue = null;
   private static String postGeofenceExitBodyPath = null;
   private static String postStaticIdSetBodyPath = null;
 
   private static Logger log = Logger.getLogger(DeviceAPI.class);
-  private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
+  private String xAuth = null;
 
   @BeforeClass
   @Parameters({"env",
-              "clientId_android_access_key",
-              "clientId_android_signature_key",
-              "orgId",
-              "clientId",
-              "postDeviceRegistrationBodyPath",
-              "postDownloadGeofenceBodyPath",
-              "postGeofenceEntryBodyPath",
-              "postDeviceAttributesBodyPath",
-              "deviceAttributeName",
-              "deviceAttributeValue",
-              "postGeofenceExitBodyPath",
-              "postStaticIdSetBodyPath"})
+      "clientId_android_access_key",
+      "clientId_android_signature_key",
+      "orgId",
+      "clientId",
+      "postDeviceRegistrationBodyPath",
+      "postDownloadGeofenceBodyPath",
+      "postGeofenceEntryBodyPath",
+      "postDeviceAttributesBodyPath",
+      "deviceAttributeName",
+      "deviceAttributeValue",
+      "postGeofenceExitBodyPath",
+      "postStaticIdSetBodyPath"})
   public void preTestSteps(String env,
                            String clientId_android_access_key,
                            String clientId_android_signature_key,
@@ -601,7 +603,7 @@ public class DeviceAPI {
   //Verify_Device_Registration_Key_Update
   @Test(priority = 10)
   public void Verify_Device_Registration_Key_Update()
-          throws IOException {
+      throws IOException {
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.DEVICE_API_EVENTS_END_POINT;
 
@@ -619,12 +621,12 @@ public class DeviceAPI {
     // Auth Generation
     try {
       xAuth =
-              auth.generateAuthHeader(
-                      "POST",
-                      clientId_android_access_key,
-                      clientId_android_signature_key,
-                      requestURL,
-                      requestBodyJSONObject.toString());
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
       log.error("Error generating Auth header" + e);
     }
@@ -635,17 +637,17 @@ public class DeviceAPI {
 
     // Extracting response after status code validation
     Response response =
-            given()
-                    .header("Content-Type", "application/json")
-                    .header("x-org-id", orgId)
-                    .header("x-client-id", clientId)
-                    .header("X-Auth", xAuth)
-                    .body(requestBodyJSONObject.toString())
-                    .post(requestURL)
-                    .then()
-                    .statusCode(200)
-                    .extract()
-                    .response();
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
 
     // printing response
     log.info("RESPONSE:" + response.asString());

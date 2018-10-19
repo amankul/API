@@ -19,18 +19,19 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 
-/** Created by VinayKarumuri on 5/18/17. */
+/**
+ * Created by VinayKarumuri on 5/18/17.
+ */
 public class Profiles {
 
   private static String serviceEndPoint = null;
   private static String newProfileId;
   private static String profileId;
-  private static String clientId_android_access_key =null;
-  private static String clientId_android_signature_key =null;
-  private static String orgId =null;
-  private static String clientId =null;
+  private static String clientId_android_access_key = null;
+  private static String clientId_android_signature_key = null;
+  private static String orgId = null;
+  private static String clientId = null;
   private static String postProfileRequestBodyPath = null;
-
 
 
   private static Logger log = Logger.getLogger(Profiles.class);
@@ -39,7 +40,7 @@ public class Profiles {
   AuthHeader auth = new AuthHeader();
 
   @BeforeClass
-  @Parameters({"env","profileId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId","postProfileRequestBodyPath"} )
+  @Parameters({"env", "profileId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
   public void preTestSteps(String env, String profileId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) {
 
     this.profileId = profileId;

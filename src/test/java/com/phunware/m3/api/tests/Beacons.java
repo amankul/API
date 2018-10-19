@@ -6,7 +6,6 @@ import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
-import org.apache.log4j.lf5.util.StreamUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -19,34 +18,33 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/** Created by VinayKarumuri on 5/15/17. */
+/**
+ * Created by VinayKarumuri on 5/15/17.
+ */
 public class Beacons {
 
   private static String capturedNewBeaaconId;
   private static String uuid = null;
   private static String serviceEndPoint = null;
   private static Logger log = Logger.getLogger(Beacons.class);
-  private String xAuth = null;
-  private static String clientId_android_access_key =null;
-  private static String clientId_android_signature_key =null;
-  private static String orgId =null;
-  private static String clientId =null;
-  private static String beaconId =null;
-  private static String beaconUuid =null;
-  private static String beaconMajor =null;
-  private static String beaconMinor =null;
+  private static String clientId_android_access_key = null;
+  private static String clientId_android_signature_key = null;
+  private static String orgId = null;
+  private static String clientId = null;
+  private static String beaconId = null;
+  private static String beaconUuid = null;
+  private static String beaconMajor = null;
+  private static String beaconMinor = null;
   private static String beaconTags = null;
   private static String beaconUuidAlias = null;
   private static String postBeaconRequestBodyPath = null;
   private static String postUuidAliasRequestBodyPath = null;
-
-
-
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
+  private String xAuth = null;
 
   @BeforeClass
-  @Parameters({"env","beaconId", "clientId_android_access_key", "clientId_android_signature_key",  "orgId", "clientId", "beaconUuid", "beaconMajor", "beaconMinor", "beaconTags", "beaconUuidAlias", "postBeaconRequestBodyPath", "postUuidAliasRequestBodyPath"} )
+  @Parameters({"env", "beaconId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "beaconUuid", "beaconMajor", "beaconMinor", "beaconTags", "beaconUuidAlias", "postBeaconRequestBodyPath", "postUuidAliasRequestBodyPath"})
   public void preTestSteps(String env,
                            String beaconId,
                            String clientId_android_access_key,
@@ -59,7 +57,7 @@ public class Beacons {
                            String beaconTags,
                            String beaconUuidAlias,
                            String postBeaconRequestBodyPath,
-                           String postUuidAliasRequestBodyPath){
+                           String postUuidAliasRequestBodyPath) {
 
     this.beaconId = beaconId;
     this.clientId_android_access_key = clientId_android_access_key;
@@ -180,7 +178,7 @@ public class Beacons {
 
 
   @Test(priority = 3)
-  public void verify_Get_Beacons_By_Uuid(){
+  public void verify_Get_Beacons_By_Uuid() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;

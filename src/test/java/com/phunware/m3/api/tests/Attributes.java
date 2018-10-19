@@ -18,25 +18,27 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/** Created by VinayKarumuri on 5/17/17. */
+/**
+ * Created by VinayKarumuri on 5/17/17.
+ */
 public class Attributes {
 
   private static String serviceEndPoint = null;
   private static String attributeName;
   private static Logger log = Logger.getLogger(Attributes.class);
   private String xAuth = null;
-  private static String clientId_android_access_key =null;
-  private static String clientId_android_signature_key =null;
+  private static String clientId_android_access_key = null;
+  private static String clientId_android_signature_key = null;
   private static String postAttributeRequestBodyPath = null;
-  private static String orgId =null;
-  private static String clientId =null;
+  private static String orgId = null;
+  private static String clientId = null;
 
 
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
   @BeforeClass
-  @Parameters({"env",  "attributeName",  "clientId_android_access_key",  "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
+  @Parameters({"env", "attributeName", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postAttributeRequestBodyPath"})
   public void preTestSteps(String env,
                            String attributeName,
                            String clientId_android_access_key,
@@ -44,7 +46,7 @@ public class Attributes {
                            String orgId,
                            String clientId,
                            String postAttributeRequestBodyPath
-                           ) {
+  ) {
 
     this.attributeName = attributeName;
     this.clientId_android_access_key = clientId_android_access_key;
