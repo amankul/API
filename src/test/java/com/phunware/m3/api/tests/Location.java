@@ -431,60 +431,6 @@ public class Location {
   }
 
   @Test(priority = 8)
-  public void verify_Create_Location_InvalidState()
-      throws IOException {
-
-    // Request Details
-    String requestURL = serviceEndPoint + MeAPI_Constants.LOCATION_END_POINT_1;
-
-    String requestBody = fileUtils.getJsonTextFromFile(postLocationRequestBodyPath);
-    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
-    String locationName = "PhunwareAustin" + HelperMethods.getDateAsString();
-    requestBodyJSONObject.put("locationName", locationName);
-    requestBodyJSONObject.put("state", "OO");
-
-    // Printing Request Details
-    log.info("REQUEST-URL:POST-" + requestURL);
-    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
-
-    // Auth Generation
-    try {
-      xAuth =
-          auth.generateAuthHeader(
-              "POST",
-              clientId_android_access_key,
-              clientId_android_signature_key,
-              requestURL,
-              requestBodyJSONObject.toString());
-    } catch (Exception e) {
-      log.error("Error generating Auth header" + e);
-    }
-
-    // Printing xAuth
-    log.info("X-AUTH " + xAuth);
-
-    // Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("x-org-id", orgId)
-            .header("x-client-id", clientId)
-            .header("X-Auth", xAuth)
-            .body(requestBodyJSONObject.toString())
-            .post(requestURL)
-            .then()
-            .statusCode(400)
-            .extract()
-            .response();
-
-    // printing response
-    log.info("RESPONSE:" + response.asString());
-
-    // JSON response validations
-    Assert.assertEquals(response.asString(), "Address not found");
-  }
-
-  @Test(priority = 9)
   public void verify_Create_Location_NoTimezone()
       throws IOException {
 
@@ -547,7 +493,7 @@ public class Location {
   }
 
 
-  @Test(priority = 10)
+  @Test(priority = 9)
   public void verify_Create_Location_NoLocationName()
       throws IOException {
 
@@ -602,7 +548,7 @@ public class Location {
         "requirement failed: Value required for [locationName]; please provide");
   }
 
-  @Test(priority = 11)
+  @Test(priority = 10)
   public void verify_Create_Location_NoCountry()
       throws IOException {
 
@@ -661,7 +607,7 @@ public class Location {
             + "]");
   }
 
-  @Test(priority = 12)
+  @Test(priority = 11)
   public void verify_Create_Location_NoZip()
       throws IOException {
 
@@ -719,7 +665,7 @@ public class Location {
             + "]");
   }
 
-  @Test(priority = 13)
+  @Test(priority = 12)
   public void verify_Create_Location_NoCity()
       throws IOException {
 
@@ -777,7 +723,7 @@ public class Location {
             + "]");
   }
 
-  @Test(priority = 14)
+  @Test(priority = 13)
   public void verify_Create_Location_NoAddress1()
       throws IOException {
 
@@ -833,7 +779,7 @@ public class Location {
         "requirement failed: missing address1 [locationName: " + locationName + "]");
   }
 
-  @Test(priority = 15)
+  @Test(priority = 14)
   public void verify_Update_Location()
       throws IOException {
 
@@ -904,7 +850,7 @@ public class Location {
   }
 
 
-  @Test(priority = 16)
+  @Test(priority = 15)
   public void verify_Update_Location_InvalidId()
       throws IOException {
 
@@ -964,7 +910,7 @@ public class Location {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Test(priority = 17)
+  @Test(priority = 16)
   public void verify_Disable_Location()
       throws IOException {
 
@@ -1020,7 +966,7 @@ public class Location {
   }
 
 
-  @Test(priority = 18)
+  @Test(priority = 17)
   public void verify_Download_Locations()
       throws IOException {
 
