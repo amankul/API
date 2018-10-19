@@ -18,20 +18,60 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/** Created by VinayKarumuri on 5/15/17. */
+/**
+ * Created by VinayKarumuri on 5/15/17.
+ */
 public class Beacons {
 
   private static String capturedNewBeaaconId;
   private static String uuid = null;
   private static String serviceEndPoint = null;
   private static Logger log = Logger.getLogger(Beacons.class);
-  private String xAuth = null;
+  private static String clientId_android_access_key = null;
+  private static String clientId_android_signature_key = null;
+  private static String orgId = null;
+  private static String clientId = null;
+  private static String beaconId = null;
+  private static String beaconUuid = null;
+  private static String beaconMajor = null;
+  private static String beaconMinor = null;
+  private static String beaconTags = null;
+  private static String beaconUuidAlias = null;
+  private static String postBeaconRequestBodyPath = null;
+  private static String postUuidAliasRequestBodyPath = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
+  private String xAuth = null;
 
   @BeforeClass
-  @Parameters({"env"})
-  public void preTestSteps(String env) {
+  @Parameters({"env", "beaconId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "beaconUuid", "beaconMajor", "beaconMinor", "beaconTags", "beaconUuidAlias", "postBeaconRequestBodyPath", "postUuidAliasRequestBodyPath"})
+  public void preTestSteps(String env,
+                           String beaconId,
+                           String clientId_android_access_key,
+                           String clientId_android_signature_key,
+                           String orgId,
+                           String clientId,
+                           String beaconUuid,
+                           String beaconMajor,
+                           String beaconMinor,
+                           String beaconTags,
+                           String beaconUuidAlias,
+                           String postBeaconRequestBodyPath,
+                           String postUuidAliasRequestBodyPath) {
+
+    this.beaconId = beaconId;
+    this.clientId_android_access_key = clientId_android_access_key;
+    this.clientId_android_signature_key = clientId_android_signature_key;
+    this.orgId = orgId;
+    this.clientId = clientId;
+    this.beaconUuid = beaconUuid;
+    this.beaconMajor = beaconMajor;
+    this.beaconMinor = beaconMinor;
+    this.beaconTags = beaconTags;
+    this.beaconUuidAlias = beaconUuidAlias;
+    this.postBeaconRequestBodyPath = postBeaconRequestBodyPath;
+    this.postUuidAliasRequestBodyPath = postUuidAliasRequestBodyPath;
+
 
     if ("PROD".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -43,20 +83,9 @@ public class Beacons {
     }
   }
 
-  @Parameters({
-    "beaconId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 1)
-  public void verify_Get_Beacon(
-      String beaconId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacon() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT + beaconId;
@@ -108,20 +137,9 @@ public class Beacons {
     response.then().body(("any { it.key == 'createdById'}"), is(true));
   }
 
-  @Parameters({
-    "beaconId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 2)
-  public void verify_Get_Beacon_InvalidId(
-      String beaconId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacon_InvalidId() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT + "000";
@@ -158,20 +176,9 @@ public class Beacons {
     log.info("RESPONSE:" + response.asString());
   }
 
-  @Parameters({
-    "beaconUuid",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 3)
-  public void verify_Get_Beacons_By_Uuid(
-      String beaconUuid,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Uuid() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -219,20 +226,9 @@ public class Beacons {
     response.then().body("uuid", everyItem(is(beaconUuid)));
   }
 
-  @Parameters({
-    "beaconUuid",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 4)
-  public void verify_Get_Beacons_By_Invalid_Uuid(
-      String beaconUuid,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Invalid_Uuid() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -282,22 +278,9 @@ public class Beacons {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "beaconUuid",
-    "beaconMajor",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 5)
-  public void verify_Get_Beacons_By_Uuid_And_Major(
-      String beaconUuid,
-      String beaconMajor,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_Major() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -346,22 +329,8 @@ public class Beacons {
     response.then().body("major", everyItem(is(Integer.parseInt(beaconMajor))));
   }
 
-  @Parameters({
-    "beaconUuid",
-    "beaconMajor",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 6)
-  public void verify_Get_Beacons_By_Uuid_And_InvalidMajor(
-      String beaconUuid,
-      String beaconMajor,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_InvalidMajor() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -411,24 +380,9 @@ public class Beacons {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "beaconUuid",
-    "beaconMajor",
-    "beaconMinor",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 7)
-  public void verify_Get_Beacons_By_Uuid_Major_And_Minor(
-      String beaconUuid,
-      String beaconMajor,
-      String beaconMinor,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Uuid_Major_And_Minor() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -479,24 +433,9 @@ public class Beacons {
     response.then().body("major", is(Integer.parseInt(beaconMajor)));
   }
 
-  @Parameters({
-    "beaconUuid",
-    "beaconMajor",
-    "beaconMinor",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 8)
-  public void verify_Get_Beacons_By_Uuid_Major_And_InvalidMinor(
-      String beaconUuid,
-      String beaconMajor,
-      String beaconMinor,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Uuid_Major_And_InvalidMinor() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -546,22 +485,8 @@ public class Beacons {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "beaconUuid",
-    "beaconTags",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 9)
-  public void verify_Get_Beacons_By_Uuid_And_Tags(
-      String beaconUuid,
-      String beaconTags,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_Tags() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -610,22 +535,9 @@ public class Beacons {
     response.then().body("tags", everyItem(hasItem(beaconTags)));
   }
 
-  @Parameters({
-    "beaconUuid",
-    "beaconTags",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 10)
-  public void verify_Get_Beacons_By_Uuid_And_InvalidTags(
-      String beaconUuid,
-      String beaconTags,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Uuid_And_InvalidTags() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -675,20 +587,9 @@ public class Beacons {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "beaconUuidAlias",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 11)
-  public void verify_Get_UUID_By_Alias(
-      String beaconUuidAlias,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_UUID_By_Alias() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT;
@@ -737,20 +638,9 @@ public class Beacons {
     response.then().body("uuidAlias", is(beaconUuidAlias));
   }
 
-  @Parameters({
-    "beaconUuidAlias",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 12)
-  public void verify_Get_UUID_By_InvalidAlias(
-      String beaconUuidAlias,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_UUID_By_InvalidAlias() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT;
@@ -800,20 +690,9 @@ public class Beacons {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "beaconTags",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
+
   @Test(priority = 13)
-  public void verify_Get_Beacons_By_Tags(
-      String beaconTags,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_Tags() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -861,20 +740,8 @@ public class Beacons {
     response.then().body("tags", everyItem(hasItem(beaconTags)));
   }
 
-  @Parameters({
-    "beaconTags",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 14)
-  public void verify_Get_Beacons_By_InvalidTags(
-      String beaconTags,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacons_By_InvalidTags() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_END_POINT_1;
@@ -924,18 +791,8 @@ public class Beacons {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 15)
-  public void verify_Get_Beacon_Tags(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Beacon_Tags() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_TAGS_END_POINT;
@@ -975,18 +832,8 @@ public class Beacons {
     response.then().body("size()", is(greaterThan(0)));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 16)
-  public void verify_Get_Uuids_By_Org(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Uuids_By_Org() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.BEACON_UUID_ALIAS_END_POINT;
@@ -1029,20 +876,9 @@ public class Beacons {
     response.then().body("size()", is(greaterThan(0)));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
+
   @Test(priority = 17)
-  public void verify_Create_Beacon(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Create_Beacon()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1113,20 +949,9 @@ public class Beacons {
     capturedNewBeaaconId = response.then().extract().path("id").toString();
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postUuidAliasRequestBodyPath"
-  })
+
   @Test(priority = 18)
-  public void verify_Create_Uuid_Alias(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postUuidAliasRequestBodyPath)
+  public void verify_Create_Uuid_Alias()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1185,20 +1010,9 @@ public class Beacons {
   }
 
   // here Invalid Means there is no beacon exist with this UUID.
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postUuidAliasRequestBodyPath"
-  })
+
   @Test(priority = 19)
-  public void verify_Create_Invalid_Uuid_Alias(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postUuidAliasRequestBodyPath)
+  public void verify_Create_Invalid_Uuid_Alias()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1253,20 +1067,9 @@ public class Beacons {
         response.asString(), "requirement failed: A beacon with this UUID doesn't exist yet");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postUuidAliasRequestBodyPath"
-  })
+
   @Test(priority = 20)
-  public void verify_Update_Uuid_Alias(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postUuidAliasRequestBodyPath)
+  public void verify_Update_Uuid_Alias()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1320,20 +1123,9 @@ public class Beacons {
     response.then().body("uuidAlias", is(uuidAlias));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
+
   @Test(priority = 21)
-  public void verify_Update_Beacon(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Update_Beacon()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1402,20 +1194,8 @@ public class Beacons {
     response.then().body(("any { it.key == 'tags'}"), is(true));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
   @Test(priority = 22)
-  public void verify_Create_Beacon_No_Major(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Create_Beacon_No_Major()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1477,20 +1257,8 @@ public class Beacons {
             + "Required field [major] is missing; please provide field and value in your request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
   @Test(priority = 23)
-  public void verify_Create_Beacon_No_Minor(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Create_Beacon_No_Minor()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1552,20 +1320,9 @@ public class Beacons {
             + "Required field [minor] is missing; please provide field and value in your request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
+
   @Test(priority = 24)
-  public void verify_Create_Beacon_No_MajorMinorDisplayType(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Create_Beacon_No_MajorMinorDisplayType()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1628,20 +1385,8 @@ public class Beacons {
             + "Required field [majorMinorDisplayType] is missing; please provide field and value in your request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
   @Test(priority = 25)
-  public void verify_Create_Beacon_No_Tags(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Create_Beacon_No_Tags()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1698,20 +1443,9 @@ public class Beacons {
     response.then().body("id", is(greaterThan(0)));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
+
   @Test(priority = 26)
-  public void verify_Create_Beacon_No_Interval(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Create_Beacon_No_Interval()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1774,20 +1508,9 @@ public class Beacons {
             + "Required field [interval] is missing; please provide field and value in your request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
+
   @Test(priority = 27)
-  public void verify_Create_Beacon_No_TxPower(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Create_Beacon_No_TxPower()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -1850,20 +1573,9 @@ public class Beacons {
             + "Required field [txPower] is missing; please provide field and value in your request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postBeaconRequestBodyPath"
-  })
+
   @Test(priority = 28)
-  public void verify_Delete_Beacon(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postBeaconRequestBodyPath)
+  public void verify_Delete_Beacon()
       throws IOException, NullPointerException {
 
     // Request Details

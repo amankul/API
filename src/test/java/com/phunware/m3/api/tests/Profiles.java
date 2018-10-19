@@ -19,19 +19,37 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 
-/** Created by VinayKarumuri on 5/18/17. */
+/**
+ * Created by VinayKarumuri on 5/18/17.
+ */
 public class Profiles {
 
   private static String serviceEndPoint = null;
   private static String newProfileId;
+  private static String profileId;
+  private static String clientId_android_access_key = null;
+  private static String clientId_android_signature_key = null;
+  private static String orgId = null;
+  private static String clientId = null;
+  private static String postProfileRequestBodyPath = null;
+
+
   private static Logger log = Logger.getLogger(Profiles.class);
   private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
   @BeforeClass
-  @Parameters("env")
-  public void preTestSteps(String env) {
+  @Parameters({"env", "profileId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "postProfileRequestBodyPath"})
+  public void preTestSteps(String env, String profileId, String clientId_android_access_key, String clientId_android_signature_key, String orgId, String clientId, String postProfileRequestBodyPath) {
+
+    this.profileId = profileId;
+    this.clientId_android_access_key = clientId_android_access_key;
+    this.clientId_android_signature_key = clientId_android_signature_key;
+    this.clientId = clientId;
+    this.orgId = orgId;
+    this.postProfileRequestBodyPath = postProfileRequestBodyPath;
+
     if ("PROD".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
     } else if ("STAGE".equalsIgnoreCase(env)) {
@@ -42,20 +60,8 @@ public class Profiles {
     }
   }
 
-  @Parameters({
-    "profileId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 1)
-  public void verify_Get_Profile(
-      String profileId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Profile() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + profileId;
@@ -100,20 +106,8 @@ public class Profiles {
     response.then().body(("groups.size()"), is(greaterThan(0)));
   }
 
-  @Parameters({
-    "profileId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 2)
-  public void verify_Get_InvalidProfileId(
-      String profileId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_InvalidProfileId() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT + "000";
@@ -155,20 +149,8 @@ public class Profiles {
         "The requested resource could not be found but may be available again in the future.");
   }
 
-  @Parameters({
-    "profileId",
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId"
-  })
   @Test(priority = 3)
-  public void verify_Get_Collection_Of_Profiles_By_Org(
-      String profileId,
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId) {
+  public void verify_Get_Collection_Of_Profiles_By_Org() {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.PROFILES_END_POINT_1;
@@ -225,20 +207,8 @@ public class Profiles {
         .body("items.groups.attributes.flatten().any { it.containsKey('value') }", is(true));
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postProfileRequestBodyPath"
-  })
   @Test(priority = 4)
-  public void verify_Create_Profile(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postProfileRequestBodyPath)
+  public void verify_Create_Profile()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -314,20 +284,8 @@ public class Profiles {
     newProfileId = response.then().extract().path("id").toString();
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postProfileRequestBodyPath"
-  })
-  @Test(priority = 4)
-  public void verify_Create_Profile_WithoutEnabled(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postProfileRequestBodyPath)
+  @Test(priority = 5)
+  public void verify_Create_Profile_WithoutEnabled()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -401,20 +359,8 @@ public class Profiles {
             + "Required field [enabled] is missing; please provide field and value in your request");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postProfileRequestBodyPath"
-  })
-  @Test(priority = 5)
-  public void verify_Create_Profile_Without_Description(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postProfileRequestBodyPath)
+  @Test(priority = 6)
+  public void verify_Create_Profile_Without_Description()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -487,20 +433,8 @@ public class Profiles {
             + "Required field [description] for a profile is missing; please provide field and value in your request.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postProfileRequestBodyPath"
-  })
-  @Test(priority = 6)
-  public void Create_Profile_WithOut_Attributes(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postProfileRequestBodyPath)
+  @Test(priority = 7)
+  public void Create_Profile_WithOut_Attributes()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -557,20 +491,8 @@ public class Profiles {
             + "Required field [attributes] is missing in a profile group ; please provide field and value in your request.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postProfileRequestBodyPath"
-  })
-  @Test(priority = 7)
-  public void Create_Profile_WithOut_Name(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postProfileRequestBodyPath)
+  @Test(priority = 8)
+  public void Create_Profile_WithOut_Name()
       throws IOException, NullPointerException {
 
     // Request Details
@@ -643,20 +565,8 @@ public class Profiles {
             + "Required field [name] for a profile is missing; please provide field and value in your request.");
   }
 
-  @Parameters({
-    "clientId_android_access_key",
-    "clientId_android_signature_key",
-    "orgId",
-    "clientId",
-    "postProfileRequestBodyPath"
-  })
-  @Test(priority = 8)
-  public void Disable_Profile(
-      String clientId_android_access_key,
-      String clientId_android_signature_key,
-      String orgId,
-      String clientId,
-      String postProfileRequestBodyPath)
+  @Test(priority = 9)
+  public void Disable_Profile()
       throws IOException, NullPointerException {
 
     // Request Details
