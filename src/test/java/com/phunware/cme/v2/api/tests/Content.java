@@ -3,25 +3,24 @@ package com.phunware.cme.v2.api.tests;
 import com.phunware.cmev2_api.constants.CmeV2_API_Constants;
 import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
+import com.phunware.utility.JWTUtils;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
-import org.junit.*;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import static com.phunware.cme.v2.api.tests.Structure.structureMap;
 import static com.phunware.cme.v2.api.tests.Structure.containerId;
 import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
+import static com.phunware.cme.v2.api.tests.Schema.containerName;
 import static io.restassured.RestAssured.given;
 
 
@@ -30,151 +29,167 @@ import static io.restassured.RestAssured.given;
  */
 public class Content {
 
-  static Logger log;
-  //public String dynamicValue;
-  FileUtils fileUtils = new FileUtils();
-  public static String SERVICE_END_POINT = null;
-  public static String JWT = null;
-  public static String postContentRequestURL;
-  public static String deleteContainerRequestURL;
-  public static String deleteSchemaRequestURL;
+    private static Logger log;
+    private static String serviceEndPoint = null;
+    private static String jwt = null;
+    private static String postContentRequestUrl;
+    private static String deleteContainerRequestUrl;
+    private static String deleteSchemaRequestUrl;
+    private String contentId;
 
-  public static String dateTime = null;
-  public static HashMap<String,String> contentMap = new HashMap<String,String>();
+    protected static String dateTime = null;
+    protected static HashMap<String, String> contentMap = new HashMap<String, String>();
 
 
-  @BeforeClass
-  @Parameters({"env","jwt","orgId"})
-  public void setEnv(String env, String jwt, String orgId) throws IOException {
-    log = Logger.getLogger(Structure.class);
-    JWT = jwt;
-    if ("PROD".equalsIgnoreCase(env)) {
-      SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
-    } else if ("STAGE".equalsIgnoreCase(env)) {
-      SERVICE_END_POINT = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
-    } else {
-      log.error("Environment is not set properly. Please check your testng xml file");
-      Assert.fail("Environment is not set properly. Please check your testng xml file");
+    @BeforeClass
+    @Parameters({"env", "orgId"})
+    private void setEnv(String env, int orgId) throws IOException {
+        log = Logger.getLogger(Structure.class);
+        jwt = JWTUtils.getJWTForAdmin(env, orgId);
+
+
+        if (env.equalsIgnoreCase("PROD")) {
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
+        } else if (env.equalsIgnoreCase("STAGE")) {
+            serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
+        } else {
+            log.error("Environment is not set properly. Please check testng xml.");
+            Assert.fail("Environment is not set properly. Please check testng xml.");
+        }
+        postContentRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT;
+        deleteContainerRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
+        deleteSchemaRequestUrl = serviceEndPoint + CmeV2_API_Constants.SCHEMAS_END_POINT + "/";
+
+        log.info("Content URL: " + postContentRequestUrl);
+        dateTime = HelperMethods.getDateAsString();
     }
-    postContentRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTENT_END_POINT;
-    deleteContainerRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
-    deleteSchemaRequestURL = SERVICE_END_POINT + CmeV2_API_Constants.SCHEMAS_END_POINT + "/";
-
-    log.info("Content URL" + postContentRequestURL);
-    dateTime = HelperMethods.getDateAsString();
-  }
-
-/** Creating Content for Dignity Health **/
-  @Test(dataProvider = "usesParameter")
-  public void verify_Post_Content(String path, Integer structureId, String parentId) throws IOException {
-
-    // Request Details
-    String datetime = HelperMethods.getDateAsString();
-    String requestBody = fileUtils.getJsonTextFromFile(path);
-    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
-    requestBodyJSONObject.put("containerId",containerId);
-    requestBodyJSONObject.put("structureId", structureId);
-    requestBodyJSONObject.put("parentId", contentMap.get(parentId));
 
 
-    // logging Request Details
-    log.info("REQUEST-URL:POST-" + postContentRequestURL);
-    log.info("REQUEST-URL:BODY-" + requestBodyJSONObject.toString());
+    /**
+     * Creating Content for container
+     **/
+    @Test(dataProvider = "usesParameter", priority = 0)
+    public void verify_Post_Content(String path, Integer structureId, String parentId) throws IOException {
 
-    // Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", JWT)
-            .body(requestBodyJSONObject.toString())
-            .post(postContentRequestURL)
-            .then()
-            .extract()
-            .response();
-
-    // printing response
-    log.info("RESPONSE:" + response.asString());
-
-    response.then().statusCode(200);
-    String contentId = response.getBody().jsonPath().get("id");
-
-    int index = path.indexOf("Content");
-    String name = path.substring(index).replaceAll(".json", "").replaceAll("Content", "");
-    contentMap.put(name,contentId);
-    log.info("Content Map : " +contentMap);
-  }
+        // verify dataprovider is not sending NULL values. Path should be enough to test this scenario.
+        Assert.assertNotNull(path);
+        log.info("File Path for Content JSON: " + path);
+        String requestBody = FileUtils.getJsonTextFromFile(path);
+        JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+        requestBodyJSONObject.put("containerId", containerId);
+        requestBodyJSONObject.put("structureId", structureId);
+        requestBodyJSONObject.put("parentId", contentMap.get(parentId));
 
 
-  @DataProvider(name = "usesParameter")
-  public Object[][] provideTestParam(ITestContext context) {
-    return new Object[][] {
-        {context.getCurrentXmlTest().getParameter("postContentApplication"), structureMap.get("Application"), null},
-        {context.getCurrentXmlTest().getParameter("postContentPlatform"), structureMap.get("Platform"), "Application"},
-        {context.getCurrentXmlTest().getParameter("postContentAppVersion"), structureMap.get("AppVersion"), "Platform"},
-        {context.getCurrentXmlTest().getParameter("postContentPreCachingConfiguration"), structureMap.get("CachingSettings"), "Platform"},
-        {context.getCurrentXmlTest().getParameter("postContentAdvertisingSetting"), structureMap.get("AdvertisementSettings"), "Platform"},
-        {context.getCurrentXmlTest().getParameter("postContentSettings"), structureMap.get("Settings"), "Platform"},
-        {context.getCurrentXmlTest().getParameter("postContentDatabaseVersion"), structureMap.get("Platform_Database"), "Platform"},
-        {context.getCurrentXmlTest().getParameter("postContentPlatformVenueTexas"), structureMap.get("Platform_Venue"), "Platform"},
-        {context.getCurrentXmlTest().getParameter("postContentTexasDatabaseVersion"), structureMap.get("Venue_Database"), "VenueTexas"},
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexas"), structureMap.get("Venue"), null},
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampus"), structureMap.get("Campus"), "VenueTexas"},
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuilding"), structureMap.get("Building"), "VenueTexasCampus"},
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloor"), structureMap.get("Floor"), "VenueTexasCampusBuilding"},
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingMapSettings"), structureMap.get("MapSettings"), "VenueTexasCampusBuilding"},
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingGeoSettings"), structureMap.get("GeoSettings"), "VenueTexasCampusBuilding"},
+        // logging Request Details
+        log.info("REQUEST: POST-" + postContentRequestUrl);
+        log.info("REQUEST: BODY-" + requestBodyJSONObject.toString());
 
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloorBeacon"), structureMap.get("Beacon"), "VenueTexasCampusBuildingFloor"},
-        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloorBeaconAlert"), structureMap.get("Alert"), "VenueTexasCampusBuildingFloor"},
+        // Extracting response after status code validation
+        Response response =
+                given()
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", jwt)
+                        .body(requestBodyJSONObject.toString())
+                        .post(postContentRequestUrl)
+                        .then()
+                        .extract()
+                        .response();
 
+        // printing response
+        log.info("RESPONSE:" + response.asString());
 
-    };
-  }
+        response.then().statusCode(200);
+        contentId = response.getBody().jsonPath().get("id");
+        int index = path.indexOf("Content");
 
+        //stripping prefix and postfix from source file name and pushing into hashMap
+        String name = path.substring(index).replaceAll(".json", "").replaceAll("Content", "");
+        contentMap.put(name, contentId);
+        log.info("Content Map : " + contentMap);
 
-  @AfterClass
-  public void deleteContainer(){
-    // logging Request Details
-    log.info("-------------------------------------------------------------------------------------");
-    log.info("Deleting the Container - it deletes the content and structure in it");
-    log.info("REQUEST-URL:DELETE-" + deleteContainerRequestURL+containerId);
-
-    // Extracting response after status code validation
-    Response response =
-        given()
-            .header("Content-Type", "application/json")
-            .header("Authorization", JWT)
-            .delete(deleteContainerRequestURL+containerId)
-            .then()
-            .statusCode(200)
-            .extract()
-            .response();
-    log.info("-------------------------------------------------------------------------------------");
-  }
-
-  @AfterSuite
-  public void deleteSchema(){
-    // logging Request Details
-    log.info("Schema Map" +schemaMap);
-    log.info("Deleting the Schema");
-    log.info("REQUEST-URL:DELETE-" + deleteSchemaRequestURL);
-
-    Iterator entries = schemaMap.entrySet().iterator();
-    while(entries.hasNext()){
-      Map.Entry entry = (Map.Entry) entries.next();
-      log.info("Deleting " + deleteSchemaRequestURL + entry.getValue().toString());
-      Response response =
-          given()
-              .header("Content-Type", "application/json")
-              .header("Authorization", JWT)
-              .delete(deleteSchemaRequestURL + entry.getValue().toString())
-              .then()
-              .statusCode(200)
-              .extract()
-              .response();
-      log.info("-------------------------------------------------------------------------------------");
     }
-  }
 
 
+    /** Deleting Container. This will delete content and structure contained it." **/
+    @Test(priority = 1)
+    public void deleteContainer() {
+
+        log.info("REQUEST: DELETE-" + deleteContainerRequestUrl + containerId);
+
+        // Extracting response after status code validation
+        Response response =
+                given()
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", jwt)
+                        .delete(deleteContainerRequestUrl + containerId)
+                        .then()
+                        .statusCode(200)
+                        .extract()
+                        .response();
+
+    }
+
+    /**
+     * Schema can be deleted after the parent Container has been deleted.
+     **/
+    @Test(priority = 2)
+    public void deleteSchema() {
+        // logging Request Details
+        log.info("Schema Map" + schemaMap);
+        log.info("Deleting the Schema");
+        log.info("REQUEST: DELETE-" + deleteSchemaRequestUrl);
+
+        for (Map.Entry<String, String> entry : schemaMap.entrySet()) {
+            log.info("Deleting " + deleteSchemaRequestUrl + entry.getValue().toString());
+            Response response =
+                    given()
+                            .header("Content-Type", "application/json")
+                            .header("Authorization", jwt)
+                            .delete(deleteSchemaRequestUrl + entry.getValue().toString())
+                            .then()
+                            .statusCode(200)
+                            .extract()
+                            .response();
+        }
+    }
+
+
+    @DataProvider(name = "usesParameter")
+    public Object[][] provideTestParam(ITestContext context) {
+
+        switch (Schema.containerName) {
+            case "DignityHealth":
+                return new Object[][]{
+                        {context.getCurrentXmlTest().getParameter("postContentApplication"), structureMap.get("Application"), null},
+                        {context.getCurrentXmlTest().getParameter("postContentPlatform"), structureMap.get("Platform"), "Application"},
+                        {context.getCurrentXmlTest().getParameter("postContentAppVersion"), structureMap.get("AppVersion"), "Platform"},
+                        {context.getCurrentXmlTest().getParameter("postContentPreCachingConfiguration"), structureMap.get("CachingSettings"), "Platform"},
+                        {context.getCurrentXmlTest().getParameter("postContentAdvertisingSetting"), structureMap.get("AdvertisementSettings"), "Platform"},
+                        {context.getCurrentXmlTest().getParameter("postContentSettings"), structureMap.get("Settings"), "Platform"},
+                        {context.getCurrentXmlTest().getParameter("postContentDatabaseVersion"), structureMap.get("Platform_Database"), "Platform"},
+                        {context.getCurrentXmlTest().getParameter("postContentPlatformVenueTexas"), structureMap.get("Platform_Venue"), "Platform"},
+                        {context.getCurrentXmlTest().getParameter("postContentTexasDatabaseVersion"), structureMap.get("Venue_Database"), "VenueTexas"},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexas"), structureMap.get("Venue"), null},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampus"), structureMap.get("Campus"), "VenueTexas"},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuilding"), structureMap.get("Building"), "VenueTexasCampus"},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloor"), structureMap.get("Floor"), "VenueTexasCampusBuilding"},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingMapSettings"), structureMap.get("MapSettings"), "VenueTexasCampusBuilding"},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingGeoSettings"), structureMap.get("GeoSettings"), "VenueTexasCampusBuilding"},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloorBeacon"), structureMap.get("Beacon"), "VenueTexasCampusBuildingFloor"},
+                        {context.getCurrentXmlTest().getParameter("postContentVenueTexasCampusBuildingFloorBeaconAlert"), structureMap.get("Alert"), "VenueTexasCampusBuildingFloor"},
+                };
+            case "Directory":
+                return new Object[][]{
+                        {context.getCurrentXmlTest().getParameter("postContentAAA"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentAthleta"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentBSpot"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentStarbucks"), structureMap.get("Item"), "Items"},
+                        {context.getCurrentXmlTest().getParameter("postContentSubway"), structureMap.get("Item"), "Items"}
+                };
+            default:
+                return null;
+        }
+
+    }
 }

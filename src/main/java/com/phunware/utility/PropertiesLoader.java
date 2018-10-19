@@ -14,20 +14,16 @@ public class PropertiesLoader {
         pro= new Properties();
         try {
             fi= new FileInputStream(path);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
             pro.load(fi);
-        } catch (IOException e) {
-            e.printStackTrace();
+        }  catch (IOException ioe) {
+            ioe.printStackTrace();
         }
     }
 
 
     public String getProperty(String propertyName){
+
         return pro.getProperty(propertyName);
     }
-
 
 }

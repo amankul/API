@@ -4,9 +4,8 @@ target
 .settings/
 .gradle
 .idea
-bin
-build
-gradle
 
 Logging
 test-output
+build/
+.DS_Store

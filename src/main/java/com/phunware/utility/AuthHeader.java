@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class AuthHeader {
 
-    public static String generateAuthHeader(String httpMethod, String accessKey, String signatureKey, String url, String body) throws NoSuchAlgorithmException, InvalidKeyException, IOException {
+   public static String generateAuthHeader(String httpMethod, String accessKey, String signatureKey, String url, String body) throws NoSuchAlgorithmException, InvalidKeyException, IOException {
 
         Long timestamp = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
         String signatureString = httpMethod + "&" + accessKey + "&" + timestamp + "&" + body;
