@@ -22,6 +22,7 @@ import java.util.Random;
 import static com.phunware.cme.v2.api.tests.Schema.containerName;
 import static com.phunware.cme.v2.api.tests.Structure.structureMap;
 import static com.phunware.cme.v2.api.tests.Structure.containerId;
+import static com.phunware.cme.v2.api.tests.Schema.schemaMap;
 import static io.restassured.RestAssured.given;
 
 
@@ -333,7 +334,7 @@ public class Content {
 
 
     /** Deleting Container. This will delete content and structure contained it." **/
-/*    @Test(priority = 8)
+    @Test(priority = 8)
     public void delete_Container() {
 
         log.info("REQUEST: DELETE-" + deleteContainerRequestUrl + containerId);
@@ -349,12 +350,12 @@ public class Content {
                         .extract()
                         .response();
 
-    }*/
+    }
 
     /**
      * Schema can be deleted after the parent Container has been deleted.
      **/
-/*    @Test(priority = 9)
+    @Test(priority = 9)
     public void delete_Schema() {
         // logging Request Details
         log.info("Schema Map" + schemaMap);
@@ -373,7 +374,7 @@ public class Content {
                             .extract()
                             .response();
         }
-    }*/
+    }
 
 
     @DataProvider(name = "usesParameter")
