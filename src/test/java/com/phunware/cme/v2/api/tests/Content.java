@@ -138,6 +138,7 @@ public class Content {
                             .header("Content-Type", "application/json")
                             .header("Authorization", jwt)
                             .body(containerId)
+                            .log().all()
                             .get(contentRequestUrl+randomValue)
                             .then()
                             .statusCode(200)
@@ -179,6 +180,7 @@ public class Content {
                             .header("Content-Type", "application/json")
                             .header("Authorization", jwt)
                             .queryParam(jo.toString())
+                            .log().all()
                             .get(contentRequestUrl)
                             .then()
                             .statusCode(200)
@@ -294,7 +296,7 @@ public class Content {
      *  Offset
      **/
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void verify_Get_Content_by_contentId_and_containerId_and_field() {
 
         //This testcase is dependent on Data, hence field values are hard coded.
