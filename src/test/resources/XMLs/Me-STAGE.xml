@@ -37,6 +37,10 @@
     <parameter name="postStaticIdSetBodyPath" value="src/test/resources/JSONs/me_jsons/postStaticId.json"/>
     <parameter name="deviceAttributeName" value="member"/>
     <parameter name="deviceAttributeValue" value="gold"/>
+    <parameter name="nonRollingTimeZone" value="Mexico/BajaSur"/>
+    <parameter name="campaignTypeGfEntry" value="GEOFENCE_ENTRY"/>
+    <parameter name="campaignTypeGfExit" value="GEOFENCE_EXIT"/>
+    <parameter name="repeatInterval" value="2"/>
 
     <test name="MA">
         <classes>

@@ -5,6 +5,7 @@ import com.phunware.utility.AuthHeader;
 import com.phunware.utility.FileUtils;
 import com.phunware.utility.HelperMethods;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -39,6 +40,7 @@ public class Campaigns {
   private static String limit;
   private static String postCampaignRequestBodyPath;
 
+
   private static Logger log = Logger.getLogger(Campaigns.class);
   private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
@@ -57,7 +59,8 @@ public class Campaigns {
                            String sortBy,
                            String sortOrder,
                            String limit,
-                           String postCampaignRequestBodyPath) {
+                           String postCampaignRequestBodyPath
+                           ) {
 
     this.clientId_android_access_key = clientId_android_access_key;
     this.clientId_android_signature_key = clientId_android_signature_key;
@@ -70,6 +73,7 @@ public class Campaigns {
     this.sortOrder = sortOrder;
     this.limit = limit;
     this.postCampaignRequestBodyPath = postCampaignRequestBodyPath;
+
 
     if ("PROD".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -469,6 +473,282 @@ public class Campaigns {
 
     capturedCampaignId = response.then().extract().path("id").toString();
   }
+
+
+  @Test(priority = 7)
+  @Parameters({"nonRollingTimeZone"})
+  public void verify_Create_Campaign_NonRolling(String nonRollingTimeZone)
+          throws IOException, NullPointerException {
+
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
+
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String campaignName = "CampaignNameNonRolling" + HelperMethods.getDateAsString();
+    String startDate = HelperMethods.addDaystoCurrentDate(365);
+    String endDate = HelperMethods.addDaystoCurrentDate(369);
+    String targetedEntryEndDate = HelperMethods.addDaystoCurrentDate(366);
+    requestBodyJSONObject.put("startDate", startDate);
+    requestBodyJSONObject.put("endDate", endDate);
+    requestBodyJSONObject.put("targetedEntryEndDate", targetedEntryEndDate);
+    requestBodyJSONObject.put("campaignName", campaignName);
+    requestBodyJSONObject.put("targetTimeZone", nonRollingTimeZone);
+
+    // Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+    // Auth Generation
+    try {
+      xAuth =
+              auth.generateAuthHeader(
+                      "POST",
+                      clientId_android_access_key,
+                      clientId_android_signature_key,
+                      requestURL,
+                      requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      log.error("Error generating Auth header" + e);
+    }
+
+    // Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .header("Content-Type", "application/json")
+                    .header("x-org-id", orgId)
+                    .header("x-client-id", clientId)
+                    .header("X-Auth", xAuth)
+                    .body(requestBodyJSONObject.toString())
+                    .post(requestURL)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+
+    // JSON Response Validations
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body(("any { it.key == 'id'}"), is(true));
+    response.then().body(("any { it.key == 'createdById'}"), is(true));
+    response.then().body(("any { it.key == 'notificationTitle'}"), is(true));
+    response.then().body(("any { it.key == 'endDate'}"), is(true));
+    response.then().body(("any { it.key == 'actionHTML'}"), is(true));
+    response.then().body(("any { it.key == 'description'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("any { it.key == 'modifiedById'}"), is(true));
+    response.then().body(("any { it.key == 'targetedEntryLocationTags'}"), is(true));
+    response.then().body(("any { it.key == 'targetedEntryEndDate'}"), is(true));
+    response.then().body(("any { it.key == 'actionType'}"), is(true));
+    response.then().body(("any { it.key == 'actionTitle'}"), is(true));
+    response.then().body(("any { it.key == 'repeatFrequency'}"), is(true));
+    response.then().body(("any { it.key == 'status'}"), is(true));
+    response.then().body(("any { it.key == 'campaignName'}"), is(true));
+    response.then().body(("any { it.key == 'notificationMessage'}"), is(true));
+    response.then().body(("any { it.key == 'locationTags'}"), is(true));
+    response.then().body(("any { it.key == 'appId'}"), is(true));
+    response.then().body(("any { it.key == 'startDate'}"), is(true));
+    response.then().body(("any { it.key == 'campaignType'}"), is(true));
+    response.then().body(("any { it.key == 'messageMetadata'}"), is(true));
+    response.then().body(("any { it.key == 'profiles'}"), is(true));
+    response.then().body("campaignName", is(campaignName));
+    response.then().body("startDate", is(startDate));
+    response.then().body("endDate", is(endDate));
+    response.then().body("targetedEntryEndDate", is(targetedEntryEndDate));
+    response.then().body("targetTimeZone", is(nonRollingTimeZone));
+
+  }
+
+  @Test(priority = 7 )
+  @Parameters({"campaignTypeGfEntry","repeatInterval"})
+  public void verify_Create_Campaign_GfEntry(String campaignTypeGfEntry,int repeatInterval)
+          throws IOException, NullPointerException {
+
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
+
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String campaignName = "CampaignNameGfEntry" + HelperMethods.getDateAsString();
+    String startDate = HelperMethods.addDaystoCurrentDate(365);
+    String endDate = HelperMethods.addDaystoCurrentDate(369);
+    String targetedEntryEndDate = HelperMethods.addDaystoCurrentDate(366);
+    requestBodyJSONObject.put("startDate", startDate);
+    requestBodyJSONObject.put("endDate", endDate);
+    requestBodyJSONObject.put("targetedEntryEndDate", targetedEntryEndDate);
+    requestBodyJSONObject.put("campaignName", campaignName);
+    requestBodyJSONObject.put("campaignType", campaignTypeGfEntry);
+    requestBodyJSONObject.append("repeatInterval",null);
+    requestBodyJSONObject.put("repeatInterval", repeatInterval);
+    requestBodyJSONObject.remove("targetTimeZone");
+    requestBodyJSONObject.remove("repeatFrequency");
+
+
+    // Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+    // Auth Generation
+    try {
+      xAuth =
+              auth.generateAuthHeader(
+                      "POST",
+                      clientId_android_access_key,
+                      clientId_android_signature_key,
+                      requestURL,
+                      requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      log.error("Error generating Auth header" + e);
+    }
+
+    // Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .header("Content-Type", "application/json")
+                    .header("x-org-id", orgId)
+                    .header("x-client-id", clientId)
+                    .header("X-Auth", xAuth)
+                    .body(requestBodyJSONObject.toString())
+                    .post(requestURL)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+
+    // JSON Response Validations
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body(("any { it.key == 'id'}"), is(true));
+    response.then().body(("any { it.key == 'createdById'}"), is(true));
+    response.then().body(("any { it.key == 'notificationTitle'}"), is(true));
+    response.then().body(("any { it.key == 'endDate'}"), is(true));
+    response.then().body(("any { it.key == 'actionHTML'}"), is(true));
+    response.then().body(("any { it.key == 'description'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("any { it.key == 'modifiedById'}"), is(true));
+    response.then().body(("any { it.key == 'targetedEntryLocationTags'}"), is(true));
+    response.then().body(("any { it.key == 'targetedEntryEndDate'}"), is(true));
+    response.then().body(("any { it.key == 'actionType'}"), is(true));
+    response.then().body(("any { it.key == 'actionTitle'}"), is(true));
+    response.then().body(("any { it.key == 'repeatInterval'}"), is(true));
+    response.then().body(("any { it.key == 'status'}"), is(true));
+    response.then().body(("any { it.key == 'campaignName'}"), is(true));
+    response.then().body(("any { it.key == 'notificationMessage'}"), is(true));
+    response.then().body(("any { it.key == 'locationTags'}"), is(true));
+    response.then().body(("any { it.key == 'appId'}"), is(true));
+    response.then().body(("any { it.key == 'startDate'}"), is(true));
+    response.then().body(("any { it.key == 'campaignType'}"), is(true));
+    response.then().body(("any { it.key == 'messageMetadata'}"), is(true));
+    response.then().body(("any { it.key == 'profiles'}"), is(true));
+    response.then().body("campaignName", is(campaignName));
+    response.then().body("startDate", is(startDate));
+    response.then().body("endDate", is(endDate));
+    response.then().body("targetedEntryEndDate", is(targetedEntryEndDate));
+    response.then().body("campaignType", is(campaignTypeGfEntry));
+
+  }
+
+  @Test(priority = 7 )
+  @Parameters({"campaignTypeGfExit","repeatInterval"})
+  public void verify_Create_Campaign_GfExit(String campaignTypeGfExit,int repeatInterval)
+          throws IOException, NullPointerException {
+
+    // Request Details
+    String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
+
+    String requestBody = fileUtils.getJsonTextFromFile(postCampaignRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String campaignName = "CampaignNameGfEntry" + HelperMethods.getDateAsString();
+    String startDate = HelperMethods.addDaystoCurrentDate(365);
+    String endDate = HelperMethods.addDaystoCurrentDate(369);
+    String targetedEntryEndDate = HelperMethods.addDaystoCurrentDate(366);
+    requestBodyJSONObject.put("startDate", startDate);
+    requestBodyJSONObject.put("endDate", endDate);
+    requestBodyJSONObject.put("targetedEntryEndDate", targetedEntryEndDate);
+    requestBodyJSONObject.put("campaignName", campaignName);
+    requestBodyJSONObject.put("campaignType", campaignTypeGfExit);
+    requestBodyJSONObject.append("repeatInterval","");
+    requestBodyJSONObject.put("repeatInterval", repeatInterval);
+    requestBodyJSONObject.remove("targetTimeZone");
+    requestBodyJSONObject.remove("repeatFrequency");
+
+
+    // Printing Request Details
+    log.info("REQUEST-URL:POST-" + requestURL);
+    log.info("REQUEST-BODY:" + requestBodyJSONObject.toString());
+
+    // Auth Generation
+    try {
+      xAuth =
+              auth.generateAuthHeader(
+                      "POST",
+                      clientId_android_access_key,
+                      clientId_android_signature_key,
+                      requestURL,
+                      requestBodyJSONObject.toString());
+    } catch (Exception e) {
+      log.error("Error generating Auth header" + e);
+    }
+
+    // Printing xAuth
+    log.info("X-AUTH " + xAuth);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .header("Content-Type", "application/json")
+                    .header("x-org-id", orgId)
+                    .header("x-client-id", clientId)
+                    .header("X-Auth", xAuth)
+                    .body(requestBodyJSONObject.toString())
+                    .post(requestURL)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+
+    // JSON Response Validations
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body(("any { it.key == 'id'}"), is(true));
+    response.then().body(("any { it.key == 'createdById'}"), is(true));
+    response.then().body(("any { it.key == 'notificationTitle'}"), is(true));
+    response.then().body(("any { it.key == 'endDate'}"), is(true));
+    response.then().body(("any { it.key == 'actionHTML'}"), is(true));
+    response.then().body(("any { it.key == 'description'}"), is(true));
+    response.then().body(("any { it.key == 'enabled'}"), is(true));
+    response.then().body(("any { it.key == 'modifiedById'}"), is(true));
+    response.then().body(("any { it.key == 'targetedEntryLocationTags'}"), is(true));
+    response.then().body(("any { it.key == 'targetedEntryEndDate'}"), is(true));
+    response.then().body(("any { it.key == 'actionType'}"), is(true));
+    response.then().body(("any { it.key == 'actionTitle'}"), is(true));
+    response.then().body(("any { it.key == 'repeatInterval'}"), is(true));
+    response.then().body(("any { it.key == 'status'}"), is(true));
+    response.then().body(("any { it.key == 'campaignName'}"), is(true));
+    response.then().body(("any { it.key == 'notificationMessage'}"), is(true));
+    response.then().body(("any { it.key == 'locationTags'}"), is(true));
+    response.then().body(("any { it.key == 'appId'}"), is(true));
+    response.then().body(("any { it.key == 'startDate'}"), is(true));
+    response.then().body(("any { it.key == 'campaignType'}"), is(true));
+    response.then().body(("any { it.key == 'messageMetadata'}"), is(true));
+    response.then().body(("any { it.key == 'profiles'}"), is(true));
+    response.then().body("campaignName", is(campaignName));
+    response.then().body("startDate", is(startDate));
+    response.then().body("endDate", is(endDate));
+    response.then().body("targetedEntryEndDate", is(targetedEntryEndDate));
+    response.then().body("campaignType", is(campaignTypeGfExit));
+
+  }
+
 
   @Test(priority = 8)
   public void verify_Create_Campaign_WithNoNameInBody()
