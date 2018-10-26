@@ -124,6 +124,7 @@ public class Content {
     @Test(priority = 1)
     public void verify_Get_Content_by_contentId() {
 
+
         Random generator = new Random();
         Object[] values = contentMap.values().toArray();
         Object randomValue = values[generator.nextInt(values.length)];
@@ -140,6 +141,7 @@ public class Content {
                             .log().all()
                             .get(contentRequestUrl+randomValue)
                             .then()
+                            .log().body()
                             .statusCode(200)
                             .extract()
                             .response();
