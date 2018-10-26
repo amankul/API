@@ -39,7 +39,7 @@ public class Content {
     private static String deleteSchemaRequestUrl;
     private String contentId;
     private int spacesToIndentEachLevel = 2;
-    private int structureId=0;
+    private int structureId = 0;
 
     protected static String dateTime = null;
     protected static HashMap<String, String> contentMap = new HashMap<String, String>();
@@ -60,7 +60,7 @@ public class Content {
             log.error("Environment is not set properly. Please check testng xml.");
             Assert.fail("Environment is not set properly. Please check testng xml.");
         }
-        contentRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT+"/";
+        contentRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTENT_END_POINT + "/";
         deleteContainerRequestUrl = serviceEndPoint + CmeV2_API_Constants.CONTAINERS_END_POINT + "/";
         deleteSchemaRequestUrl = serviceEndPoint + CmeV2_API_Constants.SCHEMAS_END_POINT + "/";
 
@@ -111,56 +111,54 @@ public class Content {
         //stripping prefix and postfix from source file name and pushing into hashMap
         String name = path.substring(index).replaceAll(".json", "").replaceAll("Content", "");
         contentMap.put(name, contentId);
-        log.info("Content Name : " + name + " Content ID: "+ contentId);
+        log.info("Content Name : " + name + " Content ID: " + contentId);
 
     }
 
 
-
-/** Verify GET CONTENT by Content Id (with containerId in the body)
-     **
-     **
- **/
+    /**
+     * Verify GET CONTENT by Content Id (with containerId in the body)
+     * *
+     * *
+     **/
     @Test(priority = 1)
     public void verify_Get_Content_by_contentId() {
 
-
+        log.info("containerName: " + containerName);
+        log.info("contentMap: " + contentMap);
         Random generator = new Random();
         Object[] values = contentMap.values().toArray();
         Object randomValue = values[generator.nextInt(values.length)];
 
-        log.info("randomValue: "+randomValue);
+        log.info("randomValue: " + randomValue);
 
 
-            log.info("Get Content: By Content ID:  " + contentRequestUrl + randomValue);
-            Response response =
-                    given()
-                            .header("Content-Type", "application/json")
-                            .header("Authorization", jwt)
-                            .body(containerId)
-                            .log().all()
-                            .get(contentRequestUrl+randomValue)
-                            .then()
-                            .log().body()
-                            .statusCode(200)
-                            .extract()
-                            .response();
-            log.info("Get Content Response value: "+response.asString());
+        log.info("Get Content: By Content ID:  " + contentRequestUrl + randomValue);
+        Response response =
+                given()
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", jwt)
+                        .body(containerId)
+                        .log().all()
+                        .get(contentRequestUrl + randomValue)
+                        .then()
+                        .log().body()
+                        .statusCode(200)
+                        .extract()
+                        .response();
+        log.info("Get Content Response value: " + response.asString());
         Assert.assertNotNull(response.body());
     }
 
 
-
-
-
-
-/** Verify GET CONTENT by Container ID. This option is when the structure is of type Object.
-     *  Structure ID
-     *  Parent ID
-     *  Org ID
-     *
-     *  get content for only one content and remove this comment
-     *  **/
+    /**
+     * Verify GET CONTENT by Container ID. This option is when the structure is of type Object.
+     * Structure ID
+     * Parent ID
+     * Org ID
+     * <p>
+     * get content for only one content and remove this comment
+     **/
 
     @Test(priority = 3)
     public void verify_Get_Content_by_containerId_for_Structure_Object() {
@@ -194,11 +192,12 @@ public class Content {
 
     }
 
-    /** Verify GET Content with below fields. This option is when the structure is of type ARRAY.
-     *  Structure ID
-     *  Parent ID
-     *  Limit
-     *  Offset
+    /**
+     * Verify GET Content with below fields. This option is when the structure is of type ARRAY.
+     * Structure ID
+     * Parent ID
+     * Limit
+     * Offset
      **/
 
     @Test(priority = 4)
@@ -209,46 +208,43 @@ public class Content {
         if (containerName.equals("DignityHealth")) {
 
 
-            log.info("structureID: "+ structureMap.get("Venues"));
+            log.info("structureID: " + structureMap.get("Venues"));
 
-            JSONObject jo =new JSONObject();
-            jo.put("orgId",109);
-            jo.put("containerId",containerId);
-            jo.put("structureId",structureMap.get("Venues"));
-            jo.put("limit",2);
-            jo.put("offset",1);
+            JSONObject jo = new JSONObject();
+            jo.put("orgId", 109);
+            jo.put("containerId", containerId);
+            jo.put("structureId", structureMap.get("Venues"));
+            jo.put("limit", 2);
+            jo.put("offset", 1);
 
             log.info(jo.toString(spacesToIndentEachLevel));
 
 
-                log.info("Get Content: By Container ID:  " + contentRequestUrl );
-                Response response =
-                        given()
-                                .header("Content-Type", "application/json")
-                                .header("Authorization", jwt)
-                                .queryParam(jo.toString())
-                                .log().all().request()
-                                .get(contentRequestUrl)
-                                .then()
-                                .statusCode(200)
-                                .extract()
-                                .response();
-                log.info("Response value: "+response.asString());
+            log.info("Get Content: By Container ID:  " + contentRequestUrl);
+            Response response =
+                    given()
+                            .header("Content-Type", "application/json")
+                            .header("Authorization", jwt)
+                            .queryParam(jo.toString())
+                            .log().all().request()
+                            .get(contentRequestUrl)
+                            .then()
+                            .statusCode(200)
+                            .extract()
+                            .response();
+            log.info("Response value: " + response.asString());
 
             Assert.assertNotNull(response.body());
-            }
+        }
     }
 
 
-
-
-
-
-    /** Verify GET Content with below fields. This option is when the structure is of type ARRAY.
-     *  Structure ID
-     *  Parent ID
-     *  Limit
-     *  Offset
+    /**
+     * Verify GET Content with below fields. This option is when the structure is of type ARRAY.
+     * Structure ID
+     * Parent ID
+     * Limit
+     * Offset
      **/
 
     @Test(priority = 5)
@@ -259,43 +255,43 @@ public class Content {
         if (containerName.equals("DignityHealth")) {
 
 
-            log.info("structureID: "+ structureMap.get("Venues"));
+            log.info("structureID: " + structureMap.get("Venues"));
 
-            JSONObject jo =new JSONObject();
-            jo.put("orgId",109);
-            jo.put("containerId",containerId);
-            jo.put("structureId",structureMap.get("Platform"));
-            jo.put("limit",2);
-            jo.put("offset",1);
+            JSONObject jo = new JSONObject();
+            jo.put("orgId", 109);
+            jo.put("containerId", containerId);
+            jo.put("structureId", structureMap.get("Platform"));
+            jo.put("limit", 2);
+            jo.put("offset", 1);
 
             log.info(jo.toString(spacesToIndentEachLevel));
 
 
-            log.info("Get Content: By Container ID:  " + contentRequestUrl );
+            log.info("Get Content: By Container ID:  " + contentRequestUrl);
             Response response =
                     given()
                             .header("Content-Type", "application/json")
                             .header("Authorization", jwt)
                             .queryParam(jo.toString())
                             .log().all().request()
-                            .get(contentRequestUrl+"Settings")
+                            .get(contentRequestUrl + "Settings")
                             .then()
                             .statusCode(200)
                             .extract()
                             .response();
-            log.info("Response value: "+response.asString());
+            log.info("Response value: " + response.asString());
             Assert.assertNotNull(response.body());
         }
     }
 
 
-
-    /** Verify GET Content with below fields.
-     *  Structure ID
-     *  Container ID
-     *  Parent ID
-     *  Limit
-     *  Offset
+    /**
+     * Verify GET Content with below fields.
+     * Structure ID
+     * Container ID
+     * Parent ID
+     * Limit
+     * Offset
      **/
 
     @Test(priority = 6)
@@ -304,39 +300,39 @@ public class Content {
         //This testcase is dependent on Data, hence field values are hard coded.
         if (containerName.equals("DignityHealth")) {
 
-            log.info("structureID: "+ structureMap.get("Venues"));
+            log.info("structureID: " + structureMap.get("Venues"));
 
-            JSONObject jo =new JSONObject();
-            jo.put("orgId",109);
-            jo.put("containerId",containerId);
-            jo.put("structureId",structureMap.get("Platform"));
-            jo.put("limit",2);
-            jo.put("offset",1);
+            JSONObject jo = new JSONObject();
+            jo.put("orgId", 109);
+            jo.put("containerId", containerId);
+            jo.put("structureId", structureMap.get("Platform"));
+            jo.put("limit", 2);
+            jo.put("offset", 1);
 
             log.info(jo.toString(spacesToIndentEachLevel));
 
 
-            log.info("Get Content: By Container ID:  " + contentRequestUrl );
+            log.info("Get Content: By Container ID:  " + contentRequestUrl);
             Response response =
                     given()
                             .header("Content-Type", "application/json")
                             .header("Authorization", jwt)
                             .queryParam(jo.toString())
                             .log().all().request()
-                            .get(contentRequestUrl+"Settings")
+                            .get(contentRequestUrl + "Settings")
                             .then()
                             .statusCode(200)
                             .extract()
                             .response();
-            log.info("Response value: "+response.asString());
+            log.info("Response value: " + response.asString());
             Assert.assertNotNull(response.body());
         }
     }
 
 
-
-
-    /** Deleting Container. This will delete content and structure contained it." **/
+    /**
+     * Deleting Container. This will delete content and structure contained it."
+     **/
     @Test(priority = 8)
     public void delete_Container() {
 
