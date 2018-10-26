@@ -418,4 +418,12 @@ public class Content {
         }
 
     }
+
+
+    @AfterClass
+    public void teardown() {
+        contentMap.clear();
+        structureMap.clear();
+        schemaMap.clear();
+    }
 }
