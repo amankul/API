@@ -126,9 +126,10 @@ public class Content {
 
         log.info("containerName: " + containerName);
         log.info("contentMap: " + contentMap);
+
         Random generator = new Random();
         Object[] values = contentMap.values().toArray();
-        Object randomValue = values[generator.nextInt(values.length)];
+        String randomValue = values[generator.nextInt(values.length)].toString();
 
         log.info("randomValue: " + randomValue);
 
