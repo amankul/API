@@ -45,7 +45,6 @@ public class Content {
     protected static HashMap<String, String> contentMap = new HashMap<String, String>();
 
 
-
     @BeforeClass
     @Parameters({"env", "orgId"})
     private void setEnv(String env, int orgId) throws IOException {
@@ -145,7 +144,6 @@ public class Content {
                             .extract()
                             .response();
             log.info("Get Content Response value: "+response.asString());
-
         Assert.assertNotNull(response.body());
     }
 
@@ -165,15 +163,15 @@ public class Content {
     @Test(priority = 3)
     public void verify_Get_Content_by_containerId_for_Structure_Object() {
 
+        if (containerName.equals("DignityHealth")) {
 
+            JSONObject jo = new JSONObject();
+            jo.put("orgId", 109);
+            jo.put("containerId", containerId);
+            jo.put("structureId", structureMap.get("GeoSettings")  //get structure id of type Object.
+            );
 
-        JSONObject jo =new JSONObject();
-        jo.put("orgId",109);
-        jo.put("containerId",containerId);
-        jo.put("structureId",structureMap.get("GeoSettings")  //get structure id of type Object.
-        );
-
-        log.info(jo.toString(spacesToIndentEachLevel));
+            log.info(jo.toString(spacesToIndentEachLevel));
 
             Response response =
                     given()
@@ -186,12 +184,13 @@ public class Content {
                             .statusCode(200)
                             .extract()
                             .response();
-            log.info("Get Content Response value: "+response.asString());
+            log.info("Get Content Response value: " + response.asString());
 
-        Assert.assertNotNull(response.body());
+            Assert.assertNotNull(response.body());
+
+        }
 
     }
-
 
     /** Verify GET Content with below fields. This option is when the structure is of type ARRAY.
      *  Structure ID
@@ -289,8 +288,9 @@ public class Content {
 
 
 
-    /** Verify GET Content with below fields. This option is when the structure is of type ARRAY.
+    /** Verify GET Content with below fields.
      *  Structure ID
+     *  Container ID
      *  Parent ID
      *  Limit
      *  Offset
@@ -330,7 +330,6 @@ public class Content {
             Assert.assertNotNull(response.body());
         }
     }
-
 
 
 
