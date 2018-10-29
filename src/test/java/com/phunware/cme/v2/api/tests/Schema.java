@@ -35,12 +35,12 @@ public class Schema {
     @BeforeSuite
     @Parameters("containerName")
     private void setUpSuite(String containerName) {
-        this.containerName=containerName;
+        this.containerName = containerName;
     }
 
 
     @BeforeClass
-    @Parameters({"env", "orgId" })
+    @Parameters({"env", "orgId"})
     private void setEnv(String env, int orgId) {
 
         log = Logger.getLogger(Schema.class);
@@ -50,7 +50,7 @@ public class Schema {
 
         if (env.equalsIgnoreCase("PROD")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
-            if(orgId!=96) {
+            if (orgId != 96) {
                 log.info("orgID is not pointing to QA TEST in PROD.");
                 System.exit(0);
             }
@@ -113,8 +113,8 @@ public class Schema {
         log.info("RESPONSE: " + response.asString());
         Assert.assertEquals(response.getStatusCode(), 200);
 
-            // Get schema ID and put it into hash map
-            schemaMap.put(name, response.getBody().jsonPath().get("id"));
+        // Get schema ID and put it into hash map
+        schemaMap.put(name, response.getBody().jsonPath().get("id"));
     }
 
 

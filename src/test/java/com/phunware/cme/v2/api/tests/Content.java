@@ -56,7 +56,7 @@ public class Content {
 
         if (env.equalsIgnoreCase("PROD")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
-            if(orgId!=96) {
+            if (orgId != 96) {
                 log.info("orgID is not pointing to QA TEST in PROD.");
                 System.exit(0);
             }
@@ -82,7 +82,7 @@ public class Content {
     @Test(dataProvider = "usesParameter", priority = 0)
     public void verify_Post_Content(String path, Integer structureId, String parentId) throws IOException {
 
-        // verify dataprovider is not sending NULL values. Path should be enough to test this scenario.
+        // verify data provider is not sending NULL values. Path should be enough to test this scenario.
         Assert.assertNotNull(path);
         log.info("File Path for Content JSON: " + path);
         String requestBody = FileUtils.getJsonTextFromFile(path);
@@ -102,6 +102,7 @@ public class Content {
                         .header("Content-Type", "application/json")
                         .header("Authorization", jwt)
                         .body(requestBodyJSONObject.toString())
+                        .log().all().request()
                         .post(contentRequestUrl)
                         .then()
                         .extract()
@@ -134,7 +135,7 @@ public class Content {
         log.info("contentMap: " + contentMap);
 
         Random random = new Random();
-        Object[] contentMapValues  = contentMap.values().toArray();
+        Object[] contentMapValues = contentMap.values().toArray();
         String randomValue = contentMapValues[random.nextInt(contentMapValues.length)].toString();
 
         log.info("randomValue: " + randomValue);
@@ -150,7 +151,7 @@ public class Content {
                         .response();
         log.info("Get Content Response value: " + response.asString());
 
-        Assert.assertEquals(response.statusCode(),200);
+        Assert.assertEquals(response.statusCode(), 200);
         Assert.assertNotNull(response.body());
     }
 
@@ -187,7 +188,7 @@ public class Content {
                             .response();
             log.info("Get Content Response value: " + response.asString());
 
-            Assert.assertEquals(response.statusCode(),200);
+            Assert.assertEquals(response.statusCode(), 200);
             Assert.assertNotNull(response.body());
 
         }
@@ -195,7 +196,7 @@ public class Content {
     }
 
     /**
-     * Verify GET Content with below fields. This option is when the structure is of type ARRAY.
+     * Verify GET Content. This option is when the structure is of type ARRAY.
      * Structure ID
      * Parent ID
      * Limit
@@ -234,14 +235,14 @@ public class Content {
                             .response();
             log.info("Response value: " + response.asString());
 
-            Assert.assertEquals(response.statusCode(),200);
+            Assert.assertEquals(response.statusCode(), 200);
             Assert.assertNotNull(response.body());
         }
     }
 
 
     /**
-     * Verify GET Content with below fields. This option is when the structure is of type ARRAY.
+     * Verify GET Content with below fields. This option is when the structure is of type Object.
      * Structure ID
      * Parent ID
      * Limit
@@ -255,7 +256,6 @@ public class Content {
 
         if (containerName.equals("DignityHealth")) {
 
-
             log.info("structureID: " + structureMap.get("Venues"));
 
             JSONObject jo = new JSONObject();
@@ -281,54 +281,7 @@ public class Content {
                             .response();
             log.info("Response value: " + response.asString());
 
-            Assert.assertEquals(response.statusCode(),200);
-            Assert.assertNotNull(response.body());
-        }
-    }
-
-
-    /**
-     * Verify GET Content with below fields.
-     * Structure ID
-     * Container ID
-     * Parent ID
-     * Limit
-     * Offset
-     **/
-
-    @Test(priority = 6)
-    public void verify_Get_Content_by_contentId_and_containerId_and_field() {
-
-        //This testcase is dependent on Data, hence field values are hard coded.
-        if (containerName.equals("DignityHealth")) {
-
-            log.info("structureID: " + structureMap.get("Venues"));
-
-            JSONObject jo = new JSONObject();
-            jo.put("orgId", orgId);
-            jo.put("containerId", containerId);
-            jo.put("structureId", structureMap.get("Platform"));
-            jo.put("limit", 2);
-            jo.put("offset", 1);
-
-            log.info(jo.toString(spacesToIndentEachLevel));
-
-
-            log.info("Get Content: By Container ID:  " + contentRequestUrl);
-            Response response =
-                    given()
-                            .header("Content-Type", "application/json")
-                            .header("Authorization", jwt)
-                            .queryParam(jo.toString())
-                            .log().all().request()
-                            .get(contentRequestUrl + "Settings")
-                            .then()
-                            .extract()
-                            .response();
-            log.info("Response value: " + response.asString());
-
-
-            Assert.assertEquals(response.statusCode(),200);
+            Assert.assertEquals(response.statusCode(), 200);
             Assert.assertNotNull(response.body());
         }
     }
@@ -354,7 +307,7 @@ public class Content {
 
         log.info("Response value: " + response.asString());
 
-        Assert.assertEquals(response.statusCode(),200);
+        Assert.assertEquals(response.statusCode(), 200);
     }
 
     /**
@@ -380,7 +333,7 @@ public class Content {
 
             log.info("Response value: " + response.asString());
 
-            Assert.assertEquals(response.statusCode(),200);
+            Assert.assertEquals(response.statusCode(), 200);
         }
     }
 

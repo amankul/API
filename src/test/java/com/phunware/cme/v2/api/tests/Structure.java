@@ -79,7 +79,7 @@ public class Structure {
 
         if (env.equalsIgnoreCase("PROD")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
-            if(orgId!=96) {
+            if (orgId != 96) {
                 log.info("orgID is not pointing to QA TEST in PROD.");
                 System.exit(0);
             }
@@ -128,9 +128,9 @@ public class Structure {
         log.info("RESPONSE:" + response.asString());
         Assert.assertEquals(response.getStatusCode(), 200);
 
-            //JSON response Pay load validations
-            containerId = response.getBody().jsonPath().get("id");
-            log.info("ContainerId = " + containerId);
+        //JSON response Pay load validations
+        containerId = response.getBody().jsonPath().get("id");
+        log.info("ContainerId = " + containerId);
 
     }
 
@@ -171,11 +171,11 @@ public class Structure {
         log.info("RESPONSE: " + response.asString());
 
         Assert.assertEquals(response.getStatusCode(), 200);
-            structureId = response.getBody().jsonPath().get("id");
-            log.info("NAME: " + name);
-            log.info("structureId: " + structureId);
-            structureMap.put(name, structureId);
-            log.info("STRUCTURE MAP: " + structureMap);
+        structureId = response.getBody().jsonPath().get("id");
+        log.info("NAME: " + name);
+        log.info("structureId: " + structureId);
+        structureMap.put(name, structureId);
+        log.info("STRUCTURE MAP: " + structureMap);
 
     }
 
