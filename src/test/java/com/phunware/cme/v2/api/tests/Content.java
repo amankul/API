@@ -151,7 +151,7 @@ public class Content {
         log.info("Get Content Response value: " + response.asString());
 
         Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertNotNull(response.body());
+        Assert.assertNotNull(response.body(),"Response Body is null");
     }
 
 
@@ -185,7 +185,7 @@ public class Content {
             log.info("Response value: " + response.asString());
 
             Assert.assertEquals(response.statusCode(), 200);
-            Assert.assertNotNull(response.body());
+            Assert.assertNotNull(response.body(),"Response Body is null");
         }
     }
 
@@ -222,7 +222,7 @@ public class Content {
             log.info("Get Content Response value: " + response.asString());
 
             Assert.assertEquals(response.statusCode(), 200);
-            Assert.assertNotNull(response.body());
+            Assert.assertNotNull(response.body(),"Response Body is null");
 
         }
 
@@ -267,7 +267,7 @@ public class Content {
             log.info("Response value: " + response.asString());
 
             Assert.assertEquals(response.statusCode(), 200);
-            Assert.assertNotNull(response.body());
+            Assert.assertNotNull(response.body(),"Response Body is null");
         }
     }
 
@@ -311,7 +311,7 @@ public class Content {
             log.info("Response value: " + response.asString());
 
             Assert.assertEquals(response.statusCode(), 200);
-            Assert.assertNotNull(response.body());
+            Assert.assertNotNull(response.body(),"Response Body is null");
         }
     }
 
