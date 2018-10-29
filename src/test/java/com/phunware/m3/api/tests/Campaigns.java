@@ -20,9 +20,7 @@ import java.util.stream.Collectors;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-/**
- * Created by VinayKarumuri on 5/22/17.
- */
+/** Created by VinayKarumuri on 5/22/17. */
 public class Campaigns {
 
   private static String serviceEndPoint = null;
@@ -40,27 +38,38 @@ public class Campaigns {
   private static String limit;
   private static String postCampaignRequestBodyPath;
 
-
   private static Logger log = Logger.getLogger(Campaigns.class);
-  private String xAuth = null;
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
 
   @BeforeClass
-  @Parameters({"env", "campaignId", "clientId_android_access_key", "clientId_android_signature_key", "orgId", "clientId", "campaignType", "status", "sortBy", "sortOrder", "limit", "postCampaignRequestBodyPath"})
-  public void preTestSteps(String env,
-                           String campaignId,
-                           String clientId_android_access_key,
-                           String clientId_android_signature_key,
-                           String orgId,
-                           String clientId,
-                           String campaignType,
-                           String status,
-                           String sortBy,
-                           String sortOrder,
-                           String limit,
-                           String postCampaignRequestBodyPath
-                           ) {
+  @Parameters({
+    "env",
+    "campaignId",
+    "clientId_android_access_key",
+    "clientId_android_signature_key",
+    "orgId",
+    "clientId",
+    "campaignType",
+    "status",
+    "sortBy",
+    "sortOrder",
+    "limit",
+    "postCampaignRequestBodyPath"
+  })
+  public void preTestSteps(
+      String env,
+      String campaignId,
+      String clientId_android_access_key,
+      String clientId_android_signature_key,
+      String orgId,
+      String clientId,
+      String campaignType,
+      String status,
+      String sortBy,
+      String sortOrder,
+      String limit,
+      String postCampaignRequestBodyPath) {
 
     this.clientId_android_access_key = clientId_android_access_key;
     this.clientId_android_signature_key = clientId_android_signature_key;
@@ -73,7 +82,6 @@ public class Campaigns {
     this.sortOrder = sortOrder;
     this.limit = limit;
     this.postCampaignRequestBodyPath = postCampaignRequestBodyPath;
-
 
     if ("PROD".equalsIgnoreCase(env)) {
       serviceEndPoint = MeAPI_Constants.SERVICE_ENT_POINT_PROD;
@@ -388,8 +396,7 @@ public class Campaigns {
   }
 
   @Test(priority = 7)
-  public void verify_Create_Campaign()
-      throws IOException, NullPointerException {
+  public void verify_Create_Campaign() throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -474,11 +481,10 @@ public class Campaigns {
     capturedCampaignId = response.then().extract().path("id").toString();
   }
 
-
   @Test(priority = 7)
   @Parameters({"nonRollingTimeZone"})
   public void verify_Create_Campaign_NonRolling(String nonRollingTimeZone)
-          throws IOException, NullPointerException {
+      throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -502,12 +508,12 @@ public class Campaigns {
     // Auth Generation
     try {
       xAuth =
-              auth.generateAuthHeader(
-                      "POST",
-                      clientId_android_access_key,
-                      clientId_android_signature_key,
-                      requestURL,
-                      requestBodyJSONObject.toString());
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
       log.error("Error generating Auth header" + e);
     }
@@ -517,16 +523,16 @@ public class Campaigns {
 
     // Extracting response after status code validation
     Response response =
-            given()
-                    .header("Content-Type", "application/json")
-                    .header("x-org-id", orgId)
-                    .header("x-client-id", clientId)
-                    .header("X-Auth", xAuth)
-                    .body(requestBodyJSONObject.toString())
-                    .post(requestURL)
-                    .then()
-                    .extract()
-                    .response();
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .extract()
+            .response();
 
     // printing response
     log.info("RESPONSE:" + response.asString());
@@ -560,13 +566,12 @@ public class Campaigns {
     response.then().body("endDate", is(endDate));
     response.then().body("targetedEntryEndDate", is(targetedEntryEndDate));
     response.then().body("targetTimeZone", is(nonRollingTimeZone));
-
   }
 
-  @Test(priority = 7 )
-  @Parameters({"campaignTypeGfEntry","repeatInterval"})
-  public void verify_Create_Campaign_GfEntry(String campaignTypeGfEntry,int repeatInterval)
-          throws IOException, NullPointerException {
+  @Test(priority = 7)
+  @Parameters({"campaignTypeGfEntry", "repeatInterval"})
+  public void verify_Create_Campaign_GfEntry(String campaignTypeGfEntry, int repeatInterval)
+      throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -582,11 +587,10 @@ public class Campaigns {
     requestBodyJSONObject.put("targetedEntryEndDate", targetedEntryEndDate);
     requestBodyJSONObject.put("campaignName", campaignName);
     requestBodyJSONObject.put("campaignType", campaignTypeGfEntry);
-    requestBodyJSONObject.append("repeatInterval",null);
+    requestBodyJSONObject.append("repeatInterval", null);
     requestBodyJSONObject.put("repeatInterval", repeatInterval);
     requestBodyJSONObject.remove("targetTimeZone");
     requestBodyJSONObject.remove("repeatFrequency");
-
 
     // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
@@ -595,12 +599,12 @@ public class Campaigns {
     // Auth Generation
     try {
       xAuth =
-              auth.generateAuthHeader(
-                      "POST",
-                      clientId_android_access_key,
-                      clientId_android_signature_key,
-                      requestURL,
-                      requestBodyJSONObject.toString());
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
       log.error("Error generating Auth header" + e);
     }
@@ -610,16 +614,16 @@ public class Campaigns {
 
     // Extracting response after status code validation
     Response response =
-            given()
-                    .header("Content-Type", "application/json")
-                    .header("x-org-id", orgId)
-                    .header("x-client-id", clientId)
-                    .header("X-Auth", xAuth)
-                    .body(requestBodyJSONObject.toString())
-                    .post(requestURL)
-                    .then()
-                    .extract()
-                    .response();
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .extract()
+            .response();
 
     // printing response
     log.info("RESPONSE:" + response.asString());
@@ -653,13 +657,12 @@ public class Campaigns {
     response.then().body("endDate", is(endDate));
     response.then().body("targetedEntryEndDate", is(targetedEntryEndDate));
     response.then().body("campaignType", is(campaignTypeGfEntry));
-
   }
 
-  @Test(priority = 7 )
-  @Parameters({"campaignTypeGfExit","repeatInterval"})
-  public void verify_Create_Campaign_GfExit(String campaignTypeGfExit,int repeatInterval)
-          throws IOException, NullPointerException {
+  @Test(priority = 7)
+  @Parameters({"campaignTypeGfExit", "repeatInterval"})
+  public void verify_Create_Campaign_GfExit(String campaignTypeGfExit, int repeatInterval)
+      throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -675,11 +678,10 @@ public class Campaigns {
     requestBodyJSONObject.put("targetedEntryEndDate", targetedEntryEndDate);
     requestBodyJSONObject.put("campaignName", campaignName);
     requestBodyJSONObject.put("campaignType", campaignTypeGfExit);
-    requestBodyJSONObject.append("repeatInterval","");
+    requestBodyJSONObject.append("repeatInterval", "");
     requestBodyJSONObject.put("repeatInterval", repeatInterval);
     requestBodyJSONObject.remove("targetTimeZone");
     requestBodyJSONObject.remove("repeatFrequency");
-
 
     // Printing Request Details
     log.info("REQUEST-URL:POST-" + requestURL);
@@ -688,12 +690,12 @@ public class Campaigns {
     // Auth Generation
     try {
       xAuth =
-              auth.generateAuthHeader(
-                      "POST",
-                      clientId_android_access_key,
-                      clientId_android_signature_key,
-                      requestURL,
-                      requestBodyJSONObject.toString());
+          auth.generateAuthHeader(
+              "POST",
+              clientId_android_access_key,
+              clientId_android_signature_key,
+              requestURL,
+              requestBodyJSONObject.toString());
     } catch (Exception e) {
       log.error("Error generating Auth header" + e);
     }
@@ -703,16 +705,16 @@ public class Campaigns {
 
     // Extracting response after status code validation
     Response response =
-            given()
-                    .header("Content-Type", "application/json")
-                    .header("x-org-id", orgId)
-                    .header("x-client-id", clientId)
-                    .header("X-Auth", xAuth)
-                    .body(requestBodyJSONObject.toString())
-                    .post(requestURL)
-                    .then()
-                    .extract()
-                    .response();
+        given()
+            .header("Content-Type", "application/json")
+            .header("x-org-id", orgId)
+            .header("x-client-id", clientId)
+            .header("X-Auth", xAuth)
+            .body(requestBodyJSONObject.toString())
+            .post(requestURL)
+            .then()
+            .extract()
+            .response();
 
     // printing response
     log.info("RESPONSE:" + response.asString());
@@ -746,13 +748,10 @@ public class Campaigns {
     response.then().body("endDate", is(endDate));
     response.then().body("targetedEntryEndDate", is(targetedEntryEndDate));
     response.then().body("campaignType", is(campaignTypeGfExit));
-
   }
 
-
   @Test(priority = 8)
-  public void verify_Create_Campaign_WithNoNameInBody()
-      throws IOException, NullPointerException {
+  public void verify_Create_Campaign_WithNoNameInBody() throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -1292,8 +1291,7 @@ public class Campaigns {
   }
 
   @Test(priority = 17)
-  public void verify_Update_Campaign()
-      throws IOException, NullPointerException {
+  public void verify_Update_Campaign() throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + capturedCampaignId;
@@ -1381,8 +1379,7 @@ public class Campaigns {
   }
 
   @Test(priority = 18)
-  public void verify_Delete_Campaign()
-      throws IOException, NullPointerException {
+  public void verify_Delete_Campaign() throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT + capturedCampaignId;
