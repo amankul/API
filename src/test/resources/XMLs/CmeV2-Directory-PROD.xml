@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="CME V2 API TEST SUITE ">
-    <parameter name="env" value="STAGE"/>
+    <parameter name="env" value="PROD"/>
     <parameter name="containerName" value="Directory" />
     <!--SCHEMAS-->
     <parameter name="postSchemaDirectory" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postSchemaDirectory.json"/>
@@ -20,7 +20,7 @@
     <parameter name="postContentSubway" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentSubway.json"/>
 
     <!--DO NOT CHANGE ORG ID-->
-    <parameter name="orgId" value="109"/>
+    <parameter name="orgId" value="96"/>
 
     <test name="CMEV2">
         <classes>

@@ -56,6 +56,10 @@ public class Content {
 
         if (env.equalsIgnoreCase("PROD")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
+            if(orgId!=96) {
+                log.info("orgID is not pointing to QA TEST in PROD.");
+                System.exit(0);
+            }
         } else if (env.equalsIgnoreCase("STAGE")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
         } else {
