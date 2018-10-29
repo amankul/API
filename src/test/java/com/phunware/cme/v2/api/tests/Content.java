@@ -38,6 +38,7 @@ public class Content {
     private static String deleteContainerRequestUrl;
     private static String deleteSchemaRequestUrl;
     private String contentId;
+    private String randomContentId;
     private int spacesToIndentEachLevel = 2;
     private int structureId = 0;
     private int orgId;
@@ -134,18 +135,16 @@ public class Content {
         log.info("containerName: " + containerName);
         log.info("contentMap: " + contentMap);
 
-        Random random = new Random();
-        Object[] contentMapValues = contentMap.values().toArray();
-        String randomValue = contentMapValues[random.nextInt(contentMapValues.length)].toString();
 
-        log.info("randomValue: " + randomValue);
+
+        log.info("randomValue: " + randomContentId);
 
         Response response =
                 given()
                         .header("Content-Type", "application/json")
                         .header("Authorization", jwt)
                         .log().all().request()
-                        .get(contentRequestUrl + randomValue)
+                        .get(contentRequestUrl + contentMap.get("Platform"))
                         .then()
                         .extract()
                         .response();
@@ -154,6 +153,42 @@ public class Content {
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertNotNull(response.body());
     }
+
+
+
+
+    /**
+     * Verify GET Content with below fields. This option is ONLY for structure type Object.
+     * Structure ID
+     * Parent ID
+     * Limit
+     * Offset
+     **/
+
+    @Test(priority = 2)
+    public void verify_Get_Content_by_contentId_and_field() {
+
+        //This testcase is dependent on Data, hence field values are hard coded.
+
+        if (containerName.equals("DignityHealth")) {
+
+            log.info("Get Content: By Container ID:  " + contentRequestUrl);
+            Response response =
+                    given()
+                            .header("Content-Type", "application/json")
+                            .header("Authorization", jwt)
+                            .log().all().request()
+                            .get(contentRequestUrl + contentMap.get("Platform") +"/" +"Settings")
+                            .then()
+                            .extract()
+                            .response();
+            log.info("Response value: " + response.asString());
+
+            Assert.assertEquals(response.statusCode(), 200);
+            Assert.assertNotNull(response.body());
+        }
+    }
+
 
 
     /**
@@ -173,8 +208,6 @@ public class Content {
             jo.put("containerId", containerId);
             jo.put("structureId", structureMap.get("GeoSettings")  //get structure id of type Object.
             );
-
-            log.info(jo.toString(spacesToIndentEachLevel));
 
             Response response =
                     given()
@@ -218,8 +251,6 @@ public class Content {
             jo.put("structureId", structureMap.get("Venues"));
             jo.put("limit", 2);
             jo.put("offset", 1);
-
-            log.info(jo.toString(spacesToIndentEachLevel));
 
 
             log.info("Get Content: By Container ID:  " + contentRequestUrl);
@@ -265,8 +296,6 @@ public class Content {
             jo.put("limit", 2);
             jo.put("offset", 1);
 
-            log.info(jo.toString(spacesToIndentEachLevel));
-
 
             log.info("Get Content: By Container ID:  " + contentRequestUrl);
             Response response =
@@ -285,6 +314,9 @@ public class Content {
             Assert.assertNotNull(response.body());
         }
     }
+
+
+
 
 
     /**
