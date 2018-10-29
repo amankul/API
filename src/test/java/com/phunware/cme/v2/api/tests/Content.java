@@ -40,14 +40,16 @@ public class Content {
     private String contentId;
     private int spacesToIndentEachLevel = 2;
     private int structureId = 0;
+    private int orgId;
 
     protected static String dateTime = null;
-    protected static HashMap<String, String> contentMap = new HashMap<String, String>();
+    protected static HashMap<String, String> contentMap = new HashMap<>();
 
 
     @BeforeClass
     @Parameters({"env", "orgId"})
     private void setEnv(String env, int orgId) throws IOException {
+        this.orgId = orgId;
         log = Logger.getLogger(Structure.class);
         jwt = JWTUtils.getJWTForAdmin(env, orgId);
 
@@ -117,7 +119,7 @@ public class Content {
 
 
     /**
-     * Verify GET CONTENT by Content Id (with containerId in the body)
+     * Verify GET CONTENT by Content Id
      * *
      * *
      **/
@@ -127,27 +129,24 @@ public class Content {
         log.info("containerName: " + containerName);
         log.info("contentMap: " + contentMap);
 
-        Random generator = new Random();
-        Object[] values = contentMap.values().toArray();
-        String randomValue = values[generator.nextInt(values.length)].toString();
+        Random random = new Random();
+        Object[] contentMapValues  = contentMap.values().toArray();
+        String randomValue = contentMapValues[random.nextInt(contentMapValues.length)].toString();
 
         log.info("randomValue: " + randomValue);
 
-
-        log.info("Get Content: By Content ID:  " + contentRequestUrl + randomValue);
         Response response =
                 given()
                         .header("Content-Type", "application/json")
                         .header("Authorization", jwt)
-                        .body(containerId)
-                        .log().all()
+                        .log().all().request()
                         .get(contentRequestUrl + randomValue)
                         .then()
-                        .log().body()
-                        .statusCode(200)
                         .extract()
                         .response();
         log.info("Get Content Response value: " + response.asString());
+
+        Assert.assertEquals(response.statusCode(),200);
         Assert.assertNotNull(response.body());
     }
 
@@ -157,8 +156,6 @@ public class Content {
      * Structure ID
      * Parent ID
      * Org ID
-     * <p>
-     * get content for only one content and remove this comment
      **/
 
     @Test(priority = 3)
@@ -167,7 +164,7 @@ public class Content {
         if (containerName.equals("DignityHealth")) {
 
             JSONObject jo = new JSONObject();
-            jo.put("orgId", 109);
+            jo.put("orgId", orgId);
             jo.put("containerId", containerId);
             jo.put("structureId", structureMap.get("GeoSettings")  //get structure id of type Object.
             );
@@ -179,14 +176,14 @@ public class Content {
                             .header("Content-Type", "application/json")
                             .header("Authorization", jwt)
                             .queryParam(jo.toString())
-                            .log().all()
+                            .log().all().request()
                             .get(contentRequestUrl)
                             .then()
-                            .statusCode(200)
                             .extract()
                             .response();
             log.info("Get Content Response value: " + response.asString());
 
+            Assert.assertEquals(response.statusCode(),200);
             Assert.assertNotNull(response.body());
 
         }
@@ -208,11 +205,10 @@ public class Content {
 
         if (containerName.equals("DignityHealth")) {
 
-
             log.info("structureID: " + structureMap.get("Venues"));
 
             JSONObject jo = new JSONObject();
-            jo.put("orgId", 109);
+            jo.put("orgId", orgId);
             jo.put("containerId", containerId);
             jo.put("structureId", structureMap.get("Venues"));
             jo.put("limit", 2);
@@ -230,11 +226,11 @@ public class Content {
                             .log().all().request()
                             .get(contentRequestUrl)
                             .then()
-                            .statusCode(200)
                             .extract()
                             .response();
             log.info("Response value: " + response.asString());
 
+            Assert.assertEquals(response.statusCode(),200);
             Assert.assertNotNull(response.body());
         }
     }
@@ -259,7 +255,7 @@ public class Content {
             log.info("structureID: " + structureMap.get("Venues"));
 
             JSONObject jo = new JSONObject();
-            jo.put("orgId", 109);
+            jo.put("orgId", orgId);
             jo.put("containerId", containerId);
             jo.put("structureId", structureMap.get("Platform"));
             jo.put("limit", 2);
@@ -277,10 +273,11 @@ public class Content {
                             .log().all().request()
                             .get(contentRequestUrl + "Settings")
                             .then()
-                            .statusCode(200)
                             .extract()
                             .response();
             log.info("Response value: " + response.asString());
+
+            Assert.assertEquals(response.statusCode(),200);
             Assert.assertNotNull(response.body());
         }
     }
@@ -304,7 +301,7 @@ public class Content {
             log.info("structureID: " + structureMap.get("Venues"));
 
             JSONObject jo = new JSONObject();
-            jo.put("orgId", 109);
+            jo.put("orgId", orgId);
             jo.put("containerId", containerId);
             jo.put("structureId", structureMap.get("Platform"));
             jo.put("limit", 2);
@@ -322,10 +319,12 @@ public class Content {
                             .log().all().request()
                             .get(contentRequestUrl + "Settings")
                             .then()
-                            .statusCode(200)
                             .extract()
                             .response();
             log.info("Response value: " + response.asString());
+
+
+            Assert.assertEquals(response.statusCode(),200);
             Assert.assertNotNull(response.body());
         }
     }
@@ -346,10 +345,12 @@ public class Content {
                         .header("Authorization", jwt)
                         .delete(deleteContainerRequestUrl + containerId)
                         .then()
-                        .statusCode(200)
                         .extract()
                         .response();
 
+        log.info("Response value: " + response.asString());
+
+        Assert.assertEquals(response.statusCode(),200);
     }
 
     /**
@@ -370,9 +371,12 @@ public class Content {
                             .header("Authorization", jwt)
                             .delete(deleteSchemaRequestUrl + entry.getValue().toString())
                             .then()
-                            .statusCode(200)
                             .extract()
                             .response();
+
+            log.info("Response value: " + response.asString());
+
+            Assert.assertEquals(response.statusCode(),200);
         }
     }
 
