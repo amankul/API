@@ -91,11 +91,7 @@ public class Content {
         requestBodyJSONObject.put("containerId", containerId);
         requestBodyJSONObject.put("structureId", structureId);
         requestBodyJSONObject.put("parentId", contentMap.get(parentId));
-
-
-        // logging Request Details
-        log.info("REQUEST: URL-" + contentRequestUrl);
-        log.info("REQUEST: BODY-" + requestBodyJSONObject.toString());
+        
 
         // Extracting response after status code validation
         Response response =
@@ -135,9 +131,6 @@ public class Content {
         log.info("containerName: " + containerName);
         log.info("contentMap: " + contentMap);
 
-
-
-        log.info("randomValue: " + randomContentId);
 
         Response response =
                 given()
