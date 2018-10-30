@@ -6,13 +6,13 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 repositories {
-    maven  {
+    maven {
         url "http://repo1.maven.org/maven2"
     }
 }
 
 dependencies {
-    testCompile 'io.rest-assured:rest-assured:3.0.0'
+    testCompile 'io.rest-assured:rest-assured:3.2.0'
     testCompile 'io.rest-assured:json-schema-validator:3.0.0'
     compile 'io.rest-assured:json-path:3.0.0'
     compile group: 'org.json', name: 'json', version: '20160810'
@@ -104,7 +104,18 @@ task runCMEDirectoryStage(type: Test) {
     }
 }
 
-task runCMEAPIAutomation(type: Test) {
+task runCMEAPIAutomationPROD(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        outputs.upToDateWhen { false }
+        ignoreFailures = true
+        suites '/src/test/resources/XMLs/CmeV2-DignityHealth-PROD.xml'
+        suites '/src/test/resources/XMLs/CmeV2-Directory-PROD.xml'
+
+    }
+}
+
+task runCMEAPIAutomationSTAGE(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         outputs.upToDateWhen { false }

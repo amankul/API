@@ -4,6 +4,10 @@ target
 .settings/
 .gradle
 .idea
+.iml
+
+build
+.class
 
 Logging
 test-output

@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="CME V2 - Dignity Health ">
-    <parameter name="env" value="STAGE"/>
+    <parameter name="env" value="PROD"/>
     <parameter name="containerName" value="DignityHealth" />
     <!--SCHEMAS-->
     <parameter name="postSchemaVscAdvertisingSetting" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postSchemaVscAdvertisingSetting.json"/>
@@ -53,7 +53,7 @@
 
 
     <!--DO NOT CHANGE ORG ID-->
-    <parameter name="orgId" value="109"/>
+    <parameter name="orgId" value="96"/>
 
     <test name="CMEV2">
         <classes>

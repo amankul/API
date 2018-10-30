@@ -79,6 +79,10 @@ public class Structure {
 
         if (env.equalsIgnoreCase("PROD")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_PROD;
+            if (orgId != 96) {
+                log.info("orgID is not pointing to QA TEST in PROD.");
+                System.exit(0);
+            }
         } else if (env.equalsIgnoreCase("STAGE")) {
             serviceEndPoint = CmeV2_API_Constants.SERVICE_END_POINT_STAGE;
         } else {
@@ -124,9 +128,9 @@ public class Structure {
         log.info("RESPONSE:" + response.asString());
         Assert.assertEquals(response.getStatusCode(), 200);
 
-            //JSON response Pay load validations
-            containerId = response.getBody().jsonPath().get("id");
-            log.info("ContainerId = " + containerId);
+        //JSON response Pay load validations
+        containerId = response.getBody().jsonPath().get("id");
+        log.info("ContainerId = " + containerId);
 
     }
 
@@ -167,11 +171,11 @@ public class Structure {
         log.info("RESPONSE: " + response.asString());
 
         Assert.assertEquals(response.getStatusCode(), 200);
-            structureId = response.getBody().jsonPath().get("id");
-            log.info("NAME: " + name);
-            log.info("structureId: " + structureId);
-            structureMap.put(name, structureId);
-            log.info("STRUCTURE MAP: " + structureMap);
+        structureId = response.getBody().jsonPath().get("id");
+        log.info("NAME: " + name);
+        log.info("structureId: " + structureId);
+        structureMap.put(name, structureId);
+        log.info("STRUCTURE MAP: " + structureMap);
 
     }
 
@@ -194,7 +198,7 @@ public class Structure {
                         {containerId, platformVenueStructureName, STRUCTURE_TYPE_OBJECT, platformVenueStructureName, schemaMap.get("VscVenue"), platformVenuesStructureName},
                         {containerId, platformDatabasesStructureName, STRUCTURE_TYPE_ARRAY, platformDatabasesStructureName, "", platformStructureName},
                         {containerId, platformDatabaseStructureName, STRUCTURE_TYPE_OBJECT, platformDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), platformDatabasesStructureName},
-                        {containerId, venueDatabasesStructureName, STRUCTURE_TYPE_OBJECT, venueDatabasesStructureName, "", platformVenuesStructureName},
+                        {containerId, venueDatabasesStructureName, STRUCTURE_TYPE_ARRAY, venueDatabasesStructureName, "", platformVenueStructureName},
                         {containerId, venueDatabaseStructureName, STRUCTURE_TYPE_OBJECT, venueDatabaseStructureName, schemaMap.get("VscDatabaseVersion"), venueDatabasesStructureName},
                         {containerId, venuesStructureName, STRUCTURE_TYPE_ARRAY, venuesStructureName, "", ""},
                         {containerId, venueStructureName, STRUCTURE_TYPE_OBJECT, venueStructureName, schemaMap.get("VscVenue"), venuesStructureName},
