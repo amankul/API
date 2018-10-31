@@ -128,23 +128,26 @@ public class Content {
     @Test(priority = 1)
     public void verify_Get_Content_by_contentId() {
 
-        log.info("containerName: " + containerName);
-        log.info("contentMap: " + contentMap);
+        if (containerName.equals("DignityHealth")) {
+
+            log.info("containerName: " + containerName);
+            log.info("contentMap: " + contentMap);
 
 
-        Response response =
+            Response response =
                 given()
-                        .header("Content-Type", "application/json")
-                        .header("Authorization", jwt)
-                        .log().all().request()
-                        .get(contentRequestUrl + contentMap.get("Platform"))
-                        .then()
-                        .extract()
-                        .response();
-        log.info("Get Content Response value: " + response.asString());
+                    .header("Content-Type", "application/json")
+                    .header("Authorization", jwt)
+                    .log().all().request()
+                    .get(contentRequestUrl + contentMap.get("Platform"))
+                    .then()
+                    .extract()
+                    .response();
+            log.info("Get Content Response value: " + response.asString());
 
-        Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertNotNull(response.body(),"Response Body is null");
+            Assert.assertEquals(response.statusCode(), 200);
+            Assert.assertNotNull(response.body(), "Response Body is null");
+        }
     }
 
 
