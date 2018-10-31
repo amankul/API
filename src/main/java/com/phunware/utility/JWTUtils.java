@@ -27,7 +27,7 @@ public class JWTUtils {
   private static String lastName = "Automation";
   private static final int STAGE_ADMIN_USER_ID = 2633;
   //Note this is not a admin user for prod environment. it is normal user which has access to org id 96 (QA test)
-  private static final int PROD_ADMIN_USER_ID = 959;
+  private static final int PROD_USER_ID = 959;
   private static String orgName = "test";
 
 
@@ -47,7 +47,7 @@ public class JWTUtils {
   public static String getJWTForAdmin(String env, int orgId) {
 
     String JWT_SECRET_KEY = (env =="STAGE") ? JWT_SECRET_KEY_STAGE_ENV : JWT_SECRET_KEY_PROD_ENV;
-    int USER_ID = (env =="STAGE") ? STAGE_ADMIN_USER_ID : PROD_ADMIN_USER_ID ;
+    int USER_ID = (env =="STAGE") ? STAGE_ADMIN_USER_ID : PROD_USER_ID ;
     log.info("env " + env);
     log.info("User_Id:" + USER_ID);
     log.info("org id " + orgId);
@@ -91,7 +91,7 @@ public class JWTUtils {
   public static String getExpiredJWTForAdmin(String env, int orgId) {
 
     String JWT_SECRET_KEY = (env =="STAGE") ? JWT_SECRET_KEY_STAGE_ENV : JWT_SECRET_KEY_PROD_ENV;
-    int USER_ID = (env =="STAGE") ? STAGE_ADMIN_USER_ID : PROD_ADMIN_USER_ID ;
+    int USER_ID = (env =="STAGE") ? STAGE_ADMIN_USER_ID : PROD_USER_ID ;
     log.info("org id" + orgId);
 
     try {
