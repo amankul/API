@@ -22,13 +22,13 @@ public class JWTUtils {
   public static String expiredJWTToken = "";
   private static Logger log = Logger.getLogger(JWTUtils.class);
   private static final String SESSION_ID = "fa4fbd8fdf7b58782bf66b4b0c850db53db55c4b";
-  private static String EMAIL_ID = "qaautomation@gmail.com";
-  private static String FIRST_NAME = "QA";
-  private static String LAST_NAME = "Automation";
-  private static int STAGE_ADMIN_USER_ID = 2633;
+  private static String emailId = "qaautomation@gmail.com";
+  private static String firstName = "QA";
+  private static String lastName = "Automation";
+  private static final int STAGE_ADMIN_USER_ID = 2633;
   //Note this is not a admin user for prod environment. it is normal user which has access to org id 96 (QA test)
-  private static int PROD_ADMIN_USER_ID = 959;
-  private static String ORG_NAME = "test";
+  private static final int PROD_ADMIN_USER_ID = 959;
+  private static String orgName = "test";
 
 
 
@@ -49,7 +49,6 @@ public class JWTUtils {
     String JWT_SECRET_KEY = (env =="STAGE") ? JWT_SECRET_KEY_STAGE_ENV : JWT_SECRET_KEY_PROD_ENV;
     int USER_ID = (env =="STAGE") ? STAGE_ADMIN_USER_ID : PROD_ADMIN_USER_ID ;
     log.info("env " + env);
-    log.info("Jwt Secret Key:" + JWT_SECRET_KEY);
     log.info("User_Id:" + USER_ID);
     log.info("org id " + orgId);
 
@@ -58,12 +57,12 @@ public class JWTUtils {
           Jwts.builder()
               .setHeaderParam("typ", "JWT")
               .claim("id", USER_ID)
-              .claim("email", EMAIL_ID)
-              .claim("first_name", FIRST_NAME)
-              .claim("last_name", LAST_NAME)
+              .claim("email", emailId)
+              .claim("first_name", firstName)
+              .claim("last_name", lastName)
               .claim("session_id", SESSION_ID)
               .claim("org_id", orgId)
-              .claim("org_name", ORG_NAME)
+              .claim("org_name", orgName)
               .claim("orgs", EMPTY_ARRAY)
               .setIssuedAt(Date.from(Instant.ofEpochSecond(System.currentTimeMillis() / 1000)))
               .setExpiration(Date.from(Instant.ofEpochSecond((System.currentTimeMillis() / 1000) + 60 * 60 * 24 )))
@@ -100,12 +99,12 @@ public class JWTUtils {
           Jwts.builder()
               .setHeaderParam("typ", "JWT")
               .claim("id", USER_ID)
-              .claim("email", EMAIL_ID)
-              .claim("first_name", FIRST_NAME)
-              .claim("last_name", LAST_NAME)
+              .claim("email", emailId)
+              .claim("first_name", firstName)
+              .claim("last_name", lastName)
               .claim("session_id", SESSION_ID)
               .claim("org_id", orgId)
-              .claim("org_name", ORG_NAME)
+              .claim("org_name", orgName)
               .claim("orgs", EMPTY_ARRAY)
               .setIssuedAt(Date.from(Instant.ofEpochSecond(System.currentTimeMillis() / 1000 - 60 * 60 * 24 )))
               .setExpiration(Date.from(Instant.ofEpochSecond((System.currentTimeMillis() / 1000) - 60 )))
