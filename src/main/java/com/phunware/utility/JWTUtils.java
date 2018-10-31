@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 public class JWTUtils {
 
   private static final String JWT_SECRET_KEY_STAGE_ENV = "g7sXZBzouwh9mUttvHJoG8Wk6DH9XmAa";
-  private static final String JWT_SECRET_KEY_PROD_ENV = "g7sXZBzouwh9mUttvHJoG8Wk6DH9XmAa";
+  private static final String JWT_SECRET_KEY_PROD_ENV = "js44TTpeB2EBwbGnaNhJ92QyvRDacyNQ";
   private static final String[] EMPTY_ARRAY = new String[0];
   public static String jwtToken = "";
   public static String expiredJWTToken = "";
@@ -26,7 +26,8 @@ public class JWTUtils {
   private static String FIRST_NAME = "QA";
   private static String LAST_NAME = "Automation";
   private static int STAGE_ADMIN_USER_ID = 2633;
-  private static int PROD_ADMIN_USER_ID = 0;
+  //Note this is not a admin user for prod environment. it is normal user which has access to org id 96 (QA test)
+  private static int PROD_ADMIN_USER_ID = 959;
   private static String ORG_NAME = "test";
 
 
@@ -47,6 +48,9 @@ public class JWTUtils {
 
     String JWT_SECRET_KEY = (env =="STAGE") ? JWT_SECRET_KEY_STAGE_ENV : JWT_SECRET_KEY_PROD_ENV;
     int USER_ID = (env =="STAGE") ? STAGE_ADMIN_USER_ID : PROD_ADMIN_USER_ID ;
+    log.info("env " + env);
+    log.info("Jwt Secret Key:" + JWT_SECRET_KEY);
+    log.info("User_Id:" + USER_ID);
     log.info("org id " + orgId);
 
     try {
