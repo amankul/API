@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -526,7 +527,7 @@ public class Campaigns {
     // Extracting response after status code validation
     Response response =
         given()
-            .header("Content-Type", "application/json")
+            .contentType(MediaType.APPLICATION_JSON)
             .header("x-org-id", orgId)
             .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
@@ -618,7 +619,7 @@ public class Campaigns {
     // Extracting response after status code validation
     Response response =
         given()
-            .header("Content-Type", "application/json")
+            .contentType(MediaType.APPLICATION_JSON)
             .header("x-org-id", orgId)
             .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
@@ -710,7 +711,7 @@ public class Campaigns {
     // Extracting response after status code validation
     Response response =
         given()
-            .header("Content-Type", "application/json")
+            .contentType(MediaType.APPLICATION_JSON)
             .header("x-org-id", orgId)
             .header("x-client-id", clientId)
             .header("X-Auth", xAuth)
