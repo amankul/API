@@ -41,6 +41,7 @@ public class Campaigns {
   private static Logger log = Logger.getLogger(Campaigns.class);
   FileUtils fileUtils = new FileUtils();
   AuthHeader auth = new AuthHeader();
+  private String xAuth = null;
 
   @BeforeClass
   @Parameters({
@@ -396,7 +397,7 @@ public class Campaigns {
   }
 
   @Test(priority = 7)
-  public void verify_Create_Campaign() throws IOException, NullPointerException {
+  public void verify_Create_Campaign_Rolling_Broadcast() throws IOException, NullPointerException {
 
     // Request Details
     String requestURL = serviceEndPoint + MeAPI_Constants.CAMPAIGNS_END_POINT_1;
@@ -483,7 +484,7 @@ public class Campaigns {
 
   @Test(priority = 7)
   @Parameters({"nonRollingTimeZone"})
-  public void verify_Create_Campaign_NonRolling(String nonRollingTimeZone)
+  public void verify_Create_Campaign_NonRolling_Broadcast(String nonRollingTimeZone)
       throws IOException, NullPointerException {
 
     // Request Details
@@ -516,6 +517,7 @@ public class Campaigns {
               requestBodyJSONObject.toString());
     } catch (Exception e) {
       log.error("Error generating Auth header" + e);
+      Assert.fail("Test cannot continue without XAUTH");
     }
 
     // Printing xAuth
@@ -607,6 +609,7 @@ public class Campaigns {
               requestBodyJSONObject.toString());
     } catch (Exception e) {
       log.error("Error generating Auth header" + e);
+      Assert.fail("Test cannot continue without XAUTH");
     }
 
     // Printing xAuth
@@ -698,6 +701,7 @@ public class Campaigns {
               requestBodyJSONObject.toString());
     } catch (Exception e) {
       log.error("Error generating Auth header" + e);
+      Assert.fail("Test cannot continue without XAUTH");
     }
 
     // Printing xAuth
