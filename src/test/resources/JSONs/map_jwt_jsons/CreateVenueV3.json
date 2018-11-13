@@ -1,0 +1,11 @@
+{
+  "name": "PLAT SEC TEST",
+  "appId": "NULL",
+  "clientIds": "",
+  "orgIds": "109",
+  "mseUdi": "abcd",
+  "supportsGeographicCoordinates": true,
+  "isActive":true,
+  "callbackUrl":"http://mars-api.phunware.com/v1.0/mse/ee772e95-5034-4b68-924b-5a564208f9f6/register"
+
+}

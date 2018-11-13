@@ -6,6 +6,15 @@ public class MapAPI_Constants {
     public static final String SERVICE_END_POINT_STAGE = "https://map-api-stage.phunware.com";
     public static final String SERVICE_ENT_POINT_PROD = "https://map-api.phunware.com";
 
+    //EndPoints FOR V3
+    public static final String VENUE_END_POINT_V3 = "/v3.0/venues";
+    public static final String CAMPUS_END_POINT_V3 = "/v3.0/campuses";
+    public static final String BUILDING_END_POINT_V3 = "/v3.0/buildings";
+    public static final String FLOOR_END_POINT_V3 = "/v3.0/floors";
+    public static final String POINT_END_POINT_V3 = "/v3.0/points";
+    public static final String POITYPE_END_POINT_V3 = "/v3.0/poi-types";
+
+
     //EndPoints FOR V2
     public static final String VENUE_END_POINT = "/v2.0/venues";
     public static final String CAMPUS_END_POINT = "/v2.0/campuses";
@@ -38,6 +47,8 @@ public class MapAPI_Constants {
     public static final String SEGMENT_END_POINT_v1 = "/v1.0/segments/";
     public static final String SEGMENT_END_POINT_v1_1 = "/v1.0/segments";
     public static final String SEGMENT_END_POINT_v1_2="/v1.0/segments?%7B%22floorId%22%3A15242%7D";
+
+
 
 
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="MAP API TEST SUITE ">
+    <parameter name="env" value="STAGE"/>
+
+
+    <parameter name="CreateVenueRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateVenueV3.json"/>
+    <parameter name="UpdateVenueRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateVenueV3.json"/>
+    <parameter name="CreateCampusRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateCampus.json"/>
+    <parameter name="UpdateCampusRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateCampus.json"/>
+    <parameter name="CreateBuildingRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateBuilding.json"/>
+    <parameter name="UpdateBuildingRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateBuilding.json"/>
+    <parameter name="CreateFloorRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateFloor.json"/>
+    <parameter name="UpdateFloorRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateFloor.json"/>
+    <parameter name="CreateResourceRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateResource.json"/>
+    <parameter name="UpdateResourceRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateResource.json"/>
+    <parameter name="CreatePointRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreatePoint.json"/>
+    <parameter name="UpdatePointRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdatePoint.json"/>
+    <parameter name="CreateRouteRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateRoute.json"/>
+    <parameter name="UpdateRouteRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateRoute.json"/>
+    <parameter name="resetRouteRequestBodyPath" value="src/test/resources/map_jwt_jsons/resetRoute.json"/>
+    <parameter name="CreateSegmentRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateSegment.json"/>
+    <parameter name="UpdateSegmentRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateSegment.json"/>
+
+
+    <test name="Mapping">
+        <classes>
+            <class name="com.phunware.map.jwt.api.tests.MappingV3"/>
+        </classes>
+    </test>
+
+    <!--DO NOT CHANGE ORG ID-->
+    <parameter name="orgId" value="109"/>
+
+
+</suite>

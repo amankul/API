@@ -3,10 +3,10 @@ package com.phunware.utility;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.apache.log4j.Logger;
 
 import java.time.Instant;
 import java.util.Date;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -46,8 +46,8 @@ public class JWTUtils {
    */
   public static String getJWTForAdmin(String env, int orgId) {
 
-    String JWT_SECRET_KEY = (env =="STAGE") ? JWT_SECRET_KEY_STAGE_ENV : JWT_SECRET_KEY_PROD_ENV;
-    int USER_ID = (env =="STAGE") ? STAGE_ADMIN_USER_ID : PROD_USER_ID ;
+    String JWT_SECRET_KEY = (env =="PROD") ? JWT_SECRET_KEY_PROD_ENV : JWT_SECRET_KEY_STAGE_ENV;
+    int USER_ID = (env =="PROD") ? PROD_USER_ID : STAGE_ADMIN_USER_ID ;
     log.info("env " + env);
     log.info("User_Id:" + USER_ID);
     log.info("org id " + orgId);
