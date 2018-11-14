@@ -7,6 +7,7 @@ import com.phunware.utility.JWTUtils;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -19,261 +20,425 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
 
+/* Created by Amit Kulkarni on 11/14/2018 */
+
 public class MappingV3 {
-    private static String serviceEndPoint = null;
-    FileUtils fileUtils = new FileUtils();
-    private static Logger log = Logger.getLogger(Venue.class);
-    private static  String venueUrl,jwt,venueUrlById;
-    private String capturedVenueId;
+  private static String serviceEndPoint = null;
+  private static Logger log = Logger.getLogger(Venue.class);
+  private static String venueUrl,
+      jwt,
+      venueUrlById,
+      campusUrl,
+      campusUrlById,
+      buildingUrl,
+      buildingUrlById,
+      floorUrl,
+      floorUrlById;
+  FileUtils fileUtils = new FileUtils();
+  private String capturedVenueId;
+  private int capturedCampusId, capturedBuildingId, capturedFloorId;
 
+  @BeforeClass
+  @Parameters({"env", "orgId"})
+  public void preTestSteps(String env, int orgId) {
 
-    @BeforeClass
-    @Parameters({"env","orgId"})
-    public void preTestSteps(String env, int orgId) {
+    if ("PROD".equalsIgnoreCase(env)) {
+      serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
 
-        if ("PROD".equalsIgnoreCase(env)) {
-            serviceEndPoint = MapAPI_Constants.SERVICE_ENT_POINT_PROD;
-
-        } else if ("STAGE".equalsIgnoreCase(env)) {
-            serviceEndPoint = MapAPI_Constants.SERVICE_END_POINT_STAGE;
-        } else {
-            log.error("Environment is not set properly. Please check your testng xml file");
-            Assert.fail("Environment is not set properly. Please check your testng xml file");
-        }
-
-        jwt = JWTUtils.getJWTForAdmin(env, orgId);
-
-        venueUrl = serviceEndPoint + MapAPI_Constants.VENUE_END_POINT_V3;
-
-        log.info("URL - " + venueUrl);
-
+    } else if ("STAGE".equalsIgnoreCase(env)) {
+      serviceEndPoint = MapAPI_Constants.SERVICE_END_POINT_STAGE;
+    } else {
+      log.error("Environment is not set properly. Please check your testng xml file");
+      Assert.fail("Environment is not set properly. Please check your testng xml file");
     }
 
+    jwt = JWTUtils.getJWTForAdmin(env, orgId);
 
-    @Parameters({"CreateVenueRequestBodyPath"})
-    @Test(priority = 1)
-    public void verify_Create_Venue(String createVenueRequestBodyPath) throws IOException {
-        //Request Details
-        String requestBody = fileUtils.getJsonTextFromFile(createVenueRequestBodyPath);
-        JSONObject requestBodyJSONObject = new JSONObject(requestBody);
-        String name = "QA-VENUE-" + HelperMethods.getDateAsString();
-        requestBodyJSONObject.put("name", name);
+    venueUrl = serviceEndPoint + MapAPI_Constants.VENUE_END_POINT_V3;
+    campusUrl = serviceEndPoint + MapAPI_Constants.CAMPUS_END_POINT_V3;
+    buildingUrl = serviceEndPoint + MapAPI_Constants.BUILDING_END_POINT_V3;
+    floorUrl = serviceEndPoint + MapAPI_Constants.FLOOR_END_POINT_V3;
+  }
 
-        //Printing Request Details
-        log.info("REQUEST-URL:POST- " + venueUrl);
+  @Parameters({"CreateVenueRequestBodyPath"})
+  @Test(priority = 1)
+  public void verify_Create_Venue(String createVenueRequestBodyPath) throws IOException {
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(createVenueRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String name = "QA-VENUE-" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", name);
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .auth().oauth2(jwt)
-                        .body(requestBodyJSONObject.toString())
-                        .post(venueUrl)
-                        .then()
-                        .extract()
-                        .response();
+    // Printing Request Details
+    log.info("REQUEST-URL:POST- " + venueUrl);
 
-        //printing response
-        log.info("RESPONSE:" + response.asString());
-        response.then().body("data.any { it.key == 'guid'}", is(true));
-        response.then().statusCode(HttpStatus.SC_OK);
-        capturedVenueId = response.then().extract().path("data.guid").toString();
-        Assert.assertNotNull(capturedVenueId);
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .post(venueUrl)
+            .then()
+            .extract()
+            .response();
 
-    }
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().body("data.any { it.key == 'guid'}", is(true));
+    response.then().statusCode(HttpStatus.SC_OK);
+    capturedVenueId = response.then().extract().path("data.guid").toString();
+    Assert.assertNotNull(capturedVenueId);
+  }
 
+  @Parameters()
+  @Test(priority = 1)
+  public void verify_Get_Draft_Venue_By_Id() throws IOException {
+    Assert.assertNotNull(capturedVenueId);
 
-    @Parameters()
-    @Test(priority = 2)
-    public void verify_Get_Draft_Venue_By_Id() throws IOException {
-        Assert.assertNotNull(capturedVenueId);
+    // Request Details
+    venueUrlById = venueUrl + "/" + capturedVenueId;
 
-        //Request Details
-        venueUrlById = venueUrl + "/" + capturedVenueId;
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + venueUrlById);
 
-        //Printing Request Details
-        log.info("REQUEST-URL:GET- " + venueUrlById);
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .queryParam("draftStatus", "DRAFT")
+            .queryParam("includeBuildings", "true")
+            .get(venueUrlById)
+            .then()
+            .extract()
+            .response();
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .auth().oauth2(jwt)
-                        .queryParam("draftStatus","DRAFT")
-                        .queryParam("includeBuildings","true")
-                        .get(venueUrlById)
-                        .then()
-                        .extract()
-                        .response();
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("guid", is(capturedVenueId));
+    response.then().body("draftStatus", is("DRAFT"));
+    response.then().body("any { it.key == 'orgIds'}", is(true));
 
-        //printing response
-        log.info("RESPONSE:" + response.asString());
-        response.then().statusCode(HttpStatus.SC_OK);
-        response.then().body("guid" ,is(capturedVenueId));
-        response.then().body("draftStatus" ,is("DRAFT"));
-        response.then().body("any { it.key == 'buildings'}", is(true));
+    // Buildings fields is returned in response if includeBuildings param is set to true
+    response.then().body("any { it.key == 'buildings'}", is(true));
+  }
 
+  @Parameters({"UpdateVenueRequestBodyPath"})
+  @Test(priority = 1)
+  public void verify_Update_Venue_By_Id(String updateVenueRequestBodyPath) throws IOException {
 
-    }
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(updateVenueRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
 
-    @Parameters({"UpdateVenueRequestBodyPath"})
-    @Test(priority = 2)
-    public void verify_Update_Venue_By_Id(String updateVenueRequestBodyPath) throws IOException {
+    // Printing Request Details
+    log.info("REQUEST-URL:PUT- " + venueUrlById);
 
-        //Request Details
-        String requestBody = fileUtils.getJsonTextFromFile(updateVenueRequestBodyPath);
-        JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .put(venueUrlById)
+            .then()
+            .extract()
+            .response();
 
-        //Printing Request Details
-        log.info("REQUEST-URL:PUT- " + venueUrlById);
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_NO_CONTENT);
+    Assert.assertEquals(response.asString(), "");
+  }
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .auth().oauth2(jwt)
-                        .body(requestBodyJSONObject.toString())
-                        .put(venueUrlById)
-                        .then()
-                        .extract()
-                        .response();
+  @Parameters({"CreateCampusRequestBodyPath"})
+  @Test(priority = 2)
+  public void verify_Create_Campus(String createCampusRequestBodyPath) throws IOException {
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(createCampusRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String name = "QA-CAMPUS-" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", name);
+    requestBodyJSONObject.put("venueGuid", capturedVenueId);
 
-        //printing response
-        log.info("RESPONSE:" + response.asString());
-        response.then().statusCode(HttpStatus.SC_NO_CONTENT);
+    // Printing Request Details
+    log.info("REQUEST-URL:POST- " + campusUrl);
 
-    }
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .post(campusUrl)
+            .then()
+            .extract()
+            .response();
 
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().body("data.any { it.key == 'id'}", Matchers.is(true));
+    capturedCampusId = response.then().extract().path("data.id");
+    response.then().statusCode(HttpStatus.SC_OK);
+    Assert.assertNotNull(capturedCampusId);
+  }
 
+  @Parameters()
+  @Test(priority = 2)
+  public void verify_Get_Draft_Campus_By_Id() throws IOException {
 
-/*    @Parameters({"jwt"})
-    @Test(priority = 1)
-    public void verify_Get_Live_Venues_By_Org(String jwt) {
-        //Request Details
-        String queryParameters = "DraftStatus=" + "Live";
+    // Request Details
+    campusUrlById = campusUrl + "/" + capturedCampusId;
 
-        //Printing Request Details
-        log.info("REQUEST-URL:GET-" + venueURL);
-        log.info("QUERY PARAMETERS: GET-" + queryParameters);
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + campusUrlById);
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .header("Content-Type", "application/json")
-                        .auth().oauth2(jwt)
-                        .get(venueURL)
-                        .then()
-                        .statusCode(200)
-                        .extract()
-                        .response();
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .queryParam("draftStatus", "DRAFT")
+            .get(campusUrlById)
+            .then()
+            .extract()
+            .response();
 
-        //printing response
-        log.info("RESPONSE:" + response.asString());
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("venueGuid", is(capturedVenueId));
+    response.then().body("id", is(capturedCampusId));
+  }
 
-        resultcount = response.then().extract().path("resultCount");
-        response.then().body("totalCount", is(greaterThan(0)));
-        response.then().body("resultCount", is(greaterThan(0)));
-        response.then().body(("any { it.key == 'offset'}"), is(true));
-        response.then().body("items.size", is(resultcount));
+  @Parameters({"UpdateVenueRequestBodyPath"})
+  @Test(priority = 2)
+  public void verify_Update_Campus_By_Id(String updateCampusRequestBodyPath) throws IOException {
 
-    }
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(updateCampusRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
 
-    @Parameters({"jwt"})
-    @Test(priority = 1)
-    public void verify_Get_Draft_Venues_By_Org(String jwt) {
-        //Request Details
-        String queryParameters = "DraftStatus=" + "DRAFT";
+    // Printing Request Details
+    log.info("REQUEST-URL:PUT- " + campusUrlById);
 
-        //Printing Request Details
-        log.info("REQUEST-URL:GET-" + venueURL);
-        log.info("QUERY PARAMETERS: GET-" + queryParameters);
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .put(venueUrlById)
+            .then()
+            .extract()
+            .response();
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .header("Content-Type", "application/json")
-                        .auth().oauth2(jwt)
-                        .queryParams("{\"draftStatus\":\"DRAFT\"}", "")
-                        .get(venueURL)
-                        .then()
-                        .statusCode(200)
-                        .extract()
-                        .response();
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_NO_CONTENT);
+    Assert.assertEquals(response.asString(), "");
+  }
 
-        //printing response
-        log.info("RESPONSE:" + response.asString());
+  @Parameters({"CreateBuildingRequestBodyPath"})
+  @Test(priority = 3)
+  public void verify_Create_Building(String createBuildingRequestBodyPath) throws IOException {
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(createBuildingRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String name = "QA-BUILDING-" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", name);
+    requestBodyJSONObject.put("campusId", capturedCampusId);
+    requestBodyJSONObject.put("venueGuid", capturedVenueId);
 
-        resultcount = response.then().extract().path("resultCount");
-        response.then().body("totalCount", is(greaterThan(0)));
-        response.then().body("resultCount", is(greaterThan(0)));
-        response.then().body(("any { it.key == 'offset'}"), is(true));
-        response.then().body("items.size", is(resultcount));
+    // Printing Request Details
+    log.info("REQUEST-URL:POST-" + buildingUrl);
 
-    }
+    log.info("REQUEST-URL:POST-" + requestBodyJSONObject.toString());
 
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .post(buildingUrl)
+            .then()
+            .extract()
+            .response();
 
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().body("data.any { it.key == 'id'}", Matchers.is(true));
+    capturedBuildingId = response.then().extract().path("data.id");
+    response.then().statusCode(HttpStatus.SC_OK);
+    Assert.assertNotNull(capturedBuildingId);
+  }
 
+  @Parameters()
+  @Test(priority = 3)
+  public void verify_Get_Draft_Building_By_Id() throws IOException {
 
+    // Request Details
+    buildingUrlById = buildingUrl + "/" + capturedBuildingId;
 
-    @Parameters({"jwt", "UpdateBuildingRequestBodyPath"})
-    @Test(priority = 2)
-    public void verify_Update_Venue_By_Id(String jwt, String UpdateBuildingRequestBodyPath) throws IOException {
-        Assert.assertNotNull(capturedVenueId);
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + buildingUrlById);
 
-        //Request Details
-        String venueURL1 = venueURL + "/" + capturedVenueId;
-        String requestBody = fileUtils.getJsonTextFromFile(UpdateBuildingRequestBodyPath);
-        JSONObject requestBodyJSONObject = new JSONObject(requestBody);
-        String name = "PhunwareAustin" + HelperMethods.getDateAsString();
-        requestBodyJSONObject.put("name", name);
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .queryParam("draftStatus", "DRAFT")
+            .queryParam("deep", "true")
+            .get(buildingUrlById)
+            .then()
+            .extract()
+            .response();
 
-        //Printing Request Details
-        log.info("REQUEST-URL:GET-" + venueURL1);
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("venueGuid", is(capturedVenueId));
+    response.then().body("campusId", is(capturedCampusId));
+    response.then().body("id", is(capturedBuildingId));
+    response.then().body("any { it.key == 'name'}", is(true));
+    response.then().body("any { it.key == 'floors'}", is(true));
+  }
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .header("Content-Type", "application/json")
-                        .auth().oauth2(jwt)
-                        .body(requestBodyJSONObject.toString())
-                        .put(venueURL1)
-                        .then()
-                        .statusCode(204)
-                        .extract()
-                        .response();
+  @Parameters({"UpdateBuildingRequestBodyPath"})
+  @Test(priority = 3)
+  public void verify_Update_Building_By_Id(String updateBuildingRequestBodyPath)
+      throws IOException {
 
-        //printing response
-        log.info("RESPONSE:" + response.asString());
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(updateBuildingRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
 
-    }
+    // Printing Request Details
+    log.info("REQUEST-URL:PUT- " + buildingUrlById);
 
-    @Parameters({"jwt"})
-    @Test(priority = 3)
-    public void verify_Delete_Venue_By_Id(String jwt) throws IOException {
-        Assert.assertNotNull(capturedVenueId);
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .put(buildingUrlById)
+            .then()
+            .extract()
+            .response();
 
-        //Request Details
-        String venueURL1 = venueURL + "/" + capturedVenueId;
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_NO_CONTENT);
+    Assert.assertEquals(response.asString(), "");
+  }
 
-        //Printing Request Details
-        log.info("REQUEST-URL:GET-" + venueURL1);
+  @Parameters({"CreateFloorRequestBodyPath"})
+  @Test(priority = 4)
+  public void verify_Create_Floor(String createFloorRequestBodyPath) throws IOException {
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(createFloorRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    String name = "QA-FLOOR-" + HelperMethods.getDateAsString();
+    requestBodyJSONObject.put("name", name);
+    requestBodyJSONObject.put("buildingId", capturedBuildingId);
+    requestBodyJSONObject.put("venueGuid", capturedVenueId);
 
-        //Extracting response after status code validation
-        Response response =
-                given()
-                        .header("Content-Type", "application/json")
-                        .auth().oauth2(jwt)
-                        .delete(venueURL1)
-                        .then()
-                        .statusCode(204)
-                        .extract()
-                        .response();
+    // Printing Request Details
+    log.info("REQUEST-URL:POST-" + floorUrl);
 
-        //printing response
-        log.info("RESPONSE:" + response.asString());
-        Assert.assertEquals(response.asString(), "");
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .post(floorUrl)
+            .then()
+            .extract()
+            .response();
 
-    }
-    */
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("data.any { it.key == 'id'}", Matchers.is(true));
+    capturedFloorId = response.then().extract().path("data.id");
+    Assert.assertNotNull(capturedFloorId);
+  }
 
+  @Parameters()
+  @Test(priority = 4)
+  public void verify_Get_Draft_Floor_By_Id() throws IOException {
+
+    // Request Details
+    floorUrlById = floorUrl + "/" + capturedFloorId;
+
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + floorUrlById);
+
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .queryParam("draftStatus", "DRAFT")
+            .get(floorUrlById)
+            .then()
+            .extract()
+            .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("venueGuid", is(capturedVenueId));
+    response.then().body("buildingId", is(capturedBuildingId));
+    response.then().body("id", is(capturedFloorId));
+    response.then().body("any { it.key == 'originalMapUrl'}", is(true));
+    response.then().body("any { it.key == 'isOutdoor'}", is(true));
+    response.then().body("any { it.key == 'level'}", is(true));
+  }
+
+  @Parameters({"UpdateFloorRequestBodyPath"})
+  @Test(priority = 4)
+  public void verify_Update_Floor_By_Id(String updateFloorRequestBodyPath) throws IOException {
+
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(updateFloorRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+
+    // Printing Request Details
+    log.info("REQUEST-URL:PUT- " + floorUrlById);
+
+    // Extracting response after status code validation
+    Response response =
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .auth()
+            .oauth2(jwt)
+            .body(requestBodyJSONObject.toString())
+            .put(floorUrlById)
+            .then()
+            .extract()
+            .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_NO_CONTENT);
+    Assert.assertEquals(response.asString(), "");
+  }
 }

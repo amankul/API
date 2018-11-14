@@ -6,21 +6,21 @@
 
     <parameter name="CreateVenueRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateVenueV3.json"/>
     <parameter name="UpdateVenueRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateVenueV3.json"/>
-    <parameter name="CreateCampusRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateCampus.json"/>
-    <parameter name="UpdateCampusRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateCampus.json"/>
-    <parameter name="CreateBuildingRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateBuilding.json"/>
-    <parameter name="UpdateBuildingRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateBuilding.json"/>
-    <parameter name="CreateFloorRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateFloor.json"/>
-    <parameter name="UpdateFloorRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateFloor.json"/>
-    <parameter name="CreateResourceRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateResource.json"/>
-    <parameter name="UpdateResourceRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateResource.json"/>
-    <parameter name="CreatePointRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreatePoint.json"/>
-    <parameter name="UpdatePointRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdatePoint.json"/>
-    <parameter name="CreateRouteRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateRoute.json"/>
-    <parameter name="UpdateRouteRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateRoute.json"/>
-    <parameter name="resetRouteRequestBodyPath" value="src/test/resources/map_jwt_jsons/resetRoute.json"/>
-    <parameter name="CreateSegmentRequestBodyPath" value="src/test/resources/map_jwt_jsons/CreateSegment.json"/>
-    <parameter name="UpdateSegmentRequestBodyPath" value="src/test/resources/map_jwt_jsons/UpdateSegment.json"/>
+    <parameter name="CreateCampusRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateCampusV3.json"/>
+    <parameter name="UpdateCampusRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateCampusV3.json"/>
+    <parameter name="CreateBuildingRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateBuildingV3.json"/>
+    <parameter name="UpdateBuildingRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateBuildingV3.json"/>
+    <parameter name="CreateFloorRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateFloorV3.json"/>
+    <parameter name="UpdateFloorRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateFloorV3.json"/>
+    <parameter name="CreateResourceRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateResource.json"/>
+    <parameter name="UpdateResourceRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateResource.json"/>
+    <parameter name="CreatePointRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreatePoint.json"/>
+    <parameter name="UpdatePointRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdatePoint.json"/>
+    <parameter name="CreateRouteRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateRoute.json"/>
+    <parameter name="UpdateRouteRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateRoute.json"/>
+    <parameter name="resetRouteRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/resetRoute.json"/>
+    <parameter name="CreateSegmentRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateSegment.json"/>
+    <parameter name="UpdateSegmentRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateSegment.json"/>
 
 
     <test name="Mapping">
