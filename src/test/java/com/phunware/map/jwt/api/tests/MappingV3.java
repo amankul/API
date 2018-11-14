@@ -236,7 +236,7 @@ public class MappingV3 {
             .auth()
             .oauth2(jwt)
             .body(requestBodyJSONObject.toString())
-            .put(venueUrlById)
+            .put(campusUrlById)
             .then()
             .extract()
             .response();
