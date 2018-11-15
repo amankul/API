@@ -24,7 +24,7 @@ import static org.hamcrest.core.Is.is;
 
 public class MappingV3 {
   private static String serviceEndPoint = null;
-  private static Logger log = Logger.getLogger(Venue.class);
+  private static Logger log = Logger.getLogger(MappingV3.class);
   private static String venueUrl,
       jwt,
       venueUrlById,
@@ -86,8 +86,9 @@ public class MappingV3 {
 
     // printing response
     log.info("RESPONSE:" + response.asString());
-    response.then().body("data.any { it.key == 'guid'}", is(true));
     response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("data.any { it.key == 'guid'}", is(true));
+
     capturedVenueId = response.then().extract().path("data.guid").toString();
     Assert.assertNotNull(capturedVenueId);
   }
@@ -183,9 +184,9 @@ public class MappingV3 {
 
     // printing response
     log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
     response.then().body("data.any { it.key == 'id'}", Matchers.is(true));
     capturedCampusId = response.then().extract().path("data.id");
-    response.then().statusCode(HttpStatus.SC_OK);
     Assert.assertNotNull(capturedCampusId);
   }
 
@@ -218,7 +219,7 @@ public class MappingV3 {
     response.then().body("id", is(capturedCampusId));
   }
 
-  @Parameters({"UpdateVenueRequestBodyPath"})
+  @Parameters({"UpdateCampusRequestBodyPath"})
   @Test(priority = 2)
   public void verify_Update_Campus_By_Id(String updateCampusRequestBodyPath) throws IOException {
 
@@ -261,8 +262,6 @@ public class MappingV3 {
     // Printing Request Details
     log.info("REQUEST-URL:POST-" + buildingUrl);
 
-    log.info("REQUEST-URL:POST-" + requestBodyJSONObject.toString());
-
     // Extracting response after status code validation
     Response response =
         given()
@@ -277,9 +276,9 @@ public class MappingV3 {
 
     // printing response
     log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
     response.then().body("data.any { it.key == 'id'}", Matchers.is(true));
     capturedBuildingId = response.then().extract().path("data.id");
-    response.then().statusCode(HttpStatus.SC_OK);
     Assert.assertNotNull(capturedBuildingId);
   }
 
