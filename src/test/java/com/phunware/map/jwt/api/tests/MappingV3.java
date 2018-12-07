@@ -60,6 +60,8 @@ public class MappingV3 {
     floorUrl = serviceEndPoint + MapAPI_Constants.FLOOR_END_POINT_V3;
   }
 
+  /* This method creates a brand new Venue in QA Test org. All subsequent methods depend on successful creation of venue */
+
   @Parameters({"CreateVenueRequestBodyPath"})
   @Test(priority = 1)
   public void verify_Create_Venue(String createVenueRequestBodyPath) throws IOException {
@@ -93,8 +95,10 @@ public class MappingV3 {
     Assert.assertNotNull(capturedVenueId);
   }
 
+  /* This method retrieves the venue created above which will be in DRAFT status */
+
   @Parameters()
-  @Test(priority = 1)
+  @Test(priority = 2)
   public void verify_Get_Draft_Venue_By_Id() throws IOException {
     Assert.assertNotNull(capturedVenueId);
 
@@ -128,8 +132,10 @@ public class MappingV3 {
     response.then().body("any { it.key == 'buildings'}", is(true));
   }
 
+  /* This method updates the venue created  */
+
   @Parameters({"UpdateVenueRequestBodyPath"})
-  @Test(priority = 1)
+  @Test(priority = 2)
   public void verify_Update_Venue_By_Id(String updateVenueRequestBodyPath) throws IOException {
 
     // Request Details
@@ -156,10 +162,13 @@ public class MappingV3 {
     response.then().statusCode(HttpStatus.SC_NO_CONTENT);
     Assert.assertEquals(response.asString(), "");
   }
+  /* This method creates a new campus under the venue created earlier */
 
   @Parameters({"CreateCampusRequestBodyPath"})
-  @Test(priority = 2)
+  @Test(priority = 3)
   public void verify_Create_Campus(String createCampusRequestBodyPath) throws IOException {
+
+    Assert.assertNotNull(capturedVenueId);
     // Request Details
     String requestBody = fileUtils.getJsonTextFromFile(createCampusRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -190,10 +199,13 @@ public class MappingV3 {
     Assert.assertNotNull(capturedCampusId);
   }
 
+  /* This method retrieves the campus created above which will be in DRAFT status */
+
   @Parameters()
-  @Test(priority = 2)
+  @Test(priority = 4)
   public void verify_Get_Draft_Campus_By_Id() throws IOException {
 
+    Assert.assertNotNull(capturedCampusId);
     // Request Details
     campusUrlById = campusUrl + "/" + capturedCampusId;
 
@@ -219,8 +231,10 @@ public class MappingV3 {
     response.then().body("id", is(capturedCampusId));
   }
 
+  /* This method updates the campus created  */
+
   @Parameters({"UpdateCampusRequestBodyPath"})
-  @Test(priority = 2)
+  @Test(priority = 4)
   public void verify_Update_Campus_By_Id(String updateCampusRequestBodyPath) throws IOException {
 
     // Request Details
@@ -248,9 +262,14 @@ public class MappingV3 {
     Assert.assertEquals(response.asString(), "");
   }
 
+  /* This method creates a new building under the campus created earlier */
+
   @Parameters({"CreateBuildingRequestBodyPath"})
-  @Test(priority = 3)
+  @Test(priority = 5)
   public void verify_Create_Building(String createBuildingRequestBodyPath) throws IOException {
+
+    Assert.assertNotNull(capturedCampusId);
+    Assert.assertNotNull(capturedVenueId);
     // Request Details
     String requestBody = fileUtils.getJsonTextFromFile(createBuildingRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -282,10 +301,13 @@ public class MappingV3 {
     Assert.assertNotNull(capturedBuildingId);
   }
 
+  /* This method retrieves the building created above which will be in DRAFT status */
+
   @Parameters()
-  @Test(priority = 3)
+  @Test(priority = 6)
   public void verify_Get_Draft_Building_By_Id() throws IOException {
 
+    Assert.assertNotNull(capturedBuildingId);
     // Request Details
     buildingUrlById = buildingUrl + "/" + capturedBuildingId;
 
@@ -315,8 +337,10 @@ public class MappingV3 {
     response.then().body("any { it.key == 'floors'}", is(true));
   }
 
+  /* This method updates the building created  */
+
   @Parameters({"UpdateBuildingRequestBodyPath"})
-  @Test(priority = 3)
+  @Test(priority = 6)
   public void verify_Update_Building_By_Id(String updateBuildingRequestBodyPath)
       throws IOException {
 
@@ -345,9 +369,14 @@ public class MappingV3 {
     Assert.assertEquals(response.asString(), "");
   }
 
+  /* This method creates a new floor under the building created earlier */
+
   @Parameters({"CreateFloorRequestBodyPath"})
-  @Test(priority = 4)
+  @Test(priority = 7)
   public void verify_Create_Floor(String createFloorRequestBodyPath) throws IOException {
+
+    Assert.assertNotNull(capturedBuildingId);
+    Assert.assertNotNull(capturedVenueId);
     // Request Details
     String requestBody = fileUtils.getJsonTextFromFile(createFloorRequestBodyPath);
     JSONObject requestBodyJSONObject = new JSONObject(requestBody);
@@ -379,10 +408,13 @@ public class MappingV3 {
     Assert.assertNotNull(capturedFloorId);
   }
 
+  /* This method retrieves the floor created above which will be in DRAFT status */
+
   @Parameters()
-  @Test(priority = 4)
+  @Test(priority = 8)
   public void verify_Get_Draft_Floor_By_Id() throws IOException {
 
+    Assert.assertNotNull(capturedFloorId);
     // Request Details
     floorUrlById = floorUrl + "/" + capturedFloorId;
 
@@ -412,8 +444,10 @@ public class MappingV3 {
     response.then().body("any { it.key == 'level'}", is(true));
   }
 
+  /* This method updates the floor created  */
+
   @Parameters({"UpdateFloorRequestBodyPath"})
-  @Test(priority = 4)
+  @Test(priority = 8)
   public void verify_Update_Floor_By_Id(String updateFloorRequestBodyPath) throws IOException {
 
     // Request Details
