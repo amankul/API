@@ -53,6 +53,7 @@ public class MappingV3 {
     }
 
     jwt = JWTUtils.getJWTForAdmin(env, orgId);
+    Assert.assertNotNull(jwt);
 
     venueUrl = serviceEndPoint + MapAPI_Constants.VENUE_END_POINT_V3;
     campusUrl = serviceEndPoint + MapAPI_Constants.CAMPUS_END_POINT_V3;
