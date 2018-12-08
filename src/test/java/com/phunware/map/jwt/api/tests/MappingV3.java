@@ -33,9 +33,10 @@ public class MappingV3 {
       buildingUrl,
       buildingUrlById,
       floorUrl,
+          publishUrl,
       floorUrlById;
   FileUtils fileUtils = new FileUtils();
-  private String capturedVenueId;
+  private String capturedVenueId,capturedLiveVenueId;
   private int capturedCampusId, capturedBuildingId, capturedFloorId;
 
   @BeforeClass
@@ -59,6 +60,7 @@ public class MappingV3 {
     campusUrl = serviceEndPoint + MapAPI_Constants.CAMPUS_END_POINT_V3;
     buildingUrl = serviceEndPoint + MapAPI_Constants.BUILDING_END_POINT_V3;
     floorUrl = serviceEndPoint + MapAPI_Constants.FLOOR_END_POINT_V3;
+    publishUrl = serviceEndPoint + MapAPI_Constants.PUBLISH_END_POINT_V3;
   }
 
   /* This method creates a brand new Venue in QA Test org. All subsequent methods depend on successful creation of venue */
@@ -475,4 +477,173 @@ public class MappingV3 {
     response.then().statusCode(HttpStatus.SC_NO_CONTENT);
     Assert.assertEquals(response.asString(), "");
   }
+
+  /* This method publishes the venue so all entities under it become LIVE  */
+
+  @Parameters({"PublishRequestBodyPath"})
+  @Test(priority = 9)
+  public void verify_Publish_Venue(String publishVenueRequestBodyPath) throws IOException {
+    Assert.assertNotNull(capturedVenueId);
+    // Request Details
+    String requestBody = fileUtils.getJsonTextFromFile(publishVenueRequestBodyPath);
+    JSONObject requestBodyJSONObject = new JSONObject(requestBody);
+    requestBodyJSONObject.put("sourceGuid",capturedVenueId);
+
+
+    // Printing Request Details
+    log.info("REQUEST-URL:PUT- " + publishUrl);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .auth()
+                    .oauth2(jwt)
+                    .body(requestBodyJSONObject.toString())
+                    .put(publishUrl)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_ACCEPTED);
+    response.then().body("data.any { it.key == 'guid'}", is(true));
+    response.then().body("data.message", is("Accepted"));
+
+    capturedLiveVenueId = response.then().extract().path("data.guid").toString();
+    Assert.assertNotNull(capturedLiveVenueId);
+  }
+
+  /* This method retrieves the LIVE venue created above after publish. We also verify fields modified in update tests earlier */
+
+  @Parameters()
+  @Test(priority = 10)
+  public void verify_Get_Live_Venue_By_Id() throws IOException {
+    Assert.assertNotNull(capturedLiveVenueId);
+
+    // Request Details
+    venueUrlById = venueUrl + "/" + capturedLiveVenueId;
+
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + venueUrlById);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .auth()
+                    .oauth2(jwt)
+                    .get(venueUrlById)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("guid", is(capturedLiveVenueId));
+    response.then().body("draftStatus", is("LIVE"));
+    response.then().body("isActive", is(false));
+
+  }
+
+  /* This method retrieves the LIVE campus created above after publish. We also verify fields modified in update tests earlier */
+
+
+  @Parameters()
+  @Test(priority = 10)
+  public void verify_Get_Live_Campus_By_Id() throws IOException {
+
+    Assert.assertNotNull(capturedCampusId);
+    // Request Details
+    campusUrlById = campusUrl + "/" + capturedCampusId;
+
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + campusUrlById);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .auth()
+                    .oauth2(jwt)
+                    .get(campusUrlById)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("venueGuid", is(capturedLiveVenueId));
+    response.then().body("name", is("Automation_Update_Campus"));
+  }
+
+
+  /* This method retrieves the LIVE building created above after publish. We also verify fields modified in update tests earlier */
+
+
+  @Parameters()
+  @Test(priority = 10)
+  public void verify_Get_Live_Building_By_Id() throws IOException {
+
+    Assert.assertNotNull(capturedBuildingId);
+    // Request Details
+    buildingUrlById = buildingUrl + "/" + capturedBuildingId;
+
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + buildingUrlById);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .auth()
+                    .oauth2(jwt)
+                    .get(buildingUrlById)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("venueGuid", is(capturedLiveVenueId));
+    response.then().body("campusId", is(capturedCampusId));
+    response.then().body("streetAddress", is("123 Majora"));
+  }
+
+  /* This method retrieves the LIVE floor created above after publish. We also verify fields modified in update tests earlier */
+
+  @Parameters()
+  @Test(priority = 10)
+  public void verify_Get_Live_Floor_By_Id() throws IOException {
+
+    Assert.assertNotNull(capturedFloorId);
+    // Request Details
+    floorUrlById = floorUrl + "/" + capturedFloorId;
+
+    // Printing Request Details
+    log.info("REQUEST-URL:GET- " + floorUrlById);
+
+    // Extracting response after status code validation
+    Response response =
+            given()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .auth()
+                    .oauth2(jwt)
+                    .get(floorUrlById)
+                    .then()
+                    .extract()
+                    .response();
+
+    // printing response
+    log.info("RESPONSE:" + response.asString());
+    response.then().statusCode(HttpStatus.SC_OK);
+    response.then().body("venueGuid", is(capturedLiveVenueId));
+    response.then().body("buildingId", is(capturedBuildingId));
+    response.then().body("isOutdoor", is(true));
+  }
+
 }

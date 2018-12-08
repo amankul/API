@@ -14,7 +14,7 @@
                value="src/test/resources/JSONs/map_jwt_jsons/UpdateBuildingV3.json"/>
     <parameter name="CreateFloorRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateFloorV3.json"/>
     <parameter name="UpdateFloorRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateFloorV3.json"/>
-    <parameter name="CreateResourceRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreateResource.json"/>
+    <parameter name="PublishRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/PublishVenueV3.json"/>
     <parameter name="UpdateResourceRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdateResource.json"/>
     <parameter name="CreatePointRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/CreatePoint.json"/>
     <parameter name="UpdatePointRequestBodyPath" value="src/test/resources/JSONs/map_jwt_jsons/UpdatePoint.json"/>

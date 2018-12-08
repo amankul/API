@@ -11,6 +11,7 @@ public class MapAPI_Constants {
   public static final String CAMPUS_END_POINT_V3 = "/v3.0/campuses";
   public static final String BUILDING_END_POINT_V3 = "/v3.0/buildings";
   public static final String FLOOR_END_POINT_V3 = "/v3.0/floors";
+  public static final String PUBLISH_END_POINT_V3 = "/v3.0/venues/published";
   public static final String POINT_END_POINT_V3 = "/v3.0/points";
   public static final String POITYPE_END_POINT_V3 = "/v3.0/poi-types";
 
