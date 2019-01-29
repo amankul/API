@@ -100,7 +100,7 @@ public class MappingV3 {
 
     /* This method retrieves the venue created above which will be in DRAFT status */
 
-    @Parameters()
+
     @Test(priority = 2)
     public void verify_Get_Draft_Venue_By_Id() throws IOException {
         Assert.assertNotNull(capturedVenueId);
@@ -165,6 +165,7 @@ public class MappingV3 {
         response.then().statusCode(HttpStatus.SC_NO_CONTENT);
         Assert.assertEquals(response.asString(), "");
     }
+
     /* This method creates a new campus under the venue created earlier */
 
     @Parameters({"CreateCampusRequestBodyPath"})
@@ -204,7 +205,7 @@ public class MappingV3 {
 
     /* This method retrieves the campus created above which will be in DRAFT status */
 
-    @Parameters()
+
     @Test(priority = 4)
     public void verify_Get_Draft_Campus_By_Id() throws IOException {
 
@@ -306,7 +307,7 @@ public class MappingV3 {
 
     /* This method retrieves the building created above which will be in DRAFT status */
 
-    @Parameters()
+
     @Test(priority = 6)
     public void verify_Get_Draft_Building_By_Id() throws IOException {
 
@@ -413,7 +414,7 @@ public class MappingV3 {
 
     /* This method retrieves the floor created above which will be in DRAFT status */
 
-    @Parameters()
+
     @Test(priority = 8)
     public void verify_Get_Draft_Floor_By_Id() throws IOException {
 
@@ -516,7 +517,7 @@ public class MappingV3 {
 
     /* This method retrieves the LIVE venue created above after publish. We also verify fields modified in update tests earlier */
 
-    @Parameters()
+
     @Test(priority = 10)
     public void verify_Get_Live_Venue_By_Id() throws IOException {
         Assert.assertNotNull(capturedLiveVenueId);
@@ -548,7 +549,7 @@ public class MappingV3 {
 
     /* This method retrieves the LIVE campus created above after publish. We also verify fields modified in update tests earlier */
 
-    @Parameters()
+
     @Test(priority = 10)
     public void verify_Get_Live_Campus_By_Id() throws IOException {
 
@@ -579,7 +580,7 @@ public class MappingV3 {
 
     /* This method retrieves the LIVE building created above after publish. We also verify fields modified in update tests earlier */
 
-    @Parameters()
+
     @Test(priority = 10)
     public void verify_Get_Live_Building_By_Id() throws IOException {
 
@@ -611,7 +612,7 @@ public class MappingV3 {
 
     /* This method retrieves the LIVE floor created above after publish. We also verify fields modified in update tests earlier */
 
-    @Parameters()
+
     @Test(priority = 10)
     public void verify_Get_Live_Floor_By_Id() throws IOException {
 
@@ -644,7 +645,7 @@ public class MappingV3 {
 
     /* This method deletes the floor created earlier */
 
-    @Parameters()
+
     @Test(priority = 11)
     public void verify_Delete_Floor() throws IOException {
 
@@ -674,7 +675,7 @@ public class MappingV3 {
 
     /* This method deletes the building created earlier */
 
-    @Parameters()
+
     @Test(priority = 12)
     public void verify_Delete_Building() throws IOException {
 
@@ -704,7 +705,7 @@ public class MappingV3 {
 
     /* This method deletes the campus created earlier */
 
-    @Parameters()
+
     @Test(priority = 13)
     public void verify_Delete_Campus() throws IOException {
 
@@ -734,7 +735,7 @@ public class MappingV3 {
 
     /* This method deletes the venue created earlier */
 
-    @Parameters()
+    
     @Test(priority = 14)
     public void verify_Delete_Venue() throws IOException {
         Assert.assertNotNull(capturedVenueId);
