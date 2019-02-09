@@ -27,12 +27,12 @@
 
     <test name="Mapping">
         <classes>
-            <class name="com.phunware.map.jwt.api.tests.MappingV3"/>
+          <!--<class name="com.phunware.map.jwt.api.tests.MappingV3"/> -->
+            <class name="com.phunware.map.jwt.api.tests.Venues"/>
         </classes>
     </test>
 
     <!--DO NOT CHANGE ORG ID-->
     <parameter name="orgId" value="109"/>
-
 
 </suite>
