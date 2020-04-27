@@ -6,5 +6,5 @@
   "mseUdi": "abcd",
   "supportsGeographicCoordinates": true,
   "isActive": true,
-  "callbackUrl": "http://mars-api.phunware.com/v1.0/mse/ee772e95-5034-4b68-924b-5a564208f9f6/register"
+  "callbackUrl": "http://mars-api.org.com/v1.0/mse/ee772e95-5034-4b68-924b-5a564208f9f6/register"
 }

@@ -1,0 +1,107 @@
+
+{
+  "data": {
+    "attributes": [],
+    "description": "Proximity Alert",
+    "fields": [
+      {
+        "label": "Alert Name",
+        "field": "vscAlertName",
+        "description": "The name for this alert.",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Proximity",
+        "field": "vscAlertProximity",
+        "description": "The proximity event that should trigger this alert",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "selectSingle",
+        "attributes": {
+          "options": {
+            "far": "Far",
+            "near": "Near",
+            "immediate": "Immediate",
+            "all": "All"
+          }
+        }
+      },
+      {
+        "label": "Cooldown",
+        "field": "vscAlertCooldown",
+        "description": "The cooldown for the alert in minutes",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "decimal"
+      },
+      {
+        "label": "Message",
+        "field": "vscAlertMessage",
+        "description": "The message to show when the alert is presented to the user",
+        "isRequired": true,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "HTML Message",
+        "field": "vscAlertHTMLMessage",
+        "description": "The HTML that should be displayed with a beacon alert",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "htmlMulti"
+      },
+      {
+        "label": "Active",
+        "field": "vscAlertActive",
+        "description": "Whether this Alert is active",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      },
+      {
+        "label": "Action Type",
+        "field": "vscProximityAlertClass",
+        "description": "This is the class that implements the proximity action",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "selectSingle",
+        "attributes": {
+          "options": {
+            "custom": "Custom",
+            "alert": "Alert",
+            "analytic": "Analytic"
+          }
+        }
+      },
+      {
+        "label": "Content Type",
+        "field": "vscAlertContentType",
+        "description": "The content type associated to this alert",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Content Action",
+        "field": "vscAlertContentAction",
+        "description": "The content action associated to this alert",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      },
+      {
+        "label": "Content Id",
+        "field": "vscAlertContentId",
+        "description": "The id for the content that is going the action is going to presented",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "textSingle"
+      }
+    ],
+    "name": "VSC - Proximity Alert",
+    "orgId": 109,
+    "tags": []
+  }
+}

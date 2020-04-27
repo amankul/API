@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="CME V2 API TEST SUITE ">
+    <parameter name="env" value="STAGE"/>
+    <parameter name="containerName" value="Directory" />
+    <!--SCHEMAS-->
+    <parameter name="postSchemaDirectory" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postSchemaDirectory.json"/>
+
+    <!--STRUCTURE-->
+    <parameter name="postStructureFilePath" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postStructure.json"/>
+
+    <!--CONTAINER-->
+    <parameter name="postContainerFilePath" value="src/test/resources/JSONs/cme_v2_jsons/DignityHealth/postContainer.json"/>
+
+    <!--CONTENT-->
+    <parameter name="postContentAAA" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAAA.json"/>
+    <parameter name="postContentAthleta" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentAthleta.json"/>
+    <parameter name="postContentBSpot" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentBSpot.json"/>
+    <parameter name="postContentStarbucks" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentStarbucks.json"/>
+    <parameter name="postContentSubway" value="src/test/resources/JSONs/cme_v2_jsons/WeBuildApps/postContentSubway.json"/>
+
+    <!--DO NOT CHANGE ORG ID-->
+    <parameter name="orgId" value="109"/>
+
+    <test name="CMEV2">
+        <classes>
+            <class name="com.phunware.cme.v2.api.tests.Schema"/>
+            <class name="com.phunware.cme.v2.api.tests.Structure"/>
+            <class name="com.phunware.cme.v2.api.tests.Content"/>
+        </classes>
+    </test>
+
+
+</suite>

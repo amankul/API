@@ -57,9 +57,9 @@
 
     <test name="CMEV2">
         <classes>
-            <class name="com.phunware.cme.v2.api.tests.Schema"/>
-            <class name="com.phunware.cme.v2.api.tests.Structure"/>
-            <class name="com.phunware.cme.v2.api.tests.Content"/>
+            <class name="com.org.cme.v2.api.tests.Schema"/>
+            <class name="com.org.cme.v2.api.tests.Structure"/>
+            <class name="com.org.cme.v2.api.tests.Content"/>
         </classes>
     </test>
 </suite>

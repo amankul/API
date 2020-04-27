@@ -13,3 +13,11 @@ Logging
 test-output
 build/
 .DS_Store
+
+postContentAdvertisingSetting.json
+postContentApplication.json
+postContentAppVersion.json
+postContentDatabaseVersion.json
+postContentPlatform.json
+postContentPreCachingConfiguration.json
+postContentPlatformVenueTexas.json

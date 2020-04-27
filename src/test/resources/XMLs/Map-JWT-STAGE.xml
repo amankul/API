@@ -26,16 +26,16 @@
 
     <test name="Mapping">
         <classes>
-            <class name="com.phunware.map.jwt.api.tests.Venue"/>
-             <class name="com.phunware.map.jwt.api.tests.Campus"/>
-            <class name="com.phunware.map.jwt.api.tests.Building"/>
-             <class name="com.phunware.map.jwt.api.tests.Floor"/>
-             <class name="com.phunware.map.jwt.api.tests.Resource"/>
-             <class name="com.phunware.map.jwt.api.tests.Entity"/>
-            <class name="com.phunware.map.jwt.api.tests.Point"/>
-            <class name="com.phunware.map.jwt.api.tests.PoiType"/>
-            <class name="com.phunware.map.jwt.api.tests.Segment"/>
-            <class name="com.phunware.map.jwt.api.tests.Route"/>
+            <class name="com.org.map.jwt.api.tests.Venue"/>
+             <class name="com.org.map.jwt.api.tests.Campus"/>
+            <class name="com.org.map.jwt.api.tests.Building"/>
+             <class name="com.org.map.jwt.api.tests.Floor"/>
+             <class name="com.org.map.jwt.api.tests.Resource"/>
+             <class name="com.org.map.jwt.api.tests.Entity"/>
+            <class name="com.org.map.jwt.api.tests.Point"/>
+            <class name="com.org.map.jwt.api.tests.PoiType"/>
+            <class name="com.org.map.jwt.api.tests.Segment"/>
+            <class name="com.org.map.jwt.api.tests.Route"/>
         </classes>
     </test>
 

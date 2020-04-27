@@ -24,7 +24,7 @@
 
     <test name="Get Client Details">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_ClientDetails"/>
                 </methods>
@@ -34,7 +34,7 @@
 
     <test name="Get Client Details - Invalid Client Id">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_ClientDetails_InvalidClientId"/>
 
@@ -44,7 +44,7 @@
     </test>
     <test name="Get Client Details - Invalid Auth">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_ClientDetails_InvalidAuth"/>
                 </methods>
@@ -53,7 +53,7 @@
     </test>
     <test name="Client GET Client Types">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
 
                     <include name="verify_Get_ClientTypes"/>
@@ -63,7 +63,7 @@
     </test>
     <test name="Client GET Client Types - Invalid Auth">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_ClientTypes_InvalidAuth"/>
                 </methods>
@@ -75,7 +75,7 @@
     <test name="Client Category Tests">
         <parameter name="queryParameters" value="{&quot;type_id&quot;:1}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_Client_Categories"/>
                 </methods>
@@ -86,7 +86,7 @@
     <test name="Client Category Tests - Invalid Auth">
         <parameter name="queryParameters" value="{&quot;type_id&quot;:1}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_Client_Categories_InvalidAuth"/>
                 </methods>
@@ -98,7 +98,7 @@
         <parameter name="queryParameters"
                    value="{&quot;offset&quot; : &quot;15&quot;,&quot; limit &quot;:&quot; 15 &quot;,&quot; org_id &quot;:&quot; 1 &quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_Client_Pagination"/>
                 </methods>
@@ -110,7 +110,7 @@
         <parameter name="queryParameters"
                    value="{&quot;offset&quot; : &quot;15&quot;,&quot; limit &quot;:&quot; 15 &quot;,&quot; org_id &quot;:&quot; 1 &quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Get_Client_Pagination_InvalidAuth"/>
                 </methods>
@@ -121,7 +121,7 @@
 
     <test name="create app">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Post_New_Client"/>
                 </methods>
@@ -132,7 +132,7 @@
     <test name="create app with empty org id">
         <parameter name="orgId" value=""/>
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Post_New_Client_emptyOrgID"/>
                 </methods>
@@ -144,7 +144,7 @@
     <test name="create app with empty category id">
         <parameter name="categoryId" value=""/>
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Post_New_Client_emptyCategoryID"/>
                 </methods>
@@ -155,7 +155,7 @@
     <test name="create app with empty client type">
         <parameter name="clientType" value=""/>
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Post_New_Client_emptyType"/>
                 </methods>
@@ -165,7 +165,7 @@
 
     <test name="create app with empty name">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Post_New_Client_emptyName"/>
                 </methods>
@@ -175,7 +175,7 @@
 
     <test name="Update Existing Client ">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Put_Update_Existing_Client"/>
                 </methods>
@@ -186,7 +186,7 @@
 
     <test name="Update Existing Client Invalid Authorization">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Put_Update_Existing_Client_InvalidAuth"/>
                 </methods>
@@ -196,7 +196,7 @@
 
     <test name="Update Invalid Client Id">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Put_Update_Invalid_Client"/>
                 </methods>
@@ -206,7 +206,7 @@
 
     <test name="Delete Client">
         <classes>
-            <class name="com.phunware.core.api.tests.Client">
+            <class name="com.org.core.api.tests.Client">
                 <methods>
                     <include name="verify_Delete_Client"/>
                 </methods>
@@ -216,7 +216,7 @@
 
     <test name="Get Organisation Details">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Get_Organization_Details"/>
                 </methods>
@@ -226,7 +226,7 @@
 
     <test name="Get Organisation Details - Invalid Org">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Get_Organization_Details_InvalidOrgID"/>
                 </methods>
@@ -236,7 +236,7 @@
 
     <test name="Get Organisation Details - Invalid Authorization">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Get_Organization_Details_InvalidAuthorization"/>
                 </methods>
@@ -247,7 +247,7 @@
     <test name="Get Collection of Orgs">
         <parameter name="queryParameters" value="{&quot;name&quot;:&quot;QA&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Get_Collection_Of_Organizations"/>
                 </methods>
@@ -258,7 +258,7 @@
     <test name="Get Collection of Orgs with Empty String ">
         <parameter name="queryParameters" value="{&quot;name&quot;:&quot;&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Get_Collection_Of_Organizations_NameWithEmptyString"/>
                 </methods>
@@ -270,7 +270,7 @@
         <parameter name="queryParameters"
                    value="    {&quot;name&quot;:&quot;qa&quot;,&quot;offset&quot;:&quot;1&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Get_Collection_Of_Organizations_Pagination"/>
                 </methods>
@@ -283,7 +283,7 @@
         <parameter name="queryParameters"
                    value="{&quot;name&quot;:&quot;&quot;,&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Get_Collection_Of_Organizations_Pagination_EmptyName"/>
                 </methods>
@@ -293,7 +293,7 @@
 
     <test name="Create New Org">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Post_Create_New_Organization"/>
                 </methods>
@@ -303,7 +303,7 @@
 
     <test name="Create New Org With Empty Name">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Post_Create_New_Organization_EmptyName_InRequestBody"/>
                 </methods>
@@ -313,7 +313,7 @@
 
     <test name="Update an Existing Org">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Put_Update_Organization"/>
                 </methods>
@@ -323,7 +323,7 @@
 
     <test name="Update an Existing Org with Empty Name">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Put_Update_Organization_EmptyName_InRequestBody"/>
                 </methods>
@@ -333,7 +333,7 @@
 
     <test name="Update an Existing Org with Empty Services ">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Put_Update_Organization_EmptyServices_InRequestBody"/>
                 </methods>
@@ -343,7 +343,7 @@
 
     <test name="Update an Invalid or Non Existing Org ">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Put_Update_Organization_InvalidOrganization"/>
                 </methods>
@@ -353,7 +353,7 @@
 
     <test name="Delete Existing Org">
         <classes>
-            <class name="com.phunware.core.api.tests.Organization">
+            <class name="com.org.core.api.tests.Organization">
                 <methods>
                     <include name="verify_Delete_ExistingOrganization"/>
                 </methods>
@@ -364,7 +364,7 @@
     <test name="verify_Get_User_Role ">
         <parameter name="queryParameters" value="{&quot;org_id&quot;:128}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Get_User_Role"/>
                 </methods>
@@ -375,7 +375,7 @@
     <test name="verify_Get_User_Role - Non Existing Org Id">
         <parameter name="queryParameters" value="{&quot;org_id&quot;:&quot;abc&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Get_UserRole_NonExistant_OrgID"/>
                 </methods>
@@ -386,7 +386,7 @@
     <test name="verify_Get_User_Role - Invalid Parameter Structure">
         <parameter name="queryParameters" value="{&quot;org_id&quot;:abc}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Get_UserRole_Invalid_parameter_Structure"/>
                 </methods>
@@ -397,7 +397,7 @@
     <test name="verify_Get_User_Role - Invalid Auth">
         <parameter name="queryParameters" value="{&quot;org_id&quot;:128}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Get_USerRole_InvalidAuth"/>
                 </methods>
@@ -410,7 +410,7 @@
         <parameter name="queryParameters"
                    value="{&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;1&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Get_UserRole_Pagination"/>
                 </methods>
@@ -422,7 +422,7 @@
         <parameter name="queryParameters"
                    value="{&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;!2#&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Get_UserRole_Pagination_NonExistant_OrgID"/>
                 </methods>
@@ -434,7 +434,7 @@
         <parameter name="queryParameters"
                    value="{&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;1&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Get_UserRole_Pagination_InvalidAuth"/>
                 </methods>
@@ -444,7 +444,7 @@
 
     <test name="Create New User Role">
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Post_Create_New_UserRole"/>
                 </methods>
@@ -454,7 +454,7 @@
 
     <test name="Create New User Role Empty Name">
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Post_Create_New_UserRole_EmptyName"/>
                 </methods>
@@ -464,7 +464,7 @@
 
     <test name="Create New User Role Invalid Auth">
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Post_Create_New_UserRole_InvalidAuth"/>
                 </methods>
@@ -474,7 +474,7 @@
 
     <test name="Update User Role">
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Put_Update_UserRole"/>
                 </methods>
@@ -484,7 +484,7 @@
 
     <test name="Update User Role - Empty Name">
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Put_Update_UserRole_EmptyName_InRequestBody"/>
                 </methods>
@@ -494,7 +494,7 @@
 
     <test name="Update User Role - Invalid or NonExisting User Role">
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Put_Update_UserRole_InvalidId"/>
                 </methods>
@@ -505,7 +505,7 @@
 
     <test name="Delete Existing User Role">
         <classes>
-            <class name="com.phunware.core.api.tests.UserRole">
+            <class name="com.org.core.api.tests.UserRole">
                 <methods>
                     <include name="verify_Delete_ExistingUserRole"/>
                 </methods>
@@ -515,7 +515,7 @@
 
     <test name="Get User Details">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_User"/>
                 </methods>
@@ -525,7 +525,7 @@
 
     <test name="Get User Details - Invalid ID">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_User_InvalidUserID"/>
                 </methods>
@@ -535,7 +535,7 @@
 
     <test name="Get User Details - Invalid Auth">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_User_InvalidAuth"/>
                 </methods>
@@ -545,9 +545,9 @@
 
     <test name="Verify Authenticate User">
         <parameter name="queryParameters"
-                   value="{&quot;provider&quot;:&quot;phunware&quot;,&quot;email&quot;:&quot;fakeowner@phunware.com&quot;,&quot;password&quot;:&quot;Password1&quot;}"/>
+                   value="{&quot;provider&quot;:&quot;org&quot;,&quot;email&quot;:&quot;fakeowner@org.com&quot;,&quot;password&quot;:&quot;Password1&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_Authenticate_User"/>
                 </methods>
@@ -557,9 +557,9 @@
 
     <test name="Verify Authenticate User- Invalid Credentials">
         <parameter name="queryParameters"
-                   value="{&quot;provider&quot;:&quot;phunware&quot;,&quot;email&quot;:&quot;asdf@phunware.com&quot;,&quot;password&quot;:&quot;Password1&quot;}"/>
+                   value="{&quot;provider&quot;:&quot;org&quot;,&quot;email&quot;:&quot;asdf@org.com&quot;,&quot;password&quot;:&quot;Password1&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_Authenticate_User_Invalid_Credentials"/>
                 </methods>
@@ -569,9 +569,9 @@
 
     <test name="Verify Authenticate User- Empty Credentials">
         <parameter name="queryParameters"
-                   value="{&quot;provider&quot;:&quot;phunware&quot;,&quot;email&quot;:&quot;&quot;,&quot;password&quot;:&quot;&quot;}"/>
+                   value="{&quot;provider&quot;:&quot;org&quot;,&quot;email&quot;:&quot;&quot;,&quot;password&quot;:&quot;&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_Authenticate_User_Empty_Credentials"/>
                 </methods>
@@ -583,7 +583,7 @@
         <parameter name="queryParameters"
                    value="{&quot;name&quot;:&quot;ngai caleb&quot;,&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_UserPagination"/>
                 </methods>
@@ -595,7 +595,7 @@
         <parameter name="queryParameters"
                    value="{&quot;name&quot;:&quot;&quot;,&quot;offset&quot;:&quot;0&quot;,&quot;limit&quot;:&quot;15&quot;,&quot;org_id&quot;:&quot;&quot;}"/>
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_Get_UserPagination_NullName"/>
                 </methods>
@@ -605,7 +605,7 @@
 
     <test name="Post New User - 9">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_post_CreateNewUser"/>
                 </methods>
@@ -615,7 +615,7 @@
 
     <test name="Post New User Empty FirstName - 10">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_post_CreateNewUser_Empty_FirstNameIn_Body"/>
                 </methods>
@@ -625,7 +625,7 @@
 
     <test name="Post New User Empty LastName - 11">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_post_CreateNewUser_Empty_LastNameIn_Body"/>
                 </methods>
@@ -635,7 +635,7 @@
 
     <test name="Post New User Empty Email Id- 12">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_post_CreateNewUser_Empty_email"/>
                 </methods>
@@ -646,7 +646,7 @@
 
     <test name="Post New User Empty Time Zone- 13 - TO DO ">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_post_CreateNewUser_Null_Timezone"/>
                 </methods>
@@ -656,7 +656,7 @@
 
     <test name="Post New User  Is active Null - 14 ">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_post_CreateNewUser_Null_isActive"/>
                 </methods>
@@ -666,7 +666,7 @@
 
     <test name="Post New User Empty Password - 15 ">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_post_CreateNewUser_Empty_Password"/>
                 </methods>
@@ -676,7 +676,7 @@
 
     <test name="Put Update Existing User - 16 ">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_put_UpdateExistingUser"/>
                 </methods>
@@ -686,7 +686,7 @@
 
     <test name="Put Update Existing User Null Email id Null Password- 17 ">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_put_UpdateExistingUser_NullEmail_EmptyPassword_ValuesInBody"/>
                 </methods>
@@ -696,7 +696,7 @@
 
     <test name="Put Change Password- 18 ">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_put_Change_Password_ExistingUser"/>
                 </methods>
@@ -706,7 +706,7 @@
 
     <test name="Put Change Password - Invalid Password - 19">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_put_Change_Password_InvalidCurrentPassword"/>
                 </methods>
@@ -716,7 +716,7 @@
 
     <test name="Put Reset Password - 20">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_put_Reset_Password_ExistingUser"/>
                 </methods>
@@ -726,7 +726,7 @@
 
     <test name="Put Rest Password Invalid EmailId- 21">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_put_Reset_Password_InvalidBodyParameters"/>
                 </methods>
@@ -736,7 +736,7 @@
 
     <test name="Delete New User 23">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_delete_ExistingUser"/>
                 </methods>
@@ -746,7 +746,7 @@
 
     <test name="Delete New User 24 Invalid User">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_delete_Invaliduser"/>
                 </methods>
@@ -756,7 +756,7 @@
 
     <test name="Delete New User 25 Invalid Auth- ">
         <classes>
-            <class name="com.phunware.core.api.tests.User">
+            <class name="com.org.core.api.tests.User">
                 <methods>
                     <include name="verify_delete_ExistingUser_InvalidAuth"/>
                 </methods>

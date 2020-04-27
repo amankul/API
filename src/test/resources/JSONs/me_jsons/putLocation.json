@@ -10,7 +10,7 @@
   "zip": "78757",
   "state": "TX",
   "tags": [
-    "phunwareapi"
+    "orgapi"
   ],
   "enabled": true,
   "createdById": 0,
@@ -20,7 +20,7 @@
   "orgId": 139,
   "id": 0 ,
   "address1": "7800 Shoal Creek Boulevard",
-  "locationName": "PhunwareAustin",
+  "locationName": "orgAustin",
   "timeZone": "America/Chicago"
 }
 

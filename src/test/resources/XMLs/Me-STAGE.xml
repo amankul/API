@@ -44,12 +44,12 @@
 
     <test name="MA">
         <classes>
-            <class name="com.phunware.m3.api.tests.Location"/>
-            <class name="com.phunware.m3.api.tests.Attributes"/>
-            <class name="com.phunware.m3.api.tests.Beacons"/>
-            <class name="com.phunware.m3.api.tests.Profiles"/>
-            <class name="com.phunware.m3.api.tests.DeviceAPI"/>
-            <class name="com.phunware.m3.api.tests.Campaigns"/>
+            <class name="com.org.m3.api.tests.Location"/>
+            <class name="com.org.m3.api.tests.Attributes"/>
+            <class name="com.org.m3.api.tests.Beacons"/>
+            <class name="com.org.m3.api.tests.Profiles"/>
+            <class name="com.org.m3.api.tests.DeviceAPI"/>
+            <class name="com.org.m3.api.tests.Campaigns"/>
         </classes>
     </test>
 

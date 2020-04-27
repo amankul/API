@@ -1,0 +1,44 @@
+
+{
+  "data": {
+    "attributes": [],
+    "description": "Configuration for Precaching",
+    "fields": [
+      {
+        "label": "Configuration Name",
+        "field": "vscPrecachingName",
+        "description": "The name for these settings.",
+        "isRequired": true,
+        "isTitleKey": true,
+        "type": "textSingle"
+      },
+      {
+        "label": "Directory DB Image Precaching",
+        "field": "vscDirectoryPrecaching",
+        "description": "Whether the app should research the directory DB for images to cache",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      },
+      {
+        "label": "Events DB Image Precaching",
+        "field": "vscEventsPrecaching",
+        "description": "Whether the app should research the Events DB for images to cache",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      },
+      {
+        "label": "POI Detail Image Precaching",
+        "field": "vscPOIPrecaching",
+        "description": "Whether the app should research POIs for images to cache",
+        "isRequired": false,
+        "isTitleKey": false,
+        "type": "boolean"
+      }
+    ],
+    "name": "VSC - Precaching Configuration",
+    "orgId": 109,
+    "tags": []
+  }
+}

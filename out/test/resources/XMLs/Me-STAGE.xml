@@ -1,0 +1,56 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="M3 API TEST SUITE ">
+    <parameter name="env" value="STAGE"/>
+    <parameter name="locationId" value="317"/>
+    <parameter name="orgId" value="139"/>
+    <parameter name="clientId" value="632"/>
+    <parameter name="tags" value="qa"/>
+    <parameter name="clientId_android_access_key" value="a9703774190655e3b6a3e82f5c3fa1eb2b9b8e20"/>
+    <parameter name="clientId_android_signature_key" value="9a5941cdbf1099e2db20ea59eb0d131c09857316"/>
+    <parameter name="postLocationRequestBodyPath" value="src/test/resources/JSONs/me_jsons/postLocation.json"/>
+    <parameter name="putLocationRequestBodyPath" value="src/test/resources/JSONs/me_jsons/putLocation.json"/>
+    <parameter name="beaconId" value="2246"/>
+    <parameter name="beaconUuid" value="bd87d214-abd0-4db0-98d3-0fa33b7ee712"/>
+    <parameter name="beaconMajor" value="1234"/>
+    <parameter name="beaconMinor" value="121"/>
+    <parameter name="beaconTags" value="qa"/>
+    <parameter name="beaconUuidAlias" value="API_AUTOMATION"/>
+    <parameter name="postBeaconRequestBodyPath" value="src/test/resources/JSONs/me_jsons/postBeacon.json"/>
+    <parameter name="postUuidAliasRequestBodyPath" value="src/test/resources/JSONs/me_jsons/postUUIDAlias.json"/>
+    <parameter name="attributeName" value="car"/>
+    <parameter name="postAttributeRequestBodyPath" value="src/test/resources/JSONs/me_jsons/postAttribute.json"/>
+    <parameter name="profileId" value="445"/>
+    <parameter name="postProfileRequestBodyPath" value="src/test/resources/JSONs/me_jsons/postProfile.json"/>
+    <parameter name="campaignId" value="3257"/>
+    <parameter name="campaignType" value="BROADCAST"/>
+    <parameter name="status" value="SCHEDULED"/>
+    <parameter name="sortBy" value="startDate"/>
+    <parameter name="sortOrder" value="desc"/>
+    <parameter name="limit" value="6"/>
+    <parameter name="postCampaignRequestBodyPath" value="src/test/resources/JSONs/me_jsons/postCampaign.json"/>
+    <parameter name="postDeviceRegistrationBodyPath" value="src/test/resources/JSONs/me_jsons/postDeviceRegistration.json"/>
+    <parameter name="postDownloadGeofenceBodyPath" value="src/test/resources/JSONs/me_jsons/postDownloadGeofence.json"/>
+    <parameter name="postGeofenceEntryBodyPath" value="src/test/resources/JSONs/me_jsons/postGeofenceEntry.json"/>
+    <parameter name="postDeviceAttributesBodyPath" value="src/test/resources/JSONs/me_jsons/postDeviceAttributes.json"/>
+    <parameter name="postGeofenceExitBodyPath" value="src/test/resources/JSONs/me_jsons/postGeofenceExit.json"/>
+    <parameter name="postStaticIdSetBodyPath" value="src/test/resources/JSONs/me_jsons/postStaticId.json"/>
+    <parameter name="deviceAttributeName" value="member"/>
+    <parameter name="deviceAttributeValue" value="gold"/>
+    <parameter name="nonRollingTimeZone" value="Mexico/BajaSur"/>
+    <parameter name="campaignTypeGfEntry" value="GEOFENCE_ENTRY"/>
+    <parameter name="campaignTypeGfExit" value="GEOFENCE_EXIT"/>
+    <parameter name="repeatInterval" value="2"/>
+
+    <test name="MA">
+        <classes>
+            <class name="com.phunware.m3.api.tests.Location"/>
+            <class name="com.phunware.m3.api.tests.Attributes"/>
+            <class name="com.phunware.m3.api.tests.Beacons"/>
+            <class name="com.phunware.m3.api.tests.Profiles"/>
+            <class name="com.phunware.m3.api.tests.DeviceAPI"/>
+            <class name="com.phunware.m3.api.tests.Campaigns"/>
+        </classes>
+    </test>
+
+</suite>

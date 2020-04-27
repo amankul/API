@@ -1,0 +1,18 @@
+{
+  "containerId": "582b81db00fbc8dc79000182",
+  "structureId": 17,
+  "parentId": "58a2385bae1ce97e08d9022c",
+  "data":
+  {
+    "vscAlertName":  "Dignity Alert",
+    "vscAlertProximity" : "immediate",
+    "vscAlertCooldown" : 2,
+    "vscAlertMessage" : "Dignity Message",
+    "vscAlertHTMLMessage" : "HTML",
+    "vscAlertActive": true,
+    "vscProximityAlertClass": "alert",
+    "vscAlertContentType" : "HTML",
+    "vscAlertContentAction" : "Click",
+    "vscAlertContentId" : "12334"
+  }
+}

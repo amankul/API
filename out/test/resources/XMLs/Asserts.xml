@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="ASSERT SUITE ">
+    <parameter name="repeatInterval" value="2"/>
+
+    <test name="MA">
+        <classes>
+            <class name="com.phunware.map.jwt.api.tests.Asserts"/>
+        </classes>
+    </test>
+
+</suite>

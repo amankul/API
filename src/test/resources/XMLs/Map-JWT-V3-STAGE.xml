@@ -1,5 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
+
+
 <suite name="MAP API TEST SUITE ">
     <parameter name="env" value="STAGE"/>
 
@@ -27,8 +29,8 @@
 
     <test name="Mapping">
         <classes>
-          <!--<class name="com.phunware.map.jwt.api.tests.MappingV3"/> -->
-            <class name="com.phunware.map.jwt.api.tests.Venues"/>
+          <class name="com.org.map.jwt.api.tests.MappingV3"/>
+            <!--<class name="com.org.map.jwt.api.tests.Venues"/>-->
         </classes>
     </test>
 
