@@ -31,7 +31,7 @@ public class Schema {
 
 
     @BeforeSuite
-    @Parameters("containerName")
+    @Parameters("containerName") // Params can also be optional and at class level
     private void setUpSuite(String containerName) {
         this.containerName = containerName;
     }

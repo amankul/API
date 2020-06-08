@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="M3 API TEST SUITE ">
+<suite name="M3 API TEST SUITE " parallel="tests" thread-count="3">
     <parameter name="env" value="PROD"/>
     <parameter name="locationId" value="3971"/>
     <parameter name="orgId" value="386"/>

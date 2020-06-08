@@ -22,8 +22,6 @@ import static org.hamcrest.core.Is.is;
 
 /* Created by Amit Kulkarni on 11/14/2018 */
 
-
-
 public class MappingV3 {
     private static String serviceEndPoint = null;
     private static Logger log = Logger.getLogger(MappingV3.class);
@@ -69,7 +67,7 @@ public class MappingV3 {
     /* This method creates a brand new Venue in QA Test org. All subsequent methods depend on successful creation of venue */
 
     @Parameters({"CreateVenueRequestBodyPath"})
-    @Test(priority = 1)
+    @Test(priority = 1)               // can also use (dependsonmedthod which precides over priority)
     public void verify_Create_Venue(String createVenueRequestBodyPath) throws IOException {
         // Request Details
         String requestBody = FileUtils.getJsonTextFromFile(createVenueRequestBodyPath);
